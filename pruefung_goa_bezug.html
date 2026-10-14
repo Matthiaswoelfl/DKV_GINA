@@ -1,0 +1,511 @@
+<!DOCTYPE html><html lang="de"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prüfung GOÄ-Bezug</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" crossorigin="anonymous" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#edf1f5;
+    --rail-bg:#0a3d75; --rail-bg-2:#0f5fa8;
+    --rail-text:#eef6fc; --rail-text-soft:#a9cbe8;
+    --ink:#16212e; --ink-soft:#495b70;
+    --card-bg:#ffffff; --card-border:#d8dee7;
+    --accent:#0f6fb8; --accent-strong:#0a5490; --accent-contrast:#ffffff;
+    --cat-ok:#2f7a4f; --cat-ok-bg:#e6f2ea;
+    --cat-boundary:#9c6b0a; --cat-boundary-bg:#f6eed8;
+    --cat-violation:#ad3527; --cat-violation-bg:#f7e5e1;
+    --cat-conflict:#6a4796; --cat-conflict-bg:#ece4f5;
+    --focus:#0f6fb8;
+    --shadow-doc: 0 1px 2px rgba(10,25,45,.07), 0 10px 30px -12px rgba(10,25,45,.28);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0d1720;
+      --rail-bg:#061c33; --rail-bg-2:#0a2c4d;
+      --rail-text:#e9f2fa; --rail-text-soft:#9ec2e2;
+      --ink:#e6ebf1; --ink-soft:#a3b1c4;
+      --card-bg:#161f2c; --card-border:#2a3549;
+      --accent:#4fa3e0; --accent-strong:#7cc0ee; --accent-contrast:#071626;
+      --cat-ok:#5fbf88; --cat-ok-bg:#163524;
+      --cat-boundary:#d9a53b; --cat-boundary-bg:#3a2e12;
+      --cat-violation:#e07364; --cat-violation-bg:#3a1c16;
+      --cat-conflict:#b79bdb; --cat-conflict-bg:#2a2140;
+      --shadow-doc: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px -12px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0d1720;
+    --rail-bg:#061c33; --rail-bg-2:#0a2c4d;
+    --rail-text:#e9f2fa; --rail-text-soft:#9ec2e2;
+    --ink:#e6ebf1; --ink-soft:#a3b1c4;
+    --card-bg:#161f2c; --card-border:#2a3549;
+    --accent:#4fa3e0; --accent-strong:#7cc0ee; --accent-contrast:#071626;
+    --cat-ok:#5fbf88; --cat-ok-bg:#163524;
+    --cat-boundary:#d9a53b; --cat-boundary-bg:#3a2e12;
+    --cat-violation:#e07364; --cat-violation-bg:#3a1c16;
+    --cat-conflict:#b79bdb; --cat-conflict-bg:#2a2140;
+    --shadow-doc: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px -12px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box;}
+  html{background:var(--bg);}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  h1,h2,h3{text-wrap:balance; font-family:"Source Sans 3",sans-serif;}
+  .mono{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;}
+  ::selection{background:var(--accent); color:var(--accent-contrast);}
+  a{color:var(--accent);}
+  :focus-visible{outline:2px solid var(--focus); outline-offset:2px; border-radius:4px;}
+  [hidden]{display:none !important;}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;}}
+
+  .app{max-width:1180px; margin:0 auto; padding:22px clamp(16px,3vw,34px) 60px;}
+
+  .btn{
+    font:600 .88rem/1 "Source Sans 3",sans-serif; padding:11px 18px; border-radius:10px;
+    border:1px solid transparent; cursor:pointer; display:inline-flex; align-items:center; gap:8px;
+    transition:transform .12s ease, box-shadow .12s ease, background-color .12s ease;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-ghost{background:transparent; color:var(--ink); border-color:var(--card-border);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent);}
+  .btn svg{width:15px; height:15px;}
+
+  /* ---------- Modul-Kopf ---------- */
+  .module-rail{
+    background:linear-gradient(160deg, var(--rail-bg), var(--rail-bg-2)); color:var(--rail-text);
+    border-radius:16px; padding:20px 24px; margin-bottom:22px;
+    display:flex; justify-content:space-between; align-items:flex-start; gap:18px; flex-wrap:wrap;
+  }
+  .module-rail-text{flex:1; min-width:0;}
+  .module-rail h1{margin:0; font-size:1.2rem;}
+  .module-rail p{margin:6px 0 0; color:var(--rail-text-soft); font-size:.86rem; max-width:68ch; line-height:1.6;}
+  .module-rail .btn-ghost{background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.2); color:var(--rail-text); flex:none;}
+  .module-rail .btn-ghost:hover{border-color:rgba(255,255,255,.4); color:var(--rail-text);}
+
+  .disclaimer{
+    display:flex; gap:10px; align-items:flex-start; margin:0 0 22px; padding:11px 14px;
+    background:var(--cat-boundary-bg); color:var(--ink); border:1px solid var(--card-border); border-radius:10px;
+    font-size:.82rem; line-height:1.55;
+  }
+  .disclaimer svg{flex:none; width:16px; height:16px; margin-top:2px; color:var(--cat-boundary);}
+
+  /* ---------- Prüfung GOÄ-Bezug: Facet-Sidebar + Datentabelle ---------- */
+  .pr-shell{display:flex; gap:16px; align-items:flex-start;}
+  @media (max-width:880px){.pr-shell{flex-direction:column;}}
+
+  .pr-sidebar{
+    width:216px; flex:none; background:var(--card-bg); border:1px solid var(--card-border);
+    border-radius:12px; padding:16px; position:sticky; top:16px;
+  }
+  @media (max-width:880px){.pr-sidebar{width:100%; position:static;}}
+  .pr-reset{
+    display:block; width:100%; text-align:left; font:600 .74rem "Source Sans 3"; color:var(--accent-strong);
+    background:transparent; border:none; padding:0 0 14px; cursor:pointer;
+  }
+  .pr-reset:hover{text-decoration:underline;}
+  .pr-facet-group{margin-bottom:16px;}
+  .pr-facet-group:last-child{margin-bottom:0;}
+  .pr-facet-label{
+    font:700 .66rem "Source Sans 3"; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+  .pr-facet-item{
+    display:flex; justify-content:space-between; align-items:center; gap:8px; width:100%;
+    font:500 .82rem "Source Sans 3"; color:var(--ink); background:transparent; border:none; border-radius:7px;
+    padding:6px 8px; cursor:pointer; text-align:left;
+  }
+  .pr-facet-item:hover{background:var(--bg);}
+  .pr-facet-item[data-active="true"]{background:var(--accent); color:var(--accent-contrast);}
+  .pr-facet-item[data-active="true"] .pr-facet-count{background:rgba(255,255,255,.25); color:inherit;}
+  .pr-facet-count{
+    font:700 .68rem "IBM Plex Mono",monospace; color:var(--ink-soft); background:var(--bg);
+    border-radius:999px; padding:1px 7px; min-width:20px; text-align:center;
+  }
+
+  .pr-main{flex:1; min-width:0;}
+  .pr-toolbar{display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:12px;}
+  .pr-search{
+    display:flex; align-items:center; gap:8px; background:var(--card-bg); border:1px solid var(--card-border);
+    border-radius:9px; padding:8px 12px; flex:1; min-width:220px; max-width:420px;
+  }
+  .pr-search svg{width:15px; height:15px; color:var(--ink-soft); flex:none;}
+  .pr-search input{border:none; background:transparent; outline:none; font:500 .84rem "Source Sans 3"; color:var(--ink); width:100%;}
+  .pr-search input::placeholder{color:var(--ink-soft);}
+  .pr-toolbar-right{display:flex; align-items:center; gap:14px;}
+  .pr-count{font-size:.78rem; color:var(--ink-soft); white-space:nowrap;}
+  .pr-export-btn{padding:8px 14px; font-size:.8rem;}
+
+  .pr-table-wrap{background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; overflow-x:auto; margin-bottom:18px;}
+  .pr-table{width:100%; border-collapse:collapse; font-size:.78rem; min-width:620px;}
+  .pr-table thead th{
+    text-align:left; font:700 .64rem "Source Sans 3"; text-transform:uppercase; letter-spacing:.04em;
+    color:var(--ink-soft); padding:11px 10px; border-bottom:1px solid var(--card-border); background:var(--bg);
+    white-space:nowrap;
+  }
+  .pr-table tbody tr{border-bottom:1px solid var(--card-border); cursor:pointer;}
+  .pr-table tbody tr:last-child{border-bottom:none;}
+  .pr-table tbody tr:hover{background:var(--bg);}
+  .pr-table tbody tr[data-active="true"]{background:var(--bg); box-shadow:inset 3px 0 0 var(--accent);}
+  .pr-table td{padding:9px 10px; vertical-align:middle; color:var(--ink);}
+  .pr-col-quelle{display:flex; align-items:center; gap:8px; font-weight:600; white-space:nowrap;}
+  .pr-source-icon{width:17px; height:17px; color:var(--accent-strong); flex:none; display:flex;}
+  .pr-source-icon svg{width:100%; height:100%;}
+  .pr-path{
+    font-family:"IBM Plex Mono",monospace; font-size:.7rem; color:var(--ink-soft);
+    max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .pr-empty-row td{padding:26px 14px; text-align:center; color:var(--ink-soft); font-size:.84rem;}
+
+  .pr-dot{display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; vertical-align:middle;}
+  .pr-dot-direkt{background:var(--cat-violation);}
+  .pr-dot-mittelbar{background:var(--cat-boundary);}
+
+  .pr-badge{display:inline-block; font:700 .68rem "Source Sans 3"; padding:3px 9px; border-radius:999px; white-space:nowrap;}
+  .pr-prio-hoch{background:var(--cat-violation-bg); color:var(--cat-violation);}
+  .pr-prio-mittel{background:var(--cat-boundary-bg); color:var(--cat-boundary);}
+  .pr-prio-niedrig{background:var(--bg); color:var(--ink-soft);}
+  .pr-status-offen{background:var(--bg); color:var(--ink-soft);}
+  .pr-status-neues-thema{background:var(--cat-conflict-bg); color:var(--cat-conflict);}
+  .pr-status-in-pruefung{background:var(--cat-conflict-bg); color:var(--cat-conflict);}
+  .pr-status-uebernommen{background:var(--cat-ok-bg); color:var(--cat-ok);}
+
+  /* ---------- Detailkarte (Fund) ---------- */
+  .finding-card{background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; padding:16px 18px; margin-bottom:14px;}
+  .finding-head{display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:10px; flex-wrap:wrap;}
+  .finding-loc{font:700 .68rem "IBM Plex Mono",monospace; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.03em;}
+  .finding-reason{font-size:.82rem; color:var(--ink-soft); margin-bottom:12px; line-height:1.55;}
+  .finding-reason b{color:var(--ink); font-weight:600;}
+  .diff-block{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  @media (max-width:640px){.diff-block{grid-template-columns:1fr;}}
+  .diff-col{border-radius:8px; padding:11px 13px; font-size:.83rem; line-height:1.55;}
+  .diff-col.old{background:var(--cat-violation-bg); color:var(--ink);}
+  .diff-col.new{background:var(--cat-ok-bg); color:var(--ink);}
+  .diff-col .diff-label{display:block; font:700 .62rem "Source Sans 3"; text-transform:uppercase; letter-spacing:.04em; margin-bottom:5px;}
+  .diff-col.old .diff-label{color:var(--cat-violation);}
+  .diff-col.new .diff-label{color:var(--cat-ok);}
+  .tarif-note{display:inline-flex; align-items:center; gap:5px; font-size:.74rem; color:var(--ink-soft);}
+  .tarif-note svg{width:13px; height:13px; color:var(--accent-strong);}
+
+  footer{margin-top:40px; padding-top:18px; border-top:1px solid var(--card-border); font-size:.78rem; color:var(--ink-soft); line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="module-rail">
+    <div class="module-rail-text">
+      <h1>Prüfung definierter Bereiche auf GOÄ-Bezug</h1>
+      <p>Durchsucht die festgelegten Quellenbereiche — KV-Intranet, von der KV verantwortete Internetdomänen, PDF-Druckstücke und Tabellen, die die Basis von Programmen bilden — nach GOÄ-Bezug, zeigt die Fundstellen an und schlägt plausible neue Formulierungen vor, die bei Relevanz die neuen tariflichen Leistungen berücksichtigen.</p>
+    </div>
+    <button class="btn btn-ghost" id="btn-theme" type="button" title="Theme umschalten" aria-label="Theme umschalten">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.4 4.4l1.7 1.7M17.9 17.9l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.4 19.6l1.7-1.7M17.9 6.1l1.7-1.7"/></svg>
+    </button>
+  </div>
+
+  <div class="disclaimer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg>
+    <span><strong>Beispieldaten zur Veranschaulichung.</strong> Quellen, Fundstellen und Textvorschläge unten sind frei erzeugt und dienen ausschließlich der Darstellung der Modul-Funktionalität.</span>
+  </div>
+
+  <div class="pr-shell">
+    <aside class="pr-sidebar" id="pr-sidebar"></aside>
+    <div class="pr-main">
+      <div class="pr-toolbar">
+        <div class="pr-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.6-4.6"/></svg>
+          <input type="text" id="pr-search-input" placeholder="Volltext: Fundstelle, Bereich oder Wortlaut durchsuchen…">
+        </div>
+        <div class="pr-toolbar-right">
+          <span class="pr-count" id="pr-result-count"></span>
+          <button class="btn btn-ghost pr-export-btn" id="pr-export-btn" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5"/><path d="M4 17v2.4A1.6 1.6 0 0 0 5.6 21h12.8a1.6 1.6 0 0 0 1.6-1.6V17"/></svg>
+            Export
+          </button>
+        </div>
+      </div>
+      <div class="pr-table-wrap">
+        <table class="pr-table">
+          <thead>
+            <tr><th>Quelle</th><th>Bereich</th><th>Fundstelle</th><th>GOÄ-Bezug</th><th>Priorität</th><th>Status</th></tr>
+          </thead>
+          <tbody id="pr-table-body"></tbody>
+        </table>
+      </div>
+      <div id="pr-detail"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div>Eigenständiges Modul „Prüfung GOÄ-Bezug" — herausgelöst aus der GOÄneu Suite. Beispieldaten zur Veranschaulichung der Funktionalität.</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
+
+async function saveBlobForViewer(filename, blob){
+  if(typeof window.claude !== "undefined" && typeof window.claude.use === "function"){
+    try{
+      const downloads = await window.claude.use("downloads");
+      if(downloads){
+        await downloads.save({ filename, data: blob });
+        return;
+      }
+    }catch(capErr){
+      if(capErr && capErr.code === "declined") return;
+    }
+  }
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 4000);
+}
+
+/* ========================= Modul: Prüfung definierter Bereiche auf GOÄ-Bezug ========================= */
+const PR_ICONS = {
+  intranet:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>',
+  webdomains:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.4 3.8 5.4 3.8 8.5s-1.3 6.1-3.8 8.5c-2.5-2.4-3.8-5.4-3.8-8.5S9.5 5.9 12 3.5Z"/></svg>',
+  pdf:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2.5h9l3.5 3.5V21H6z"/><path d="M15 2.5V6h3.5M9 13h6M9 16.5h6"/></svg>',
+  tabellen:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M3.5 10h17M3.5 15h17M10 4v16"/></svg>',
+};
+const PR_SOURCES = [
+  {id:"intranet", titel:"KV-Intranet", desc:"Internes Wissens- und Arbeitsanweisungsportal für den Kundendienst", seitenGeprueft:1240,
+    fundstellen:[
+      {pfad:"KV-Intranet › Abrechnung › Privatärztliche Rechnungen › FAQ Steigerungssatz", kategorie:"Steigerungsfaktor",
+        auszug:"„Der Regelhöchstsatz beträgt das 2,3-fache des Gebührensatzes (bei technischen Leistungen 1,8-fach). Eine Überschreitung ist nur mit schriftlicher Begründung des Arztes zulässig.“",
+        grund:"GOÄneu (§5) kennt keinen Steigerungsfaktor mit Schwellenwert mehr — der Gebührensatz ist ein fester Eurobetrag je Ziffer. Abweichungen sind nur über die Faktor-Gründe HV/AB/BT/ST/NT möglich.",
+        vorschlag:"„GOÄneu sieht grundsätzlich einen festen Gebührensatz je Ziffer vor. Ein abweichender Faktor ist nur bei individueller Honorarvereinbarung (HV), einer Allgemeinen Bestimmung (AB) oder bei Basis-/Standard-/Notlagentarif-Versicherten (BT/ST/NT) zulässig und muss entsprechend gekennzeichnet sein.“",
+        tarifBezug:false, goaBezug:"direkt", prioritaet:"hoch", status:"in Prüfung"},
+      {pfad:"KV-Intranet › Abrechnung › Analogziffern", kategorie:"Analogbewertung",
+        auszug:"„Analog abgerechnete Leistungen erkennen Sie am Zusatz ‚Analog‘ im Freitext der Rechnung.“",
+        grund:"§12 Abs.4 Nr.6 GOÄneu schreibt für Analogleistungen das Präfix „A“ als verbindliche Kennzeichnung vor, nicht einen Freitext-Zusatz.",
+        vorschlag:"„Analogleistungen sind ab GOÄneu am Präfix „A“ in der Vergütungstabelle zu erkennen; die Begründung muss zusätzlich Nummer und Bezeichnung der herangezogenen Basisleistung enthalten.“",
+        tarifBezug:false, goaBezug:"direkt", prioritaet:"mittel", status:"offen"},
+      {pfad:"KV-Intranet › Abrechnung › Stationäre Behandlung › Minderungssatz", kategorie:"Honorarminderung",
+        auszug:"„Bei stationärer Behandlung ist grundsätzlich ein pauschaler Abschlag von 20% auf die Gebühr vorzunehmen.“",
+        grund:"§6a Abs.1 GOÄneu differenziert: 25% Minderung bei Behandlung durch einen angestellten Krankenhausarzt, aber nur 15% bei Behandlung durch einen Belegarzt — ein einheitlicher 20%-Abschlag ist unzutreffend.",
+        vorschlag:"„Bei stationärer Behandlung mindert sich die Gebühr nach §6a GOÄneu um 25% (Krankenhausarzt) bzw. 15% (Belegarzt). Der zutreffende Minderungssatz richtet sich nach der Arztfunktion, nicht pauschal.“",
+        tarifBezug:false, goaBezug:"direkt", prioritaet:"hoch", status:"in Prüfung"}
+    ]},
+  {id:"webdomains", titel:"KV-Domains", desc:"Von der KV verantwortete Internetdomänen, u. a. kv.com", seitenGeprueft:380,
+    fundstellen:[
+      {pfad:"kv.com/kundenservice/haeufige-fragen/goa-abrechnung", kategorie:"Tarif/Erstattung",
+        auszug:"„Für eine einfache Beratung berechnet Ihr Arzt in der Regel 4,66 € (GOÄ-Nr. 1).“",
+        grund:"Mit GOÄneu ändern sich Nummerierung und Bewertung: „Persönliche Beratung durch den Arzt“ ist neu Ziffer 1 mit 14,11 € (Dauer unter 10 Minuten) bzw. Ziffer 2 mit 21,21 € (je vollendete 10 Minuten).",
+        vorschlag:"„Für eine Beratung berechnet Ihr Arzt nach GOÄneu 14,11 € (Nr. 1, unter 10 Minuten) bzw. 21,21 € je vollendete 10 Minuten (Nr. 2).“",
+        tarifBezug:true, goaBezug:"direkt", prioritaet:"hoch", status:"offen"},
+      {pfad:"kv.com/leistungen/krankenvollversicherung/erstattung", kategorie:"Verweisstruktur",
+        auszug:"„Rechnungen werden auf Basis der Gebührenordnung für Ärzte (GOÄ) geprüft und nach dem tariflich vereinbarten Umfang erstattet.“",
+        grund:"Allgemeiner Verweis auf „die GOÄ“ — sollte klarstellen, dass seit GOÄneu zusätzlich das maschinenlesbare Rechnungsformular (Anlage 2) Voraussetzung für die Fälligkeit ist.",
+        vorschlag:"„Rechnungen werden auf Basis der aktuell geltenden Gebührenordnung für Ärzte (GOÄ) geprüft. Seit Inkrafttreten von GOÄneu ist zusätzlich die Verwendung des maschinenlesbaren Rechnungsformulars (Anlage 2 GOÄ) Voraussetzung für die Fälligkeit Ihrer Rechnung.“",
+        tarifBezug:false, goaBezug:"mittelbar", prioritaet:"niedrig", status:"übernommen"},
+      {pfad:"kv.com/kundenservice/haeufige-fragen/hausbesuch-kosten", kategorie:"Verweisstruktur",
+        auszug:"„Fahrtkosten des Arztes zu einem Hausbesuch können als Wegegeld separat abgerechnet werden.“",
+        grund:"§12 Abs.4 Nr.4/5 GOÄneu unterscheidet Wegegeld (Präfix „W“, Entfernung bis 25 km) und Reiseentschädigung (Präfix „R“, über 25 km) als zwei unterschiedliche Positionen mit eigener Kennzeichnungspflicht.",
+        vorschlag:"„Fahrtkosten Ihres Arztes zu einem Hausbesuch werden je nach Entfernung als Wegegeld (bis 25 km, Präfix „W“) oder Reiseentschädigung (über 25 km, Präfix „R“) gesondert ausgewiesen.“",
+        tarifBezug:false, goaBezug:"direkt", prioritaet:"mittel", status:"offen"}
+    ]},
+  {id:"pdf", titel:"PDF-Druckstücke", desc:"Kundeninformationen, Merkblätter und Antragsunterlagen im PDF-Format", seitenGeprueft:96,
+    fundstellen:[
+      {pfad:"Merkblatt_Privatpatient_2023.pdf · Seite 4", kategorie:"Sachkosten",
+        auszug:"„Sachkosten wie Verbandmaterial und Einmalspritzen können Ihnen gesondert in Rechnung gestellt werden.“",
+        grund:"§10 Abs.2 GOÄneu schließt Einmalspritzen, -kanülen, -handschuhe und Schnellverbandmaterial ausdrücklich von der gesonderten Berechnung aus — diese Kosten sind mit der Gebühr abgegolten.",
+        vorschlag:"„Bestimmte Sachkosten (u. a. Einmalspritzen, -kanülen, Schnellverbandmaterial) sind nach GOÄneu bereits mit der ärztlichen Gebühr abgegolten und dürfen nicht gesondert berechnet werden. Andere Auslagen, z. B. Medikamente, bleiben gesondert erstattungsfähig.“",
+        tarifBezug:false, goaBezug:"direkt", prioritaet:"mittel", status:"in Prüfung"},
+      {pfad:"Antragsunterlagen_Privatpatient_Merkblatt.pdf · Seite 2", kategorie:"Formularpflicht",
+        auszug:"„Reichen Sie uns die Original-Rechnung Ihres Arztes zur Erstattung ein.“",
+        grund:"Seit GOÄneu ist die Verwendung des maschinenlesbaren Rechnungsformulars nach Anlage 2 (§12 GOÄneu) Fälligkeitsvoraussetzung — eine formlose Originalrechnung genügt nicht mehr in jedem Fall.",
+        vorschlag:"„Reichen Sie uns die Rechnung Ihres Arztes im GOÄ-Rechnungsformular (Anlage 2) zur Erstattung ein. Nur so ist die Fälligkeit der Rechnung nach GOÄneu sichergestellt.“",
+        tarifBezug:false, goaBezug:"mittelbar", prioritaet:"mittel", status:"offen"}
+    ]},
+  {id:"tabellen", titel:"Tabellen & Programmbasis", desc:"Tabellen, die die fachliche Basis von Abrechnungsprogrammen bilden", seitenGeprueft:22,
+    fundstellen:[
+      {pfad:"Tarifierungstabelle_GOAE_Basissaetze.xlsx · Blatt „Grundleistungen“", kategorie:"Tarif/Erstattung",
+        auszug:"Zeile „Nr. 1 – Beratung – 4,66 €“, Zeile „Nr. 5 – Symptombezogene Untersuchung – 4,66 €“",
+        grund:"Diese Tabelle bildet die fachliche Basis für die automatisierte Rechnungsprüfung im Abrechnungsprogramm. Ziffern, Bezeichnungen und Sätze entsprechen der alten GOÄ und stimmen nicht mit dem GOÄneu-Gebührenverzeichnis überein.",
+        vorschlag:"Tabelle auf Basis des GOÄneu-Gebührenverzeichnisses aktualisieren, u. a.: Nr. 1 „Persönliche Beratung durch den Arzt“ (unter 10 Min.) = 14,11 €; Nr. 18 „Vollständige körperliche Untersuchung eines Organsystems“ = 25,44 €. Vollständige Neuabbildung aller Gebührenpositionen erforderlich.",
+        tarifBezug:true, goaBezug:"direkt", prioritaet:"hoch", status:"offen"},
+      {pfad:"Pruefregeln_Abrechnungsautomat.json › Regel „doppelte_abrechnung“", kategorie:"Komplexleistungen",
+        auszug:"Prüfregel enthält keinen Abgleich auf den Zusatz „soweit nicht in Komplexleistungen enthalten“.",
+        grund:"GOÄneu führt für mehrere Ziffern (u. a. Nr. 721) diesen Zusatz ein — Einzelleistungen dürfen nicht neben einer bereits abgerechneten Komplexleistung erstattet werden. Ohne diese Prüfregel drohen Doppelerstattungen.",
+        vorschlag:"Prüfregel ergänzen: Einzelposition mit Zusatz „soweit nicht in Komplexleistungen enthalten“ gegen im selben Behandlungszeitraum abgerechnete Komplexleistungen abgleichen und bei Überschneidung automatisch kürzen/markieren.",
+        tarifBezug:false, goaBezug:"direkt", prioritaet:"hoch", status:"offen"}
+    ]},
+];
+
+const PR_ROWS = [];
+PR_SOURCES.forEach(s=>{ s.fundstellen.forEach(f=>{ PR_ROWS.push(Object.assign({sourceId:s.id, sourceTitel:s.titel}, f, {id:PR_ROWS.length})); }); });
+
+const PR_PRIO_ORDER = {hoch:0, mittel:1, niedrig:2};
+const PR_PRIO_LABEL = {hoch:"Hoch", mittel:"Mittel", niedrig:"Niedrig"};
+const PR_STATUS_LABEL = {"offen":"Offen", "in Prüfung":"In Prüfung", "übernommen":"Übernommen"};
+const PR_STATUS_CLASS = {"offen":"offen", "in Prüfung":"in-pruefung", "übernommen":"uebernommen"};
+
+const prState = {sourceId:null, goaBezug:null, prioritaet:null, status:null, search:"", selected:PR_ROWS.length?0:null};
+
+function prFacetCounts(field){
+  const counts = {};
+  PR_ROWS.forEach(r=>{ counts[r[field]] = (counts[r[field]]||0)+1; });
+  return counts;
+}
+
+function prFacetGroupHtml(field, label, order, labelMap){
+  const counts = prFacetCounts(field);
+  const keys = order || Object.keys(counts);
+  return '<div class="pr-facet-group">'+
+    '<div class="pr-facet-label">'+esc(label)+'</div>'+
+    keys.filter(k=>counts[k]).map(k=>
+      '<button class="pr-facet-item" type="button" data-field="'+field+'" data-value="'+esc(k)+'" data-active="'+(prState[field]===k?"true":"false")+'">'+
+        '<span>'+esc(labelMap?labelMap[k]:k)+'</span><span class="pr-facet-count">'+counts[k]+'</span>'+
+      '</button>'
+    ).join("") +
+  '</div>';
+}
+
+function renderPrSidebar(){
+  const sourceLabelMap = {}; PR_SOURCES.forEach(s=>sourceLabelMap[s.id]=s.titel);
+  const sidebar = document.getElementById("pr-sidebar");
+  sidebar.innerHTML =
+    '<button class="pr-reset" type="button" id="pr-reset-btn"'+((!prState.sourceId&&!prState.goaBezug&&!prState.prioritaet&&!prState.status&&!prState.search)?' hidden':'')+'>Alle Filter zurücksetzen</button>'+
+    prFacetGroupHtml("sourceId","Quelle", PR_SOURCES.map(s=>s.id), sourceLabelMap)+
+    prFacetGroupHtml("goaBezug","GOÄ-Bezug", ["direkt","mittelbar"], {direkt:"Direkt", mittelbar:"Mittelbar"})+
+    prFacetGroupHtml("prioritaet","Priorität", ["hoch","mittel","niedrig"], PR_PRIO_LABEL)+
+    prFacetGroupHtml("status","Status", ["offen","in Prüfung","übernommen"], PR_STATUS_LABEL);
+  sidebar.querySelectorAll(".pr-facet-item").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const field = btn.dataset.field, value = btn.dataset.value;
+      prState[field] = (prState[field]===value) ? null : value;
+      renderPrSidebar(); renderPrTable();
+    });
+  });
+  const resetBtn = document.getElementById("pr-reset-btn");
+  if(resetBtn) resetBtn.addEventListener("click", ()=>{
+    prState.sourceId=null; prState.goaBezug=null; prState.prioritaet=null; prState.status=null; prState.search="";
+    const input = document.getElementById("pr-search-input"); if(input) input.value="";
+    renderPrSidebar(); renderPrTable();
+  });
+}
+
+function getFilteredPrRows(){
+  const q = prState.search.trim().toLowerCase();
+  return PR_ROWS.filter(r=>
+    (!prState.sourceId || r.sourceId===prState.sourceId) &&
+    (!prState.goaBezug || r.goaBezug===prState.goaBezug) &&
+    (!prState.prioritaet || r.prioritaet===prState.prioritaet) &&
+    (!prState.status || r.status===prState.status) &&
+    (!q || (r.pfad+" "+r.kategorie+" "+r.auszug+" "+r.vorschlag).toLowerCase().includes(q))
+  );
+}
+
+function renderPrTable(){
+  const rows = getFilteredPrRows();
+  const body = document.getElementById("pr-table-body");
+  const countEl = document.getElementById("pr-result-count");
+  if(countEl) countEl.textContent = rows.length+" von "+PR_ROWS.length+" Fundstellen";
+  if(!rows.length){
+    body.innerHTML = '<tr class="pr-empty-row"><td colspan="6">Keine Fundstellen für diese Filterkombination.</td></tr>';
+  } else {
+    body.innerHTML = rows.map(r=>
+      '<tr data-row="'+r.id+'" data-active="'+(prState.selected===r.id?"true":"false")+'">'+
+        '<td class="pr-col-quelle"><span class="pr-source-icon">'+PR_ICONS[r.sourceId]+'</span>'+esc(r.sourceTitel)+'</td>'+
+        '<td>'+esc(r.kategorie)+'</td>'+
+        '<td class="pr-path" title="'+esc(r.pfad)+'">'+esc(r.pfad)+'</td>'+
+        '<td><span class="pr-dot pr-dot-'+r.goaBezug+'"></span>'+(r.goaBezug==="direkt"?"Direkt":"Mittelbar")+'</td>'+
+        '<td><span class="pr-badge pr-prio-'+r.prioritaet+'">'+PR_PRIO_LABEL[r.prioritaet]+'</span></td>'+
+        '<td><span class="pr-badge pr-status-'+PR_STATUS_CLASS[r.status]+'">'+esc(PR_STATUS_LABEL[r.status])+'</span></td>'+
+      '</tr>'
+    ).join("");
+  }
+  body.querySelectorAll("tr[data-row]").forEach(tr=>{
+    tr.addEventListener("click", ()=>selectPrRow(parseInt(tr.dataset.row,10)));
+  });
+  if(rows.length && !rows.some(r=>r.id===prState.selected)){
+    selectPrRow(rows[0].id);
+  } else {
+    renderPrDetail();
+  }
+}
+
+function selectPrRow(id){
+  prState.selected = id;
+  document.querySelectorAll("#pr-table-body tr[data-row]").forEach(tr=>{
+    tr.dataset.active = (parseInt(tr.dataset.row,10)===id) ? "true":"false";
+  });
+  renderPrDetail();
+}
+
+function renderPrDetail(){
+  const detail = document.getElementById("pr-detail");
+  const f = PR_ROWS.find(r=>r.id===prState.selected);
+  if(!f){ detail.innerHTML = ""; return; }
+  detail.innerHTML =
+    '<div class="finding-card">'+
+      '<div class="finding-head"><span class="finding-loc">'+esc(f.pfad)+'</span>'+
+      (f.tarifBezug?'<span class="tarif-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18M7 15l4-4 3 3 5-6"/></svg>berücksichtigt neue tarifliche Leistungen</span>':'')+
+      '</div>'+
+      '<div class="finding-reason"><b>Warum GOÄ-Bezug:</b> '+esc(f.grund)+'</div>'+
+      '<div class="diff-block">'+
+        '<div class="diff-col old"><span class="diff-label">Bisheriger Text</span>'+esc(f.auszug)+'</div>'+
+        '<div class="diff-col new"><span class="diff-label">Vorschlag neue Formulierung</span>'+esc(f.vorschlag)+'</div>'+
+      '</div>'+
+    '</div>';
+}
+
+function prCsvField(v){
+  const s = String(v==null?"":v);
+  return /[",\n;]/.test(s) ? '"'+s.replace(/"/g,'""')+'"' : s;
+}
+
+async function exportPrCsv(){
+  const rows = getFilteredPrRows();
+  const header = ["Quelle","Bereich","Fundstelle","GOÄ-Bezug","Priorität","Status","Bisheriger Text","Formulierungsvorschlag"];
+  const lines = [header.map(prCsvField).join(";")];
+  rows.forEach(r=>{
+    lines.push([r.sourceTitel, r.kategorie, r.pfad, r.goaBezug==="direkt"?"Direkt":"Mittelbar", PR_PRIO_LABEL[r.prioritaet], PR_STATUS_LABEL[r.status], r.auszug, r.vorschlag].map(prCsvField).join(";"));
+  });
+  const csv = "﻿"+lines.join("\r\n");
+  const blob = new Blob([csv], {type:"text/csv;charset=utf-8"});
+  await saveBlobForViewer("GOAeneu_Pruefung_GOA-Bezug.csv", blob);
+}
+
+function initPruefung(){
+  renderPrSidebar();
+  renderPrTable();
+  const searchInput = document.getElementById("pr-search-input");
+  if(searchInput) searchInput.addEventListener("input", ()=>{ prState.search = searchInput.value; renderPrSidebar(); renderPrTable(); });
+  const exportBtn = document.getElementById("pr-export-btn");
+  if(exportBtn) exportBtn.addEventListener("click", ()=>exportPrCsv());
+}
+
+document.getElementById("btn-theme").addEventListener("click", ()=>{
+  const root = document.documentElement;
+  const cur = root.getAttribute("data-theme");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  let next;
+  if(!cur) next = prefersDark ? "light" : "dark";
+  else if(cur==="dark") next = "light";
+  else next = "dark";
+  root.setAttribute("data-theme", next);
+  try{ localStorage.setItem("goae-theme", next); }catch(e){}
+});
+try{
+  const saved = localStorage.getItem("goae-theme");
+  if(saved) document.documentElement.setAttribute("data-theme", saved);
+}catch(e){}
+
+initPruefung();
+
+})();
+</script>
+</body>
+</html>
