@@ -1,0 +1,1200 @@
+<!DOCTYPE html><html lang="de"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prüfung DKV-Bezug</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" crossorigin="anonymous" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#edf1f5;
+    --rail-bg:#0a3d75; --rail-bg-2:#0f5fa8;
+    --rail-text:#eef6fc; --rail-text-soft:#a9cbe8;
+    --ink:#16212e; --ink-soft:#495b70;
+    --card-bg:#ffffff; --card-border:#d8dee7;
+    --accent:#0f6fb8; --accent-strong:#0a5490; --accent-contrast:#ffffff;
+    --cat-ok:#2f7a4f; --cat-ok-bg:#e6f2ea;
+    --cat-boundary:#9c6b0a; --cat-boundary-bg:#f6eed8;
+    --cat-violation:#ad3527; --cat-violation-bg:#f7e5e1;
+    --cat-conflict:#6a4796; --cat-conflict-bg:#ece4f5;
+    --focus:#0f6fb8;
+    --shadow-doc: 0 1px 2px rgba(10,25,45,.07), 0 10px 30px -12px rgba(10,25,45,.28);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0d1720;
+      --rail-bg:#061c33; --rail-bg-2:#0a2c4d;
+      --rail-text:#e9f2fa; --rail-text-soft:#9ec2e2;
+      --ink:#e6ebf1; --ink-soft:#a3b1c4;
+      --card-bg:#161f2c; --card-border:#2a3549;
+      --accent:#4fa3e0; --accent-strong:#7cc0ee; --accent-contrast:#071626;
+      --cat-ok:#5fbf88; --cat-ok-bg:#163524;
+      --cat-boundary:#d9a53b; --cat-boundary-bg:#3a2e12;
+      --cat-violation:#e07364; --cat-violation-bg:#3a1c16;
+      --cat-conflict:#b79bdb; --cat-conflict-bg:#2a2140;
+      --shadow-doc: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px -12px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0d1720;
+    --rail-bg:#061c33; --rail-bg-2:#0a2c4d;
+    --rail-text:#e9f2fa; --rail-text-soft:#9ec2e2;
+    --ink:#e6ebf1; --ink-soft:#a3b1c4;
+    --card-bg:#161f2c; --card-border:#2a3549;
+    --accent:#4fa3e0; --accent-strong:#7cc0ee; --accent-contrast:#071626;
+    --cat-ok:#5fbf88; --cat-ok-bg:#163524;
+    --cat-boundary:#d9a53b; --cat-boundary-bg:#3a2e12;
+    --cat-violation:#e07364; --cat-violation-bg:#3a1c16;
+    --cat-conflict:#b79bdb; --cat-conflict-bg:#2a2140;
+    --shadow-doc: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px -12px rgba(0,0,0,.6);
+  }
+
+  *{box-sizing:border-box;}
+  html{background:var(--bg);}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  h1,h2,h3{text-wrap:balance; font-family:"Source Sans 3",sans-serif;}
+  .mono{font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;}
+  ::selection{background:var(--accent); color:var(--accent-contrast);}
+  a{color:var(--accent);}
+  :focus-visible{outline:2px solid var(--focus); outline-offset:2px; border-radius:4px;}
+  [hidden]{display:none !important;}
+  @media (prefers-reduced-motion: reduce){*{transition:none !important;}}
+
+  .app{max-width:1180px; margin:0 auto; padding:22px clamp(16px,3vw,34px) 60px;}
+
+  .btn{
+    font:600 .88rem/1 "Source Sans 3",sans-serif; padding:11px 18px; border-radius:10px;
+    border:1px solid transparent; cursor:pointer; display:inline-flex; align-items:center; gap:8px;
+    transition:transform .12s ease, box-shadow .12s ease, background-color .12s ease;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn:disabled{opacity:.45; cursor:not-allowed; transform:none;}
+  .btn-ghost{background:transparent; color:var(--ink); border-color:var(--card-border);}
+  .btn-ghost:hover:not(:disabled){border-color:var(--accent); color:var(--accent);}
+  .btn-primary{background:var(--accent); color:var(--accent-contrast);}
+  .btn-primary:hover:not(:disabled){background:var(--accent-strong);}
+  .btn-sm{padding:7px 12px; font-size:.78rem; border-radius:8px;}
+  .btn svg{width:15px; height:15px;}
+
+  /* ---------- Modul-Kopf ---------- */
+  .module-rail{
+    background:linear-gradient(160deg, var(--rail-bg), var(--rail-bg-2)); color:var(--rail-text);
+    border-radius:16px; padding:20px 24px; margin-bottom:22px;
+    display:flex; justify-content:space-between; align-items:flex-start; gap:18px; flex-wrap:wrap;
+  }
+  .module-rail-text{flex:1; min-width:0;}
+  .module-rail .eyebrow{font:700 .66rem "Source Sans 3"; text-transform:uppercase; letter-spacing:.08em; color:var(--rail-text-soft); margin-bottom:4px;}
+  .module-rail h1{margin:0; font-size:1.2rem;}
+  .module-rail p{margin:6px 0 0; color:var(--rail-text-soft); font-size:.86rem; max-width:72ch; line-height:1.6;}
+  .module-rail .btn-ghost{background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.2); color:var(--rail-text); flex:none;}
+  .module-rail .btn-ghost:hover{border-color:rgba(255,255,255,.4); color:var(--rail-text);}
+
+  .disclaimer{
+    display:flex; gap:10px; align-items:flex-start; margin:0 0 18px; padding:11px 14px;
+    background:var(--cat-boundary-bg); color:var(--ink); border:1px solid var(--card-border); border-radius:10px;
+    font-size:.82rem; line-height:1.55;
+  }
+  .disclaimer svg{flex:none; width:16px; height:16px; margin-top:2px; color:var(--cat-boundary);}
+
+  /* ---------- Kennzahlen ---------- */
+  .stats{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:10px; margin-bottom:18px;}
+  .stat{background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; padding:12px 14px;}
+  .stat-label{font:700 .64rem "Source Sans 3"; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft);}
+  .stat-value{font:700 1.4rem "IBM Plex Mono",monospace; margin-top:4px; font-variant-numeric:tabular-nums;}
+  .stat-sub{font-size:.72rem; color:var(--ink-soft);}
+
+  /* ---------- Aufklappbare Panels (Import / Regeln) ---------- */
+  .panels{display:grid; gap:10px; margin-bottom:18px;}
+  details.panel{background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px;}
+  details.panel > summary{
+    cursor:pointer; list-style:none; padding:13px 16px; display:flex; align-items:center; gap:10px;
+    font:700 .86rem "Source Sans 3";
+  }
+  details.panel > summary::-webkit-details-marker{display:none;}
+  details.panel > summary svg{width:16px; height:16px; color:var(--accent-strong); flex:none;}
+  details.panel > summary .chev{margin-left:auto; transition:transform .15s ease; color:var(--ink-soft);}
+  details.panel[open] > summary .chev{transform:rotate(180deg);}
+  details.panel > summary .sum-note{font-weight:500; font-size:.78rem; color:var(--ink-soft);}
+  .panel-body{padding:0 16px 16px; font-size:.82rem; line-height:1.55;}
+  .panel-body p{margin:0 0 10px; color:var(--ink-soft);}
+  .form-row{display:flex; flex-wrap:wrap; gap:12px; align-items:flex-end; margin-bottom:12px;}
+  .field{display:flex; flex-direction:column; gap:4px; min-width:160px;}
+  .field label{font:700 .64rem "Source Sans 3"; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-soft);}
+  .field select, .field input[type="text"], .rules-table input[type="text"], .rules-table select{
+    font:500 .82rem "Source Sans 3"; color:var(--ink); background:var(--bg); border:1px solid var(--card-border);
+    border-radius:7px; padding:7px 9px; min-width:0;
+  }
+  .field input[type="file"]{font:500 .8rem "Source Sans 3"; color:var(--ink);}
+  .check{display:inline-flex; align-items:center; gap:6px; font-size:.8rem; color:var(--ink);}
+  .import-msg{font-size:.8rem; margin-top:8px; color:var(--ink-soft);}
+  .import-msg.err{color:var(--cat-violation);}
+  .import-msg.ok{color:var(--cat-ok);}
+  .preview-table{width:100%; border-collapse:collapse; font-size:.74rem; margin-top:6px;}
+  .preview-table th,.preview-table td{border-bottom:1px solid var(--card-border); padding:5px 7px; text-align:left; vertical-align:top; max-width:280px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .preview-table th{color:var(--ink-soft); font-weight:700;}
+  .preview-wrap{overflow-x:auto; border:1px solid var(--card-border); border-radius:8px; margin-bottom:12px;}
+
+  .rules-wrap{overflow-x:auto; border:1px solid var(--card-border); border-radius:8px; margin-bottom:12px;}
+  .rules-table{width:100%; border-collapse:collapse; font-size:.78rem; min-width:860px;}
+  .rules-table th{text-align:left; font:700 .62rem "Source Sans 3"; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-soft); padding:8px; background:var(--bg); border-bottom:1px solid var(--card-border); white-space:nowrap;}
+  .rules-table td{padding:6px 8px; border-bottom:1px solid var(--card-border); vertical-align:middle;}
+  .rules-table tr:last-child td{border-bottom:none;}
+  .rules-table input[type="text"]{width:100%;}
+  .rules-table input.mono{font-family:"IBM Plex Mono",monospace; font-size:.74rem;}
+  .rules-table .del{background:transparent; border:none; color:var(--ink-soft); cursor:pointer; font-size:1rem; padding:2px 6px; border-radius:6px;}
+  .rules-table .del:hover{color:var(--cat-violation); background:var(--cat-violation-bg);}
+  .targets{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; margin-bottom:12px;}
+  .targets .field{min-width:0;}
+  .targets code{font-family:"IBM Plex Mono",monospace; font-size:.7rem; color:var(--accent-strong);}
+  .btn-row{display:flex; gap:8px; flex-wrap:wrap;}
+
+  /* ---------- Facet-Sidebar + Datentabelle ---------- */
+  .pr-shell{display:flex; gap:16px; align-items:flex-start;}
+  @media (max-width:880px){.pr-shell{flex-direction:column;}}
+
+  .pr-sidebar{
+    width:216px; flex:none; background:var(--card-bg); border:1px solid var(--card-border);
+    border-radius:12px; padding:16px; position:sticky; top:16px; max-height:calc(100vh - 32px); overflow-y:auto;
+  }
+  @media (max-width:880px){.pr-sidebar{width:100%; position:static; max-height:none;}}
+  .pr-reset{
+    display:block; width:100%; text-align:left; font:600 .74rem "Source Sans 3"; color:var(--accent-strong);
+    background:transparent; border:none; padding:0 0 14px; cursor:pointer;
+  }
+  .pr-reset:hover{text-decoration:underline;}
+  .pr-facet-group{margin-bottom:16px;}
+  .pr-facet-group:last-child{margin-bottom:0;}
+  .pr-facet-label{
+    font:700 .66rem "Source Sans 3"; text-transform:uppercase; letter-spacing:.06em; color:var(--ink-soft);
+    margin-bottom:6px;
+  }
+  .pr-facet-item{
+    display:flex; justify-content:space-between; align-items:center; gap:8px; width:100%;
+    font:500 .82rem "Source Sans 3"; color:var(--ink); background:transparent; border:none; border-radius:7px;
+    padding:6px 8px; cursor:pointer; text-align:left;
+  }
+  .pr-facet-item:hover{background:var(--bg);}
+  .pr-facet-item[data-active="true"]{background:var(--accent); color:var(--accent-contrast);}
+  .pr-facet-item[data-active="true"] .pr-facet-count{background:rgba(255,255,255,.25); color:inherit;}
+  .pr-facet-count{
+    font:700 .68rem "IBM Plex Mono",monospace; color:var(--ink-soft); background:var(--bg);
+    border-radius:999px; padding:1px 7px; min-width:20px; text-align:center;
+  }
+
+  .pr-main{flex:1; min-width:0;}
+  .pr-toolbar{display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:12px;}
+  .pr-search{
+    display:flex; align-items:center; gap:8px; background:var(--card-bg); border:1px solid var(--card-border);
+    border-radius:9px; padding:8px 12px; flex:1; min-width:220px; max-width:420px;
+  }
+  .pr-search svg{width:15px; height:15px; color:var(--ink-soft); flex:none;}
+  .pr-search input{border:none; background:transparent; outline:none; font:500 .84rem "Source Sans 3"; color:var(--ink); width:100%;}
+  .pr-search input::placeholder{color:var(--ink-soft);}
+  .pr-toolbar-right{display:flex; align-items:center; gap:14px;}
+  .pr-count{font-size:.78rem; color:var(--ink-soft); white-space:nowrap;}
+  .pr-export-btn{padding:8px 14px; font-size:.8rem;}
+
+  .pr-table-wrap{background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; overflow-x:auto; margin-bottom:18px;}
+  .pr-table{width:100%; border-collapse:collapse; font-size:.78rem; min-width:720px;}
+  .pr-table thead th{
+    text-align:left; font:700 .64rem "Source Sans 3"; text-transform:uppercase; letter-spacing:.04em;
+    color:var(--ink-soft); padding:11px 10px; border-bottom:1px solid var(--card-border); background:var(--bg);
+    white-space:nowrap;
+  }
+  .pr-table tbody tr{border-bottom:1px solid var(--card-border); cursor:pointer;}
+  .pr-table tbody tr:last-child{border-bottom:none;}
+  .pr-table tbody tr:hover{background:var(--bg);}
+  .pr-table tbody tr[data-active="true"]{background:var(--bg); box-shadow:inset 3px 0 0 var(--accent);}
+  .pr-table td{padding:9px 10px; vertical-align:middle; color:var(--ink);}
+  .pr-col-quelle{display:flex; align-items:center; gap:8px; font-weight:600; white-space:nowrap;}
+  .pr-source-icon{width:17px; height:17px; color:var(--accent-strong); flex:none; display:flex;}
+  .pr-source-icon svg{width:100%; height:100%;}
+  .pr-path{
+    font-family:"IBM Plex Mono",monospace; font-size:.7rem; color:var(--ink-soft);
+    max-width:230px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .pr-more{font-size:.68rem; color:var(--ink-soft); margin-left:4px;}
+  .pr-empty-row td{padding:26px 14px; text-align:center; color:var(--ink-soft); font-size:.84rem;}
+  .pr-limit-row td{padding:12px 14px; text-align:center; color:var(--ink-soft); font-size:.78rem; cursor:default;}
+
+  .pr-dot{display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; vertical-align:middle;}
+  .pr-dot-direkt{background:var(--cat-violation);}
+  .pr-dot-mittelbar{background:var(--cat-boundary);}
+
+  .pr-badge{display:inline-block; font:700 .68rem "Source Sans 3"; padding:3px 9px; border-radius:999px; white-space:nowrap;}
+  .pr-prio-hoch{background:var(--cat-violation-bg); color:var(--cat-violation);}
+  .pr-prio-mittel{background:var(--cat-boundary-bg); color:var(--cat-boundary);}
+  .pr-prio-niedrig{background:var(--bg); color:var(--ink-soft);}
+  .pr-status-offen{background:var(--bg); color:var(--ink-soft);}
+  .pr-status-in-ueberarbeitung{background:var(--cat-conflict-bg); color:var(--cat-conflict);}
+  .pr-status-freigegeben{background:var(--cat-ok-bg); color:var(--cat-ok);}
+  .pr-qs-ausstehend{background:var(--bg); color:var(--ink-soft);}
+  .pr-qs-bestanden{background:var(--cat-ok-bg); color:var(--cat-ok);}
+  .pr-qs-hinweise{background:var(--cat-boundary-bg); color:var(--cat-boundary);}
+  .pr-qs-nicht-bestanden{background:var(--cat-violation-bg); color:var(--cat-violation);}
+
+  /* ---------- Detailkarte (Fund) ---------- */
+  .finding-card{background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; padding:16px 18px; margin-bottom:14px;}
+  .finding-head{display:flex; justify-content:space-between; align-items:flex-start; gap:10px; margin-bottom:10px; flex-wrap:wrap;}
+  .finding-loc{font:700 .68rem "IBM Plex Mono",monospace; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.03em; word-break:break-word;}
+  .finding-reason{font-size:.82rem; color:var(--ink-soft); margin-bottom:12px; line-height:1.55;}
+  .finding-reason b{color:var(--ink); font-weight:600;}
+  .finding-reason ul{margin:4px 0 0; padding-left:18px;}
+  .sec-label{display:block; font:700 .62rem "Source Sans 3"; text-transform:uppercase; letter-spacing:.04em; margin:14px 0 6px; color:var(--ink-soft);}
+  .diff-block{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+  @media (max-width:640px){.diff-block{grid-template-columns:1fr;}}
+  .diff-col{border-radius:8px; padding:11px 13px; font-size:.83rem; line-height:1.55; white-space:pre-wrap; word-break:break-word; max-height:320px; overflow-y:auto;}
+  .diff-col.old{background:var(--cat-violation-bg); color:var(--ink);}
+  .diff-col.new{background:var(--cat-ok-bg); color:var(--ink);}
+  .diff-col .diff-label{display:block; font:700 .62rem "Source Sans 3"; text-transform:uppercase; letter-spacing:.04em; margin-bottom:5px; white-space:normal;}
+  .diff-col.old .diff-label{color:var(--cat-violation);}
+  .diff-col.new .diff-label{color:var(--cat-ok);}
+  mark.hit{background:transparent; color:inherit; font-weight:700; border-bottom:2px solid var(--cat-violation);}
+  mark.repl{background:transparent; color:inherit; font-weight:700; border-bottom:2px solid var(--cat-ok);}
+  mark.manual{background:transparent; color:inherit; font-weight:700; border-bottom:2px dashed var(--cat-boundary);}
+
+  .revise-box{margin-top:4px;}
+  .revise-box textarea{
+    width:100%; min-height:110px; resize:vertical; font:500 .84rem/1.55 "Source Sans 3"; color:var(--ink);
+    background:var(--bg); border:1px solid var(--card-border); border-radius:8px; padding:10px 12px;
+  }
+  .revise-meta{display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-top:8px;}
+  .revise-origin{font-size:.74rem; color:var(--ink-soft);}
+
+  .qs-list{list-style:none; margin:0; padding:0; display:grid; gap:6px;}
+  .qs-item{display:flex; gap:9px; align-items:flex-start; font-size:.8rem; line-height:1.5; padding:8px 10px; border-radius:8px; background:var(--bg);}
+  .qs-item svg{width:15px; height:15px; flex:none; margin-top:2px;}
+  .qs-item.error svg{color:var(--cat-violation);}
+  .qs-item.warn svg{color:var(--cat-boundary);}
+  .qs-item.ok svg{color:var(--cat-ok);}
+  .qs-item.info svg{color:var(--accent-strong);}
+  .qs-head{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:14px 0 6px;}
+  .qs-head .sec-label{margin:0;}
+
+  .worddiff{font-size:.82rem; line-height:1.7; background:var(--bg); border-radius:8px; padding:10px 12px; max-height:260px; overflow-y:auto; word-break:break-word;}
+  .worddiff del{background:var(--cat-violation-bg); color:var(--cat-violation); text-decoration:line-through;}
+  .worddiff ins{background:var(--cat-ok-bg); color:var(--cat-ok); text-decoration:none; font-weight:600;}
+
+  .status-row{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:14px; padding-top:12px; border-top:1px solid var(--card-border);}
+  .status-row .lbl{font:700 .62rem "Source Sans 3"; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-soft); margin-right:4px;}
+  .status-btn[data-active="true"]{background:var(--accent); color:var(--accent-contrast); border-color:var(--accent);}
+  .status-hint{font-size:.74rem; color:var(--cat-violation);}
+
+  footer{margin-top:40px; padding-top:18px; border-top:1px solid var(--card-border); font-size:.78rem; color:var(--ink-soft); line-height:1.7;}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="module-rail">
+    <div class="module-rail-text">
+      <div class="eyebrow">GINA · Identifikation Änderungsbedarf &amp; QS</div>
+      <h1>Prüfung definierter Bereiche auf DKV-Bezug</h1>
+      <p>Durchsucht Crawling-Ergebnisse des externen Anbieters, Brief- und Textbausteine, PDF-Druckstücke, Intranet-Inhalte und Tabellen der Programmbasis nach DKV-Bezug (Markenname, Firmierung, Domains/E-Mail, Kontaktdaten, Logos), zeigt die Fundstellen an, schlägt angepasste Formulierungen vor und führt eine Qualitätssicherung der überarbeiteten Texte durch.</p>
+    </div>
+    <button class="btn btn-ghost" id="btn-theme" type="button" title="Theme umschalten" aria-label="Theme umschalten">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.4 4.4l1.7 1.7M17.9 17.9l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.4 19.6l1.7-1.7M17.9 6.1l1.7-1.7"/></svg>
+    </button>
+  </div>
+
+  <div class="disclaimer" id="sample-disclaimer">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg>
+    <span><strong>Beispieldaten zur Veranschaulichung.</strong> Fundstellen und Texte unten sind frei erzeugt. Echte Daten (Crawling-Export, Briefbausteine, überarbeitete Texte) über „Daten importieren“ laden — die Verarbeitung erfolgt ausschließlich lokal im Browser.</span>
+  </div>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="panels">
+    <details class="panel" id="panel-import">
+      <summary>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3m0 0L7.5 7.5M12 3l4.5 4.5"/><path d="M4 17v2.4A1.6 1.6 0 0 0 5.6 21h12.8a1.6 1.6 0 0 0 1.6-1.6V17"/></svg>
+        Daten importieren <span class="sum-note">— Crawling-Export, Brief-/Textbausteine, überarbeitete Texte (CSV, XLSX, TXT)</span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </summary>
+      <div class="panel-body">
+        <p>Jede Zeile der Datei wird als ein Prüfobjekt (Seite, Briefbaustein, Tabellenzeile) behandelt. Enthält die Datei zusätzlich eine Spalte mit dem <b>überarbeiteten Text</b>, wird dieser direkt der Qualitätssicherung unterzogen. Bei TXT-Dateien gilt jeder durch Leerzeile getrennte Absatz als Prüfobjekt.</p>
+        <div class="form-row">
+          <div class="field"><label for="imp-file">Datei</label><input type="file" id="imp-file" accept=".csv,.tsv,.txt,.xlsx,.xls"></div>
+          <div class="field"><label for="imp-source">Quelle</label><select id="imp-source"></select></div>
+          <label class="check"><input type="checkbox" id="imp-replace-sample" checked> Beispieldaten ersetzen</label>
+        </div>
+        <div id="imp-mapping" hidden>
+          <div class="form-row">
+            <div class="field" id="imp-sheet-field" hidden><label for="imp-sheet">Tabellenblatt</label><select id="imp-sheet"></select></div>
+            <div class="field"><label for="imp-col-id">Fundstelle / ID / URL</label><select id="imp-col-id"></select></div>
+            <div class="field"><label for="imp-col-text">Originaltext</label><select id="imp-col-text"></select></div>
+            <div class="field"><label for="imp-col-rev">Überarbeiteter Text (optional)</label><select id="imp-col-rev"></select></div>
+            <label class="check"><input type="checkbox" id="imp-header" checked> Erste Zeile ist Kopfzeile</label>
+          </div>
+          <div class="preview-wrap"><table class="preview-table" id="imp-preview"></table></div>
+          <div class="btn-row">
+            <button class="btn btn-primary btn-sm" type="button" id="imp-run">Importieren &amp; prüfen</button>
+          </div>
+        </div>
+        <div class="import-msg" id="imp-msg"></div>
+        <div class="btn-row" style="margin-top:12px">
+          <button class="btn btn-ghost btn-sm" type="button" id="imp-restore-sample">Beispieldaten wiederherstellen</button>
+          <button class="btn btn-ghost btn-sm" type="button" id="imp-clear">Alle importierten Daten entfernen</button>
+        </div>
+      </div>
+    </details>
+
+    <details class="panel" id="panel-rules">
+      <summary>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h6"/><circle cx="18" cy="16" r="3"/><path d="m20.2 18.2 1.8 1.8"/></svg>
+        Prüfregeln &amp; Zielbezeichnungen <span class="sum-note" id="rules-note"></span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+      </summary>
+      <div class="panel-body">
+        <p>Zielbezeichnungen werden über Platzhalter in den Ersetzungen verwendet. Solange sie mit „‹…›“ markiert sind, gelten sie als noch nicht festgelegt.</p>
+        <div class="targets" id="targets"></div>
+        <p>Regeln werden in der angezeigten Reihenfolge angewendet; bei überlappenden Treffern gewinnt die obere Regel. Ist keine Ersetzung angegeben, wird der Treffer zur manuellen Prüfung markiert (z. B. Logos).</p>
+        <div class="rules-wrap"><table class="rules-table" id="rules-table"></table></div>
+        <div class="btn-row">
+          <button class="btn btn-ghost btn-sm" type="button" id="rules-add">Regel hinzufügen</button>
+          <button class="btn btn-ghost btn-sm" type="button" id="rules-default">Standardregeln wiederherstellen</button>
+          <button class="btn btn-primary btn-sm" type="button" id="rules-apply">Übernehmen &amp; neu prüfen</button>
+        </div>
+        <div class="import-msg" id="rules-msg"></div>
+      </div>
+    </details>
+  </div>
+
+  <div class="pr-shell">
+    <aside class="pr-sidebar" id="pr-sidebar"></aside>
+    <div class="pr-main">
+      <div class="pr-toolbar">
+        <div class="pr-search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.6-4.6"/></svg>
+          <input type="text" id="pr-search-input" placeholder="Volltext: Fundstelle, Bezugsart oder Wortlaut durchsuchen…">
+        </div>
+        <div class="pr-toolbar-right">
+          <span class="pr-count" id="pr-result-count"></span>
+          <button class="btn btn-ghost pr-export-btn" id="pr-export-btn" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-4.5-4.5M12 15l4.5-4.5"/><path d="M4 17v2.4A1.6 1.6 0 0 0 5.6 21h12.8a1.6 1.6 0 0 0 1.6-1.6V17"/></svg>
+            Export
+          </button>
+        </div>
+      </div>
+      <div class="pr-table-wrap">
+        <table class="pr-table">
+          <thead>
+            <tr><th>Quelle</th><th>Fundstelle</th><th>Bezugsart</th><th>DKV-Bezug</th><th>Priorität</th><th>Status</th><th>QS</th></tr>
+          </thead>
+          <tbody id="pr-table-body"></tbody>
+        </table>
+      </div>
+      <div id="pr-detail"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div>Eigenständiges Modul „Prüfung DKV-Bezug“ im Rahmen von GINA — abgeleitet aus dem Modul „Prüfung GOÄ-Bezug“. Alle Daten werden nur lokal im Browser verarbeitet; Bearbeitungsstände werden in diesem Browser gespeichert und lassen sich als CSV exportieren.</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function escRe(s){ return String(s).replace(/[.*+?^${}()|[\]\\]/g,"\\$&"); }
+
+function storeGet(key, fallback){
+  try{ const v = localStorage.getItem(key); return v==null ? fallback : JSON.parse(v); }catch(e){ return fallback; }
+}
+function storeSet(key, value){
+  try{ localStorage.setItem(key, JSON.stringify(value)); return true; }catch(e){ return false; }
+}
+
+async function saveBlobForViewer(filename, blob){
+  if(typeof window.claude !== "undefined" && typeof window.claude.use === "function"){
+    try{
+      const downloads = await window.claude.use("downloads");
+      if(downloads){
+        await downloads.save({ filename, data: blob });
+        return;
+      }
+    }catch(capErr){
+      if(capErr && capErr.code === "declined") return;
+    }
+  }
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(url), 4000);
+}
+
+/* ========================= Modul: Prüfung definierter Bereiche auf DKV-Bezug ========================= */
+const STORE = {records:"gina-dkv-records", edits:"gina-dkv-edits", rules:"gina-dkv-rules", targets:"gina-dkv-targets", theme:"gina-theme"};
+
+const PR_ICONS = {
+  crawling:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.4 3.8 5.4 3.8 8.5s-1.3 6.1-3.8 8.5c-2.5-2.4-3.8-5.4-3.8-8.5S9.5 5.9 12 3.5Z"/></svg>',
+  briefbausteine:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></svg>',
+  pdf:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2.5h9l3.5 3.5V21H6z"/><path d="M15 2.5V6h3.5M9 13h6M9 16.5h6"/></svg>',
+  intranet:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>',
+  tabellen:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M3.5 10h17M3.5 15h17M10 4v16"/></svg>',
+};
+const PR_SOURCES = [
+  {id:"crawling", titel:"Web-Crawling (extern)", desc:"Crawling-Ergebnisse des externen Anbieters zu den Internetauftritten"},
+  {id:"briefbausteine", titel:"Briefbausteine", desc:"Brief- und Textbausteine der Kundenkorrespondenz"},
+  {id:"pdf", titel:"PDF-Druckstücke", desc:"Merkblätter, Kundeninformationen und Antragsunterlagen"},
+  {id:"intranet", titel:"Intranet", desc:"Arbeitsanweisungen und Leitfäden"},
+  {id:"tabellen", titel:"Tabellen & Programmbasis", desc:"Tabellen und Konfigurationen, die die Basis von Programmen bilden"},
+];
+const SOURCE_TITLE = {}; PR_SOURCES.forEach(s=>SOURCE_TITLE[s.id]=s.titel);
+
+const DEFAULT_TARGETS = {MARKE:"‹Zielmarke›", FIRMA:"‹Zielfirmierung›", DOMAIN:"‹zieldomain›", ADRESSE:"‹Zieladresse›"};
+const TARGET_LABEL = {MARKE:"Markenname", FIRMA:"Firmierung (Rechtsform)", DOMAIN:"Domain", ADRESSE:"Postanschrift (Straße)"};
+
+const DEFAULT_RULES = [
+  {aktiv:true, muster:"DKV Deutsche Krankenversicherung AG", regex:false, gross:false, kategorie:"Firmierung", bezug:"direkt", prio:"hoch", ersetzung:"{FIRMA}"},
+  {aktiv:true, muster:"Deutsche Krankenversicherung( AG)?", regex:true, gross:false, kategorie:"Firmierung", bezug:"direkt", prio:"hoch", ersetzung:"{FIRMA}"},
+  {aktiv:true, muster:"\\bdkv\\.(com|de)\\b", regex:true, gross:false, kategorie:"Domain / E-Mail", bezug:"direkt", prio:"hoch", ersetzung:"{DOMAIN}"},
+  {aktiv:true, muster:"\\b[\\w-]*dkv[\\w-]*\\.(png|jpe?g|svg|gif|eps)\\b", regex:true, gross:false, kategorie:"Logo / Asset", bezug:"mittelbar", prio:"mittel", ersetzung:""},
+  {aktiv:true, muster:"\\bDKV\\b", regex:true, gross:true, kategorie:"Markenname", bezug:"direkt", prio:"hoch", ersetzung:"{MARKE}"},
+  {aktiv:true, muster:"Aachener Stra(ß|ss)e 300", regex:true, gross:false, kategorie:"Kontaktdaten", bezug:"mittelbar", prio:"mittel", ersetzung:"{ADRESSE}"},
+];
+
+/* Beispieldaten: frei erzeugte Texte, keine echten Fundstellen. */
+const SAMPLE_RECORDS = [
+  {sourceId:"crawling", pfad:"www.dkv.com/gesundheit/zahnzusatzversicherung",
+    text:"Mit der Zahnzusatzversicherung der DKV sind Sie bei Zahnersatz und Prophylaxe gut abgesichert. Alle Details finden Sie unter www.dkv.com/zahn oder direkt in der DKV-App."},
+  {sourceId:"crawling", pfad:"www.dkv.com/service/kontakt",
+    text:"Schreiben Sie uns: DKV Deutsche Krankenversicherung AG, Aachener Straße 300, 50933 Köln. Oder per E-Mail an service@dkv.com.",
+    revised:"Schreiben Sie uns: ‹Zielfirmierung›, ‹Zieladresse›, 50933 Köln. Oder per E-Mail an service@dkv.com.", status:"in Überarbeitung"},
+  {sourceId:"briefbausteine", pfad:"BB-0412 · Eingangsbestätigung Leistungsantrag",
+    text:"vielen Dank für Ihre Rechnungen. Die DKV hat Ihren Leistungsantrag erhalten und prüft ihn umgehend.\n\nMit freundlichen Grüßen\nIhre DKV",
+    revised:"vielen Dank für Ihre Rechnungen. Die ‹Zielmarke› hat Ihren Leistungsantrag erhalten und prüft ihn umgehend.\n\nMit freundlichen Grüßen\nIhre ‹Zielmarke›", status:"in Überarbeitung"},
+  {sourceId:"briefbausteine", pfad:"BB-0587 · Hinweis Online-Einreichung",
+    text:"Reichen Sie Rechnungen bequem über die App „Meine DKV“ ein oder laden Sie sie unter www.dkv.com/rechnung hoch.",
+    revised:"Reichen Sie Rechnungen bequem über die App „Meine ‹Zielmarke›“ ein oder laden Sie sie unter www.‹zieldomain›/rechnung hoch.", status:"freigegeben"},
+  {sourceId:"briefbausteine", pfad:"BB-0733 · Beitragsanpassung Anschreiben",
+    text:"die DKV Deutsche Krankenversicherung AG passt zum 1. Januar die Beiträge in Ihrem Tarif an. Als DKV-Kunde erhalten Sie die Einzelheiten mit diesem Schreiben.",
+    revised:"‹Zielfirmierung› passt zum 1. Januar die Beiträge in Ihrem Tarif an. Als Kundin oder Kunde erhalten Sie alle Einzelheiten und Ihre neuen Beiträge mit diesem Schreiben.", status:"in Überarbeitung"},
+  {sourceId:"briefbausteine", pfad:"BB-0901 · Signatur Kundenservice",
+    text:"Mit freundlichen Grüßen\nIhr DKV-Kundenservice",
+    revised:"Mit freundlichen Grüßen\nIhr DKV-Kundenservice", status:"in Überarbeitung"},
+  {sourceId:"pdf", pfad:"Merkblatt_Leistungseinreichung.pdf · Seite 2",
+    text:"Die DKV erstattet Rechnungen im Rahmen Ihres Tarifs. Fragen beantworten wir gern unter www.dkv.com/kontakt."},
+  {sourceId:"intranet", pfad:"Intranet › Kundenservice › Gesprächsleitfaden Begrüßung",
+    text:"Begrüßen Sie Anrufende mit: „DKV Kundenservice, mein Name ist …, was kann ich für Sie tun?“"},
+  {sourceId:"tabellen", pfad:"Textkonstanten_Korrespondenz.xlsx · Blatt „Absender“ · Zeile 4",
+    text:"ABSENDER_FIRMA = DKV Deutsche Krankenversicherung AG; ABSENDER_STRASSE = Aachener Straße 300; LOGO = logo_dkv_blau.svg"},
+  {sourceId:"tabellen", pfad:"Mailvorlagen_Konfiguration.json › reply_to",
+    text:"reply_to: leistung@dkv.com; footer: „Diese E-Mail wurde von der DKV automatisch erzeugt.“"},
+];
+
+let rules = storeGet(STORE.rules, null) || DEFAULT_RULES.map(r=>Object.assign({}, r));
+let targets = Object.assign({}, DEFAULT_TARGETS, storeGet(STORE.targets, {}));
+let edits = storeGet(STORE.edits, {});
+let storedRecords = storeGet(STORE.records, null);
+let records = [];
+let usingSample = true;
+let recordsWithoutHit = 0;
+let FINDINGS = [];
+
+function setRecords(list, isSample){
+  records = list.map(r=>Object.assign({}, r, {key:r.key || (r.sourceId+"|"+r.pfad)}));
+  usingSample = !!isSample;
+  document.getElementById("sample-disclaimer").hidden = !usingSample;
+}
+
+/* ---------- Erkennung ---------- */
+function compileRule(r){
+  if(!r.aktiv || !r.muster) return null;
+  try{ return new RegExp(r.regex ? r.muster : escRe(r.muster), r.gross ? "g" : "gi"); }catch(e){ return null; }
+}
+
+function findMatches(text){
+  const cand = [];
+  rules.forEach((r,ri)=>{
+    const re = compileRule(r); if(!re) return;
+    let m;
+    while((m = re.exec(text))){
+      if(m[0]===""){ re.lastIndex++; continue; }
+      cand.push({start:m.index, end:m.index+m[0].length, ri, rule:r, text:m[0]});
+    }
+  });
+  cand.sort((a,b)=>a.ri-b.ri || (b.end-b.start)-(a.end-a.start) || a.start-b.start);
+  const accepted = [];
+  cand.forEach(c=>{ if(!accepted.some(a=>c.start<a.end && a.start<c.end)) accepted.push(c); });
+  return accepted.sort((a,b)=>a.start-b.start);
+}
+
+function resolveReplacement(rule){
+  return String(rule.ersetzung||"").replace(/\{([A-Z]+)\}/g, (all,k)=> (k in targets) ? targets[k] : all);
+}
+
+function buildProposal(text, matches){
+  let out = "", pos = 0;
+  matches.forEach(m=>{
+    out += text.slice(pos, m.start);
+    out += m.rule.ersetzung ? resolveReplacement(m.rule) : m.text;
+    pos = m.end;
+  });
+  return out + text.slice(pos);
+}
+
+function highlight(text, matches, mode){
+  let out = "", pos = 0;
+  matches.forEach(m=>{
+    out += esc(text.slice(pos, m.start));
+    if(mode==="proposal"){
+      out += m.rule.ersetzung ? '<mark class="repl">'+esc(resolveReplacement(m.rule))+'</mark>' : '<mark class="manual" title="Manuell prüfen">'+esc(m.text)+'</mark>';
+    } else {
+      out += '<mark class="'+(m.rule.ersetzung?"hit":"manual")+'" title="'+esc(m.rule.kategorie)+'">'+esc(m.text)+'</mark>';
+    }
+    pos = m.end;
+  });
+  return out + esc(text.slice(pos));
+}
+
+/* ---------- Wortvergleich ---------- */
+function wordDiff(a, b){
+  const A = a.split(/\s+/).filter(Boolean), B = b.split(/\s+/).filter(Boolean);
+  const n = A.length, m = B.length;
+  if((n+1)*(m+1) > 4000000) return null;
+  const w = m+1, dp = new Int32Array((n+1)*w);
+  for(let i=n-1;i>=0;i--) for(let j=m-1;j>=0;j--)
+    dp[i*w+j] = A[i]===B[j] ? dp[(i+1)*w+j+1]+1 : Math.max(dp[(i+1)*w+j], dp[i*w+j+1]);
+  const ops = []; let i=0, j=0;
+  while(i<n && j<m){
+    if(A[i]===B[j]){ ops.push({t:"eq", w:A[i]}); i++; j++; }
+    else if(dp[(i+1)*w+j] >= dp[i*w+j+1]){ ops.push({t:"del", w:A[i]}); i++; }
+    else { ops.push({t:"ins", w:B[j]}); j++; }
+  }
+  while(i<n) ops.push({t:"del", w:A[i++]});
+  while(j<m) ops.push({t:"ins", w:B[j++]});
+  return ops;
+}
+
+function renderWordDiff(ops){
+  return ops.map(o=> o.t==="eq" ? esc(o.w) : o.t==="del" ? '<del>'+esc(o.w)+'</del>' : '<ins>'+esc(o.w)+'</ins>').join(" ");
+}
+
+/* ---------- Qualitätssicherung ---------- */
+const QS_LABEL = {"ausstehend":"Ausstehend", "bestanden":"Bestanden", "hinweise":"Hinweise", "nicht bestanden":"Nicht bestanden"};
+const QS_CLASS = {"ausstehend":"ausstehend", "bestanden":"bestanden", "hinweise":"hinweise", "nicht bestanden":"nicht-bestanden"};
+
+function targetsArePlaceholders(){ return Object.values(targets).some(v=>/‹[^›]*›/.test(v)); }
+
+function runQs(original, text, proposal){
+  const checks = [];
+  const residual = findMatches(text);
+  const residualRepl = residual.filter(m=>m.rule.ersetzung);
+  const residualManual = residual.filter(m=>!m.rule.ersetzung);
+  if(text.trim() === original.trim()){
+    checks.push({level:"error", text:"Text ist gegenüber dem Original unverändert."});
+  }
+  if(residualRepl.length){
+    const byCat = {};
+    residualRepl.forEach(m=>{ (byCat[m.rule.kategorie] = byCat[m.rule.kategorie] || []).push(m.text); });
+    Object.keys(byCat).forEach(cat=>{
+      const uniq = Array.from(new Set(byCat[cat]));
+      checks.push({level:"error", text:"Rest-DKV-Bezug ("+cat+"): „"+uniq.join("“, „")+"“ noch "+byCat[cat].length+"× enthalten."});
+    });
+  }
+  if(residualManual.length){
+    checks.push({level:"warn", text:"Manuell zu prüfen: „"+Array.from(new Set(residualManual.map(m=>m.text))).join("“, „")+"“ ("+residualManual[0].rule.kategorie+")."});
+  }
+  const targetVals = Object.values(targets);
+  const placeholders = Array.from(new Set((text.match(/‹[^›]*›|\{[A-Z]+\}/g) || [])));
+  const unknownPh = placeholders.filter(p=>!targetVals.includes(p));
+  const knownPh = placeholders.filter(p=>targetVals.includes(p));
+  if(unknownPh.length) checks.push({level:"warn", text:"Unbefüllte Platzhalter: "+unknownPh.join(", ")+"."});
+  if(knownPh.length) checks.push({level:"info", text:"Zielbezeichnung noch als Platzhalter hinterlegt ("+knownPh.join(", ")+") — wird ersetzt, sobald die Zielbezeichnungen festgelegt sind."});
+  const tv = targetVals.filter(Boolean).map(escRe).join("|");
+  if(tv){
+    const artRe = new RegExp("\\b(der|die|des|dem|den|das)\\s+(" + tv + ")", "gi");
+    const arts = text.match(artRe);
+    if(arts) checks.push({level:"warn", text:"Artikel vor Zielbezeichnung („"+Array.from(new Set(arts)).join("“, „")+"“) — Genus und Kasus der neuen Bezeichnung prüfen."});
+  }
+  if(proposal && text !== proposal){
+    const ops = wordDiff(proposal, text);
+    if(ops){
+      const changed = ops.filter(o=>o.t!=="eq").length;
+      if(changed) checks.push({level:"info", text:changed+" Wortänderung(en) gegenüber dem automatischen Vorschlag — über die reine Ersetzung hinausgehende Änderungen fachlich prüfen."+(targetsArePlaceholders()?" (Vergleich unscharf, solange Zielbezeichnungen Platzhalter sind.)":"")});
+    }
+  }
+  if(!/[.!?“"):]\s*$/.test(text.trim()) && /[.!?]\s*$/.test(original.trim())){
+    checks.push({level:"warn", text:"Satzende fehlt — Text möglicherweise abgeschnitten."});
+  }
+  if(!checks.some(c=>c.level==="error"||c.level==="warn") && !residual.length){
+    checks.unshift({level:"ok", text:"Kein Rest-DKV-Bezug gefunden."});
+  }
+  const level = checks.some(c=>c.level==="error") ? "nicht bestanden" : checks.some(c=>c.level==="warn") ? "hinweise" : "bestanden";
+  return {level, checks};
+}
+
+/* ---------- Befunde aufbauen ---------- */
+const PR_PRIO_ORDER = {hoch:0, mittel:1, niedrig:2};
+const PR_PRIO_LABEL = {hoch:"Hoch", mittel:"Mittel", niedrig:"Niedrig"};
+const PR_STATUS_LABEL = {"offen":"Offen", "in Überarbeitung":"In Überarbeitung", "freigegeben":"Freigegeben"};
+const PR_STATUS_CLASS = {"offen":"offen", "in Überarbeitung":"in-ueberarbeitung", "freigegeben":"freigegeben"};
+
+function buildFinding(rec, id){
+  const matches = findMatches(rec.text);
+  if(!matches.length) return null;
+  const e = edits[rec.key] || {};
+  const revised = (e.revised != null) ? e.revised : (rec.revised || "");
+  const proposal = buildProposal(rec.text, matches);
+  const cats = [];
+  matches.slice().sort((a,b)=>PR_PRIO_ORDER[a.rule.prio]-PR_PRIO_ORDER[b.rule.prio] || a.ri-b.ri)
+    .forEach(m=>{ if(!cats.includes(m.rule.kategorie)) cats.push(m.rule.kategorie); });
+  const prio = matches.reduce((p,m)=>PR_PRIO_ORDER[m.rule.prio] < PR_PRIO_ORDER[p] ? m.rule.prio : p, "niedrig");
+  const qsActive = revised.trim() !== "";
+  const qs = runQs(rec.text, qsActive ? revised : proposal, proposal);
+  return {
+    id, key:rec.key, sourceId:rec.sourceId, sourceTitel:SOURCE_TITLE[rec.sourceId] || rec.sourceId, pfad:rec.pfad,
+    original:rec.text, matches, proposal, revised, revisedOrigin: e.revised != null ? "bearbeitet" : (rec.revised ? "importiert" : ""),
+    kategorie:cats[0], kategorien:cats, bezug: matches.some(m=>m.rule.bezug==="direkt") ? "direkt" : "mittelbar",
+    prioritaet:prio, status: e.status || rec.status || "offen",
+    qs, qsStatus: qsActive ? qs.level : "ausstehend",
+  };
+}
+
+function rebuildFindings(){
+  FINDINGS = []; recordsWithoutHit = 0;
+  records.forEach(rec=>{
+    const f = buildFinding(rec, FINDINGS.length);
+    if(f) FINDINGS.push(f); else recordsWithoutHit++;
+  });
+  FINDINGS.sort((a,b)=>PR_PRIO_ORDER[a.prioritaet]-PR_PRIO_ORDER[b.prioritaet] || a.sourceId.localeCompare(b.sourceId) || a.pfad.localeCompare(b.pfad));
+  FINDINGS.forEach((f,i)=>f.id=i);
+}
+
+function refreshFinding(key){
+  const idx = FINDINGS.findIndex(f=>f.key===key);
+  const rec = records.find(r=>r.key===key);
+  if(idx<0 || !rec) return;
+  const f = buildFinding(rec, FINDINGS[idx].id);
+  if(f) FINDINGS[idx] = f;
+}
+
+/* ---------- Filter & Darstellung ---------- */
+const prState = {sourceId:null, kategorie:null, bezug:null, prioritaet:null, status:null, qsStatus:null, search:"", selected:null};
+const TABLE_LIMIT = 400;
+
+function prFacetCounts(field){
+  const counts = {};
+  FINDINGS.forEach(r=>{ counts[r[field]] = (counts[r[field]]||0)+1; });
+  return counts;
+}
+
+function prFacetGroupHtml(field, label, order, labelMap){
+  const counts = prFacetCounts(field);
+  const keys = order || Object.keys(counts).sort();
+  const items = keys.filter(k=>counts[k]);
+  if(!items.length) return "";
+  return '<div class="pr-facet-group">'+
+    '<div class="pr-facet-label">'+esc(label)+'</div>'+
+    items.map(k=>
+      '<button class="pr-facet-item" type="button" data-field="'+field+'" data-value="'+esc(k)+'" data-active="'+(prState[field]===k?"true":"false")+'">'+
+        '<span>'+esc(labelMap&&labelMap[k]?labelMap[k]:k)+'</span><span class="pr-facet-count">'+counts[k]+'</span>'+
+      '</button>'
+    ).join("") +
+  '</div>';
+}
+
+function anyFilterActive(){
+  return !!(prState.sourceId||prState.kategorie||prState.bezug||prState.prioritaet||prState.status||prState.qsStatus||prState.search);
+}
+
+function renderPrSidebar(){
+  const sidebar = document.getElementById("pr-sidebar");
+  sidebar.innerHTML =
+    '<button class="pr-reset" type="button" id="pr-reset-btn"'+(anyFilterActive()?'':' hidden')+'>Alle Filter zurücksetzen</button>'+
+    prFacetGroupHtml("sourceId","Quelle", PR_SOURCES.map(s=>s.id), SOURCE_TITLE)+
+    prFacetGroupHtml("kategorie","Bezugsart", null, null)+
+    prFacetGroupHtml("bezug","DKV-Bezug", ["direkt","mittelbar"], {direkt:"Direkt", mittelbar:"Mittelbar"})+
+    prFacetGroupHtml("prioritaet","Priorität", ["hoch","mittel","niedrig"], PR_PRIO_LABEL)+
+    prFacetGroupHtml("status","Status", ["offen","in Überarbeitung","freigegeben"], PR_STATUS_LABEL)+
+    prFacetGroupHtml("qsStatus","QS-Ergebnis", ["nicht bestanden","hinweise","bestanden","ausstehend"], QS_LABEL);
+  sidebar.querySelectorAll(".pr-facet-item").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const field = btn.dataset.field, value = btn.dataset.value;
+      prState[field] = (prState[field]===value) ? null : value;
+      renderPrSidebar(); renderPrTable();
+    });
+  });
+  const resetBtn = document.getElementById("pr-reset-btn");
+  if(resetBtn) resetBtn.addEventListener("click", ()=>{
+    ["sourceId","kategorie","bezug","prioritaet","status","qsStatus"].forEach(k=>prState[k]=null);
+    prState.search="";
+    const input = document.getElementById("pr-search-input"); if(input) input.value="";
+    renderPrSidebar(); renderPrTable();
+  });
+}
+
+function getFilteredPrRows(){
+  const q = prState.search.trim().toLowerCase();
+  return FINDINGS.filter(r=>
+    (!prState.sourceId || r.sourceId===prState.sourceId) &&
+    (!prState.kategorie || r.kategorie===prState.kategorie) &&
+    (!prState.bezug || r.bezug===prState.bezug) &&
+    (!prState.prioritaet || r.prioritaet===prState.prioritaet) &&
+    (!prState.status || r.status===prState.status) &&
+    (!prState.qsStatus || r.qsStatus===prState.qsStatus) &&
+    (!q || (r.pfad+" "+r.kategorien.join(" ")+" "+r.original+" "+r.revised).toLowerCase().includes(q))
+  );
+}
+
+function renderStats(){
+  const total = FINDINGS.length;
+  const direkt = FINDINGS.filter(f=>f.bezug==="direkt").length;
+  const qsFail = FINDINGS.filter(f=>f.qsStatus==="nicht bestanden").length;
+  const qsPending = FINDINGS.filter(f=>f.qsStatus==="ausstehend").length;
+  const released = FINDINGS.filter(f=>f.status==="freigegeben").length;
+  const stat = (label, value, sub)=>'<div class="stat"><div class="stat-label">'+esc(label)+'</div><div class="stat-value">'+value+'</div><div class="stat-sub">'+esc(sub)+'</div></div>';
+  document.getElementById("stats").innerHTML =
+    stat("Prüfobjekte", records.length, recordsWithoutHit+" ohne DKV-Bezug")+
+    stat("Fundstellen", total, direkt+" mit direktem Bezug")+
+    stat("QS nicht bestanden", qsFail, qsPending+" noch nicht überarbeitet")+
+    stat("Freigegeben", released, total ? Math.round(released/total*100)+" % der Fundstellen" : "—");
+}
+
+function renderPrTable(){
+  const rows = getFilteredPrRows();
+  const body = document.getElementById("pr-table-body");
+  const countEl = document.getElementById("pr-result-count");
+  if(countEl) countEl.textContent = rows.length+" von "+FINDINGS.length+" Fundstellen";
+  if(!rows.length){
+    body.innerHTML = '<tr class="pr-empty-row"><td colspan="7">'+(FINDINGS.length?'Keine Fundstellen für diese Filterkombination.':'Keine Fundstellen mit DKV-Bezug vorhanden.')+'</td></tr>';
+  } else {
+    body.innerHTML = rows.slice(0, TABLE_LIMIT).map(r=>
+      '<tr data-row="'+r.id+'" data-active="'+(prState.selected===r.id?"true":"false")+'">'+
+        '<td class="pr-col-quelle"><span class="pr-source-icon">'+(PR_ICONS[r.sourceId]||PR_ICONS.tabellen)+'</span>'+esc(r.sourceTitel)+'</td>'+
+        '<td class="pr-path" title="'+esc(r.pfad)+'">'+esc(r.pfad)+'</td>'+
+        '<td>'+esc(r.kategorie)+(r.kategorien.length>1?'<span class="pr-more">+'+(r.kategorien.length-1)+'</span>':'')+'</td>'+
+        '<td><span class="pr-dot pr-dot-'+r.bezug+'"></span>'+(r.bezug==="direkt"?"Direkt":"Mittelbar")+'</td>'+
+        '<td><span class="pr-badge pr-prio-'+r.prioritaet+'">'+PR_PRIO_LABEL[r.prioritaet]+'</span></td>'+
+        '<td><span class="pr-badge pr-status-'+PR_STATUS_CLASS[r.status]+'">'+esc(PR_STATUS_LABEL[r.status])+'</span></td>'+
+        '<td><span class="pr-badge pr-qs-'+QS_CLASS[r.qsStatus]+'">'+esc(QS_LABEL[r.qsStatus])+'</span></td>'+
+      '</tr>'
+    ).join("") + (rows.length>TABLE_LIMIT ? '<tr class="pr-limit-row"><td colspan="7">Es werden die ersten '+TABLE_LIMIT+' von '+rows.length+' Fundstellen angezeigt — Filter oder Suche verwenden. Der Export enthält alle gefilterten Fundstellen.</td></tr>' : '');
+  }
+  body.querySelectorAll("tr[data-row]").forEach(tr=>{
+    tr.addEventListener("click", ()=>selectPrRow(parseInt(tr.dataset.row,10)));
+  });
+  if(rows.length && !rows.some(r=>r.id===prState.selected)){
+    selectPrRow(rows[0].id);
+  } else if(!rows.length){
+    prState.selected = null; renderPrDetail();
+  } else {
+    renderPrDetail();
+  }
+}
+
+function selectPrRow(id){
+  prState.selected = id;
+  document.querySelectorAll("#pr-table-body tr[data-row]").forEach(tr=>{
+    tr.dataset.active = (parseInt(tr.dataset.row,10)===id) ? "true":"false";
+  });
+  renderPrDetail();
+}
+
+const QS_ICON = {
+  error:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/></svg>',
+  warn:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5 2.5 20h19z"/><path d="M12 10v4M12 17h.01"/></svg>',
+  ok:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.7 2.7L16 10"/></svg>',
+  info:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>',
+};
+
+function ruleSummary(f){
+  const groups = {};
+  f.matches.forEach(m=>{
+    const k = m.rule.kategorie;
+    if(!groups[k]) groups[k] = {bezug:m.rule.bezug, manual:!m.rule.ersetzung, texts:{}};
+    groups[k].texts[m.text] = (groups[k].texts[m.text]||0)+1;
+  });
+  return '<ul>'+Object.keys(groups).map(k=>{
+    const g = groups[k];
+    const t = Object.keys(g.texts).map(x=>'„'+esc(x)+'“'+(g.texts[x]>1?' ('+g.texts[x]+'×)':'')).join(", ");
+    return '<li><b>'+esc(k)+'</b> ('+(g.bezug==="direkt"?"direkter":"mittelbarer")+' Bezug'+(g.manual?', manuelle Prüfung':'')+'): '+t+'</li>';
+  }).join("")+'</ul>';
+}
+
+function renderPrDetail(){
+  const detail = document.getElementById("pr-detail");
+  const f = FINDINGS.find(r=>r.id===prState.selected);
+  if(!f){ detail.innerHTML = ""; return; }
+  const qsTarget = f.revised.trim() ? "überarbeiteter Text" : "automatischer Vorschlag (noch keine Überarbeitung)";
+  const diffOps = f.revised.trim() ? wordDiff(f.original, f.revised) : null;
+  const releaseBlocked = f.qs.level==="nicht bestanden" || !f.revised.trim();
+  detail.innerHTML =
+    '<div class="finding-card">'+
+      '<div class="finding-head"><span class="finding-loc">'+esc(f.sourceTitel)+' · '+esc(f.pfad)+'</span>'+
+        '<span class="pr-badge pr-prio-'+f.prioritaet+'">Priorität '+PR_PRIO_LABEL[f.prioritaet]+'</span></div>'+
+      '<div class="finding-reason"><b>Warum DKV-Bezug:</b>'+ruleSummary(f)+'</div>'+
+      '<div class="diff-block">'+
+        '<div class="diff-col old"><span class="diff-label">Bisheriger Text</span>'+highlight(f.original, f.matches, "original")+'</div>'+
+        '<div class="diff-col new"><span class="diff-label">Vorschlag neue Formulierung (automatisch)</span>'+highlight(f.original, f.matches, "proposal")+'</div>'+
+      '</div>'+
+      '<span class="sec-label">Überarbeiteter Text</span>'+
+      '<div class="revise-box">'+
+        '<textarea id="pr-revised" placeholder="Noch keine Überarbeitung — Text hier erfassen oder den Vorschlag übernehmen.">'+esc(f.revised)+'</textarea>'+
+        '<div class="revise-meta"><span class="revise-origin">'+(f.revisedOrigin==="importiert"?"Aus Import übernommen":f.revisedOrigin==="bearbeitet"?"In diesem Browser bearbeitet":"")+'</span>'+
+          '<div class="btn-row">'+
+            '<button class="btn btn-ghost btn-sm" type="button" id="pr-take-proposal">Vorschlag übernehmen</button>'+
+            (f.revisedOrigin==="bearbeitet"?'<button class="btn btn-ghost btn-sm" type="button" id="pr-reset-revised">Bearbeitung verwerfen</button>':'')+
+          '</div></div>'+
+      '</div>'+
+      '<div class="qs-head"><span class="sec-label">Qualitätssicherung — Prüfgegenstand: '+qsTarget+'</span>'+
+        '<span class="pr-badge pr-qs-'+QS_CLASS[f.qsStatus]+'">'+esc(QS_LABEL[f.qsStatus])+'</span></div>'+
+      '<ul class="qs-list">'+f.qs.checks.map(c=>'<li class="qs-item '+c.level+'">'+QS_ICON[c.level]+'<span>'+esc(c.text)+'</span></li>').join("")+'</ul>'+
+      (f.revised.trim() ? '<span class="sec-label">Änderungen Original → überarbeiteter Text</span>'+
+        (diffOps ? '<div class="worddiff">'+renderWordDiff(diffOps)+'</div>' : '<div class="worddiff">Text zu lang für den Wortvergleich.</div>') : '')+
+      '<div class="status-row"><span class="lbl">Status</span>'+
+        ["offen","in Überarbeitung","freigegeben"].map(s=>
+          '<button class="btn btn-ghost btn-sm status-btn" type="button" data-status="'+esc(s)+'" data-active="'+(f.status===s)+'"'+
+          (s==="freigegeben" && releaseBlocked && f.status!=="freigegeben" ? ' disabled title="Freigabe erst nach bestandener QS eines überarbeiteten Textes"' : '')+'>'+esc(PR_STATUS_LABEL[s])+'</button>'
+        ).join("")+
+        (f.status==="freigegeben" && f.qs.level==="nicht bestanden" ? '<span class="status-hint">Freigegeben, aber QS nicht bestanden — bitte prüfen.</span>' : '')+
+      '</div>'+
+    '</div>';
+
+  const ta = document.getElementById("pr-revised");
+  let timer = null;
+  ta.addEventListener("input", ()=>{
+    clearTimeout(timer);
+    timer = setTimeout(()=>{ saveEdit(f.key, {revised:ta.value}); afterEdit(f.key, true); }, 450);
+  });
+  document.getElementById("pr-take-proposal").addEventListener("click", ()=>{
+    saveEdit(f.key, {revised:f.proposal, status: f.status==="offen" ? "in Überarbeitung" : f.status}); afterEdit(f.key);
+  });
+  const resetRev = document.getElementById("pr-reset-revised");
+  if(resetRev) resetRev.addEventListener("click", ()=>{
+    const e = edits[f.key] || {}; delete e.revised; edits[f.key] = e; storeSet(STORE.edits, edits); afterEdit(f.key);
+  });
+  detail.querySelectorAll(".status-btn").forEach(btn=>{
+    btn.addEventListener("click", ()=>{ saveEdit(f.key, {status:btn.dataset.status}); afterEdit(f.key); });
+  });
+}
+
+function saveEdit(key, patch){
+  edits[key] = Object.assign({}, edits[key]||{}, patch);
+  storeSet(STORE.edits, edits);
+}
+
+function afterEdit(key, keepFocus){
+  refreshFinding(key);
+  renderStats(); renderPrSidebar();
+  if(keepFocus){
+    const ta = document.getElementById("pr-revised");
+    const sel = ta ? [ta.selectionStart, ta.selectionEnd] : null;
+    renderPrTable();
+    const ta2 = document.getElementById("pr-revised");
+    if(ta2 && sel){ ta2.focus(); ta2.setSelectionRange(sel[0], sel[1]); }
+  } else {
+    renderPrTable();
+  }
+}
+
+/* ---------- Export ---------- */
+function prCsvField(v){
+  const s = String(v==null?"":v);
+  return /[",\n\r;]/.test(s) ? '"'+s.replace(/"/g,'""')+'"' : s;
+}
+
+async function exportPrCsv(){
+  const rows = getFilteredPrRows();
+  const header = ["Quelle","Fundstelle","Bezugsarten","DKV-Bezug","Priorität","Status","QS-Ergebnis","QS-Hinweise","Bisheriger Text","Vorschlag (automatisch)","Überarbeiteter Text"];
+  const lines = [header.map(prCsvField).join(";")];
+  rows.forEach(r=>{
+    lines.push([r.sourceTitel, r.pfad, r.kategorien.join(", "), r.bezug==="direkt"?"Direkt":"Mittelbar", PR_PRIO_LABEL[r.prioritaet],
+      PR_STATUS_LABEL[r.status], QS_LABEL[r.qsStatus],
+      r.qs.checks.filter(c=>c.level!=="ok").map(c=>c.text).join(" | "),
+      r.original, r.proposal, r.revised].map(prCsvField).join(";"));
+  });
+  const csv = "﻿"+lines.join("\r\n");
+  const blob = new Blob([csv], {type:"text/csv;charset=utf-8"});
+  await saveBlobForViewer("GINA_Pruefung_DKV-Bezug.csv", blob);
+}
+
+/* ---------- Import ---------- */
+const importState = {fileName:"", sheets:[], sheetIdx:0};
+
+function setImpMsg(text, kind){
+  const el = document.getElementById("imp-msg");
+  el.textContent = text; el.className = "import-msg"+(kind?" "+kind:"");
+}
+
+async function readFileText(file){
+  const buf = await file.arrayBuffer();
+  let text;
+  try{ text = new TextDecoder("utf-8", {fatal:true}).decode(buf); }
+  catch(e){ text = new TextDecoder("windows-1252").decode(buf); }
+  return text.replace(/^﻿/, "");
+}
+
+function parseCsv(text, delimHint){
+  const firstLine = text.split(/\r?\n/, 1)[0] || "";
+  let d = delimHint;
+  if(!d){ let best = -1; [";",",","\t"].forEach(c=>{ const n = firstLine.split(c).length; if(n>best){ best=n; d=c; } }); }
+  const rows = []; let row = [], field = "", q = false;
+  for(let i=0;i<text.length;i++){
+    const ch = text[i];
+    if(q){
+      if(ch==='"'){ if(text[i+1]==='"'){ field+='"'; i++; } else q=false; }
+      else field += ch;
+    }
+    else if(ch==='"' && field==="") q = true;
+    else if(ch===d){ row.push(field); field=""; }
+    else if(ch==="\n"){ row.push(field); rows.push(row); row=[]; field=""; }
+    else if(ch!=="\r") field += ch;
+  }
+  if(field!=="" || row.length){ row.push(field); rows.push(row); }
+  return rows.filter(r=>r.some(c=>String(c).trim()!==""));
+}
+
+function loadSheetJs(){
+  if(window.XLSX) return Promise.resolve(window.XLSX);
+  return new Promise((resolve, reject)=>{
+    const s = document.createElement("script");
+    s.src = "https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js";
+    s.onload = ()=> window.XLSX ? resolve(window.XLSX) : reject(new Error("SheetJS nicht verfügbar"));
+    s.onerror = ()=> reject(new Error("Excel-Bibliothek konnte nicht geladen werden"));
+    document.head.appendChild(s);
+  });
+}
+
+function guessColumns(header, rows){
+  const h = header.map(x=>String(x||"").toLowerCase());
+  const find = (re, exclude)=> h.findIndex((x,i)=>re.test(x) && !(exclude && exclude.test(x)));
+  const revRe = /(überarb|ueberarb|neu(er)?\b|new|revid|korrigiert|soll)/;
+  let rev = find(revRe);
+  let txt = find(/(text|inhalt|content|wortlaut|fundstelle.*text|auszug|snippet|treffer)/, revRe);
+  let id = find(/(url|link|pfad|path|seite|page|baustein|id\b|nr|nummer|name|titel|title|datei|file|fundstelle)/, /(text|inhalt|content)/);
+  if(txt<0){
+    let best = -1, bestLen = -1;
+    h.forEach((_,i)=>{
+      if(i===rev || i===id) return;
+      const len = rows.reduce((s,r)=>s+String(r[i]||"").length, 0);
+      if(len>bestLen){ bestLen=len; best=i; }
+    });
+    txt = best;
+  }
+  if(id===txt) id = h.findIndex((_,i)=>i!==txt && i!==rev);
+  return {id, txt, rev};
+}
+
+function currentSheetRows(){
+  const sh = importState.sheets[importState.sheetIdx];
+  return sh ? sh.rows : [];
+}
+
+function renderImportMapping(){
+  const rows = currentSheetRows();
+  const hasHeader = document.getElementById("imp-header").checked;
+  const width = rows.reduce((w,r)=>Math.max(w, r.length), 0);
+  const header = hasHeader ? (rows[0]||[]).map((x,i)=>String(x||"").trim() || ("Spalte "+(i+1))) : Array.from({length:width}, (_,i)=>"Spalte "+(i+1));
+  while(header.length < width) header.push("Spalte "+(header.length+1));
+  const data = hasHeader ? rows.slice(1) : rows;
+  const g = guessColumns(header, data.slice(0, 200));
+  const opts = (sel, allowNone)=> (allowNone?'<option value="-1">— keine —</option>':'') + header.map((x,i)=>'<option value="'+i+'"'+(i===sel?' selected':'')+'>'+esc(x)+'</option>').join("");
+  document.getElementById("imp-col-id").innerHTML = opts(g.id, true);
+  document.getElementById("imp-col-text").innerHTML = opts(g.txt, false);
+  document.getElementById("imp-col-rev").innerHTML = opts(g.rev, true);
+  document.getElementById("imp-preview").innerHTML =
+    '<thead><tr>'+header.map(x=>'<th>'+esc(x)+'</th>').join("")+'</tr></thead>'+
+    '<tbody>'+data.slice(0,4).map(r=>'<tr>'+header.map((_,i)=>'<td title="'+esc(r[i]||"")+'">'+esc(r[i]||"")+'</td>').join("")+'</tr>').join("")+'</tbody>';
+  document.getElementById("imp-mapping").hidden = false;
+  setImpMsg(data.length+" Datenzeilen erkannt"+(importState.sheets.length>1?" (Blatt „"+importState.sheets[importState.sheetIdx].name+"“)":"")+". Spaltenzuordnung prüfen und importieren.");
+}
+
+async function onImportFile(file){
+  importState.fileName = file.name; importState.sheets = []; importState.sheetIdx = 0;
+  document.getElementById("imp-mapping").hidden = true;
+  const ext = (file.name.split(".").pop()||"").toLowerCase();
+  const srcSel = document.getElementById("imp-source");
+  if(/brief|baustein|textbaust/i.test(file.name)) srcSel.value = "briefbausteine";
+  else if(/crawl|url|web|seite/i.test(file.name)) srcSel.value = "crawling";
+  try{
+    if(ext==="xlsx" || ext==="xls"){
+      setImpMsg("Excel-Datei wird gelesen …");
+      const XLSX = await loadSheetJs();
+      const wb = XLSX.read(await file.arrayBuffer(), {type:"array"});
+      importState.sheets = wb.SheetNames.map(n=>({name:n, rows:XLSX.utils.sheet_to_json(wb.Sheets[n], {header:1, raw:false, defval:""})}))
+        .filter(s=>s.rows.length);
+    } else if(ext==="txt"){
+      const text = await readFileText(file);
+      const paras = text.split(/\r?\n\s*\r?\n/).map(s=>s.trim()).filter(Boolean);
+      importState.sheets = [{name:file.name, rows:[["Fundstelle","Text"]].concat(paras.map((p,i)=>[file.name+" · Abschnitt "+(i+1), p]))}];
+    } else {
+      const text = await readFileText(file);
+      importState.sheets = [{name:file.name, rows:parseCsv(text, ext==="tsv"?"\t":null)}];
+    }
+  }catch(err){
+    setImpMsg("Datei konnte nicht gelesen werden: "+(err && err.message ? err.message : err), "err");
+    return;
+  }
+  if(!importState.sheets.length){ setImpMsg("Die Datei enthält keine Daten.", "err"); return; }
+  const sheetField = document.getElementById("imp-sheet-field");
+  sheetField.hidden = importState.sheets.length < 2;
+  document.getElementById("imp-sheet").innerHTML = importState.sheets.map((s,i)=>'<option value="'+i+'">'+esc(s.name)+'</option>').join("");
+  renderImportMapping();
+}
+
+function runImport(){
+  const rows = currentSheetRows();
+  const hasHeader = document.getElementById("imp-header").checked;
+  const data = hasHeader ? rows.slice(1) : rows;
+  const cId = parseInt(document.getElementById("imp-col-id").value, 10);
+  const cTxt = parseInt(document.getElementById("imp-col-text").value, 10);
+  const cRev = parseInt(document.getElementById("imp-col-rev").value, 10);
+  const sourceId = document.getElementById("imp-source").value;
+  const sheetName = importState.sheets.length>1 ? " · "+importState.sheets[importState.sheetIdx].name : "";
+  const imported = [];
+  data.forEach((r,i)=>{
+    const text = String(r[cTxt]==null?"":r[cTxt]).trim();
+    if(!text) return;
+    const idVal = cId>=0 ? String(r[cId]||"").trim() : "";
+    const pfad = idVal || (importState.fileName+sheetName+" · Zeile "+(i+(hasHeader?2:1)));
+    const rec = {sourceId, pfad, text};
+    if(cRev>=0 && String(r[cRev]||"").trim()) rec.revised = String(r[cRev]).trim();
+    imported.push(rec);
+  });
+  if(!imported.length){ setImpMsg("Keine Texte in der gewählten Spalte gefunden.", "err"); return; }
+  const replaceSample = document.getElementById("imp-replace-sample").checked;
+  const base = (usingSample && replaceSample) ? [] : (usingSample ? records.map(r=>Object.assign({}, r)) : records);
+  const seen = {};
+  base.forEach(r=>seen[r.sourceId+"|"+r.pfad] = true);
+  imported.forEach(r=>{
+    let key = r.sourceId+"|"+r.pfad, n = 2;
+    while(seen[key]){ key = r.sourceId+"|"+r.pfad+" #"+n; n++; }
+    seen[key] = true; r.key = key;
+  });
+  const keepSampleFlag = usingSample && !replaceSample;
+  setRecords(base.concat(imported), keepSampleFlag);
+  const persisted = usingSample ? true : storeSet(STORE.records, records);
+  rebuildFindings();
+  const hits = imported.filter(r=>FINDINGS.some(f=>f.key===r.key)).length;
+  setImpMsg(imported.length+" Prüfobjekte importiert, davon "+hits+" mit DKV-Bezug."+(persisted?"":" Hinweis: Datenmenge zu groß zum Speichern im Browser — nach dem Neuladen bitte erneut importieren."), "ok");
+  prState.selected = null;
+  renderAll();
+}
+
+/* ---------- Regeln & Zielbezeichnungen ---------- */
+function renderTargets(){
+  document.getElementById("targets").innerHTML = Object.keys(DEFAULT_TARGETS).map(k=>
+    '<div class="field"><label for="tg-'+k+'">'+esc(TARGET_LABEL[k])+' <code>{'+k+'}</code></label><input type="text" id="tg-'+k+'" data-target="'+k+'" value="'+esc(targets[k])+'"></div>'
+  ).join("");
+}
+
+function renderRulesTable(){
+  const sel = (val, opts)=> opts.map(o=>'<option value="'+o[0]+'"'+(o[0]===val?' selected':'')+'>'+o[1]+'</option>').join("");
+  document.getElementById("rules-table").innerHTML =
+    '<thead><tr><th>Aktiv</th><th>Suchmuster</th><th>Regex</th><th>Groß/klein</th><th>Bezugsart</th><th>Bezug</th><th>Priorität</th><th>Ersetzung</th><th></th></tr></thead>'+
+    '<tbody>'+rules.map((r,i)=>
+      '<tr data-i="'+i+'">'+
+        '<td><input type="checkbox" data-k="aktiv"'+(r.aktiv?' checked':'')+' aria-label="Regel aktiv"></td>'+
+        '<td><input type="text" class="mono" data-k="muster" value="'+esc(r.muster)+'" aria-label="Suchmuster"></td>'+
+        '<td><input type="checkbox" data-k="regex"'+(r.regex?' checked':'')+' aria-label="Regulärer Ausdruck"></td>'+
+        '<td><input type="checkbox" data-k="gross"'+(r.gross?' checked':'')+' aria-label="Groß-/Kleinschreibung beachten"></td>'+
+        '<td><input type="text" data-k="kategorie" value="'+esc(r.kategorie)+'" aria-label="Bezugsart"></td>'+
+        '<td><select data-k="bezug" aria-label="Bezug">'+sel(r.bezug, [["direkt","Direkt"],["mittelbar","Mittelbar"]])+'</select></td>'+
+        '<td><select data-k="prio" aria-label="Priorität">'+sel(r.prio, [["hoch","Hoch"],["mittel","Mittel"],["niedrig","Niedrig"]])+'</select></td>'+
+        '<td><input type="text" class="mono" data-k="ersetzung" value="'+esc(r.ersetzung)+'" placeholder="(manuell prüfen)" aria-label="Ersetzung"></td>'+
+        '<td><button class="del" type="button" data-del="'+i+'" title="Regel entfernen" aria-label="Regel entfernen">×</button></td>'+
+      '</tr>'
+    ).join("")+'</tbody>';
+  document.getElementById("rules-note").textContent = "— "+rules.filter(r=>r.aktiv).length+" aktive Regeln";
+}
+
+function readRulesFromForm(){
+  const out = [];
+  document.querySelectorAll("#rules-table tbody tr").forEach(tr=>{
+    const r = {};
+    tr.querySelectorAll("[data-k]").forEach(el=>{ r[el.dataset.k] = el.type==="checkbox" ? el.checked : el.value; });
+    out.push(r);
+  });
+  return out;
+}
+
+function applyRules(){
+  const newRules = readRulesFromForm();
+  const bad = newRules.filter(r=>r.aktiv && r.muster && r.regex && !compileRule(r));
+  const msg = document.getElementById("rules-msg");
+  if(bad.length){ msg.textContent = "Ungültiger regulärer Ausdruck: "+bad.map(r=>r.muster).join(", "); msg.className = "import-msg err"; return; }
+  rules = newRules.filter(r=>r.muster.trim()!=="");
+  document.querySelectorAll("#targets [data-target]").forEach(el=>{ targets[el.dataset.target] = el.value; });
+  storeSet(STORE.rules, rules); storeSet(STORE.targets, targets);
+  rebuildFindings(); renderRulesTable(); renderAll();
+  msg.textContent = "Regeln übernommen — "+FINDINGS.length+" Fundstellen."; msg.className = "import-msg ok";
+}
+
+function renderAll(){
+  renderStats(); renderPrSidebar(); renderPrTable();
+}
+
+function initPruefung(){
+  if(storedRecords && storedRecords.length) setRecords(storedRecords, false);
+  else setRecords(SAMPLE_RECORDS, true);
+  rebuildFindings();
+  renderTargets(); renderRulesTable();
+  document.getElementById("imp-source").innerHTML = PR_SOURCES.map(s=>'<option value="'+s.id+'">'+esc(s.titel)+'</option>').join("");
+  renderAll();
+
+  const searchInput = document.getElementById("pr-search-input");
+  searchInput.addEventListener("input", ()=>{ prState.search = searchInput.value; renderPrSidebar(); renderPrTable(); });
+  document.getElementById("pr-export-btn").addEventListener("click", ()=>exportPrCsv());
+
+  document.getElementById("imp-file").addEventListener("change", e=>{ const f = e.target.files && e.target.files[0]; if(f) onImportFile(f); });
+  document.getElementById("imp-sheet").addEventListener("change", e=>{ importState.sheetIdx = parseInt(e.target.value,10); renderImportMapping(); });
+  document.getElementById("imp-header").addEventListener("change", renderImportMapping);
+  document.getElementById("imp-run").addEventListener("click", runImport);
+  document.getElementById("imp-restore-sample").addEventListener("click", ()=>{
+    try{ localStorage.removeItem(STORE.records); }catch(e){}
+    setRecords(SAMPLE_RECORDS, true); rebuildFindings(); prState.selected = null; renderAll();
+    setImpMsg("Beispieldaten wiederhergestellt.", "ok");
+  });
+  document.getElementById("imp-clear").addEventListener("click", ()=>{
+    try{ localStorage.removeItem(STORE.records); }catch(e){}
+    setRecords([], false); rebuildFindings(); prState.selected = null; renderAll();
+    setImpMsg("Importierte Daten entfernt. Bearbeitungsstände bleiben erhalten und greifen bei erneutem Import derselben Fundstellen.", "ok");
+  });
+
+  document.getElementById("rules-table").addEventListener("click", e=>{
+    const del = e.target.closest("[data-del]");
+    if(!del) return;
+    rules = readRulesFromForm(); rules.splice(parseInt(del.dataset.del,10), 1); renderRulesTable();
+  });
+  document.getElementById("rules-add").addEventListener("click", ()=>{
+    rules = readRulesFromForm();
+    rules.push({aktiv:true, muster:"", regex:false, gross:false, kategorie:"Sonstiges", bezug:"mittelbar", prio:"mittel", ersetzung:""});
+    renderRulesTable();
+  });
+  document.getElementById("rules-default").addEventListener("click", ()=>{
+    rules = DEFAULT_RULES.map(r=>Object.assign({}, r)); renderRulesTable();
+  });
+  document.getElementById("rules-apply").addEventListener("click", applyRules);
+}
+
+document.getElementById("btn-theme").addEventListener("click", ()=>{
+  const root = document.documentElement;
+  const cur = root.getAttribute("data-theme");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  let next;
+  if(!cur) next = prefersDark ? "light" : "dark";
+  else if(cur==="dark") next = "light";
+  else next = "dark";
+  root.setAttribute("data-theme", next);
+  try{ localStorage.setItem(STORE.theme, next); }catch(e){}
+});
+try{
+  const saved = localStorage.getItem(STORE.theme);
+  if(saved) document.documentElement.setAttribute("data-theme", saved);
+}catch(e){}
+
+initPruefung();
+
+})();
+</script>
+</body>
+</html>
