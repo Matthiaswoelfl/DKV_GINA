@@ -107,8 +107,8 @@
   .stat-sub{font-size:.72rem; color:var(--ink-soft);}
 
   /* ---------- Aufklappbare Panels (Import / Regeln) ---------- */
-  .panels{display:grid; gap:10px; margin-bottom:18px;}
-  details.panel{background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px;}
+  .panels{display:grid; grid-template-columns:minmax(0,1fr); gap:10px; margin-bottom:18px;}
+  details.panel{background:var(--card-bg); border:1px solid var(--card-border); border-radius:12px; min-width:0;}
   details.panel > summary{
     cursor:pointer; list-style:none; padding:13px 16px; display:flex; align-items:center; gap:10px;
     font:700 .86rem "Source Sans 3";
@@ -138,7 +138,7 @@
   .preview-wrap{overflow-x:auto; border:1px solid var(--card-border); border-radius:8px; margin-bottom:12px;}
 
   .rules-wrap{overflow-x:auto; border:1px solid var(--card-border); border-radius:8px; margin-bottom:12px;}
-  .rules-table{width:100%; border-collapse:collapse; font-size:.78rem; min-width:860px;}
+  .rules-table{width:100%; border-collapse:collapse; font-size:.78rem; min-width:1500px;}
   .rules-table th{text-align:left; font:700 .62rem "Source Sans 3"; text-transform:uppercase; letter-spacing:.04em; color:var(--ink-soft); padding:8px; background:var(--bg); border-bottom:1px solid var(--card-border); white-space:nowrap;}
   .rules-table td{padding:6px 8px; border-bottom:1px solid var(--card-border); vertical-align:middle;}
   .rules-table tr:last-child td{border-bottom:none;}
@@ -153,7 +153,7 @@
 
   /* ---------- Facet-Sidebar + Datentabelle ---------- */
   .pr-shell{display:flex; gap:16px; align-items:flex-start;}
-  @media (max-width:880px){.pr-shell{flex-direction:column;}}
+  @media (max-width:880px){.pr-shell{flex-direction:column; align-items:stretch;}}
 
   .pr-sidebar{
     width:216px; flex:none; background:var(--card-bg); border:1px solid var(--card-border);
@@ -283,6 +283,21 @@
   .status-btn[data-active="true"]{background:var(--accent); color:var(--accent-contrast); border-color:var(--accent);}
   .status-hint{font-size:.74rem; color:var(--cat-violation);}
 
+  .pr-sub{font-size:.68rem; color:var(--ink-soft); margin-top:2px; white-space:nowrap;}
+  .pr-tag{display:inline-block; font:700 .66rem "Source Sans 3"; padding:2px 8px; border-radius:999px; white-space:nowrap; background:var(--cat-conflict-bg); color:var(--cat-conflict);}
+  .pr-tag.ok{background:var(--cat-ok-bg); color:var(--cat-ok);}
+  .pr-tag.art{background:var(--bg); color:var(--ink-soft); border:1px solid var(--card-border);}
+  .tag-row{display:flex; gap:6px; flex-wrap:wrap;}
+  mark.prelim{background:transparent; color:inherit; font-weight:700; border-bottom:2px dashed var(--cat-ok);}
+  mark.keep{background:transparent; color:inherit; font-weight:700; border-bottom:2px dotted var(--cat-conflict);}
+  mark.open{background:transparent; color:inherit; font-weight:700; border-bottom:2px solid var(--cat-conflict);}
+  .legend{display:flex; gap:14px; flex-wrap:wrap; font-size:.72rem; color:var(--ink-soft); margin-top:8px;}
+  .legend mark{font-weight:600;}
+  .target-status{font:700 .6rem "Source Sans 3"; text-transform:uppercase; letter-spacing:.04em; padding:1px 6px; border-radius:999px; margin-left:4px;}
+  .target-status.bestaetigt{background:var(--cat-ok-bg); color:var(--cat-ok);}
+  .target-status.offen{background:var(--cat-conflict-bg); color:var(--cat-conflict);}
+  .finding-link{font-size:.76rem; word-break:break-all;}
+
   footer{margin-top:40px; padding-top:18px; border-top:1px solid var(--card-border); font-size:.78rem; color:var(--ink-soft); line-height:1.7;}
 </style>
 </head>
@@ -290,9 +305,9 @@
 <div class="app">
   <div class="module-rail">
     <div class="module-rail-text">
-      <div class="eyebrow">GINA · Identifikation Änderungsbedarf &amp; QS</div>
+      <div class="eyebrow">GINA · Identifikation Änderungsbedarf &amp; QS · DKV → ERGO</div>
       <h1>Prüfung definierter Bereiche auf DKV-Bezug</h1>
-      <p>Durchsucht Crawling-Ergebnisse des externen Anbieters, Brief- und Textbausteine, PDF-Druckstücke, Intranet-Inhalte und Tabellen der Programmbasis nach DKV-Bezug (Markenname, Firmierung, Domains/E-Mail, Kontaktdaten, Logos), zeigt die Fundstellen an, schlägt angepasste Formulierungen vor und führt eine Qualitätssicherung der überarbeiteten Texte durch.</p>
+      <p>Durchsucht Crawling-Ergebnisse des externen Anbieters, Brief- und Textbausteine, PDF-Druckstücke, Intranet-Inhalte und Tabellen der Programmbasis nach DKV-Bezug. Das Modul unterscheidet eindeutige Ersetzungen (DKV → ERGO) von Fällen mit fachlichem Entscheidungsbedarf (Themenblöcke 1–4 aus GINA-Auswertung 1), schlägt Formulierungen vor und führt eine Qualitätssicherung der überarbeiteten Texte durch.</p>
     </div>
     <button class="btn btn-ghost" id="btn-theme" type="button" title="Theme umschalten" aria-label="Theme umschalten">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.4 4.4l1.7 1.7M17.9 17.9l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.4 19.6l1.7-1.7M17.9 6.1l1.7-1.7"/></svg>
@@ -301,7 +316,7 @@
 
   <div class="disclaimer" id="sample-disclaimer">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 16.5h.01"/><circle cx="12" cy="12" r="9"/></svg>
-    <span><strong>Beispieldaten zur Veranschaulichung.</strong> Fundstellen und Texte unten sind frei erzeugt. Echte Daten (Crawling-Export, Briefbausteine, überarbeitete Texte) über „Daten importieren“ laden — die Verarbeitung erfolgt ausschließlich lokal im Browser.</span>
+    <span><strong>Beispieldaten zur Veranschaulichung.</strong> Die Texte sind an die Kontext-Phrasen aus GINA-Auswertung 1 und das Website-Crawling angelehnt, aber gekürzt bzw. ergänzt; überarbeitete Fassungen sind frei erzeugt. Echte Daten (Unload der Briefbausteine, Crawling-Export, Wording-Listen, überarbeitete Texte) über „Daten importieren“ laden — die Verarbeitung erfolgt ausschließlich lokal im Browser.</span>
   </div>
 
   <div class="stats" id="stats"></div>
@@ -310,11 +325,11 @@
     <details class="panel" id="panel-import">
       <summary>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3m0 0L7.5 7.5M12 3l4.5 4.5"/><path d="M4 17v2.4A1.6 1.6 0 0 0 5.6 21h12.8a1.6 1.6 0 0 0 1.6-1.6V17"/></svg>
-        Daten importieren <span class="sum-note">— Crawling-Export, Brief-/Textbausteine, überarbeitete Texte (CSV, XLSX, TXT)</span>
+        Daten importieren <span class="sum-note">— Unload Briefbausteine, Crawling-Export, Wording-Listen, überarbeitete Texte (CSV, XLSX, TXT)</span>
         <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
       </summary>
       <div class="panel-body">
-        <p>Jede Zeile der Datei wird als ein Prüfobjekt (Seite, Briefbaustein, Tabellenzeile) behandelt. Enthält die Datei zusätzlich eine Spalte mit dem <b>überarbeiteten Text</b>, wird dieser direkt der Qualitätssicherung unterzogen. Bei TXT-Dateien gilt jeder durch Leerzeile getrennte Absatz als Prüfobjekt.</p>
+        <p>Jede Zeile wird als ein Prüfobjekt behandelt (Seite, Briefbaustein, Tabellenzeile oder Wording). Wording-Listen wie „Website_DKVcom_Brand_Wordings“ oder „DKV_Artikel_Kombinationen“ werden erkannt: Wording = Fundstelle und Prüftext, „Anzahl Verwendungen“ und „Beispiel-URL“ werden übernommen. Enthält die Datei eine Spalte mit dem <b>überarbeiteten Text</b>, wird dieser direkt der Qualitätssicherung unterzogen. Bei TXT-Dateien gilt jeder durch Leerzeile getrennte Absatz als Prüfobjekt.</p>
         <div class="form-row">
           <div class="field"><label for="imp-file">Datei</label><input type="file" id="imp-file" accept=".csv,.tsv,.txt,.xlsx,.xls"></div>
           <div class="field"><label for="imp-source">Quelle</label><select id="imp-source"></select></div>
@@ -323,9 +338,14 @@
         <div id="imp-mapping" hidden>
           <div class="form-row">
             <div class="field" id="imp-sheet-field" hidden><label for="imp-sheet">Tabellenblatt</label><select id="imp-sheet"></select></div>
-            <div class="field"><label for="imp-col-id">Fundstelle / ID / URL</label><select id="imp-col-id"></select></div>
+            <label class="check" id="imp-all-sheets-field" hidden><input type="checkbox" id="imp-all-sheets"> Alle Blätter mit gleicher Struktur importieren</label>
+          </div>
+          <div class="form-row">
+            <div class="field"><label for="imp-col-id">Fundstelle / Baustein / Wording</label><select id="imp-col-id"></select></div>
             <div class="field"><label for="imp-col-text">Originaltext</label><select id="imp-col-text"></select></div>
             <div class="field"><label for="imp-col-rev">Überarbeiteter Text (optional)</label><select id="imp-col-rev"></select></div>
+            <div class="field"><label for="imp-col-count">Anzahl (optional)</label><select id="imp-col-count"></select></div>
+            <div class="field"><label for="imp-col-link">Link / Beispiel-URL (optional)</label><select id="imp-col-link"></select></div>
             <label class="check"><input type="checkbox" id="imp-header" checked> Erste Zeile ist Kopfzeile</label>
           </div>
           <div class="preview-wrap"><table class="preview-table" id="imp-preview"></table></div>
@@ -344,13 +364,13 @@
     <details class="panel" id="panel-rules">
       <summary>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h10M4 18h6"/><circle cx="18" cy="16" r="3"/><path d="m20.2 18.2 1.8 1.8"/></svg>
-        Prüfregeln &amp; Zielbezeichnungen <span class="sum-note" id="rules-note"></span>
+        Zielwerte &amp; Prüfregeln <span class="sum-note" id="rules-note"></span>
         <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
       </summary>
       <div class="panel-body">
-        <p>Zielbezeichnungen werden über Platzhalter in den Ersetzungen verwendet. Solange sie mit „‹…›“ markiert sind, gelten sie als noch nicht festgelegt.</p>
+        <p>Zielwerte nach GINA-Auswertung 1 (Stand 15.09.2026, Vorgabentabelle 30.07.2026). Sie werden über Platzhalter wie <code class="mono">{MARKE}</code> in den Ersetzungen verwendet. Die Ziel-Domain ist noch nicht final entschieden.</p>
         <div class="targets" id="targets"></div>
-        <p>Regeln werden in der angezeigten Reihenfolge angewendet; bei überlappenden Treffern gewinnt die obere Regel. Ist keine Ersetzung angegeben, wird der Treffer zur manuellen Prüfung markiert (z. B. Logos).</p>
+        <p><b>Entscheidung</b>: „bestätigt“ = Ersetzung bzw. „kein Eingriff“ ist freigegeben; „offen“ = Klärungsbedarf (Themenblock), ein Belassen gilt in der QS derzeit als zulässig; „manuell“ = immer Einzelfallprüfung. <b>Bei ERGO-Kollision</b> greift, wenn im selben Text bereits „ERGO“ steht (Themenblock 4). Regeln werden von oben nach unten angewendet; bei überlappenden Treffern gewinnt die obere Regel.</p>
         <div class="rules-wrap"><table class="rules-table" id="rules-table"></table></div>
         <div class="btn-row">
           <button class="btn btn-ghost btn-sm" type="button" id="rules-add">Regel hinzufügen</button>
@@ -368,7 +388,7 @@
       <div class="pr-toolbar">
         <div class="pr-search">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.6-4.6"/></svg>
-          <input type="text" id="pr-search-input" placeholder="Volltext: Fundstelle, Bezugsart oder Wortlaut durchsuchen…">
+          <input type="text" id="pr-search-input" placeholder="Volltext: Baustein, URL, Bezugsart oder Wortlaut durchsuchen…">
         </div>
         <div class="pr-toolbar-right">
           <span class="pr-count" id="pr-result-count"></span>
@@ -381,7 +401,7 @@
       <div class="pr-table-wrap">
         <table class="pr-table">
           <thead>
-            <tr><th>Quelle</th><th>Fundstelle</th><th>Bezugsart</th><th>DKV-Bezug</th><th>Priorität</th><th>Status</th><th>QS</th></tr>
+            <tr><th>Quelle</th><th>Fundstelle</th><th>Bezugsart</th><th>Klärung</th><th>Priorität</th><th>Status</th><th>QS</th></tr>
           </thead>
           <tbody id="pr-table-body"></tbody>
         </table>
@@ -391,7 +411,7 @@
   </div>
 
   <footer>
-    <div>Eigenständiges Modul „Prüfung DKV-Bezug“ im Rahmen von GINA — abgeleitet aus dem Modul „Prüfung GOÄ-Bezug“. Alle Daten werden nur lokal im Browser verarbeitet; Bearbeitungsstände werden in diesem Browser gespeichert und lassen sich als CSV exportieren.</div>
+    <div>Eigenständiges Modul „Prüfung DKV-Bezug“ im Rahmen von GINA — abgeleitet aus dem Modul „Prüfung GOÄ-Bezug“. Zielwerte und Themenblöcke nach GINA-Auswertung 1 (Stand 15.09.2026); Produkt-/Markenliste ergänzt um Wordings aus dem Website-Crawling dkv.com. Alle Daten werden nur lokal im Browser verarbeitet; Bearbeitungsstände werden in diesem Browser gespeichert und lassen sich als CSV exportieren.</div>
   </footer>
 </div>
 
@@ -401,6 +421,7 @@
 
 function esc(s){ return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
 function escRe(s){ return String(s).replace(/[.*+?^${}()|[\]\\]/g,"\\$&"); }
+function fmtNum(n){ return Number(n).toLocaleString("de-DE"); }
 
 function storeGet(key, fallback){
   try{ const v = localStorage.getItem(key); return v==null ? fallback : JSON.parse(v); }catch(e){ return fallback; }
@@ -431,7 +452,7 @@ async function saveBlobForViewer(filename, blob){
 }
 
 /* ========================= Modul: Prüfung definierter Bereiche auf DKV-Bezug ========================= */
-const STORE = {records:"gina-dkv-records", edits:"gina-dkv-edits", rules:"gina-dkv-rules", targets:"gina-dkv-targets", theme:"gina-theme"};
+const STORE = {records:"gina-dkv-records-v2", edits:"gina-dkv-edits-v2", rules:"gina-dkv-rules-v2", targets:"gina-dkv-targets-v2", theme:"gina-theme"};
 
 const PR_ICONS = {
   crawling:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.4 3.8 5.4 3.8 8.5s-1.3 6.1-3.8 8.5c-2.5-2.4-3.8-5.4-3.8-8.5S9.5 5.9 12 3.5Z"/></svg>',
@@ -441,56 +462,129 @@ const PR_ICONS = {
   tabellen:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4" width="17" height="16" rx="2"/><path d="M3.5 10h17M3.5 15h17M10 4v16"/></svg>',
 };
 const PR_SOURCES = [
-  {id:"crawling", titel:"Web-Crawling (extern)", desc:"Crawling-Ergebnisse des externen Anbieters zu den Internetauftritten"},
-  {id:"briefbausteine", titel:"Briefbausteine", desc:"Brief- und Textbausteine der Kundenkorrespondenz"},
+  {id:"crawling", titel:"Web-Crawling (extern)", desc:"Crawling-Ergebnisse und Wording-Listen des externen Anbieters zu dkv.com"},
+  {id:"briefbausteine", titel:"Briefbausteine", desc:"Brief- und Textbausteine der Kundenkorrespondenz (Unload Textsystem)"},
   {id:"pdf", titel:"PDF-Druckstücke", desc:"Merkblätter, Kundeninformationen und Antragsunterlagen"},
   {id:"intranet", titel:"Intranet", desc:"Arbeitsanweisungen und Leitfäden"},
-  {id:"tabellen", titel:"Tabellen & Programmbasis", desc:"Tabellen und Konfigurationen, die die Basis von Programmen bilden"},
+  {id:"tabellen", titel:"Tabellen & Programmbasis", desc:"Variablen, Tabellen und Konfigurationen, die die Basis von Programmen bilden"},
 ];
 const SOURCE_TITLE = {}; PR_SOURCES.forEach(s=>SOURCE_TITLE[s.id]=s.titel);
 
-const DEFAULT_TARGETS = {MARKE:"‹Zielmarke›", FIRMA:"‹Zielfirmierung›", DOMAIN:"‹zieldomain›", ADRESSE:"‹Zieladresse›"};
-const TARGET_LABEL = {MARKE:"Markenname", FIRMA:"Firmierung (Rechtsform)", DOMAIN:"Domain", ADRESSE:"Postanschrift (Straße)"};
+/* Zielwerte lt. GINA-Auswertung 1 */
+const DEFAULT_TARGETS = {MARKE:"ERGO", FIRMA:"ERGO Deutsche Krankenversicherung AG", DOMAIN:"ergo-dkv.com", LBEZ:"E1_TXAL_T_GES_LBEZ"};
+const TARGET_META = {
+  MARKE:{label:"Marke (DKV →)", status:"bestätigt"},
+  FIRMA:{label:"Voll-Name / Firmierung", status:"bestätigt"},
+  DOMAIN:{label:"Ziel-Domain (www / E-Mail)", status:"offen"},
+  LBEZ:{label:"Variable Voll-Name (statt KBEZ)", status:"bestätigt"},
+};
 
+const KLAERUNG_LABEL = {
+  TB1:"TB1 Produkte, Marken & Apps", TB2:"TB2 Domains", TB3:"TB3 URL-Pfade", TB4:"TB4 Mischform DKV + ERGO",
+  OFFEN:"Sonstige offene Entscheidung", ART:"Artikel-Kombination", OK:"Eindeutig",
+};
+const KLAERUNG_ORDER = ["TB1","TB2","TB3","TB4","OFFEN","ART","OK"];
+const ENTSCHEIDUNGEN = ["bestätigt","offen","manuell"];
+
+/* Regelwerk. ersetzung leer = Text bleibt (bei „bestätigt“: kein Eingriff nötig). */
 const DEFAULT_RULES = [
-  {aktiv:true, muster:"DKV Deutsche Krankenversicherung AG", regex:false, gross:false, kategorie:"Firmierung", bezug:"direkt", prio:"hoch", ersetzung:"{FIRMA}"},
-  {aktiv:true, muster:"Deutsche Krankenversicherung( AG)?", regex:true, gross:false, kategorie:"Firmierung", bezug:"direkt", prio:"hoch", ersetzung:"{FIRMA}"},
-  {aktiv:true, muster:"\\bdkv\\.(com|de)\\b", regex:true, gross:false, kategorie:"Domain / E-Mail", bezug:"direkt", prio:"hoch", ersetzung:"{DOMAIN}"},
-  {aktiv:true, muster:"\\b[\\w-]*dkv[\\w-]*\\.(png|jpe?g|svg|gif|eps)\\b", regex:true, gross:false, kategorie:"Logo / Asset", bezug:"mittelbar", prio:"mittel", ersetzung:""},
-  {aktiv:true, muster:"\\bDKV\\b", regex:true, gross:true, kategorie:"Markenname", bezug:"direkt", prio:"hoch", ersetzung:"{MARKE}"},
-  {aktiv:true, muster:"Aachener Stra(ß|ss)e 300", regex:true, gross:false, kategorie:"Kontaktdaten", bezug:"mittelbar", prio:"mittel", ersetzung:"{ADRESSE}"},
+  {aktiv:true, muster:"DKV Deutsche Krankenversicherung", regex:false, gross:true, kategorie:"Firmierung", bezug:"direkt", prio:"hoch",
+    ersetzung:"{MARKE} Deutsche Krankenversicherung", kollision:"", entscheidung:"bestätigt", themenblock:"", artikel:false,
+    hinweis:"Zielwert bestätigt: ERGO Deutsche Krankenversicherung AG."},
+  {aktiv:true, muster:"(?<!(DKV|ERGO) )Deutsche Krankenversicherung", regex:true, gross:true, kategorie:"Firmierung", bezug:"direkt", prio:"hoch",
+    ersetzung:"{MARKE} Deutsche Krankenversicherung", kollision:"", entscheidung:"bestätigt", themenblock:"", artikel:false,
+    hinweis:"Firmierung ohne Kürzel — wird zum Voll-Namen ergänzt."},
+  {aktiv:true, muster:"(?<![\\w.-])(https?:\\/\\/)?([\\w-]+\\.)*dkv\\.(com|de|vom)\\/[^\\s\"“”<>)]*[^\\s\"“”<>).,;:!?]", regex:true, gross:false, kategorie:"URL-Pfad", bezug:"direkt", prio:"mittel",
+    ersetzung:"", kollision:"", entscheidung:"offen", themenblock:"TB3", artikel:false,
+    hinweis:"Konkreter Pfad unter dkv.com — existiert nicht automatisch unter neuer Domain. Je Pfad Ziel-URL festlegen, variabilisieren oder belassen."},
+  {aktiv:true, muster:"(?<![\\w.-])(https?:\\/\\/)?(www\\.)?(?!www\\.)[\\w-]+\\.dkv\\.(com|de|vom)\\b", regex:true, gross:false, kategorie:"URL-Pfad", bezug:"direkt", prio:"mittel",
+    ersetzung:"", kollision:"", entscheidung:"offen", themenblock:"TB3", artikel:false,
+    hinweis:"Subdomain unter dkv.com (z. B. i.dkv.com, hilfsmittelservice.dkv.com) — Ziel-URL festlegen."},
+  {aktiv:true, muster:"\\b[\\w-]*dkv[\\w-]*\\.html?\\b", regex:true, gross:false, kategorie:"URL-Pfad", bezug:"mittelbar", prio:"mittel",
+    ersetzung:"", kollision:"", entscheidung:"offen", themenblock:"TB3", artikel:false,
+    hinweis:"Seitenname mit DKV-Bezug (z. B. dkv-gesundheitsservices.html) — Ziel-URL festlegen."},
+  {aktiv:true, muster:"(?<![\\w-])dkv\\.(com|de|vom)\\b", regex:true, gross:false, kategorie:"Domain / E-Mail", bezug:"direkt", prio:"hoch",
+    ersetzung:"{DOMAIN}", kollision:"", entscheidung:"offen", themenblock:"TB2", artikel:false,
+    hinweis:"www.dkv.com / @dkv.com → Ziel-Domain noch nicht final (z. B. ergo-dkv.com). Ersetzung ist vorläufig."},
+  {aktiv:true, muster:"E1_TXAL_T_GES_INTERNET_ADR\\b|E1_KVZZ_T_EMAIL_DOMAIN\\b", regex:true, gross:true, kategorie:"Variable Domain", bezug:"mittelbar", prio:"hoch",
+    ersetzung:"", kollision:"", entscheidung:"offen", themenblock:"TB2", artikel:false,
+    hinweis:"Zentrale Variable (INTERNET_ADR: 1.653 uses / 638 docs; EMAIL_DOMAIN: 797 uses / 603 docs) — Inhalt wird zentral umgestellt, kein Eingriff im Baustein."},
+  {aktiv:true, muster:"E1_TXAL_T_GES_KBEZ\\b", regex:true, gross:true, kategorie:"Variable Firmenname", bezug:"mittelbar", prio:"niedrig",
+    ersetzung:"", kollision:"{LBEZ}", entscheidung:"bestätigt", themenblock:"", artikel:false,
+    hinweis:"KBEZ liefert künftig automatisch ERGO — kein Eingriff. Steht ERGO bereits im selben Baustein: KBEZ → LBEZ (Voll-Name)."},
+  {aktiv:true, muster:"\\b[\\w-]*dkv[\\w-]*\\.(png|jpe?g|svg|gif|eps)\\b", regex:true, gross:false, kategorie:"Logo / Asset", bezug:"mittelbar", prio:"niedrig",
+    ersetzung:"", kollision:"", entscheidung:"manuell", themenblock:"", artikel:false,
+    hinweis:"Bild-/Logo-Datei mit DKV-Bezug — Austausch manuell prüfen."},
+  {aktiv:true, muster:"\\bDKV[- ]?Card\\b|\\bDKV-Karten?\\b|\\bDKV[- ]?(Zahn)?[Tt]arif(e|en)?\\b|\\bDKVplus\\b|\\bDKV[- ]?Pflegewelt\\b|\\bDKV-Bonus(-65\\+)?|\\bDKV KombiMed( Budget)?\\b|\\bDKV-Notrufzentrale\\b|\\bDKV BeihilfeMed( Extra Plus)?\\b|\\bDKV Beitragsentlastungstarif( VV65)?\\b|\\bDKV KOOP\\b|\\bDKV-Wechsler\\b|\\bDKVG(-Pool-Beteiligung)?\\b|\\bDKV (Options|Standard)tarif\\b|\\bDKV Sozialtarife\\b|\\bDKV Pflege-Dashboard\\b|\\bDKV Pflege-Zuschuss\\b", regex:true, gross:false, kategorie:"Produkt / Tarif", bezug:"direkt", prio:"mittel",
+    ersetzung:"", kollision:"", entscheidung:"offen", themenblock:"TB1", artikel:false,
+    hinweis:"Produkt-/Tarifname — Produktnamen werden derzeit NICHT geändert. Je Name: unverändert, umbenennen oder variabilisieren (Produkt-/Tarifmanagement Kranken, Markenführung)."},
+  {aktiv:true, muster:"\\b[Mm]eine DKV( App)?\\b|\\bmy DKV\\b|\\bDKV[- ]?(Gesundheits-?|Rechnungs-)?App\\b|\\bDKV [\"„]GesundheitsApp[\"“]", regex:true, gross:false, kategorie:"App / Digitaler Dienst", bezug:"direkt", prio:"mittel",
+    ersetzung:"", kollision:"", entscheidung:"offen", themenblock:"TB1", artikel:false,
+    hinweis:"App-Name — derzeit unverändert. Entscheidung Markenführung/Marketing und Digital/Online."},
+  {aktiv:true, muster:"\\bDKV[- ]Services?\\b|\\bDKV[- ]Gesundheitstelefon(s|at)?\\b|\\bKrankenhausausweis der DKV\\b|\\bHilfsmittelservice der DKV\\b|\\bDKV[- ]Hilfsmittelservice\\b|\\bDKV-Formular\\b|\\bDKV Testsieger\\b|\\bDKV bekannt\\b|\\bDKV[- ]Kundenservice\\b|\\bDKV Fragen\\b|\\bDKV[- ]Auslands?-Notruf(service)?\\b|\\bDKV Notrufnummern?\\b|\\bDKV-Experten-Service\\b|\\bDKV Rückruf-Service\\b|\\bDKV-Telefonservice\\b|\\bDKV Online-Services\\b", regex:true, gross:false, kategorie:"Service / Marke", bezug:"direkt", prio:"mittel",
+    ersetzung:"", kollision:"", entscheidung:"offen", themenblock:"TB1", artikel:false,
+    hinweis:"Service-/Markenname — derzeit unverändert. Entscheidung: belassen, umbenennen oder variabilisieren."},
+  {aktiv:true, muster:"\\bDKV[- ]?Report(s|age)?\\b|\\bDKV[- ]Gesundheitswelt\\b|\\bDKV[- ]Zahnwelt\\b|\\bDKV Servicewelt\\b|\\bDKV-Welten\\b|\\bDKV[- ]Aktivprogramm(e|en)?\\b|\\bDKV[- ]Familienprogramm(e|en)?\\b|\\bDKV[- ]Gesundheitsprogr?amm(e|en)?\\b|\\bDKV Fallmanagements?\\b|\\bDKV Gesundheitsberatungs?\\b|\\bDKV Info-Center\\b|\\bDKV Versicherungskompass\\b|\\bDKV Beikostplan\\b|\\bDKV Erklärfilm\\b|\\bDKV Krankenhaussuche\\b|\\bDKV-ID\\b|\\bDKV-Krankenhaus-(Zusatz-?)?[Ss]chutz\\b|\\bDKV-Einmalzahlung\\b", regex:true, gross:false, kategorie:"Produkt / Marke (Website)", bezug:"direkt", prio:"mittel",
+    ersetzung:"", kollision:"", entscheidung:"offen", themenblock:"TB1", artikel:false,
+    hinweis:"Aus dem Website-Crawling dkv.com abgeleiteter Produkt-/Angebotsname. Zuordnung zu Themenblock 1 ist vorläufig — bitte fachlich bestätigen."},
+  {aktiv:true, muster:"\\bDKV AG\\b", regex:true, gross:true, kategorie:"Firmierung", bezug:"direkt", prio:"hoch",
+    ersetzung:"{FIRMA}", kollision:"", entscheidung:"offen", themenblock:"", artikel:true,
+    hinweis:"Kurzform der Firmierung — „ERGO AG“ wäre eine andere Gesellschaft. Vorschlag: Voll-Name; fachlich bestätigen."},
+  {aktiv:true, muster:"\\bDKV\\b", regex:true, gross:true, kategorie:"Markenname", bezug:"direkt", prio:"hoch",
+    ersetzung:"{MARKE}", kollision:"{FIRMA}", entscheidung:"bestätigt", themenblock:"", artikel:true,
+    hinweis:"DKV → ERGO bestätigt. Steht ERGO bereits im selben Text (Mischform), ist die Endformulierung je Fall festzulegen (Themenblock 4)."},
 ];
 
-/* Beispieldaten: frei erzeugte Texte, keine echten Fundstellen. */
+/* Beispieldaten: angelehnt an Kontext-Phrasen aus GINA-Auswertung 1 und dem Website-Crawling; gekürzt/ergänzt. */
 const SAMPLE_RECORDS = [
-  {sourceId:"crawling", pfad:"www.dkv.com/gesundheit/zahnzusatzversicherung",
-    text:"Mit der Zahnzusatzversicherung der DKV sind Sie bei Zahnersatz und Prophylaxe gut abgesichert. Alle Details finden Sie unter www.dkv.com/zahn oder direkt in der DKV-App."},
-  {sourceId:"crawling", pfad:"www.dkv.com/service/kontakt",
-    text:"Schreiben Sie uns: DKV Deutsche Krankenversicherung AG, Aachener Straße 300, 50933 Köln. Oder per E-Mail an service@dkv.com.",
-    revised:"Schreiben Sie uns: ‹Zielfirmierung›, ‹Zieladresse›, 50933 Köln. Oder per E-Mail an service@dkv.com.", status:"in Überarbeitung"},
-  {sourceId:"briefbausteine", pfad:"BB-0412 · Eingangsbestätigung Leistungsantrag",
-    text:"vielen Dank für Ihre Rechnungen. Die DKV hat Ihren Leistungsantrag erhalten und prüft ihn umgehend.\n\nMit freundlichen Grüßen\nIhre DKV",
-    revised:"vielen Dank für Ihre Rechnungen. Die ‹Zielmarke› hat Ihren Leistungsantrag erhalten und prüft ihn umgehend.\n\nMit freundlichen Grüßen\nIhre ‹Zielmarke›", status:"in Überarbeitung"},
-  {sourceId:"briefbausteine", pfad:"BB-0587 · Hinweis Online-Einreichung",
-    text:"Reichen Sie Rechnungen bequem über die App „Meine DKV“ ein oder laden Sie sie unter www.dkv.com/rechnung hoch.",
-    revised:"Reichen Sie Rechnungen bequem über die App „Meine ‹Zielmarke›“ ein oder laden Sie sie unter www.‹zieldomain›/rechnung hoch.", status:"freigegeben"},
-  {sourceId:"briefbausteine", pfad:"BB-0733 · Beitragsanpassung Anschreiben",
-    text:"die DKV Deutsche Krankenversicherung AG passt zum 1. Januar die Beiträge in Ihrem Tarif an. Als DKV-Kunde erhalten Sie die Einzelheiten mit diesem Schreiben.",
-    revised:"‹Zielfirmierung› passt zum 1. Januar die Beiträge in Ihrem Tarif an. Als Kundin oder Kunde erhalten Sie alle Einzelheiten und Ihre neuen Beiträge mit diesem Schreiben.", status:"in Überarbeitung"},
-  {sourceId:"briefbausteine", pfad:"BB-0901 · Signatur Kundenservice",
-    text:"Mit freundlichen Grüßen\nIhr DKV-Kundenservice",
-    revised:"Mit freundlichen Grüßen\nIhr DKV-Kundenservice", status:"in Überarbeitung"},
+  {sourceId:"briefbausteine", pfad:"E1_KVZZ_TBS_LE_EINGANG_BEISPIEL_001",
+    text:"vielen Dank für Ihre Rechnungen. Die DKV hat Ihren Leistungsantrag erhalten und prüft ihn umgehend.",
+    revised:"vielen Dank für Ihre Rechnungen. Die ERGO hat Ihren Leistungsantrag erhalten und prüft ihn umgehend.", status:"freigegeben"},
+  {sourceId:"briefbausteine", pfad:"E1_KOZZ_TBS_CK100_BST2A",
+    text:"Vertragsbeziehung. Die DKV ist ein Unternehmen der ERGO Gruppe.",
+    revised:"Vertragsbeziehung. Die ERGO ist ein Unternehmen der ERGO Gruppe.", status:"in Überarbeitung"},
+  {sourceId:"briefbausteine", pfad:"E1_KVON_TBS_VE_PP200_07",
+    text:"Mit der DKV, einem Unternehmen der ERGO Versicherungsgruppe, haben Sie einen starken Partner an Ihrer Seite."},
+  {sourceId:"briefbausteine", pfad:"E1_KVON_TBS_AN_PN111_AGT_BRIEF_013",
+    text:"Für den Abschluss benötigen wir eine DKV- oder ERGO-eigene Beratungsdokumentation."},
+  {sourceId:"briefbausteine", pfad:"E1_CMZZ_TBS_MAHNUNG_VERSICHERUNG_BESITZER_CARD_PRIVATVERSICH_DKV",
+    text:"Als Besitzer einer DKV-Card für Privatversicherte dürfen Sie diese ab sofort nicht mehr verwenden. Bitte wenden Sie sich an die DKV.",
+    revised:"Als Besitzer einer DKV-Card für Privatversicherte dürfen Sie diese ab sofort nicht mehr verwenden. Bitte wenden Sie sich an die DKV.", status:"in Überarbeitung"},
+  {sourceId:"briefbausteine", pfad:"E1_KVBA_TBS_BAP_A_PS2",
+    text:"Meine DKV App vereint eine Vielzahl mobiler Services, die Ihnen den Alltag erleichtern."},
+  {sourceId:"briefbausteine", pfad:"E1_KVBA_TBS_LE_LAB_ANMERKSL_085I",
+    text:"Belege können Sie bequem online unter dkv.com/Belegupload einreichen."},
+  {sourceId:"briefbausteine", pfad:"E1_KVON_TBS_LE_SOZIALTARIFE_KONTAKT",
+    text:"Weitere Informationen finden Sie unter www.dkv.com oder schreiben Sie uns an sozialtarife@dkv.com.",
+    revised:"Weitere Informationen finden Sie unter www.ergo-dkv.com oder schreiben Sie uns an sozialtarife@ergo-dkv.com.", status:"in Überarbeitung"},
+  {sourceId:"briefbausteine", pfad:"E1_KVBA_TBS_LE_BEISPIEL_KBEZ_001",
+    text:"Ihre &E1_TXAL_T_GES_KBEZ hat Ihren Antrag erhalten und meldet sich in Kürze bei Ihnen."},
+  {sourceId:"briefbausteine", pfad:"E1_KVBA_TBS_VE_BEISPIEL_KBEZ_002",
+    text:"&E1_TXAL_T_GES_KBEZ ist ein Unternehmen der ERGO Group AG."},
+  {sourceId:"briefbausteine", pfad:"E1_KVZZ_TBS_BRIEFKOPF_BEISPIEL",
+    text:"DKV Deutsche Krankenversicherung AG · 50594 Köln · &E1_TXAL_T_GES_INTERNET_ADR",
+    revised:"ERGO Deutsche Krankenversicherung AG · 50594 Köln · &E1_TXAL_T_GES_INTERNET_ADR", status:"freigegeben"},
+  {sourceId:"crawling", pfad:"https://www.dkv.com/adresse-aendern.html",
+    text:"Ihre neue Adresse teilen Sie uns am einfachsten im Kundenportal der DKV mit."},
+  {sourceId:"crawling", pfad:"https://www.dkv.com/faq-versicherungspflicht.html",
+    text:"Als DKV-Kunde erhalten Sie die Bescheinigung der DKV automatisch per Post.",
+    revised:"Als ERGO-Kunde erhalten Sie die Bescheinigung der ERGO automatisch per Post.", status:"in Überarbeitung"},
+  {sourceId:"crawling", pfad:"https://www.dkv.com/dkv-gesundheitsservices.html",
+    text:"Der DKV Hilfsmittelservice und das DKV Gesundheitstelefon sind Teil der DKV Gesundheitswelt."},
   {sourceId:"pdf", pfad:"Merkblatt_Leistungseinreichung.pdf · Seite 2",
-    text:"Die DKV erstattet Rechnungen im Rahmen Ihres Tarifs. Fragen beantworten wir gern unter www.dkv.com/kontakt."},
+    text:"Laden Sie die DKV App herunter oder registrieren Sie sich unter https://www.dkv.com/papierlos. Fragen beantwortet Ihnen die DKV gern."},
   {sourceId:"intranet", pfad:"Intranet › Kundenservice › Gesprächsleitfaden Begrüßung",
     text:"Begrüßen Sie Anrufende mit: „DKV Kundenservice, mein Name ist …, was kann ich für Sie tun?“"},
+  {sourceId:"tabellen", pfad:"Variablenpflege Textsystem · E1_TXAL_T_GES_INTERNET_ADR", anzahl:1653,
+    text:"E1_TXAL_T_GES_INTERNET_ADR = www.dkv.com"},
+  {sourceId:"tabellen", pfad:"Variablenpflege Textsystem · E1_KVZZ_T_EMAIL_DOMAIN", anzahl:797,
+    text:"E1_KVZZ_T_EMAIL_DOMAIN = @dkv.com"},
   {sourceId:"tabellen", pfad:"Textkonstanten_Korrespondenz.xlsx · Blatt „Absender“ · Zeile 4",
-    text:"ABSENDER_FIRMA = DKV Deutsche Krankenversicherung AG; ABSENDER_STRASSE = Aachener Straße 300; LOGO = logo_dkv_blau.svg"},
-  {sourceId:"tabellen", pfad:"Mailvorlagen_Konfiguration.json › reply_to",
-    text:"reply_to: leistung@dkv.com; footer: „Diese E-Mail wurde von der DKV automatisch erzeugt.“"},
+    text:"ABSENDER_FIRMA = DKV Deutsche Krankenversicherung AG; LOGO = logo_dkv_blau.svg"},
 ];
 
-let rules = storeGet(STORE.rules, null) || DEFAULT_RULES.map(r=>Object.assign({}, r));
+function cloneRules(list){ return list.map(r=>Object.assign({}, r)); }
+let rules = storeGet(STORE.rules, null) || cloneRules(DEFAULT_RULES);
 let targets = Object.assign({}, DEFAULT_TARGETS, storeGet(STORE.targets, {}));
 let edits = storeGet(STORE.edits, {});
 let storedRecords = storeGet(STORE.records, null);
@@ -498,6 +592,7 @@ let records = [];
 let usingSample = true;
 let recordsWithoutHit = 0;
 let FINDINGS = [];
+let compiled = [];
 
 function setRecords(list, isSample){
   records = list.map(r=>Object.assign({}, r, {key:r.key || (r.sourceId+"|"+r.pfad)}));
@@ -510,11 +605,13 @@ function compileRule(r){
   if(!r.aktiv || !r.muster) return null;
   try{ return new RegExp(r.regex ? r.muster : escRe(r.muster), r.gross ? "g" : "gi"); }catch(e){ return null; }
 }
+function compileRules(){ compiled = rules.map(compileRule); }
 
 function findMatches(text){
   const cand = [];
   rules.forEach((r,ri)=>{
-    const re = compileRule(r); if(!re) return;
+    const re = compiled[ri]; if(!re) return;
+    re.lastIndex = 0;
     let m;
     while((m = re.exec(text))){
       if(m[0]===""){ re.lastIndex++; continue; }
@@ -527,32 +624,74 @@ function findMatches(text){
   return accepted.sort((a,b)=>a.start-b.start);
 }
 
-function resolveReplacement(rule){
-  return String(rule.ersetzung||"").replace(/\{([A-Z]+)\}/g, (all,k)=> (k in targets) ? targets[k] : all);
+/* ERGO steht bereits im Text (außerhalb der Treffer) → Mischform / Kollision */
+function hasErgoCollision(text, matches){
+  const re = /\bERGO\b|\bErgo-/g; let m;
+  while((m = re.exec(text))){
+    const s = m.index, e = s+m[0].length;
+    if(!matches.some(x=>s<x.end && x.start<e)) return true;
+  }
+  return false;
 }
 
-function buildProposal(text, matches){
+function resolveTpl(tpl){
+  return String(tpl||"").replace(/\{([A-Z]+)\}/g, (all,k)=> (k in targets) ? targets[k] : all);
+}
+
+/* Aktion je Treffer: ersetzt | vorlaeufig | offen | kein-eingriff | manuell | kollision-offen */
+function matchAction(m, text, collision){
+  const r = m.rule;
+  if(collision && r.kollision){
+    if(text[m.end]==="-") return {kind:"kollision-offen", repl:null};
+    return {kind: r.entscheidung==="bestätigt" && !r.ersetzung ? "ersetzt" : "kollision-vorlaeufig", repl:resolveTpl(r.kollision)};
+  }
+  if(r.entscheidung==="manuell") return {kind:"manuell", repl:null};
+  if(r.ersetzung) return {kind: r.entscheidung==="offen" ? "vorlaeufig" : "ersetzt", repl:resolveTpl(r.ersetzung)};
+  return {kind: r.entscheidung==="offen" ? "offen" : "kein-eingriff", repl:null};
+}
+
+function buildProposal(text, matches, collision){
   let out = "", pos = 0;
   matches.forEach(m=>{
-    out += text.slice(pos, m.start);
-    out += m.rule.ersetzung ? resolveReplacement(m.rule) : m.text;
+    const a = matchAction(m, text, collision);
+    out += text.slice(pos, m.start) + (a.repl!=null ? a.repl : m.text);
     pos = m.end;
   });
   return out + text.slice(pos);
 }
 
-function highlight(text, matches, mode){
+const KIND_TITLE = {
+  "ersetzt":"Ersetzung bestätigt", "vorlaeufig":"Vorläufige Ersetzung — Zielwert offen", "kollision-vorlaeufig":"Mischform DKV + ERGO — Vorschlag, Endformulierung festlegen",
+  "offen":"Entscheidung offen — bleibt derzeit unverändert", "kein-eingriff":"Kein Eingriff nötig", "manuell":"Manuell prüfen", "kollision-offen":"Mischform DKV + ERGO — manuell formulieren",
+};
+function highlight(text, matches, collision, mode){
   let out = "", pos = 0;
   matches.forEach(m=>{
+    const a = matchAction(m, text, collision);
     out += esc(text.slice(pos, m.start));
+    const title = esc(m.rule.kategorie+" · "+KIND_TITLE[a.kind]);
     if(mode==="proposal"){
-      out += m.rule.ersetzung ? '<mark class="repl">'+esc(resolveReplacement(m.rule))+'</mark>' : '<mark class="manual" title="Manuell prüfen">'+esc(m.text)+'</mark>';
+      const cls = a.kind==="ersetzt" ? "repl" : (a.kind==="vorlaeufig"||a.kind==="kollision-vorlaeufig") ? "prelim" : (a.kind==="manuell"||a.kind==="kollision-offen") ? "manual" : "keep";
+      out += '<mark class="'+cls+'" title="'+title+'">'+esc(a.repl!=null ? a.repl : m.text)+'</mark>';
     } else {
-      out += '<mark class="'+(m.rule.ersetzung?"hit":"manual")+'" title="'+esc(m.rule.kategorie)+'">'+esc(m.text)+'</mark>';
+      const cls = a.kind==="ersetzt" ? "hit" : (a.kind==="manuell"||a.kind==="kollision-offen") ? "manual" : "open";
+      out += '<mark class="'+cls+'" title="'+title+'">'+esc(m.text)+'</mark>';
     }
     pos = m.end;
   });
   return out + esc(text.slice(pos));
+}
+
+/* Artikel + DKV im Original (z. B. „der DKV“, „Über die DKV“) */
+function articleCombos(text, matches){
+  const out = [];
+  matches.forEach(m=>{
+    if(!m.rule.artikel) return;
+    const before = text.slice(Math.max(0, m.start-12), m.start);
+    const am = before.match(/\b(die|der|den|dem|des)\s+$/i);
+    if(am) out.push(am[0]+m.text);
+  });
+  return Array.from(new Set(out));
 }
 
 /* ---------- Wortvergleich ---------- */
@@ -582,51 +721,58 @@ function renderWordDiff(ops){
 const QS_LABEL = {"ausstehend":"Ausstehend", "bestanden":"Bestanden", "hinweise":"Hinweise", "nicht bestanden":"Nicht bestanden"};
 const QS_CLASS = {"ausstehend":"ausstehend", "bestanden":"bestanden", "hinweise":"hinweise", "nicht bestanden":"nicht-bestanden"};
 
-function targetsArePlaceholders(){ return Object.values(targets).some(v=>/‹[^›]*›/.test(v)); }
+function uniqList(arr){ return "„"+Array.from(new Set(arr)).join("“, „")+"“"; }
 
-function runQs(original, text, proposal){
+function runQs(original, text, proposal, ctx){
   const checks = [];
-  const residual = findMatches(text);
-  const residualRepl = residual.filter(m=>m.rule.ersetzung);
-  const residualManual = residual.filter(m=>!m.rule.ersetzung);
+  const marke = targets.MARKE || "ERGO";
+  const mk = escRe(marke);
   if(text.trim() === original.trim()){
-    checks.push({level:"error", text:"Text ist gegenüber dem Original unverändert."});
+    if(ctx.needsChange) checks.push({level:"error", text:"Text ist gegenüber dem Original unverändert, obwohl bestätigte Ersetzungen anstehen."});
+    else checks.push({level:"ok", text:"Unverändert zulässig — der Text enthält nur Fundstellen mit offener Entscheidung bzw. ohne nötigen Eingriff."});
   }
-  if(residualRepl.length){
-    const byCat = {};
-    residualRepl.forEach(m=>{ (byCat[m.rule.kategorie] = byCat[m.rule.kategorie] || []).push(m.text); });
-    Object.keys(byCat).forEach(cat=>{
-      const uniq = Array.from(new Set(byCat[cat]));
-      checks.push({level:"error", text:"Rest-DKV-Bezug ("+cat+"): „"+uniq.join("“, „")+"“ noch "+byCat[cat].length+"× enthalten."});
-    });
+  const residual = findMatches(text);
+  const groups = {};
+  residual.forEach(m=>{
+    const a = matchAction(m, text, ctx.collision);
+    const k = a.kind+"|"+m.rule.kategorie+"|"+(m.rule.themenblock||"");
+    (groups[k] = groups[k] || {kind:a.kind, rule:m.rule, texts:[]}).texts.push(m.text);
+  });
+  Object.values(groups).forEach(g=>{
+    const tb = g.rule.themenblock ? KLAERUNG_LABEL[g.rule.themenblock] : "";
+    const n = g.texts.length;
+    if(g.kind==="ersetzt") checks.push({level:"error", text:"Rest-DKV-Bezug ("+g.rule.kategorie+"): "+uniqList(g.texts)+" noch "+n+"× enthalten — Ersetzung ist bestätigt."});
+    else if(g.kind==="manuell") checks.push({level:"warn", text:"Manuell zu prüfen ("+g.rule.kategorie+"): "+uniqList(g.texts)+"."});
+    else if(g.kind==="kollision-offen" || g.kind==="kollision-vorlaeufig") checks.push({level:"warn", text:"Mischform DKV + ERGO: "+uniqList(g.texts)+" steht noch im Text — Endformulierung je Fall festlegen ("+KLAERUNG_LABEL.TB4+")."});
+    else if(g.kind==="kein-eingriff") checks.push({level:"info", text:g.rule.kategorie+": "+uniqList(g.texts)+" — kein Eingriff nötig."});
+    else checks.push({level:"info", text:"Entscheidung offen"+(tb?" ("+tb+")":"")+": "+uniqList(g.texts)+" — Belassen ist derzeit zulässig."});
+  });
+  /* Dopplungen durch Ersetzung in Mischformen */
+  const dup1 = new RegExp("\\b"+mk+"\\b(?! Deutsche Krankenversicherung)[^.!?\\n]{0,80}?\\b"+mk+"[ -](Gruppe|Group|Versicherungsgruppe)\\b");
+  const dup2 = new RegExp("\\b"+mk+"-?\\s+(oder|und|bzw\\.?|sowie|/)\\s+"+mk+"\\b");
+  const d1 = text.match(dup1), d2 = text.match(dup2);
+  if(d1) checks.push({level:"warn", text:"Dopplung: „"+d1[0]+"“ — z. B. Voll-Name „"+targets.FIRMA+"“ (LBEZ) verwenden oder umformulieren ("+KLAERUNG_LABEL.TB4+")."});
+  if(d2) checks.push({level:"warn", text:"Dopplung: „"+d2[0]+"“ — Formulierung anpassen ("+KLAERUNG_LABEL.TB4+")."});
+  /* Platzhalter */
+  const ph = Array.from(new Set((text.match(/‹[^›]*›|\{[A-Z]+\}/g) || [])));
+  if(ph.length) checks.push({level:"warn", text:"Unbefüllte Platzhalter: "+ph.join(", ")+"."});
+  /* Artikel-Kombinationen */
+  if(ctx.articles.length){
+    checks.push({level:"info", text:"Artikel-Kombination im Original: "+uniqList(ctx.articles)+" → mit "+marke+" entsprechend „"+ctx.articles.map(a=>a.replace(/DKV$/, marke)).join("“, „")+"“. Artikelverwendung fachlich bestätigen."});
   }
-  if(residualManual.length){
-    checks.push({level:"warn", text:"Manuell zu prüfen: „"+Array.from(new Set(residualManual.map(m=>m.text))).join("“, „")+"“ ("+residualManual[0].rule.kategorie+")."});
-  }
-  const targetVals = Object.values(targets);
-  const placeholders = Array.from(new Set((text.match(/‹[^›]*›|\{[A-Z]+\}/g) || [])));
-  const unknownPh = placeholders.filter(p=>!targetVals.includes(p));
-  const knownPh = placeholders.filter(p=>targetVals.includes(p));
-  if(unknownPh.length) checks.push({level:"warn", text:"Unbefüllte Platzhalter: "+unknownPh.join(", ")+"."});
-  if(knownPh.length) checks.push({level:"info", text:"Zielbezeichnung noch als Platzhalter hinterlegt ("+knownPh.join(", ")+") — wird ersetzt, sobald die Zielbezeichnungen festgelegt sind."});
-  const tv = targetVals.filter(Boolean).map(escRe).join("|");
-  if(tv){
-    const artRe = new RegExp("\\b(der|die|des|dem|den|das)\\s+(" + tv + ")", "gi");
-    const arts = text.match(artRe);
-    if(arts) checks.push({level:"warn", text:"Artikel vor Zielbezeichnung („"+Array.from(new Set(arts)).join("“, „")+"“) — Genus und Kasus der neuen Bezeichnung prüfen."});
-  }
-  if(proposal && text !== proposal){
+  /* Änderungen über den Vorschlag hinaus */
+  if(proposal && text !== proposal && text.trim() !== original.trim()){
     const ops = wordDiff(proposal, text);
     if(ops){
       const changed = ops.filter(o=>o.t!=="eq").length;
-      if(changed) checks.push({level:"info", text:changed+" Wortänderung(en) gegenüber dem automatischen Vorschlag — über die reine Ersetzung hinausgehende Änderungen fachlich prüfen."+(targetsArePlaceholders()?" (Vergleich unscharf, solange Zielbezeichnungen Platzhalter sind.)":"")});
+      if(changed) checks.push({level:"info", text:changed+" Wortänderung(en) gegenüber dem automatischen Vorschlag — über die reine Ersetzung hinausgehende Änderungen fachlich prüfen."});
     }
   }
   if(!/[.!?“"):]\s*$/.test(text.trim()) && /[.!?]\s*$/.test(original.trim())){
     checks.push({level:"warn", text:"Satzende fehlt — Text möglicherweise abgeschnitten."});
   }
-  if(!checks.some(c=>c.level==="error"||c.level==="warn") && !residual.length){
-    checks.unshift({level:"ok", text:"Kein Rest-DKV-Bezug gefunden."});
+  if(!checks.some(c=>c.level==="error"||c.level==="warn"||c.level==="ok")){
+    checks.unshift({level:"ok", text:"Kein ungeklärter Rest-DKV-Bezug."});
   }
   const level = checks.some(c=>c.level==="error") ? "nicht bestanden" : checks.some(c=>c.level==="warn") ? "hinweise" : "bestanden";
   return {level, checks};
@@ -638,34 +784,57 @@ const PR_PRIO_LABEL = {hoch:"Hoch", mittel:"Mittel", niedrig:"Niedrig"};
 const PR_STATUS_LABEL = {"offen":"Offen", "in Überarbeitung":"In Überarbeitung", "freigegeben":"Freigegeben"};
 const PR_STATUS_CLASS = {"offen":"offen", "in Überarbeitung":"in-ueberarbeitung", "freigegeben":"freigegeben"};
 
+function spartenOf(pfad){
+  const m = String(pfad).match(/\bE1_([A-Z0-9]{4})_/);
+  return m ? m[1] : "";
+}
+
 function buildFinding(rec, id){
   const matches = findMatches(rec.text);
   if(!matches.length) return null;
+  const collision = hasErgoCollision(rec.text, matches);
   const e = edits[rec.key] || {};
   const revised = (e.revised != null) ? e.revised : (rec.revised || "");
-  const proposal = buildProposal(rec.text, matches);
+  const proposal = buildProposal(rec.text, matches, collision);
+  const actions = matches.map(m=>matchAction(m, rec.text, collision));
   const cats = [];
   matches.slice().sort((a,b)=>PR_PRIO_ORDER[a.rule.prio]-PR_PRIO_ORDER[b.rule.prio] || a.ri-b.ri)
     .forEach(m=>{ if(!cats.includes(m.rule.kategorie)) cats.push(m.rule.kategorie); });
-  const prio = matches.reduce((p,m)=>PR_PRIO_ORDER[m.rule.prio] < PR_PRIO_ORDER[p] ? m.rule.prio : p, "niedrig");
+  let prio = matches.reduce((p,m)=>PR_PRIO_ORDER[m.rule.prio] < PR_PRIO_ORDER[p] ? m.rule.prio : p, "niedrig");
+  const tags = [];
+  matches.forEach(m=>{
+    if(m.rule.entscheidung!=="offen") return;
+    const t = m.rule.themenblock || "OFFEN";
+    if(!tags.includes(t)) tags.push(t);
+  });
+  if(collision && matches.some(m=>m.rule.kollision)){ if(!tags.includes("TB4")) tags.push("TB4"); prio = "hoch"; }
+  const articles = articleCombos(rec.text, matches);
+  if(articles.length) tags.push("ART");
+  if(!tags.length) tags.push("OK");
+  tags.sort((a,b)=>KLAERUNG_ORDER.indexOf(a)-KLAERUNG_ORDER.indexOf(b));
+  const needsChange = actions.some(a=>a.kind==="ersetzt");
   const qsActive = revised.trim() !== "";
-  const qs = runQs(rec.text, qsActive ? revised : proposal, proposal);
+  const qs = runQs(rec.text, qsActive ? revised : proposal, proposal, {collision, needsChange, articles});
   return {
     id, key:rec.key, sourceId:rec.sourceId, sourceTitel:SOURCE_TITLE[rec.sourceId] || rec.sourceId, pfad:rec.pfad,
-    original:rec.text, matches, proposal, revised, revisedOrigin: e.revised != null ? "bearbeitet" : (rec.revised ? "importiert" : ""),
-    kategorie:cats[0], kategorien:cats, bezug: matches.some(m=>m.rule.bezug==="direkt") ? "direkt" : "mittelbar",
+    sparte: spartenOf(rec.pfad) || "—", anzahl: rec.anzahl!=null && rec.anzahl!=="" ? Number(rec.anzahl) : null, link: rec.link || "",
+    original:rec.text, matches, collision, proposal, revised,
+    revisedOrigin: e.revised != null ? "bearbeitet" : (rec.revised ? "importiert" : ""),
+    kategorie:cats[0], kategorien:cats, tags, klaerung:tags[0], articles,
+    bezug: matches.some(m=>m.rule.bezug==="direkt") ? "direkt" : "mittelbar",
     prioritaet:prio, status: e.status || rec.status || "offen",
     qs, qsStatus: qsActive ? qs.level : "ausstehend",
   };
 }
 
 function rebuildFindings(){
+  compileRules();
   FINDINGS = []; recordsWithoutHit = 0;
   records.forEach(rec=>{
-    const f = buildFinding(rec, FINDINGS.length);
+    const f = buildFinding(rec, 0);
     if(f) FINDINGS.push(f); else recordsWithoutHit++;
   });
-  FINDINGS.sort((a,b)=>PR_PRIO_ORDER[a.prioritaet]-PR_PRIO_ORDER[b.prioritaet] || a.sourceId.localeCompare(b.sourceId) || a.pfad.localeCompare(b.pfad));
+  FINDINGS.sort((a,b)=>PR_PRIO_ORDER[a.prioritaet]-PR_PRIO_ORDER[b.prioritaet] || (b.anzahl||0)-(a.anzahl||0) || a.sourceId.localeCompare(b.sourceId) || a.pfad.localeCompare(b.pfad));
   FINDINGS.forEach((f,i)=>f.id=i);
 }
 
@@ -678,20 +847,24 @@ function refreshFinding(key){
 }
 
 /* ---------- Filter & Darstellung ---------- */
-const prState = {sourceId:null, kategorie:null, bezug:null, prioritaet:null, status:null, qsStatus:null, search:"", selected:null};
+const prState = {sourceId:null, sparte:null, kategorie:null, klaerung:null, prioritaet:null, status:null, qsStatus:null, search:"", selected:null};
+const FACET_FIELDS = ["sourceId","sparte","kategorie","klaerung","prioritaet","status","qsStatus"];
 const TABLE_LIMIT = 400;
 
 function prFacetCounts(field){
   const counts = {};
-  FINDINGS.forEach(r=>{ counts[r[field]] = (counts[r[field]]||0)+1; });
+  FINDINGS.forEach(r=>{
+    const vals = field==="klaerung" ? r.tags : field==="kategorie" ? r.kategorien : [r[field]];
+    vals.forEach(v=>{ counts[v] = (counts[v]||0)+1; });
+  });
   return counts;
 }
 
 function prFacetGroupHtml(field, label, order, labelMap){
   const counts = prFacetCounts(field);
-  const keys = order || Object.keys(counts).sort();
+  const keys = order || Object.keys(counts).sort((a,b)=>counts[b]-counts[a] || a.localeCompare(b));
   const items = keys.filter(k=>counts[k]);
-  if(!items.length) return "";
+  if(!items.length || (field==="sparte" && items.length===1 && items[0]==="—")) return "";
   return '<div class="pr-facet-group">'+
     '<div class="pr-facet-label">'+esc(label)+'</div>'+
     items.map(k=>
@@ -702,20 +875,19 @@ function prFacetGroupHtml(field, label, order, labelMap){
   '</div>';
 }
 
-function anyFilterActive(){
-  return !!(prState.sourceId||prState.kategorie||prState.bezug||prState.prioritaet||prState.status||prState.qsStatus||prState.search);
-}
+function anyFilterActive(){ return FACET_FIELDS.some(k=>prState[k]) || !!prState.search; }
 
 function renderPrSidebar(){
   const sidebar = document.getElementById("pr-sidebar");
   sidebar.innerHTML =
     '<button class="pr-reset" type="button" id="pr-reset-btn"'+(anyFilterActive()?'':' hidden')+'>Alle Filter zurücksetzen</button>'+
-    prFacetGroupHtml("sourceId","Quelle", PR_SOURCES.map(s=>s.id), SOURCE_TITLE)+
-    prFacetGroupHtml("kategorie","Bezugsart", null, null)+
-    prFacetGroupHtml("bezug","DKV-Bezug", ["direkt","mittelbar"], {direkt:"Direkt", mittelbar:"Mittelbar"})+
-    prFacetGroupHtml("prioritaet","Priorität", ["hoch","mittel","niedrig"], PR_PRIO_LABEL)+
+    prFacetGroupHtml("klaerung","Klärungsbedarf", KLAERUNG_ORDER, KLAERUNG_LABEL)+
+    prFacetGroupHtml("qsStatus","QS-Ergebnis", ["nicht bestanden","hinweise","bestanden","ausstehend"], QS_LABEL)+
     prFacetGroupHtml("status","Status", ["offen","in Überarbeitung","freigegeben"], PR_STATUS_LABEL)+
-    prFacetGroupHtml("qsStatus","QS-Ergebnis", ["nicht bestanden","hinweise","bestanden","ausstehend"], QS_LABEL);
+    prFacetGroupHtml("sourceId","Quelle", PR_SOURCES.map(s=>s.id), SOURCE_TITLE)+
+    prFacetGroupHtml("sparte","Sparte (Baustein)", null, {"—":"ohne Sparte"})+
+    prFacetGroupHtml("kategorie","Bezugsart", null, null)+
+    prFacetGroupHtml("prioritaet","Priorität", ["hoch","mittel","niedrig"], PR_PRIO_LABEL);
   sidebar.querySelectorAll(".pr-facet-item").forEach(btn=>{
     btn.addEventListener("click", ()=>{
       const field = btn.dataset.field, value = btn.dataset.value;
@@ -725,7 +897,7 @@ function renderPrSidebar(){
   });
   const resetBtn = document.getElementById("pr-reset-btn");
   if(resetBtn) resetBtn.addEventListener("click", ()=>{
-    ["sourceId","kategorie","bezug","prioritaet","status","qsStatus"].forEach(k=>prState[k]=null);
+    FACET_FIELDS.forEach(k=>prState[k]=null);
     prState.search="";
     const input = document.getElementById("pr-search-input"); if(input) input.value="";
     renderPrSidebar(); renderPrTable();
@@ -736,48 +908,57 @@ function getFilteredPrRows(){
   const q = prState.search.trim().toLowerCase();
   return FINDINGS.filter(r=>
     (!prState.sourceId || r.sourceId===prState.sourceId) &&
-    (!prState.kategorie || r.kategorie===prState.kategorie) &&
-    (!prState.bezug || r.bezug===prState.bezug) &&
+    (!prState.sparte || r.sparte===prState.sparte) &&
+    (!prState.kategorie || r.kategorien.includes(prState.kategorie)) &&
+    (!prState.klaerung || r.tags.includes(prState.klaerung)) &&
     (!prState.prioritaet || r.prioritaet===prState.prioritaet) &&
     (!prState.status || r.status===prState.status) &&
     (!prState.qsStatus || r.qsStatus===prState.qsStatus) &&
-    (!q || (r.pfad+" "+r.kategorien.join(" ")+" "+r.original+" "+r.revised).toLowerCase().includes(q))
+    (!q || (r.pfad+" "+r.link+" "+r.kategorien.join(" ")+" "+r.original+" "+r.revised).toLowerCase().includes(q))
   );
 }
 
 function renderStats(){
   const total = FINDINGS.length;
-  const direkt = FINDINGS.filter(f=>f.bezug==="direkt").length;
+  const eindeutig = FINDINGS.filter(f=>f.tags.length===1 && f.tags[0]==="OK").length;
+  const tb = FINDINGS.filter(f=>f.tags.some(t=>/^TB/.test(t))).length;
   const qsFail = FINDINGS.filter(f=>f.qsStatus==="nicht bestanden").length;
   const qsPending = FINDINGS.filter(f=>f.qsStatus==="ausstehend").length;
   const released = FINDINGS.filter(f=>f.status==="freigegeben").length;
-  const stat = (label, value, sub)=>'<div class="stat"><div class="stat-label">'+esc(label)+'</div><div class="stat-value">'+value+'</div><div class="stat-sub">'+esc(sub)+'</div></div>';
+  const stat = (label, value, sub)=>'<div class="stat"><div class="stat-label">'+esc(label)+'</div><div class="stat-value">'+fmtNum(value)+'</div><div class="stat-sub">'+esc(sub)+'</div></div>';
   document.getElementById("stats").innerHTML =
-    stat("Prüfobjekte", records.length, recordsWithoutHit+" ohne DKV-Bezug")+
-    stat("Fundstellen", total, direkt+" mit direktem Bezug")+
-    stat("QS nicht bestanden", qsFail, qsPending+" noch nicht überarbeitet")+
+    stat("Prüfobjekte", records.length, fmtNum(recordsWithoutHit)+" ohne DKV-Bezug")+
+    stat("Fundstellen", total, fmtNum(eindeutig)+" eindeutig (DKV → ERGO)")+
+    stat("Entscheidungsbedarf", tb, "Themenblöcke 1–4 (nicht eindeutig)")+
+    stat("QS nicht bestanden", qsFail, fmtNum(qsPending)+" noch nicht überarbeitet")+
     stat("Freigegeben", released, total ? Math.round(released/total*100)+" % der Fundstellen" : "—");
+}
+
+function tagHtml(t){
+  const cls = t==="OK" ? "pr-tag ok" : t==="ART" ? "pr-tag art" : "pr-tag";
+  return '<span class="'+cls+'">'+esc(KLAERUNG_LABEL[t])+'</span>';
 }
 
 function renderPrTable(){
   const rows = getFilteredPrRows();
   const body = document.getElementById("pr-table-body");
   const countEl = document.getElementById("pr-result-count");
-  if(countEl) countEl.textContent = rows.length+" von "+FINDINGS.length+" Fundstellen";
+  if(countEl) countEl.textContent = fmtNum(rows.length)+" von "+fmtNum(FINDINGS.length)+" Fundstellen";
   if(!rows.length){
     body.innerHTML = '<tr class="pr-empty-row"><td colspan="7">'+(FINDINGS.length?'Keine Fundstellen für diese Filterkombination.':'Keine Fundstellen mit DKV-Bezug vorhanden.')+'</td></tr>';
   } else {
-    body.innerHTML = rows.slice(0, TABLE_LIMIT).map(r=>
-      '<tr data-row="'+r.id+'" data-active="'+(prState.selected===r.id?"true":"false")+'">'+
+    body.innerHTML = rows.slice(0, TABLE_LIMIT).map(r=>{
+      const sub = [r.sparte!=="—" ? "Sparte "+r.sparte : "", r.anzahl!=null ? fmtNum(r.anzahl)+"× verwendet" : ""].filter(Boolean).join(" · ");
+      return '<tr data-row="'+r.id+'" data-active="'+(prState.selected===r.id?"true":"false")+'">'+
         '<td class="pr-col-quelle"><span class="pr-source-icon">'+(PR_ICONS[r.sourceId]||PR_ICONS.tabellen)+'</span>'+esc(r.sourceTitel)+'</td>'+
-        '<td class="pr-path" title="'+esc(r.pfad)+'">'+esc(r.pfad)+'</td>'+
+        '<td><div class="pr-path" title="'+esc(r.pfad)+'">'+esc(r.pfad)+'</div>'+(sub?'<div class="pr-sub">'+esc(sub)+'</div>':'')+'</td>'+
         '<td>'+esc(r.kategorie)+(r.kategorien.length>1?'<span class="pr-more">+'+(r.kategorien.length-1)+'</span>':'')+'</td>'+
-        '<td><span class="pr-dot pr-dot-'+r.bezug+'"></span>'+(r.bezug==="direkt"?"Direkt":"Mittelbar")+'</td>'+
+        '<td>'+tagHtml(r.klaerung)+(r.tags.length>1?'<span class="pr-more">+'+(r.tags.length-1)+'</span>':'')+'</td>'+
         '<td><span class="pr-badge pr-prio-'+r.prioritaet+'">'+PR_PRIO_LABEL[r.prioritaet]+'</span></td>'+
         '<td><span class="pr-badge pr-status-'+PR_STATUS_CLASS[r.status]+'">'+esc(PR_STATUS_LABEL[r.status])+'</span></td>'+
         '<td><span class="pr-badge pr-qs-'+QS_CLASS[r.qsStatus]+'">'+esc(QS_LABEL[r.qsStatus])+'</span></td>'+
-      '</tr>'
-    ).join("") + (rows.length>TABLE_LIMIT ? '<tr class="pr-limit-row"><td colspan="7">Es werden die ersten '+TABLE_LIMIT+' von '+rows.length+' Fundstellen angezeigt — Filter oder Suche verwenden. Der Export enthält alle gefilterten Fundstellen.</td></tr>' : '');
+      '</tr>';
+    }).join("") + (rows.length>TABLE_LIMIT ? '<tr class="pr-limit-row"><td colspan="7">Es werden die ersten '+TABLE_LIMIT+' von '+fmtNum(rows.length)+' Fundstellen angezeigt — Filter oder Suche verwenden. Der Export enthält alle gefilterten Fundstellen.</td></tr>' : '');
   }
   body.querySelectorAll("tr[data-row]").forEach(tr=>{
     tr.addEventListener("click", ()=>selectPrRow(parseInt(tr.dataset.row,10)));
@@ -809,15 +990,22 @@ const QS_ICON = {
 function ruleSummary(f){
   const groups = {};
   f.matches.forEach(m=>{
-    const k = m.rule.kategorie;
-    if(!groups[k]) groups[k] = {bezug:m.rule.bezug, manual:!m.rule.ersetzung, texts:{}};
+    const k = m.ri;
+    if(!groups[k]) groups[k] = {rule:m.rule, texts:{}};
     groups[k].texts[m.text] = (groups[k].texts[m.text]||0)+1;
   });
-  return '<ul>'+Object.keys(groups).map(k=>{
-    const g = groups[k];
+  let html = '<ul>'+Object.values(groups).map(g=>{
     const t = Object.keys(g.texts).map(x=>'„'+esc(x)+'“'+(g.texts[x]>1?' ('+g.texts[x]+'×)':'')).join(", ");
-    return '<li><b>'+esc(k)+'</b> ('+(g.bezug==="direkt"?"direkter":"mittelbarer")+' Bezug'+(g.manual?', manuelle Prüfung':'')+'): '+t+'</li>';
-  }).join("")+'</ul>';
+    const meta = [g.rule.bezug==="direkt"?"direkter Bezug":"mittelbarer Bezug", "Entscheidung "+g.rule.entscheidung, g.rule.themenblock?KLAERUNG_LABEL[g.rule.themenblock]:""].filter(Boolean).join(" · ");
+    return '<li><b>'+esc(g.rule.kategorie)+'</b> ('+esc(meta)+'): '+t+(g.rule.hinweis?'<br><span>'+esc(g.rule.hinweis)+'</span>':'')+'</li>';
+  }).join("");
+  if(f.collision && f.matches.some(m=>m.rule.kollision)){
+    html += '<li><b>Mischform DKV + ERGO</b> ('+esc(KLAERUNG_LABEL.TB4)+'): „ERGO“ steht bereits im Text — eine pauschale Ersetzung erzeugt Dopplungen. Vorschlag nutzt den Voll-Namen bzw. LBEZ; Endformulierung je Fall festlegen.</li>';
+  }
+  if(f.articles.length){
+    html += '<li><b>Artikel-Kombination</b>: '+esc(uniqList(f.articles))+' — Artikelverwendung mit „'+esc(targets.MARKE)+'“ prüfen.</li>';
+  }
+  return html+'</ul>';
 }
 
 function renderPrDetail(){
@@ -827,15 +1015,18 @@ function renderPrDetail(){
   const qsTarget = f.revised.trim() ? "überarbeiteter Text" : "automatischer Vorschlag (noch keine Überarbeitung)";
   const diffOps = f.revised.trim() ? wordDiff(f.original, f.revised) : null;
   const releaseBlocked = f.qs.level==="nicht bestanden" || !f.revised.trim();
+  const meta = [f.sparte!=="—" ? "Sparte "+f.sparte : "", f.anzahl!=null ? fmtNum(f.anzahl)+" Verwendungen" : ""].filter(Boolean).join(" · ");
   detail.innerHTML =
     '<div class="finding-card">'+
-      '<div class="finding-head"><span class="finding-loc">'+esc(f.sourceTitel)+' · '+esc(f.pfad)+'</span>'+
-        '<span class="pr-badge pr-prio-'+f.prioritaet+'">Priorität '+PR_PRIO_LABEL[f.prioritaet]+'</span></div>'+
+      '<div class="finding-head"><span class="finding-loc">'+esc(f.sourceTitel)+' · '+esc(f.pfad)+(meta?' · '+esc(meta):'')+'</span>'+
+        '<span class="tag-row">'+f.tags.map(tagHtml).join("")+'<span class="pr-badge pr-prio-'+f.prioritaet+'">Priorität '+PR_PRIO_LABEL[f.prioritaet]+'</span></span></div>'+
+      (f.link ? '<div class="finding-reason finding-link"><b>Beispiel-URL:</b> <a href="'+esc(f.link)+'" target="_blank" rel="noopener noreferrer">'+esc(f.link)+'</a></div>' : '')+
       '<div class="finding-reason"><b>Warum DKV-Bezug:</b>'+ruleSummary(f)+'</div>'+
       '<div class="diff-block">'+
-        '<div class="diff-col old"><span class="diff-label">Bisheriger Text</span>'+highlight(f.original, f.matches, "original")+'</div>'+
-        '<div class="diff-col new"><span class="diff-label">Vorschlag neue Formulierung (automatisch)</span>'+highlight(f.original, f.matches, "proposal")+'</div>'+
+        '<div class="diff-col old"><span class="diff-label">Bisheriger Text</span>'+highlight(f.original, f.matches, f.collision, "original")+'</div>'+
+        '<div class="diff-col new"><span class="diff-label">Vorschlag neue Formulierung (automatisch)</span>'+highlight(f.original, f.matches, f.collision, "proposal")+'</div>'+
       '</div>'+
+      '<div class="legend"><span><mark class="repl">ERGO</mark> bestätigt ersetzt</span><span><mark class="prelim">ergo-dkv.com</mark> vorläufig (Zielwert offen)</span><span><mark class="keep">DKV-Card</mark> bleibt — Entscheidung offen / kein Eingriff</span><span><mark class="manual">logo</mark> manuell</span></div>'+
       '<span class="sec-label">Überarbeiteter Text</span>'+
       '<div class="revise-box">'+
         '<textarea id="pr-revised" placeholder="Noch keine Überarbeitung — Text hier erfassen oder den Vorschlag übernehmen.">'+esc(f.revised)+'</textarea>'+
@@ -904,10 +1095,11 @@ function prCsvField(v){
 
 async function exportPrCsv(){
   const rows = getFilteredPrRows();
-  const header = ["Quelle","Fundstelle","Bezugsarten","DKV-Bezug","Priorität","Status","QS-Ergebnis","QS-Hinweise","Bisheriger Text","Vorschlag (automatisch)","Überarbeiteter Text"];
+  const header = ["Quelle","Fundstelle","Sparte","Anzahl","Link","Bezugsarten","Klärungsbedarf","DKV-Bezug","Priorität","Status","QS-Ergebnis","QS-Hinweise","Bisheriger Text","Vorschlag (automatisch)","Überarbeiteter Text"];
   const lines = [header.map(prCsvField).join(";")];
   rows.forEach(r=>{
-    lines.push([r.sourceTitel, r.pfad, r.kategorien.join(", "), r.bezug==="direkt"?"Direkt":"Mittelbar", PR_PRIO_LABEL[r.prioritaet],
+    lines.push([r.sourceTitel, r.pfad, r.sparte==="—"?"":r.sparte, r.anzahl==null?"":r.anzahl, r.link, r.kategorien.join(", "),
+      r.tags.map(t=>KLAERUNG_LABEL[t]).join(", "), r.bezug==="direkt"?"Direkt":"Mittelbar", PR_PRIO_LABEL[r.prioritaet],
       PR_STATUS_LABEL[r.status], QS_LABEL[r.qsStatus],
       r.qs.checks.filter(c=>c.level!=="ok").map(c=>c.text).join(" | "),
       r.original, r.proposal, r.revised].map(prCsvField).join(";"));
@@ -966,22 +1158,26 @@ function loadSheetJs(){
 
 function guessColumns(header, rows){
   const h = header.map(x=>String(x||"").toLowerCase());
-  const find = (re, exclude)=> h.findIndex((x,i)=>re.test(x) && !(exclude && exclude.test(x)));
-  const revRe = /(überarb|ueberarb|neu(er)?\b|new|revid|korrigiert|soll)/;
-  let rev = find(revRe);
-  let txt = find(/(text|inhalt|content|wortlaut|fundstelle.*text|auszug|snippet|treffer)/, revRe);
-  let id = find(/(url|link|pfad|path|seite|page|baustein|id\b|nr|nummer|name|titel|title|datei|file|fundstelle)/, /(text|inhalt|content)/);
+  const used = new Set();
+  const find = (re, exclude)=>{ const i = h.findIndex((x,i)=>!used.has(i) && re.test(x) && !(exclude && exclude.test(x))); if(i>=0) used.add(i); return i; };
+  const revRe = /(überarb|ueberarb|\bneu(er)?\b|new|revid|korrigiert|\bsoll\b)/;
+  const rev = find(revRe);
+  const count = find(/(anzahl|vorkommen|count|verwendung|uses|häufig|haeufig|treffer)/);
+  const word = find(/(wording|kombination|begriff|suchwort|schlagwort)/);
+  let txt = word>=0 ? word : find(/(text|inhalt|content|wortlaut|auszug|snippet|kontext|phrase)/, revRe);
+  let id = word>=0 ? word : find(/(baustein|modul|\bid\b|fundstelle|pfad|path|seite|page|titel|title|name|datei|file|\bnr\b|nummer|url|link)/, /(text|inhalt|content)/);
+  const link = find(/(url|link)/);
   if(txt<0){
     let best = -1, bestLen = -1;
     h.forEach((_,i)=>{
-      if(i===rev || i===id) return;
+      if(used.has(i)) return;
       const len = rows.reduce((s,r)=>s+String(r[i]||"").length, 0);
       if(len>bestLen){ bestLen=len; best=i; }
     });
-    txt = best;
+    txt = best; used.add(best);
   }
-  if(id===txt) id = h.findIndex((_,i)=>i!==txt && i!==rev);
-  return {id, txt, rev};
+  if(id<0) id = -1;
+  return {id, txt, rev, count, link};
 }
 
 function currentSheetRows(){
@@ -989,23 +1185,30 @@ function currentSheetRows(){
   return sh ? sh.rows : [];
 }
 
-function renderImportMapping(){
-  const rows = currentSheetRows();
-  const hasHeader = document.getElementById("imp-header").checked;
+function sheetHeader(rows, hasHeader){
   const width = rows.reduce((w,r)=>Math.max(w, r.length), 0);
   const header = hasHeader ? (rows[0]||[]).map((x,i)=>String(x||"").trim() || ("Spalte "+(i+1))) : Array.from({length:width}, (_,i)=>"Spalte "+(i+1));
   while(header.length < width) header.push("Spalte "+(header.length+1));
+  return header;
+}
+
+function renderImportMapping(){
+  const rows = currentSheetRows();
+  const hasHeader = document.getElementById("imp-header").checked;
+  const header = sheetHeader(rows, hasHeader);
   const data = hasHeader ? rows.slice(1) : rows;
   const g = guessColumns(header, data.slice(0, 200));
   const opts = (sel, allowNone)=> (allowNone?'<option value="-1">— keine —</option>':'') + header.map((x,i)=>'<option value="'+i+'"'+(i===sel?' selected':'')+'>'+esc(x)+'</option>').join("");
   document.getElementById("imp-col-id").innerHTML = opts(g.id, true);
   document.getElementById("imp-col-text").innerHTML = opts(g.txt, false);
   document.getElementById("imp-col-rev").innerHTML = opts(g.rev, true);
+  document.getElementById("imp-col-count").innerHTML = opts(g.count, true);
+  document.getElementById("imp-col-link").innerHTML = opts(g.link, true);
   document.getElementById("imp-preview").innerHTML =
     '<thead><tr>'+header.map(x=>'<th>'+esc(x)+'</th>').join("")+'</tr></thead>'+
     '<tbody>'+data.slice(0,4).map(r=>'<tr>'+header.map((_,i)=>'<td title="'+esc(r[i]||"")+'">'+esc(r[i]||"")+'</td>').join("")+'</tr>').join("")+'</tbody>';
   document.getElementById("imp-mapping").hidden = false;
-  setImpMsg(data.length+" Datenzeilen erkannt"+(importState.sheets.length>1?" (Blatt „"+importState.sheets[importState.sheetIdx].name+"“)":"")+". Spaltenzuordnung prüfen und importieren.");
+  setImpMsg(fmtNum(data.length)+" Datenzeilen erkannt"+(importState.sheets.length>1?" (Blatt „"+importState.sheets[importState.sheetIdx].name+"“)":"")+". Spaltenzuordnung prüfen und importieren.");
 }
 
 async function onImportFile(file){
@@ -1013,8 +1216,8 @@ async function onImportFile(file){
   document.getElementById("imp-mapping").hidden = true;
   const ext = (file.name.split(".").pop()||"").toLowerCase();
   const srcSel = document.getElementById("imp-source");
-  if(/brief|baustein|textbaust/i.test(file.name)) srcSel.value = "briefbausteine";
-  else if(/crawl|url|web|seite/i.test(file.name)) srcSel.value = "crawling";
+  if(/brief|baustein|textbaust|unload|tbs/i.test(file.name)) srcSel.value = "briefbausteine";
+  else if(/crawl|url|web|seite|website|wording|dkvcom|artikel/i.test(file.name)) srcSel.value = "crawling";
   try{
     if(ext==="xlsx" || ext==="xls"){
       setImpMsg("Excel-Datei wird gelesen …");
@@ -1035,36 +1238,50 @@ async function onImportFile(file){
     return;
   }
   if(!importState.sheets.length){ setImpMsg("Die Datei enthält keine Daten.", "err"); return; }
-  const sheetField = document.getElementById("imp-sheet-field");
-  sheetField.hidden = importState.sheets.length < 2;
+  const multi = importState.sheets.length > 1;
+  document.getElementById("imp-sheet-field").hidden = !multi;
+  document.getElementById("imp-all-sheets-field").hidden = !multi;
+  document.getElementById("imp-all-sheets").checked = false;
   document.getElementById("imp-sheet").innerHTML = importState.sheets.map((s,i)=>'<option value="'+i+'">'+esc(s.name)+'</option>').join("");
   renderImportMapping();
 }
 
+function parseCount(v){
+  if(v==null || String(v).trim()==="") return null;
+  const n = Number(String(v).replace(/\./g,"").replace(",", "."));
+  return isFinite(n) ? n : null;
+}
+
 function runImport(){
-  const rows = currentSheetRows();
   const hasHeader = document.getElementById("imp-header").checked;
-  const data = hasHeader ? rows.slice(1) : rows;
-  const cId = parseInt(document.getElementById("imp-col-id").value, 10);
-  const cTxt = parseInt(document.getElementById("imp-col-text").value, 10);
-  const cRev = parseInt(document.getElementById("imp-col-rev").value, 10);
+  const col = id=>parseInt(document.getElementById(id).value, 10);
+  const cId = col("imp-col-id"), cTxt = col("imp-col-text"), cRev = col("imp-col-rev"), cCnt = col("imp-col-count"), cLink = col("imp-col-link");
   const sourceId = document.getElementById("imp-source").value;
-  const sheetName = importState.sheets.length>1 ? " · "+importState.sheets[importState.sheetIdx].name : "";
+  const allSheets = importState.sheets.length>1 && document.getElementById("imp-all-sheets").checked;
+  const refHeader = sheetHeader(currentSheetRows(), hasHeader).join("\u0001");
+  const sheetIdxs = allSheets ? importState.sheets.map((_,i)=>i).filter(i=>sheetHeader(importState.sheets[i].rows, hasHeader).join("\u0001")===refHeader) : [importState.sheetIdx];
   const imported = [];
-  data.forEach((r,i)=>{
-    const text = String(r[cTxt]==null?"":r[cTxt]).trim();
-    if(!text) return;
-    const idVal = cId>=0 ? String(r[cId]||"").trim() : "";
-    const pfad = idVal || (importState.fileName+sheetName+" · Zeile "+(i+(hasHeader?2:1)));
-    const rec = {sourceId, pfad, text};
-    if(cRev>=0 && String(r[cRev]||"").trim()) rec.revised = String(r[cRev]).trim();
-    imported.push(rec);
+  sheetIdxs.forEach(si=>{
+    const sh = importState.sheets[si];
+    const data = hasHeader ? sh.rows.slice(1) : sh.rows;
+    const sheetName = importState.sheets.length>1 ? " · "+sh.name : "";
+    data.forEach((r,i)=>{
+      const text = String(r[cTxt]==null?"":r[cTxt]).trim();
+      if(!text) return;
+      const idVal = cId>=0 ? String(r[cId]||"").trim() : "";
+      const pfad = idVal || (importState.fileName+sheetName+" · Zeile "+(i+(hasHeader?2:1)));
+      const rec = {sourceId, pfad, text};
+      if(cRev>=0 && String(r[cRev]||"").trim()) rec.revised = String(r[cRev]).trim();
+      if(cCnt>=0){ const n = parseCount(r[cCnt]); if(n!=null) rec.anzahl = n; }
+      if(cLink>=0 && String(r[cLink]||"").trim()) rec.link = String(r[cLink]).trim();
+      imported.push(rec);
+    });
   });
   if(!imported.length){ setImpMsg("Keine Texte in der gewählten Spalte gefunden.", "err"); return; }
   const replaceSample = document.getElementById("imp-replace-sample").checked;
-  const base = (usingSample && replaceSample) ? [] : (usingSample ? records.map(r=>Object.assign({}, r)) : records);
+  const base = (usingSample && replaceSample) ? [] : records.map(r=>Object.assign({}, r));
   const seen = {};
-  base.forEach(r=>seen[r.sourceId+"|"+r.pfad] = true);
+  base.forEach(r=>seen[r.key] = true);
   imported.forEach(r=>{
     let key = r.sourceId+"|"+r.pfad, n = 2;
     while(seen[key]){ key = r.sourceId+"|"+r.pfad+" #"+n; n++; }
@@ -1074,37 +1291,45 @@ function runImport(){
   setRecords(base.concat(imported), keepSampleFlag);
   const persisted = usingSample ? true : storeSet(STORE.records, records);
   rebuildFindings();
-  const hits = imported.filter(r=>FINDINGS.some(f=>f.key===r.key)).length;
-  setImpMsg(imported.length+" Prüfobjekte importiert, davon "+hits+" mit DKV-Bezug."+(persisted?"":" Hinweis: Datenmenge zu groß zum Speichern im Browser — nach dem Neuladen bitte erneut importieren."), "ok");
+  const keys = new Set(FINDINGS.map(f=>f.key));
+  const hits = imported.filter(r=>keys.has(r.key)).length;
+  setImpMsg(fmtNum(imported.length)+" Prüfobjekte importiert"+(sheetIdxs.length>1?" (aus "+sheetIdxs.length+" Blättern)":"")+", davon "+fmtNum(hits)+" mit DKV-Bezug."+(persisted?"":" Hinweis: Datenmenge zu groß zum Speichern im Browser — nach dem Neuladen bitte erneut importieren."), "ok");
   prState.selected = null;
   renderAll();
 }
 
-/* ---------- Regeln & Zielbezeichnungen ---------- */
+/* ---------- Zielwerte & Regeln ---------- */
 function renderTargets(){
-  document.getElementById("targets").innerHTML = Object.keys(DEFAULT_TARGETS).map(k=>
-    '<div class="field"><label for="tg-'+k+'">'+esc(TARGET_LABEL[k])+' <code>{'+k+'}</code></label><input type="text" id="tg-'+k+'" data-target="'+k+'" value="'+esc(targets[k])+'"></div>'
-  ).join("");
+  document.getElementById("targets").innerHTML = Object.keys(DEFAULT_TARGETS).map(k=>{
+    const st = TARGET_META[k].status;
+    return '<div class="field"><label for="tg-'+k+'">'+esc(TARGET_META[k].label)+' <code>{'+k+'}</code><span class="target-status '+(st==="offen"?"offen":"bestaetigt")+'">'+esc(st)+'</span></label>'+
+      '<input type="text" id="tg-'+k+'" data-target="'+k+'" value="'+esc(targets[k])+'"></div>';
+  }).join("");
 }
 
 function renderRulesTable(){
-  const sel = (val, opts)=> opts.map(o=>'<option value="'+o[0]+'"'+(o[0]===val?' selected':'')+'>'+o[1]+'</option>').join("");
+  const sel = (val, opts)=> opts.map(o=>'<option value="'+esc(o[0])+'"'+(o[0]===val?' selected':'')+'>'+esc(o[1])+'</option>').join("");
   document.getElementById("rules-table").innerHTML =
-    '<thead><tr><th>Aktiv</th><th>Suchmuster</th><th>Regex</th><th>Groß/klein</th><th>Bezugsart</th><th>Bezug</th><th>Priorität</th><th>Ersetzung</th><th></th></tr></thead>'+
+    '<thead><tr><th>Aktiv</th><th>Suchmuster</th><th>Regex</th><th>Groß/klein</th><th>Bezugsart</th><th>Bezug</th><th>Priorität</th><th>Ersetzung</th><th>Bei ERGO-Kollision</th><th>Entscheidung</th><th>Themenblock</th><th>Artikel</th><th>Hinweis</th><th></th></tr></thead>'+
     '<tbody>'+rules.map((r,i)=>
       '<tr data-i="'+i+'">'+
         '<td><input type="checkbox" data-k="aktiv"'+(r.aktiv?' checked':'')+' aria-label="Regel aktiv"></td>'+
-        '<td><input type="text" class="mono" data-k="muster" value="'+esc(r.muster)+'" aria-label="Suchmuster"></td>'+
+        '<td style="min-width:240px"><input type="text" class="mono" data-k="muster" value="'+esc(r.muster)+'" title="'+esc(r.muster)+'" aria-label="Suchmuster"></td>'+
         '<td><input type="checkbox" data-k="regex"'+(r.regex?' checked':'')+' aria-label="Regulärer Ausdruck"></td>'+
         '<td><input type="checkbox" data-k="gross"'+(r.gross?' checked':'')+' aria-label="Groß-/Kleinschreibung beachten"></td>'+
-        '<td><input type="text" data-k="kategorie" value="'+esc(r.kategorie)+'" aria-label="Bezugsart"></td>'+
+        '<td style="min-width:130px"><input type="text" data-k="kategorie" value="'+esc(r.kategorie)+'" aria-label="Bezugsart"></td>'+
         '<td><select data-k="bezug" aria-label="Bezug">'+sel(r.bezug, [["direkt","Direkt"],["mittelbar","Mittelbar"]])+'</select></td>'+
         '<td><select data-k="prio" aria-label="Priorität">'+sel(r.prio, [["hoch","Hoch"],["mittel","Mittel"],["niedrig","Niedrig"]])+'</select></td>'+
-        '<td><input type="text" class="mono" data-k="ersetzung" value="'+esc(r.ersetzung)+'" placeholder="(manuell prüfen)" aria-label="Ersetzung"></td>'+
+        '<td style="min-width:150px"><input type="text" class="mono" data-k="ersetzung" value="'+esc(r.ersetzung)+'" placeholder="(belassen)" aria-label="Ersetzung"></td>'+
+        '<td style="min-width:110px"><input type="text" class="mono" data-k="kollision" value="'+esc(r.kollision||"")+'" placeholder="—" aria-label="Ersetzung bei ERGO-Kollision"></td>'+
+        '<td><select data-k="entscheidung" aria-label="Entscheidung">'+sel(r.entscheidung||"bestätigt", ENTSCHEIDUNGEN.map(x=>[x,x]))+'</select></td>'+
+        '<td><select data-k="themenblock" aria-label="Themenblock">'+sel(r.themenblock||"", [["","—"],["TB1","TB1"],["TB2","TB2"],["TB3","TB3"],["TB4","TB4"]])+'</select></td>'+
+        '<td><input type="checkbox" data-k="artikel"'+(r.artikel?' checked':'')+' aria-label="Artikel-Kombinationen prüfen"></td>'+
+        '<td style="min-width:200px"><input type="text" data-k="hinweis" value="'+esc(r.hinweis||"")+'" title="'+esc(r.hinweis||"")+'" aria-label="Hinweis"></td>'+
         '<td><button class="del" type="button" data-del="'+i+'" title="Regel entfernen" aria-label="Regel entfernen">×</button></td>'+
       '</tr>'
     ).join("")+'</tbody>';
-  document.getElementById("rules-note").textContent = "— "+rules.filter(r=>r.aktiv).length+" aktive Regeln";
+  document.getElementById("rules-note").textContent = "— DKV → ERGO · "+rules.filter(r=>r.aktiv).length+" aktive Regeln";
 }
 
 function readRulesFromForm(){
@@ -1119,14 +1344,14 @@ function readRulesFromForm(){
 
 function applyRules(){
   const newRules = readRulesFromForm();
-  const bad = newRules.filter(r=>r.aktiv && r.muster && r.regex && !compileRule(r));
+  const bad = newRules.filter(r=>r.aktiv && r.muster && !compileRule(r));
   const msg = document.getElementById("rules-msg");
   if(bad.length){ msg.textContent = "Ungültiger regulärer Ausdruck: "+bad.map(r=>r.muster).join(", "); msg.className = "import-msg err"; return; }
   rules = newRules.filter(r=>r.muster.trim()!=="");
   document.querySelectorAll("#targets [data-target]").forEach(el=>{ targets[el.dataset.target] = el.value; });
   storeSet(STORE.rules, rules); storeSet(STORE.targets, targets);
   rebuildFindings(); renderRulesTable(); renderAll();
-  msg.textContent = "Regeln übernommen — "+FINDINGS.length+" Fundstellen."; msg.className = "import-msg ok";
+  msg.textContent = "Regeln übernommen — "+fmtNum(FINDINGS.length)+" Fundstellen."; msg.className = "import-msg ok";
 }
 
 function renderAll(){
@@ -1167,11 +1392,11 @@ function initPruefung(){
   });
   document.getElementById("rules-add").addEventListener("click", ()=>{
     rules = readRulesFromForm();
-    rules.push({aktiv:true, muster:"", regex:false, gross:false, kategorie:"Sonstiges", bezug:"mittelbar", prio:"mittel", ersetzung:""});
+    rules.push({aktiv:true, muster:"", regex:false, gross:false, kategorie:"Sonstiges", bezug:"mittelbar", prio:"mittel", ersetzung:"", kollision:"", entscheidung:"offen", themenblock:"", artikel:false, hinweis:""});
     renderRulesTable();
   });
   document.getElementById("rules-default").addEventListener("click", ()=>{
-    rules = DEFAULT_RULES.map(r=>Object.assign({}, r)); renderRulesTable();
+    rules = cloneRules(DEFAULT_RULES); targets = Object.assign({}, DEFAULT_TARGETS); renderTargets(); renderRulesTable();
   });
   document.getElementById("rules-apply").addEventListener("click", applyRules);
 }
