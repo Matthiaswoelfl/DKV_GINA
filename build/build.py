@@ -686,8 +686,6 @@ def schreibe_bericht(daten, pdf, gesetz, kap, res, ui, excel_name):
             "**„Nicht durch AB steigerfähig“ ist ein Umkehrschluss:** So gekennzeichnet sind alle Ziffern der Zuordnungsdatei, "
             "die nicht in der Steigerungsmatrix stehen. Die Matrix enthält laut eigener Beschreibung nur Hauptleistungen, für die "
             "mindestens ein Erhöhungsgrund greift (Zuschläge ausgenommen). Ob diese Auswahl vollständig ist, wurde nicht geprüft.",
-            "**Darstellung der nicht steigerfähigen Ziffern:** Max. Faktor „–“, als max. Gebührensatz wird die einfache Gebühr "
-            "gezeigt (grau). Im Faktorfilter gibt es dafür den Eintrag „keine AB-Steigerung“. Bitte bestätigen.",
         ]
 
     L += ["", "## 4b. Abgleich mit dem PDF (Allgemeine Bestimmungen)", ""]
