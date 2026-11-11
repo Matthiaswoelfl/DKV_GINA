@@ -20,20 +20,21 @@ const path = require('path');
   const txt = s => page.locator(s).innerText();
 
   await page.goto('file://' + html);
-  check('Startansicht: Status „1.999 von 1.999 Ziffern“', (await txt('#status')).startsWith('1.999 von 1.999'), await txt('#status'));
-  const nav = await page.locator('#nav button.kap').allInnerTexts();
-  check('Navigation: Kapitel C, D, F, L, O mit 100 / 2 / 31 / 1.705 / 161',
-    nav.map(s => s.replace(/\s+/g, ' ')).join(' | ') === 'Kapitel C 100 | Kapitel D 2 | Kapitel F 31 | Kapitel L 1.705 | Kapitel O 161', nav.map(s => s.replace(/\s+/g, ' ')).join(' | '));
-  check('Navigation: 23 Abschnitte', await page.locator('#nav button.abs').count() === 23, await page.locator('#nav button.abs').count());
+  check('Startansicht: Status „5.580 von 5.580 Ziffern“', (await txt('#status')).startsWith('5.580 von 5.580'), await txt('#status'));
+  const nav = (await page.locator('#nav button.kap').allInnerTexts()).map(t => t.replace(/\s+/g, ' '));
+  check('Navigation: 17 Kapitel (B bis S) mit Titel, z. B. „L Chirurgie 2.478“', nav.length === 17 && nav.includes('L Chirurgie 2.478') && nav[0].startsWith('B Grundleistungen'), nav.length + ' Kapitel; ' + nav.filter(t => /^[LG] /.test(t)).join(' | '));
+  await page.locator('#nav button.kap', { hasText: 'Chirurgie' }).first().click();
+  check('Navigation: Klick auf Kapitel L zeigt dessen Abschnitte und filtert auf 2.478 Ziffern', await page.locator('#nav button.abs').count() === 20 && (await txt('#status')).startsWith('2.478 von'), (await page.locator('#nav button.abs').count()) + ' Abschnitte; ' + await txt('#status'));
+  await page.click('#reset');
   const dom = await page.locator('#spacer > *').count();
   check('Virtualisierung: weniger als 80 Zeilen im DOM', dom < 80, dom + ' Elemente');
   const opts = await page.locator('#fmax option').allInnerTexts();
   check('Faktorfilter zeigt Verteilung 142 / 55 / 58 / 37 / 1.470 / 2 / 235',
-    opts.slice(1).join(' ') === '×1,5 (142) ×2,0 (55) ×2,25 (58) ×3,0 (37) ×4,0 (1.470) ×4,5 (2) ×6,0 (235)', opts.slice(1).join(' '));
-  check('Startansicht: alle 23 Abschnitte eingeklappt', await page.locator('.ghead[aria-expanded=false]').count() === 23 && await page.locator('.row').count() === 0, (await page.locator('.ghead[aria-expanded=false]').count()) + ' eingeklappt, ' + (await page.locator('.row').count()) + ' Zeilen');
+    opts.slice(1).join(' ') === 'keine AB-Steigerung (3.581) ×1,5 (142) ×2,0 (55) ×2,25 (58) ×3,0 (37) ×4,0 (1.470) ×4,5 (2) ×6,0 (235)', opts.slice(1).join(' '));
+  check('Startansicht: alle Abschnitte eingeklappt', await page.locator('.ghead[aria-expanded=true]').count() === 0 && await page.locator('.ghead').count() > 5 && await page.locator('.row').count() === 0, (await page.locator('.ghead[aria-expanded=false]').count()) + ' eingeklappt, ' + (await page.locator('.row').count()) + ' Zeilen');
   await shot('01_startansicht.png');
   await page.locator('.ghead').first().click();
-  check('Klick auf Abschnitt klappt auf (C III: 22 Ziffern)', await page.locator('.row').count() >= 15 && (await page.locator('.row .z').first().innerText()) === '900', (await page.locator('.row .z').first().innerText()));
+  check('Klick auf Abschnitt klappt auf (B I, erste Ziffer 1)', await page.locator('.row').count() >= 10 && (await page.locator('.row .z').first().innerText()) === '1', (await page.locator('.row .z').first().innerText()));
   await page.locator('.ghead').first().click();
 
   // Suche 1200 -> eine Eingabe + Enter
@@ -59,6 +60,18 @@ const path = require('path');
   check('Schalter „theoretisch“: Faktorfilter nennt theoretische Höchstwerte (×6,0 → 1.470, ×12,0 → 235)',
     optsT.some(o => o.replace(/\s/g, '') === '×6,0(1.470)') && optsT.some(o => o.replace(/\s/g, '') === '×12,0(235)'), optsT.slice(1).join(' '));
   await page.click('#theo');
+
+  // Nicht durch AB steigerfähig
+  await page.click('.chip[data-k=ohne]');
+  check('Chip „Nicht durch AB steigerfähig“: 3.581 Ziffern', (await txt('#status')).startsWith('3.581 von'), await txt('#status'));
+  await page.fill('#q', '4500');
+  await page.keyboard.press('Enter');
+  d = (await txt('#drawer')).replace(/\s+/g, ' ');
+  check('Ziffer 4500 (PSY): Kapitel G, 145,00 €, „Nicht durch AB steigerfähig“, kein Szenario',
+    d.includes('Ziffer 4500') && d.includes('Kapitel G') && d.includes('145,00 €') && d.includes('Nicht durch AB steigerfähig') && await page.locator('#szen').count() === 0, d.slice(0, 220));
+  await shot('05_nicht_steigerfaehig.png');
+  await page.keyboard.press('Escape');
+  await page.click('#reset');
 
   // Detail 5600 per Hash
   await page.goto('file://' + html + '#5600');

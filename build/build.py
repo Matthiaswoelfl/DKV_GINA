@@ -257,6 +257,50 @@ def norm_text(s) -> str:
     return re.sub(r"\s+", " ", s).strip()
 
 
+def zusatz_text(s) -> str:
+    return re.sub(r"[ \t]*\n[ \t]*", "\n", (s or "").replace("_x000D_", "").replace("\xa0", " ")).strip()
+
+
+def lese_kapitel(daten, gesetz):
+    """Zuordnung aller GO-Ziffern zu Kapitel/Abschnitt (input/kapitel/*.json). Liefert die
+    Grundgesamtheit; Ziffern, die nicht in der Steigerungsmatrix stehen, gelten als
+    'nicht durch AB steigerfähig'."""
+    dateien = sorted((INPUT / "kapitel").glob("*.json"))
+    info = {"datei": None}
+    if not dateien:
+        return info
+    roh = json.loads(dateien[0].read_text(encoding="utf-8"))
+    K = {int(z): v for z, v in roh.items()}
+    matrix = {r["z"]: r for r in daten["rows"]}
+    alle = gesetz.get("alle", {})
+
+    def abs_name(v):
+        return f"{v['abschnitt_nr']}. {v['abschnitt_name']}" if v["abschnitt_nr"] else (v["abschnitt_name"] or "(ohne Abschnitt)")
+
+    info.update(datei=dateien[0].name, n=len(K), K=K, abs_name=abs_name,
+                fehlt_in_json=sorted(set(matrix) - set(K)),
+                nur_json=sorted(set(K) - set(alle)) if alle else [], nur_gv=sorted(set(alle) - set(K)),
+                abw_abschnitt=[], abw_gebuehr_matrix=[], abw_gebuehr_gv=[], abw_code=Counter(), ohne_text=[])
+    for z, v in K.items():
+        geb = Decimal(v["gebuehr_eur"].replace(".", "").replace(",", "."))
+        v["_g"] = geb
+        m = matrix.get(z)
+        if m:
+            if (m["kap"], m["abs"]) != (v["kapitel"], abs_name(v)):
+                info["abw_abschnitt"].append((z, f"{m['kap']} · {m['abs']}", f"{v['kapitel']} · {abs_name(v)}"))
+            if m["_g"] != geb:
+                info["abw_gebuehr_matrix"].append((z, m["_g"], geb))
+        g = alle.get(z)
+        if g:
+            if g["g"] != geb:
+                info["abw_gebuehr_gv"].append((z, geb, g["g"]))
+            if not g["code"].startswith(v["abschnitt_code"]) or not v["abschnitt_code"]:
+                info["abw_code"][(v["kapitel"], abs_name(v), v["abschnitt_code"] or "(leer)", g["code"])] += 1
+        elif not m:
+            info["ohne_text"].append(z)
+    return info
+
+
 def lese_gesetz(daten):
     """Gebührenverzeichnis des Entwurfs. Dient nur dem Abgleich (Gebühr, Bezeichnung,
     Abschnittscode) und liefert den Zusatztext je Ziffer. Zuordnungen kommen nie von hier."""
@@ -306,9 +350,11 @@ def lese_gesetz(daten):
             else:
                 info["text_abw"].append((r["z"], a, leg))
         if g[c_zus]:
-            info["zusatz"][r["z"]] = re.sub(r"[ \t]*\n[ \t]*", "\n", (g[c_zus] or "").replace("_x000D_", "").replace("\xa0", " ")).strip()
+            info["zusatz"][r["z"]] = zusatz_text(g[c_zus])
         info["codes"].setdefault((r["kap"], r["abs"]), Counter())[str(g[c_abs])] += 1
     info["je_code"] = je_code
+    info["alle"] = {z: {"t": norm_text(g[c_leg]).rstrip(",").strip(), "zus": zusatz_text(g[c_zus]),
+                        "g": dec(g[c_bew]), "code": str(g[c_abs])} for z, g in G.items()}
     # AB-IDs: Präfix (z. B. 02.03 aus 02.03-4) als Abschnittscode vorhanden?
     info["ab_praefix"] = {}
     for gr in daten["gruende"]:
@@ -380,7 +426,7 @@ def lese_pdf(daten):
 
 
 # ---------------------------------------------------------------- Tests
-def tests(daten):
+def tests(daten, js=None, kap=None):
     rows = {r["z"]: r for r in daten["rows"]}
     mus = daten["muster"]
     res = []
@@ -393,14 +439,30 @@ def tests(daten):
         m = mus[r["m"]]
         return r, m, " · ".join(f"{k} ×{v}" for k, v in m["gruende"].items())
 
-    t("Gesamtzahl Ziffern = 1.999", len(daten["rows"]) == 1999, str(len(daten["rows"])))
+    t("Durch AB steigerfähige Ziffern (Matrix) = 1.999", len(daten["rows"]) == 1999, str(len(daten["rows"])))
+    if kap and kap["datei"]:
+        zr = {r[0]: r for r in js["rows"]}
+        ohne = sum(1 for r in js["rows"] if r[6] < 0)
+        t("Dashboard enthält alle Ziffern der Zuordnungsdatei (5.580) ohne Duplikate",
+          len(js["rows"]) == len(zr) == kap["n"] == 5580, f"{len(js['rows'])} Zeilen, {len(zr)} eindeutig")
+        t("Nicht durch AB steigerfähig = Gesamt − Matrix (3.581)", ohne == kap["n"] - len(daten["rows"]) == 3581, str(ohne))
+        t("Alle Matrixziffern in der Zuordnungsdatei, Kapitel/Abschnitt identisch",
+          not kap["fehlt_in_json"] and not kap["abw_abschnitt"],
+          f"{len(kap['fehlt_in_json'])} fehlend, {len(kap['abw_abschnitt'])} abweichend")
+        r = zr.get(4500)
+        a = js["abschnitte"][r[1]] if r else None
+        t("Ziffer 4500: Kapitel G, III. Psychotherapieverfahren …, 145,00 €, nicht durch AB steigerfähig",
+          r and r[6] < 0 and r[3] == 14500 and a["kap"] == "G" and a["name"].startswith("III. Psychotherapieverfahren"),
+          f"Kapitel {a['kap']} · {a['name']} · {fmt_euro(r[3])} · {'kein Steigerungsgrund' if r[6] < 0 else 'steigerfähig'}" if r else "fehlt")
+        t("Jede nicht steigerfähige Ziffer hat eine Leistungsbezeichnung", all(r[2] for r in js["rows"]),
+          f"{sum(1 for r in js['rows'] if not r[2])} ohne Text")
     t("Keine doppelten Ziffern", len(rows) == len(daten["rows"]), f"{len(rows)} eindeutig")
-    kap = Counter(r["kap"] for r in daten["rows"])
-    t("Kapitel C=100 · D=2 · F=31 · L=1.705 · O=161", dict(kap) == SOLL_KAPITEL,
-      " · ".join(f"{k}={kap[k]}" for k in SOLL_KAPITEL))
+    je_kap = Counter(r["kap"] for r in daten["rows"])
+    t("Steigerfähige Ziffern je Kapitel C=100 · D=2 · F=31 · L=1.705 · O=161", dict(je_kap) == SOLL_KAPITEL,
+      " · ".join(f"{k}={je_kap[k]}" for k in SOLL_KAPITEL))
     t("Reihenfolge der Kapitel C, D, F, L, O", list(dict.fromkeys(k for k, _ in daten["abschnitte"])) == list(SOLL_KAPITEL),
       ", ".join(dict.fromkeys(k for k, _ in daten["abschnitte"])))
-    t("23 Abschnitte", len(daten["abschnitte"]) == 23, str(len(daten["abschnitte"])))
+    t("23 Abschnitte mit steigerfähigen Ziffern", len(daten["abschnitte"]) == 23, str(len(daten["abschnitte"])))
 
     r, m, g = prof(1200)
     t("Ziffer 1200: 21,00 €, nur B ×1,5 → max. 31,50 €",
@@ -431,13 +493,45 @@ def tests(daten):
 
 
 # ---------------------------------------------------------------- Ausgabe
-def baue_json(daten, pdf, gesetz):
-    abs_liste = [{"kap": k, "name": a, "n": n} for (k, a), n in daten["abschnitte"].items()]
-    abs_idx = {(a["kap"], a["name"]): i for i, a in enumerate(abs_liste)}
-    kapitel = []
-    for k in dict.fromkeys(a["kap"] for a in abs_liste):
-        kapitel.append({"k": k, "titel": pdf["kapiteltitel"].get(k),
-                        "n": sum(a["n"] for a in abs_liste if a["kap"] == k)})
+def baue_json(daten, pdf, gesetz, kap):
+    matrix = {r["z"]: r for r in daten["rows"]}
+    zus = gesetz.get("zusatz", {})
+    alle = gesetz.get("alle", {})
+    abs_liste, abs_idx, titel, rows = [], {}, {}, []
+
+    def idx(k, name):
+        if (k, name) not in abs_idx:
+            abs_idx[(k, name)] = len(abs_liste)
+            abs_liste.append({"kap": k, "name": name, "n": 0, "ab": 0})
+        return abs_idx[(k, name)]
+
+    if kap["datei"]:
+        for z, v in kap["K"].items():           # Reihenfolge der Zuordnungsdatei
+            titel[v["kapitel"]] = v["kapitel_name"]
+            i = idx(v["kapitel"], kap["abs_name"](v))
+            abs_liste[i]["n"] += 1
+            r = matrix.get(z)
+            if r:
+                abs_liste[i]["ab"] += 1
+                rows.append([z, i, r["t"], int(r["_g"] * 100), r["bauch"], r["ct"], r["m"], r["c"], zus.get(z, ""), v["seite"]])
+            else:
+                g = alle.get(z, {})
+                rows.append([z, i, g.get("t", ""), int(v["_g"] * 100), "–", "–", -1, [], g.get("zus", ""), v["seite"]])
+        for z in kap["fehlt_in_json"]:           # Matrixziffern ohne Zuordnung nicht verlieren
+            r = matrix[z]
+            i = idx(r["kap"], r["abs"])
+            abs_liste[i]["n"] += 1
+            abs_liste[i]["ab"] += 1
+            rows.append([z, i, r["t"], int(r["_g"] * 100), r["bauch"], r["ct"], r["m"], r["c"], zus.get(z, ""), None])
+    else:
+        for r in daten["rows"]:
+            i = idx(r["kap"], r["abs"])
+            abs_liste[i]["n"] += 1
+            abs_liste[i]["ab"] += 1
+            rows.append([r["z"], i, r["t"], int(r["_g"] * 100), r["bauch"], r["ct"], r["m"], r["c"], zus.get(r["z"], ""), None])
+    kapitel = [{"k": k, "titel": titel.get(k) or pdf["kapiteltitel"].get(k),
+                "n": sum(a["n"] for a in abs_liste if a["kap"] == k)}
+               for k in dict.fromkeys(a["kap"] for a in abs_liste)]
     gruende = []
     for g in daten["gruende"]:
         d = {k: v for k, v in g.items() if not k.startswith("_")}
@@ -450,19 +544,17 @@ def baue_json(daten, pdf, gesetz):
         "titel": daten["titel"], "hinweise": daten["hinweise"],
         "pdf": {"datei": pdf["datei"], "stand": pdf["stand"]},
         "gesetz": {"datei": gesetz["datei"], "stand": gesetz.get("stand")},
-        "gruende": gruende, "kapitel": kapitel, "abschnitte": abs_liste, "muster": muster,
-        "rows": [[r["z"], abs_idx[(r["kap"], r["abs"])], r["t"], int(r["_g"] * 100),
-                  r["bauch"], r["ct"], r["m"], r["c"], gesetz.get("zusatz", {}).get(r["z"], "")]
-                 for r in daten["rows"]],
+        "gruende": gruende, "kapitel": kapitel, "abschnitte": abs_liste, "muster": muster, "rows": rows,
     }
 
 
-def schreibe_bericht(daten, pdf, gesetz, res, ui, excel_name):
+def schreibe_bericht(daten, pdf, gesetz, kap, res, ui, excel_name):
     L = []
     ok = sum(1 for _, o, _ in res if o)
     L += ["# QS-Bericht – GOÄneu Steigerungsdashboard", "",
           f"- Quelle Zuordnungen: `input/{excel_name}`, Blatt „{SHEET}“",
           f"- Gebührenverzeichnis des Entwurfs (Excel): {'`input/gesetz/' + gesetz['datei'] + '`' if gesetz['datei'] else '**lag beim Build nicht vor**'}",
+          f"- Zuordnung Ziffer → Kapitel/Abschnitt (JSON): {'`input/kapitel/' + kap['datei'] + '`' if kap['datei'] else '**lag beim Build nicht vor**'}",
           f"- Gesetzesentwurf mit Allgemeinen Bestimmungen (PDF): {'`input/' + pdf['datei'] + '`' if pdf['datei'] else '**lag beim Build nicht vor**'}",
           f"- Abnahmetests Daten: **{ok} von {len(res)} bestanden**", "",
           "## 1. Abnahmetests (Daten)", "", "| Test | Ergebnis | Ist-Wert |", "|---|---|---|"]
@@ -547,7 +639,7 @@ def schreibe_bericht(daten, pdf, gesetz, res, ui, excel_name):
             "Benötigt wird der Entwurf mit den AB (PDF nach `input/` oder Excel-Export der AB).",
             "**Rundungsregel** (Matrix verweist auf Kap. A Nr. 23): im Gebührenverzeichnis nicht enthalten, daher nicht "
             "geprüft. Gerechnet wird kaufmännisch auf den Cent (Decimal, ROUND_HALF_UP).",
-            "**Kapiteltitel** (C, D, F, L, O): im Gebührenverzeichnis nicht enthalten; die Navigation zeigt nur die Buchstaben.",
+            *([] if kap["datei"] else ["**Kapiteltitel** (C, D, F, L, O): im Gebührenverzeichnis nicht enthalten; die Navigation zeigt nur die Buchstaben."]),
             "**Stand des Entwurfs:** nur aus dem Dateinamen des Gebührenverzeichnisses abgeleitet (v6, 15.07.2026). "
             "Bitte bestätigen oder offiziellen Stand nennen.",
             "**Vollständigkeit der Matrix:** Die Matrix enthält je Abschnitt weniger Ziffern als das Gebührenverzeichnis "
@@ -555,6 +647,47 @@ def schreibe_bericht(daten, pdf, gesetz, res, ui, excel_name):
             "und wurde nicht geprüft oder korrigiert.",
             "**Zusatztext im Detailbereich:** Zur vollständigen Leistungsbezeichnung wird der „Zusatz“ aus dem "
             "Gebührenverzeichnis angezeigt (gekennzeichnet). Falls nicht gewünscht, bitte melden.",
+        ]
+
+    L += ["", "## 4a. Zuordnungsdatei Ziffer → Kapitel/Abschnitt (alle GO-Ziffern)", ""]
+    if not kap["datei"]:
+        L.append("Nicht vorhanden – das Dashboard zeigt nur die Ziffern der Steigerungsmatrix.")
+    else:
+        n_ab = len(daten["rows"])
+        L += [f"Die Zuordnungsdatei enthält **{kap['n']} Ziffern**. Davon stehen {n_ab} in der Steigerungsmatrix; die übrigen "
+              f"**{kap['n'] - n_ab} Ziffern** werden im Dashboard als „Nicht durch AB steigerfähig“ geführt "
+              "(Bezeichnung und Zusatz aus dem Gebührenverzeichnis, Kapitel, Abschnitt, Seite und Gebühr aus der Zuordnungsdatei).", "",
+              "| Prüfung | Ergebnis |", "|---|---|",
+              "| Nummern identisch mit dem Gebührenverzeichnis | " + ("ja" if not kap["nur_json"] and not kap["nur_gv"] else
+                f"nein – nur JSON: {kap['nur_json'][:20]}, nur Gebührenverzeichnis: {kap['nur_gv'][:20]}") + " |",
+              f"| Matrixziffern in der Zuordnungsdatei vorhanden | {n_ab - len(kap['fehlt_in_json'])} von {n_ab} |",
+              f"| Kapitel/Abschnitt der Matrix = Zuordnungsdatei | {n_ab - len(kap['abw_abschnitt'])} von {n_ab} |",
+              f"| Gebühr Matrix = Zuordnungsdatei | {n_ab - len(kap['abw_gebuehr_matrix'])} von {n_ab} |",
+              f"| Gebühr Zuordnungsdatei = Gebührenverzeichnis | {kap['n'] - len(kap['abw_gebuehr_gv'])} von {kap['n']} |", ""]
+        for z, a, b in kap["abw_abschnitt"][:50]:
+            L.append(f"- **Abweichung Abschnitt** Ziffer {z}: Matrix „{a}“ ≠ Zuordnungsdatei „{b}“")
+            offen.append(f"Ziffer {z}: Kapitel/Abschnitt weicht zwischen Matrix und Zuordnungsdatei ab – Dashboard folgt der Zuordnungsdatei.")
+        for z, a, b in kap["abw_gebuehr_matrix"][:50]:
+            L.append(f"- **Abweichung Gebühr** Ziffer {z}: Matrix {a} € ≠ Zuordnungsdatei {b} €")
+            offen.append(f"Ziffer {z}: Gebühr weicht zwischen Matrix ({a} €) und Zuordnungsdatei ({b} €) ab – Dashboard rechnet mit dem Matrixwert.")
+        for z, a, b in kap["abw_gebuehr_gv"][:50]:
+            L.append(f"- **Abweichung Gebühr** Ziffer {z}: Zuordnungsdatei {str(a).replace('.', ',')} € ≠ Gebührenverzeichnis {b} "
+                     f"(kaufmännisch gerundet {str(b.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)).replace('.', ',')} €)")
+            offen.append(f"**Ziffer {z}: Gebühr unklar.** Zuordnungsdatei nennt {str(a).replace('.', ',')} €, das Gebührenverzeichnis "
+                         f"den ungerundeten Wert {b} (gerundet {str(b.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)).replace('.', ',')} €). "
+                         "Das Dashboard zeigt den Wert der Zuordnungsdatei. Bitte klären.")
+        if kap["abw_code"]:
+            L += ["", "Abschnittscodes, die sich zwischen Zuordnungsdatei und Gebührenverzeichnis unterscheiden "
+                  "(nur zur Information, das Dashboard verwendet die Codes nicht):", "",
+                  "| Kapitel · Abschnitt | Code Zuordnungsdatei | Code Gebührenverzeichnis | Ziffern |", "|---|---|---|---|"]
+            for (k, a, c1, c2), n in kap["abw_code"].items():
+                L.append(f"| {k} · {a} | {c1} | {c2} | {n} |")
+        offen += [
+            "**„Nicht durch AB steigerfähig“ ist ein Umkehrschluss:** So gekennzeichnet sind alle Ziffern der Zuordnungsdatei, "
+            "die nicht in der Steigerungsmatrix stehen. Die Matrix enthält laut eigener Beschreibung nur Hauptleistungen, für die "
+            "mindestens ein Erhöhungsgrund greift (Zuschläge ausgenommen). Ob diese Auswahl vollständig ist, wurde nicht geprüft.",
+            "**Darstellung der nicht steigerfähigen Ziffern:** Max. Faktor „–“, als max. Gebührensatz wird die einfache Gebühr "
+            "gezeigt (grau). Im Faktorfilter gibt es dafür den Eintrag „keine AB-Steigerung“. Bitte bestätigen.",
         ]
 
     L += ["", "## 4b. Abgleich mit dem PDF (Allgemeine Bestimmungen)", ""]
@@ -614,9 +747,11 @@ def main():
     daten = lese_excel(excels[0])
     pdf = lese_pdf(daten)
     gesetz = lese_gesetz(daten)
-    res = tests(daten)
+    kap = lese_kapitel(daten, gesetz)
+    js_obj = baue_json(daten, pdf, gesetz, kap)
+    res = tests(daten, js_obj, kap)
 
-    js = json.dumps(baue_json(daten, pdf, gesetz), ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
+    js = json.dumps(js_obj, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     html = TEMPLATE.read_text(encoding="utf-8").replace("/*__DATA__*/", js)
     DIST.parent.mkdir(parents=True, exist_ok=True)
     DIST.write_text(html, encoding="utf-8")
@@ -631,7 +766,7 @@ def main():
         ui = json.loads(UI_JSON.read_text(encoding="utf-8"))
         UI_JSON.unlink()
 
-    schreibe_bericht(daten, pdf, gesetz, res, ui, excels[0].name)
+    schreibe_bericht(daten, pdf, gesetz, kap, res, ui, excels[0].name)
     for name, ok, ist in res:
         print(("OK   " if ok else "FAIL ") + name + "  →  " + ist)
     for c in (ui or {}).get("checks", []):

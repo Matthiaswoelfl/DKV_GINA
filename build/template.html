@@ -37,7 +37,9 @@ nav button{display:flex;width:100%;gap:8px;align-items:baseline;border:0;backgro
 nav button:hover{background:var(--bg)}
 nav button[aria-current=true]{background:var(--accent-bg);border-left-color:var(--accent);font-weight:650}
 nav button .n{margin-left:auto;color:var(--ink-soft);font-size:12px;font-variant-numeric:tabular-nums;font-weight:400}
-nav .kap{font-weight:650;margin-top:6px}
+nav .kap{font-weight:650}
+nav .kb{flex:none;width:16px}
+nav .kt{overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 nav .abs{padding-left:26px;font-size:13px}
 
 main{display:grid;grid-template-rows:auto auto 1fr;min-width:0;min-height:0}
@@ -49,7 +51,9 @@ main{display:grid;grid-template-rows:auto auto 1fr;min-width:0;min-height:0}
 .chip[aria-pressed=true] .ltr{background:#fff;color:var(--c)}
 .chip .cnt{font-variant-numeric:tabular-nums;opacity:.85;font-size:12px}
 .ltr{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--c);color:#fff;font-weight:700;font-size:12px;flex:none}
-.cG{--c:var(--G);--cb:var(--G-bg)}.cB{--c:var(--B);--cb:var(--B-bg)}.cS{--c:var(--S);--cb:var(--S-bg)}.cF{--c:var(--F);--cb:var(--F-bg)}.cV{--c:var(--V);--cb:var(--V-bg)}
+.cG{--c:var(--G);--cb:var(--G-bg)}.cB{--c:var(--B);--cb:var(--B-bg)}.cS{--c:var(--S);--cb:var(--S-bg)}.cF{--c:var(--F);--cb:var(--F-bg)}.cV{--c:var(--V);--cb:var(--V-bg)}.cN{--c:#55606e;--cb:#eceff3}
+.compact .chip.cN .nm{display:inline}
+.row.ohne .mx{font-weight:400;color:var(--ink-soft)}
 #toolbar label{display:inline-flex;align-items:center;gap:6px;font-size:13px}
 #toolbar select{padding:5px 6px;border:1px solid #8c98a8;border-radius:6px;background:#fff}
 .btn{border:1px solid #8c98a8;background:#fff;border-radius:6px;padding:5px 10px;font-size:13px}
@@ -125,6 +129,8 @@ table.mo .th s{text-decoration:line-through}
 .abid{display:inline-block;border:1px solid var(--line);border-radius:4px;padding:0 5px;margin:0 4px 3px 0;font-variant-numeric:tabular-nums;background:var(--bg)}
 .wort{border-left:3px solid var(--line);padding-left:8px;margin:4px 0;color:var(--ink-soft)}
 .missing{color:#8a5300;font-size:12.5px}
+.nosteig{margin-top:12px;border:1px solid #b9c1cc;border-left:4px solid #55606e;border-radius:6px;padding:10px 12px;background:#f3f5f8;font-size:13px}
+.nosteig b{display:flex;align-items:center;gap:8px;margin-bottom:4px;font-size:14px}
 .link{font-size:12.5px;margin-top:14px;color:var(--ink-soft)}
 kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:3px;padding:0 4px;font:11px ui-monospace,monospace;background:#fff}
 </style>
@@ -162,16 +168,18 @@ const euro = c => { const s = String(c).padStart(3,'0'); return s.slice(0,-2).re
 const fnum = f => parseFloat(f.replace(',','.'));   // nur zum Sortieren/Filtern, nie zum Rechnen
 const GR = Object.fromEntries(D.gruende.map(g => [g.k, g]));
 const KEYS = D.gruende.map(g => g.k);
-const R = D.rows.map(r => { const m = D.muster[r[6]]; return {z:r[0], a:r[1], t:r[2], g:r[3], bauch:r[4], ct:r[5], m, c:r[7], zus:r[8], lt:r[2].toLowerCase(), zs:String(r[0])}; });
+const R = D.rows.map(r => { const m = r[6] < 0 ? null : D.muster[r[6]]; return {z:r[0], a:r[1], t:r[2], g:r[3], bauch:r[4], ct:r[5], m, c:r[7], zus:r[8], seite:r[9], lt:r[2].toLowerCase(), zs:String(r[0])}; });
 const BYZ = new Map(R.map(r => [r.z, r]));
 const ROWH = 38, HEADH = 36;
 
-const st = {kap:null, abs:null, q:'', gr:new Set(), fmax:'', theo:false, sort:'z', dir:1, collapsed:new Set(D.abschnitte.map((_,i) => i)), sel:null, active:-1};
+const st = {kap:null, abs:null, q:'', gr:new Set(), ohne:false, fmax:'', theo:false, sort:'z', dir:1, collapsed:new Set(D.abschnitte.map((_,i) => i)), sel:null, active:-1};
 let items = [], tops = [], total = 0, result = [];
 
+const KEIN = '–';   // Ziffer steht nicht in der Steigerungsmatrix
 const mi = r => st.theo ? r.m.maxT : r.m.maxP;
-const maxF = r => r.m.moegl[mi(r)].f;
-const maxC = r => r.c[mi(r)];
+const maxF = r => r.m ? r.m.moegl[mi(r)].f : KEIN;
+const maxC = r => r.m ? r.c[mi(r)] : r.g;
+const fsort = f => f === KEIN ? 1 : fnum(f);
 
 /* ---------- Hinweisleiste ---------- */
 (function(){
@@ -186,8 +194,8 @@ const maxC = r => r.c[mi(r)];
 function renderNav(){
   let h = `<button data-kap="" aria-current="${st.kap===null}">Alle Kapitel<span class="n">${R.length.toLocaleString('de-DE')}</span></button>`;
   D.kapitel.forEach(k => {
-    h += `<button class="kap" data-kap="${k.k}" aria-current="${st.kap===k.k && st.abs===null}">Kapitel ${k.k}${k.titel ? ' – ' + esc(k.titel) : ''}<span class="n">${k.n.toLocaleString('de-DE')}</span></button>`;
-    D.abschnitte.forEach((a,i) => { if (a.kap===k.k) h += `<button class="abs" data-abs="${i}" aria-current="${st.abs===i}">${esc(a.name)}<span class="n">${a.n}</span></button>`; });
+    h += `<button class="kap" data-kap="${k.k}" aria-current="${st.kap===k.k && st.abs===null}" aria-expanded="${st.kap===k.k}" title="${esc(k.titel||'')}"><span class="kb">${k.k}</span><span class="kt">${esc(k.titel || 'Kapitel ' + k.k)}</span><span class="n">${k.n.toLocaleString('de-DE')}</span></button>`;
+    if (st.kap===k.k) D.abschnitte.forEach((a,i) => { if (a.kap===k.k) h += `<button class="abs" data-abs="${i}" aria-current="${st.abs===i}">${esc(a.name)}<span class="n">${a.n.toLocaleString('de-DE')}</span></button>`; });
   });
   $('#nav').innerHTML = h;
 }
@@ -202,9 +210,9 @@ $('#nav').addEventListener('click', e => {
 function renderFmax(){
   const cnt = new Map();
   R.forEach(r => cnt.set(maxF(r), (cnt.get(maxF(r))||0)+1));
-  const opts = [...cnt].sort((a,b) => fnum(a[0])-fnum(b[0]));
+  const opts = [...cnt].sort((a,b) => fsort(a[0])-fsort(b[0]));
   if (!cnt.has(st.fmax)) st.fmax = '';
-  $('#fmax').innerHTML = '<option value="">alle</option>' + opts.map(([f,n]) => `<option value="${f}"${f===st.fmax?' selected':''}>×${f} (${n.toLocaleString('de-DE')})</option>`).join('');
+  $('#fmax').innerHTML = '<option value="">alle</option>' + opts.map(([f,n]) => `<option value="${f}"${f===st.fmax?' selected':''}>${f===KEIN ? 'keine AB-Steigerung' : '×'+f} (${n.toLocaleString('de-DE')})</option>`).join('');
 }
 function matchQ(r, toks){
   for (const t of toks) {
@@ -218,12 +226,14 @@ function apply(keepActive){
   const base = R.filter(r => (st.abs===null || r.a===st.abs) && (st.kap===null || D.abschnitte[r.a].kap===st.kap)
     && (!st.fmax || maxF(r)===st.fmax) && matchQ(r, toks));
   const cnt = Object.fromEntries(KEYS.map(k => [k,0]));
-  base.forEach(r => { for (const k in r.m.gruende) cnt[k]++; });
+  let nOhne = 0;
+  base.forEach(r => { if (!r.m) { nOhne++; return; } for (const k in r.m.gruende) cnt[k]++; });
   $('#chips').innerHTML = D.gruende.map(g =>
-    `<button class="chip c${g.k}" data-k="${g.k}" aria-pressed="${st.gr.has(g.k)}" title="${esc(g.name)} ×${g.faktor}"><span class="ltr">${g.k}</span><span class="nm">${esc(g.name.replace(/ BMI.*| ≥.*| unter.*/,''))}</span> ×${g.faktor}<span class="cnt">${cnt[g.k].toLocaleString('de-DE')}</span></button>`).join('');
-  result = base.filter(r => { for (const k of st.gr) if (!(k in r.m.gruende)) return false; return true; });
+    `<button class="chip c${g.k}" data-k="${g.k}" aria-pressed="${st.gr.has(g.k)}" title="${esc(g.name)} ×${g.faktor}"><span class="ltr">${g.k}</span><span class="nm">${esc(g.name.replace(/ BMI.*| ≥.*| unter.*/,''))}</span> ×${g.faktor}<span class="cnt">${cnt[g.k].toLocaleString('de-DE')}</span></button>`).join('') +
+    `<button class="chip cN" data-k="ohne" aria-pressed="${st.ohne}" title="Ziffer steht nicht in der Steigerungsmatrix: keiner der 5 AB-Gründe greift"><span class="ltr">–</span><span class="nm">Nicht durch AB steigerfähig</span><span class="cnt">${nOhne.toLocaleString('de-DE')}</span></button>`;
+  result = base.filter(r => { if (st.ohne) return !r.m; for (const k of st.gr) if (!r.m || !(k in r.m.gruende)) return false; return true; });
 
-  const key = {z:r=>r.z, t:r=>r.lt, g:r=>r.g, f:r=>fnum(maxF(r)), m:r=>maxC(r)}[st.sort];
+  const key = {z:r=>r.z, t:r=>r.lt, g:r=>r.g, f:r=>fsort(maxF(r)), m:r=>maxC(r)}[st.sort];
   const groups = new Map();
   result.forEach(r => { if (!groups.has(r.a)) groups.set(r.a, []); groups.get(r.a).push(r); });
   items = []; tops = []; total = 0;
@@ -255,6 +265,7 @@ function heads(){
 const list = $('#list'), spacer = $('#spacer');
 function firstAt(y){ let lo=0, hi=tops.length-1; while (lo<hi) { const mid=(lo+hi+1)>>1; if (tops[mid]<=y) lo=mid; else hi=mid-1; } return lo; }
 function badges(r){
+  if (!r.m) return `<span class="badge cN" title="Nicht durch AB steigerfähig">–<i>keine AB-Steigerung</i></span>`;
   return Object.entries(r.m.gruende).map(([k,f]) => `<span class="badge c${k}" title="${esc(GR[k].name)} ×${f}">${k}<i>×${f}</i></span>`).join('');
 }
 function render(){
@@ -265,13 +276,13 @@ function render(){
     const it = items[i];
     if (it.h !== undefined) {
       const a = D.abschnitte[it.h];
-      h += `<button class="ghead" style="top:${tops[i]}px" data-h="${it.h}" aria-expanded="${!st.collapsed.has(it.h)}" tabindex="-1"><span class="car">▾</span>Kapitel ${a.kap} · ${esc(a.name)} <span class="n">${it.n.toLocaleString('de-DE')} Ziffern</span></button>`;
+      h += `<button class="ghead" style="top:${tops[i]}px" data-h="${it.h}" aria-expanded="${!st.collapsed.has(it.h)}" tabindex="-1"><span class="car">▾</span>Kapitel ${a.kap} · ${esc(a.name)} <span class="n">${it.n.toLocaleString('de-DE')} ${it.n===1?'Ziffer':'Ziffern'}</span></button>`;
     } else {
-      const m = it.m, dif = m.maxT !== m.maxP;
-      h += `<div class="row grid${i===st.active?' active':''}${it.z===st.sel?' sel':''}" style="top:${tops[i]}px" data-i="${i}" role="option" aria-selected="${it.z===st.sel}" id="r${it.z}">` +
+      const m = it.m, dif = m && m.maxT !== m.maxP;
+      h += `<div class="row grid${m?'':' ohne'}${i===st.active?' active':''}${it.z===st.sel?' sel':''}" style="top:${tops[i]}px" data-i="${i}" role="option" aria-selected="${it.z===st.sel}" id="r${it.z}">` +
         `<span class="z">${it.z}</span><span class="t" title="${esc(it.t)}">${esc(it.t)}</span><span class="num">${euro(it.g)}</span>` +
         `<span class="badges">${badges(it)}</span>` +
-        `<span class="num mx">×${maxF(it)}${dif && !st.theo ? `<small title="theoretischer Höchstwert">theor. ×${m.moegl[m.maxT].f}</small>` : ''}</span>` +
+        `<span class="num mx">${m?'×':''}${maxF(it)}${dif && !st.theo ? `<small title="theoretischer Höchstwert">theor. ×${m.moegl[m.maxT].f}</small>` : ''}</span>` +
         `<span class="num mx">${euro(maxC(it))}${dif && !st.theo ? `<small>${euro(it.c[m.maxT])}</small>` : ''}</span></div>`;
     }
   }
@@ -316,15 +327,19 @@ const kombi = s => esc(s);
 function open(z, keepFocus){
   const r = BYZ.get(z); if (!r) return;
   st.sel = z;
-  const m = r.m, a = D.abschnitte[r.a], dif = m.maxT !== m.maxP, kap = D.kapitel.find(k => k.k===a.kap);
+  const m = r.m, a = D.abschnitte[r.a], dif = m && m.maxT !== m.maxP, kap = D.kapitel.find(k => k.k===a.kap);
   let h = `<h2><span>Ziffer ${r.z}</span><button class="btn close" id="close" aria-label="Detailbereich schließen">Schließen <kbd>Esc</kbd></button></h2>` +
-    `<div class="crumb">Kapitel ${a.kap}${kap.titel ? ' – ' + esc(kap.titel) : ''} · ${esc(a.name)}</div>` +
+    `<div class="crumb">Kapitel ${a.kap}${kap.titel ? ' – ' + esc(kap.titel) : ''} · ${esc(a.name)}${r.seite ? ' · Seite ' + r.seite : ''}</div>` +
     `<p class="leistung">${esc(r.t)}</p>` +
     (r.zus ? `<p class="zusatz"><b>Zusatz laut Gebührenverzeichnis:</b> ${esc(r.zus)}</p>` : '') +
-    `<div class="kpis${dif ? '' : ' two'}"><div class="kpi"><span>Gebühr (×1,0)</span><b>${euro(r.g)}</b></div>` +
+    (m ? '' : `<div class="kpis two"><div class="kpi"><span>Gebühr (×1,0)</span><b>${euro(r.g)}</b></div></div>` +
+      `<div class="nosteig"><b><span class="ltr cN">–</span> Nicht durch AB steigerfähig</b>Die Ziffer steht nicht in der Steigerungsmatrix: Keiner der 5 Steigerungsgründe aus den Allgemeinen Bestimmungen (G, B, S, F, V) greift. Nicht abgebildet sind § 2 (individuell vereinbarter höherer Faktor), Zuschläge und Minderungen.</div>` +
+      `<div class="link">Direktlink: <a href="#${r.z}">#${r.z}</a></div>`);
+  if (m) h += `<div class="kpis${dif ? '' : ' two'}"><div class="kpi"><span>Gebühr (×1,0)</span><b>${euro(r.g)}</b></div>` +
     `<div class="kpi"><span>Max. praktisch ×${m.moegl[m.maxP].f}</span><b>${euro(r.c[m.maxP])}</b></div>` +
     (dif ? `<div class="kpi t"><span>Nur theoretisch ×${m.moegl[m.maxT].f}</span><b>${euro(r.c[m.maxT])}</b></div>` : '') + `</div>`;
 
+  if (m) {
   h += `<h3>Szenario</h3><div class="szen" id="szen">` +
     Object.entries(m.gruende).map(([k,f]) => `<label><input type="checkbox" value="${k}"><span class="ltr c${k}">${k}</span>${esc(GR[k].name)} <span class="num" style="margin-left:auto">×${f}</span></label>`).join('') +
     `<div class="res none" id="szres" aria-live="polite"></div><div id="szwarn"></div>` +
@@ -352,11 +367,12 @@ function open(z, keepFocus){
   if (r.ct !== '–') pm.push('CT/MRT-Untersuchung: ' + r.ct);
   if (pm.length) h += `<h3>Prüfmerkmale (Vorbelegung der Matrix)</h3><div style="font-size:13px">${pm.map(esc).join(' · ')}</div>`;
   h += `<div class="link">Direktlink: <a href="#${r.z}">#${r.z}</a></div>`;
-
+  }
   const dr = $('#drawer'); dr.innerHTML = h; dr.scrollTop = 0;
   $('#app').classList.add('drawer-open');
   if (location.hash !== '#' + z) history.replaceState(null, '', '#' + z);
   const upd = () => {
+    if (!m) return;
     const sel = [...dr.querySelectorAll('#szen input:checked')].map(i => i.value);
     const res = $('#szres'), w = $('#szwarn');
     if (!sel.length) { res.className = 'res none'; res.innerHTML = `<span>Kein Grund gewählt · ×1,0</span><span>${euro(r.g)}</span>`; w.innerHTML = ''; return; }
@@ -365,7 +381,7 @@ function open(z, keepFocus){
     res.innerHTML = `<span>${sel.join('×')} · Faktor ×${m.moegl[idx].f}</span><span>${euro(r.c[idx])}</span>`;
     w.innerHTML = theo ? `<div class="warn">✗ Nur theoretisch möglich – diese Kombination ist laut Matrix praktisch ausgeschlossen (S×F bzw. B×F).</div>` : '';
   };
-  dr.querySelector('#szen').addEventListener('change', upd); upd();
+  if (m) dr.querySelector('#szen').addEventListener('change', upd); upd();
   $('#close').onclick = closeDrawer;
   render();
   if (!keepFocus) dr.focus({preventScroll:true});
@@ -378,7 +394,7 @@ function goto(z){
   if (!BYZ.has(z)) return false;
   if (st.collapsed.delete(BYZ.get(z).a)) apply();
   let i = items.indexOf(BYZ.get(z));
-  if (i < 0) { st.kap = st.abs = null; st.q = ''; $('#q').value = ''; st.gr.clear(); st.fmax = ''; renderNav(); renderFmax(); apply(); i = items.indexOf(BYZ.get(z)); }
+  if (i < 0) { st.kap = st.abs = null; st.q = ''; $('#q').value = ''; st.gr.clear(); st.ohne = false; st.fmax = ''; renderNav(); renderFmax(); apply(); i = items.indexOf(BYZ.get(z)); }
   st.active = i; list.scrollTop = Math.max(0, tops[i] - HEADH - ROWH); open(z, true);
   return true;
 }
@@ -395,10 +411,10 @@ $('#q').addEventListener('keydown', e => {
     if (first) { st.active = items.indexOf(first); scrollToIdx(st.active); open(first.z, true); } }
   else if (e.key==='ArrowDown') { list.focus(); move(1); e.preventDefault(); }
 });
-$('#chips').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; const k = b.dataset.k; st.gr.has(k) ? st.gr.delete(k) : st.gr.add(k); apply(); list.scrollTop = 0; $(`.chip[data-k=${k}]`).focus(); });
+$('#chips').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; const k = b.dataset.k; if (k==='ohne') { st.ohne = !st.ohne; st.gr.clear(); } else { st.ohne = false; st.gr.has(k) ? st.gr.delete(k) : st.gr.add(k); } apply(); list.scrollTop = 0; $(`.chip[data-k=${k}]`).focus(); });
 $('#fmax').addEventListener('change', e => { st.fmax = e.target.value; apply(); list.scrollTop = 0; });
 $('#theo').addEventListener('change', e => { st.theo = e.target.checked; renderFmax(); apply(); });
-$('#reset').addEventListener('click', () => { st.kap = st.abs = null; st.q = ''; $('#q').value = ''; st.gr.clear(); st.fmax = ''; st.collapsed = new Set(D.abschnitte.map((_,i) => i)); st.sort = 'z'; st.dir = 1; renderNav(); renderFmax(); apply(); list.scrollTop = 0; });
+$('#reset').addEventListener('click', () => { st.kap = st.abs = null; st.q = ''; $('#q').value = ''; st.gr.clear(); st.ohne = false; st.fmax = ''; st.collapsed = new Set(D.abschnitte.map((_,i) => i)); st.sort = 'z'; st.dir = 1; renderNav(); renderFmax(); apply(); list.scrollTop = 0; });
 $('#colhead').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (st.sort===b.dataset.s) st.dir = -st.dir; else { st.sort = b.dataset.s; st.dir = (b.dataset.s==='f'||b.dataset.s==='m') ? -1 : 1; } apply(); });
 document.addEventListener('keydown', e => {
   const inField = /INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName);
@@ -412,7 +428,7 @@ $('#csv').addEventListener('click', () => {
   const seen = new Map(); result.forEach(r => { if (!seen.has(r.a)) seen.set(r.a, []); seen.get(r.a).push(r); });
   for (const rs of seen.values()) for (const r of rs) {
     const a = D.abschnitte[r.a];
-    lines.push([r.z, q(a.kap), q(a.name), q(r.t), dez(r.g), q(Object.entries(r.m.gruende).map(([k,f]) => k+' ×'+f).join(', ')), q(maxF(r)), dez(maxC(r))].join(';'));
+    lines.push([r.z, q(a.kap), q(a.name), q(r.t), dez(r.g), q(r.m ? Object.entries(r.m.gruende).map(([k,f]) => k+' ×'+f).join(', ') : 'nicht durch AB steigerfähig'), q(maxF(r)), dez(maxC(r))].join(';'));
   }
   const blob = new Blob(['﻿' + lines.join('\r\n')], {type:'text/csv;charset=utf-8'});
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'GOAeneu_Steigerung_Export.csv';
