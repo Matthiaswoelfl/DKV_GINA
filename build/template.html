@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GOÄneu – Steigerungsmatrix</title>
+<style>
+:root{
+  --bg:#f3f5f8; --panel:#fff; --line:#d5dbe3; --line-soft:#e8ecf1;
+  --ink:#131c27; --ink-soft:#4a5868; --accent:#0b4f8a; --accent-bg:#e4eef8;
+  --ok:#235c2c; --ok-bg:#e2efda; --theo:#a81414; --theo-bg:#f0f0f0;
+  --G:#a3231b; --G-bg:#fbe6e3; --B:#7a4f00; --B-bg:#fbefd2; --S:#5c3399; --S-bg:#ede4f8;
+  --F:#00625a; --F-bg:#dcf1ee; --V:#0f4f9e; --V-bg:#e0ecfb;
+  --rowh:38px; --headh:36px;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font:14px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);
+  display:grid;grid-template-rows:auto auto 1fr;overflow:hidden}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.num{font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+
+header{background:#0b3157;color:#fff;padding:8px 16px;display:flex;align-items:baseline;gap:14px}
+header h1{font-size:17px;margin:0;font-weight:650}
+header span{color:#c4d6ea;font-size:12.5px}
+#hinweis{background:#fff7dd;border-bottom:1px solid #e5d08a;padding:6px 16px;font-size:12.5px;display:flex;gap:6px 18px;flex-wrap:wrap}
+#hinweis b{font-weight:650}
+
+#app{display:grid;grid-template-columns:250px minmax(0,1fr);min-height:0}
+#app.drawer-open{grid-template-columns:250px minmax(0,1fr) 440px}
+@media (max-width:1400px){#app.drawer-open{grid-template-columns:200px minmax(0,1fr) 400px}}
+
+nav{background:var(--panel);border-right:1px solid var(--line);overflow:auto;padding:8px 0}
+nav button{display:flex;width:100%;gap:8px;align-items:baseline;border:0;background:none;text-align:left;padding:5px 12px;border-left:3px solid transparent}
+nav button:hover{background:var(--bg)}
+nav button[aria-current=true]{background:var(--accent-bg);border-left-color:var(--accent);font-weight:650}
+nav button .n{margin-left:auto;color:var(--ink-soft);font-size:12px;font-variant-numeric:tabular-nums;font-weight:400}
+nav .kap{font-weight:650;margin-top:6px}
+nav .abs{padding-left:26px;font-size:13px}
+
+main{display:grid;grid-template-rows:auto auto 1fr;min-width:0;min-height:0}
+#toolbar{background:var(--panel);border-bottom:1px solid var(--line);padding:10px 14px;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+#q{flex:1 1 220px;min-width:180px;padding:7px 10px;border:1px solid #8c98a8;border-radius:6px;background:#fff}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1.5px solid var(--c);background:#fff;color:var(--c);border-radius:999px;padding:3px 10px 3px 4px;display:inline-flex;align-items:center;gap:6px;font-size:13px}
+.chip[aria-pressed=true]{background:var(--c);color:#fff}
+.chip[aria-pressed=true] .ltr{background:#fff;color:var(--c)}
+.chip .cnt{font-variant-numeric:tabular-nums;opacity:.85;font-size:12px}
+.ltr{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--c);color:#fff;font-weight:700;font-size:12px;flex:none}
+.cG{--c:var(--G);--cb:var(--G-bg)}.cB{--c:var(--B);--cb:var(--B-bg)}.cS{--c:var(--S);--cb:var(--S-bg)}.cF{--c:var(--F);--cb:var(--F-bg)}.cV{--c:var(--V);--cb:var(--V-bg)}
+#toolbar label{display:inline-flex;align-items:center;gap:6px;font-size:13px}
+#toolbar select{padding:5px 6px;border:1px solid #8c98a8;border-radius:6px;background:#fff}
+.btn{border:1px solid #8c98a8;background:#fff;border-radius:6px;padding:5px 10px;font-size:13px}
+.btn:hover{background:var(--bg)}
+#status{margin-left:auto;font-size:13px;color:var(--ink-soft);white-space:nowrap}
+
+.grid{display:grid;grid-template-columns:64px minmax(0,1fr) 92px 216px 84px 118px;gap:0 10px;align-items:center;padding:0 14px}
+.compact .grid{grid-template-columns:50px minmax(0,1fr) 76px 98px 50px 92px;gap:0 8px}
+.compact .chip .nm{display:none}
+.compact .badges{gap:2px}
+.compact .row small{font-size:10.5px}
+#colhead{background:#eef1f5;border-bottom:1px solid var(--line);font-size:12px;font-weight:650;color:var(--ink-soft);height:30px}
+#colhead button{border:0;background:none;font-weight:650;padding:0;color:inherit;text-align:inherit;white-space:nowrap}
+#colhead button.num{justify-self:end}
+#colhead button[aria-sort]{color:var(--ink)}
+#list{overflow:auto;position:relative;background:var(--panel);outline-offset:-2px}
+#spacer{position:relative}
+.row,.ghead{position:absolute;left:0;right:0}
+.row{height:var(--rowh);border-bottom:1px solid var(--line-soft);cursor:pointer}
+.row:hover{background:#f5f8fb}
+.row.active{box-shadow:inset 3px 0 0 var(--accent);background:#f0f5fa}
+.row.sel{background:var(--accent-bg)}
+.row .z{font-weight:650;font-variant-numeric:tabular-nums}
+.row .t{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.row .mx{font-weight:650}
+.row small{display:block;font-size:11px;color:var(--theo);font-weight:400;line-height:1.1}
+.badges{display:flex;gap:4px;overflow:hidden}
+.badge{display:inline-flex;align-items:center;gap:3px;background:var(--cb);color:var(--c);border:1px solid var(--c);border-radius:4px;padding:0 5px 0 4px;font-size:12px;font-weight:650;white-space:nowrap;line-height:18px}
+.compact .badge i{display:none}
+.badge i{font-style:normal;font-weight:400;font-variant-numeric:tabular-nums}
+.ghead{height:var(--headh);background:#e9edf2;border-bottom:1px solid var(--line);border-top:1px solid var(--line);display:flex;align-items:center;gap:8px;padding:0 14px;border-left:0;border-right:0;width:100%;text-align:left;font-weight:650;font-size:13px}
+.ghead .n{color:var(--ink-soft);font-weight:400}
+.ghead .car{display:inline-block;width:12px;transition:transform .1s}
+.ghead[aria-expanded=false] .car{transform:rotate(-90deg)}
+#empty{padding:40px;text-align:center;color:var(--ink-soft)}
+
+aside{background:var(--panel);border-left:1px solid var(--line);overflow:auto;padding:14px 16px 30px;display:none}
+.drawer-open aside{display:block}
+aside h2{font-size:22px;margin:0;display:flex;align-items:center;gap:10px}
+aside h2 .close{margin-left:auto}
+aside h3{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);margin:18px 0 6px}
+aside .crumb{font-size:12.5px;color:var(--ink-soft);margin:2px 0 8px}
+aside .leistung{margin:0 0 6px;font-size:14.5px}
+aside .zusatz{margin:0 0 6px;font-size:12.5px;color:var(--ink-soft);white-space:pre-line}
+aside .zusatz b{font-weight:650}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.kpi{border:1px solid var(--line);border-radius:6px;padding:6px 8px}
+.kpi span{display:block;font-size:11.5px;color:var(--ink-soft)}
+.kpi b{font-size:16px;font-variant-numeric:tabular-nums}
+.kpi.t{border-color:#d9a3a3}.kpi.t b{color:var(--theo)}
+.kpis.two{grid-template-columns:repeat(2,1fr)}
+.szen{border:1px solid var(--line);border-radius:6px;padding:8px 10px}
+.szen label{display:flex;align-items:center;gap:8px;padding:3px 0}
+.szen .res{margin-top:8px;padding:8px 10px;border-radius:6px;background:var(--ok-bg);color:var(--ok);font-weight:650;display:flex;justify-content:space-between;gap:10px;font-variant-numeric:tabular-nums}
+.szen .res.theo{background:#fde8e8;color:var(--theo);outline:2px dashed var(--theo)}
+.szen .res.none{background:var(--bg);color:var(--ink-soft)}
+.szen .warn{color:var(--theo);font-size:12.5px;margin-top:6px;font-weight:650}
+.szen .note{font-size:12px;color:var(--ink-soft);margin-top:6px}
+table.mo{width:100%;border-collapse:collapse;font-size:13px}
+table.mo th{font-size:11.5px;text-align:left;color:var(--ink-soft);font-weight:650;border-bottom:1px solid var(--line);padding:4px 6px}
+table.mo td{padding:5px 6px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+table.mo tr.p td{background:var(--ok-bg);color:var(--ok)}
+table.mo tr.t td{background:var(--theo-bg);color:var(--theo)}
+table.mo tr.t td.f,table.mo tr.t td.e{text-decoration:line-through}
+table.mo .th{color:var(--theo);font-size:12px;display:block}
+table.mo .th s{text-decoration:line-through}
+.grund{border:1px solid var(--line);border-left:4px solid var(--c);border-radius:6px;margin-bottom:8px}
+.grund summary{padding:7px 10px;cursor:pointer;display:flex;align-items:center;gap:8px;font-weight:650}
+.grund summary .fx{margin-left:auto;font-variant-numeric:tabular-nums}
+.grund dl{margin:0;padding:2px 10px 10px;font-size:13px}
+.grund dt{font-size:11.5px;color:var(--ink-soft);font-weight:650;margin-top:7px}
+.grund dd{margin:1px 0 0}
+.abid{display:inline-block;border:1px solid var(--line);border-radius:4px;padding:0 5px;margin:0 4px 3px 0;font-variant-numeric:tabular-nums;background:var(--bg)}
+.wort{border-left:3px solid var(--line);padding-left:8px;margin:4px 0;color:var(--ink-soft)}
+.missing{color:#8a5300;font-size:12.5px}
+.link{font-size:12.5px;margin-top:14px;color:var(--ink-soft)}
+kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:3px;padding:0 4px;font:11px ui-monospace,monospace;background:#fff}
+</style>
+</head>
+<body>
+<header><h1>GOÄneu – Steigerungsmatrix</h1><span>AB-Steigerungsgründe, Faktoren und maximaler Gebührensatz je Ziffer</span></header>
+<div id="hinweis" role="note"></div>
+<div id="app">
+  <nav aria-label="Kapitel und Abschnitte" id="nav"></nav>
+  <main>
+    <div id="toolbar">
+      <input id="q" type="search" placeholder="Ziffer oder Leistung suchen …  ( / )" aria-label="Suche nach Ziffer oder Leistungsbezeichnung" autocomplete="off">
+      <div class="chips" id="chips" role="group" aria-label="Steigerungsgründe (alle gewählten müssen zutreffen)"></div>
+      <label>Max. Faktor <select id="fmax" aria-label="Filter maximaler Faktor"></select></label>
+      <label><input type="checkbox" id="theo"> Theoretische Kombinationen einbeziehen</label>
+      <button class="btn" id="reset">Filter zurücksetzen</button>
+      <button class="btn" id="csv">CSV exportieren</button>
+      <span id="status" role="status" aria-live="polite"></span>
+    </div>
+    <div id="colhead" class="grid">
+      <button data-s="z">Ziffer</button><button data-s="t">Leistung</button><button data-s="g" class="num">Gebühr</button>
+      <span id="hg">Steigerungsgründe</span><button data-s="f" class="num" id="hf">Max. Faktor</button><button data-s="m" class="num" id="hm">Max. Gebührensatz</button>
+    </div>
+    <div id="list" tabindex="0" role="listbox" aria-label="Ergebnisliste. Pfeiltasten wählen, Eingabetaste öffnet Details."><div id="spacer"></div></div>
+  </main>
+  <aside id="drawer" aria-label="Details zur Ziffer" tabindex="-1"></aside>
+</div>
+<script id="data" type="application/json">/*__DATA__*/</script>
+<script>
+"use strict";
+const D = JSON.parse(document.getElementById('data').textContent);
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const euro = c => { const s = String(c).padStart(3,'0'); return s.slice(0,-2).replace(/\B(?=(\d{3})+(?!\d))/g,'.') + ',' + s.slice(-2) + ' €'; };
+const fnum = f => parseFloat(f.replace(',','.'));   // nur zum Sortieren/Filtern, nie zum Rechnen
+const GR = Object.fromEntries(D.gruende.map(g => [g.k, g]));
+const KEYS = D.gruende.map(g => g.k);
+const R = D.rows.map(r => { const m = D.muster[r[6]]; return {z:r[0], a:r[1], t:r[2], g:r[3], bauch:r[4], ct:r[5], m, c:r[7], zus:r[8], lt:r[2].toLowerCase(), zs:String(r[0])}; });
+const BYZ = new Map(R.map(r => [r.z, r]));
+const ROWH = 38, HEADH = 36;
+
+const st = {kap:null, abs:null, q:'', gr:new Set(), fmax:'', theo:false, sort:'z', dir:1, collapsed:new Set(), sel:null, active:-1};
+let items = [], tops = [], total = 0, result = [];
+
+const mi = r => st.theo ? r.m.maxT : r.m.maxP;
+const maxF = r => r.m.moegl[mi(r)].f;
+const maxC = r => r.c[mi(r)];
+
+/* ---------- Hinweisleiste ---------- */
+(function(){
+  const stand = D.pdf.stand || D.gesetz.stand;
+  $('#hinweis').innerHTML =
+    `<span><b>Entwurf:</b> Gesetzesentwurf, nicht in Kraft${stand ? ' · ' + esc(stand) : ' · Stand nicht hinterlegt'}.</span>` +
+    `<span><b>Annahme:</b> Mehrere Gründe werden multipliziert – der Entwurf regelt die Kumulation nicht ausdrücklich.</span>` +
+    `<span><b>Nicht enthalten:</b> § 2 (individuell vereinbarter höherer Faktor), Zuschläge und alle Minderungen (z. B. 0,9× ab der 2. Hauptleistung, § 6a).</span>`;
+})();
+
+/* ---------- Navigation ---------- */
+function renderNav(){
+  let h = `<button data-kap="" aria-current="${st.kap===null}">Alle Kapitel<span class="n">${R.length.toLocaleString('de-DE')}</span></button>`;
+  D.kapitel.forEach(k => {
+    h += `<button class="kap" data-kap="${k.k}" aria-current="${st.kap===k.k && st.abs===null}">Kapitel ${k.k}${k.titel ? ' – ' + esc(k.titel) : ''}<span class="n">${k.n.toLocaleString('de-DE')}</span></button>`;
+    D.abschnitte.forEach((a,i) => { if (a.kap===k.k) h += `<button class="abs" data-abs="${i}" aria-current="${st.abs===i}">${esc(a.name)}<span class="n">${a.n}</span></button>`; });
+  });
+  $('#nav').innerHTML = h;
+}
+$('#nav').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  if (b.dataset.abs !== undefined) { st.abs = +b.dataset.abs; st.kap = D.abschnitte[st.abs].kap; st.collapsed.delete(st.abs); }
+  else { st.kap = b.dataset.kap || null; st.abs = null; }
+  renderNav(); apply(); $('#list').scrollTop = 0;
+});
+
+/* ---------- Filter ---------- */
+function renderFmax(){
+  const cnt = new Map();
+  R.forEach(r => cnt.set(maxF(r), (cnt.get(maxF(r))||0)+1));
+  const opts = [...cnt].sort((a,b) => fnum(a[0])-fnum(b[0]));
+  if (!cnt.has(st.fmax)) st.fmax = '';
+  $('#fmax').innerHTML = '<option value="">alle</option>' + opts.map(([f,n]) => `<option value="${f}"${f===st.fmax?' selected':''}>×${f} (${n.toLocaleString('de-DE')})</option>`).join('');
+}
+function matchQ(r, toks){
+  for (const t of toks) {
+    if (/^\d+$/.test(t)) { if (!r.zs.startsWith(t)) return false; }
+    else if (!r.lt.includes(t)) return false;
+  }
+  return true;
+}
+function apply(keepActive){
+  const toks = st.q.toLowerCase().split(/\s+/).filter(Boolean);
+  const base = R.filter(r => (st.abs===null || r.a===st.abs) && (st.kap===null || D.abschnitte[r.a].kap===st.kap)
+    && (!st.fmax || maxF(r)===st.fmax) && matchQ(r, toks));
+  const cnt = Object.fromEntries(KEYS.map(k => [k,0]));
+  base.forEach(r => { for (const k in r.m.gruende) cnt[k]++; });
+  $('#chips').innerHTML = D.gruende.map(g =>
+    `<button class="chip c${g.k}" data-k="${g.k}" aria-pressed="${st.gr.has(g.k)}" title="${esc(g.name)} ×${g.faktor}"><span class="ltr">${g.k}</span><span class="nm">${esc(g.name.replace(/ BMI.*| ≥.*| unter.*/,''))}</span> ×${g.faktor}<span class="cnt">${cnt[g.k].toLocaleString('de-DE')}</span></button>`).join('');
+  result = base.filter(r => { for (const k of st.gr) if (!(k in r.m.gruende)) return false; return true; });
+
+  const key = {z:r=>r.z, t:r=>r.lt, g:r=>r.g, f:r=>fnum(maxF(r)), m:r=>maxC(r)}[st.sort];
+  const groups = new Map();
+  result.forEach(r => { if (!groups.has(r.a)) groups.set(r.a, []); groups.get(r.a).push(r); });
+  items = []; tops = []; total = 0;
+  for (const [a, rs] of groups) {
+    rs.sort((x,y) => { const kx = key(x), ky = key(y); return (kx<ky?-1:kx>ky?1:x.z-y.z) * st.dir; });
+    items.push({h:a, n:rs.length}); tops.push(total); total += HEADH;
+    if (!st.collapsed.has(a)) for (const r of rs) { items.push(r); tops.push(total); total += ROWH; }
+  }
+  $('#spacer').style.height = total + 'px';
+  if (!keepActive) st.active = -1;
+  const sum = result.length;
+  $('#status').textContent = `${sum.toLocaleString('de-DE')} von ${R.length.toLocaleString('de-DE')} Ziffern`;
+  heads(); render();
+}
+function heads(){
+  const c = $('main').classList.contains('compact');
+  const lab = {z:'Ziffer', t:'Leistung', g:'Gebühr',
+    f: c ? (st.theo ? 'Theor. ×' : 'Max. ×') : (st.theo ? 'Max. Faktor (theor.)' : 'Max. Faktor'),
+    m: c ? (st.theo ? 'Theor. Satz' : 'Max. Satz') : (st.theo ? 'Max. Satz (theor.)' : 'Max. Gebührensatz')};
+  $('#hg').textContent = c ? 'Gründe' : 'Steigerungsgründe';
+  document.querySelectorAll('#colhead button').forEach(b => {
+    const on = b.dataset.s===st.sort;
+    if (on) b.setAttribute('aria-sort', st.dir>0?'ascending':'descending'); else b.removeAttribute('aria-sort');
+    b.textContent = lab[b.dataset.s] + (on ? (st.dir>0?' ▲':' ▼') : '');
+  });
+}
+
+/* ---------- virtuelle Liste ---------- */
+const list = $('#list'), spacer = $('#spacer');
+function firstAt(y){ let lo=0, hi=tops.length-1; while (lo<hi) { const mid=(lo+hi+1)>>1; if (tops[mid]<=y) lo=mid; else hi=mid-1; } return lo; }
+function badges(r){
+  return Object.entries(r.m.gruende).map(([k,f]) => `<span class="badge c${k}" title="${esc(GR[k].name)} ×${f}">${k}<i>×${f}</i></span>`).join('');
+}
+function render(){
+  if (!items.length) { spacer.innerHTML = '<div id="empty">Keine Ziffer entspricht den Filtern.</div>'; return; }
+  const y0 = list.scrollTop, y1 = y0 + list.clientHeight;
+  let i = Math.max(0, firstAt(y0) - 6), h = '';
+  for (; i < items.length && tops[i] < y1 + 240; i++) {
+    const it = items[i];
+    if (it.h !== undefined) {
+      const a = D.abschnitte[it.h];
+      h += `<button class="ghead" style="top:${tops[i]}px" data-h="${it.h}" aria-expanded="${!st.collapsed.has(it.h)}" tabindex="-1"><span class="car">▾</span>Kapitel ${a.kap} · ${esc(a.name)} <span class="n">${it.n.toLocaleString('de-DE')} Ziffern</span></button>`;
+    } else {
+      const m = it.m, dif = m.maxT !== m.maxP;
+      h += `<div class="row grid${i===st.active?' active':''}${it.z===st.sel?' sel':''}" style="top:${tops[i]}px" data-i="${i}" role="option" aria-selected="${it.z===st.sel}" id="r${it.z}">` +
+        `<span class="z">${it.z}</span><span class="t" title="${esc(it.t)}">${esc(it.t)}</span><span class="num">${euro(it.g)}</span>` +
+        `<span class="badges">${badges(it)}</span>` +
+        `<span class="num mx">×${maxF(it)}${dif && !st.theo ? `<small title="theoretischer Höchstwert">theor. ×${m.moegl[m.maxT].f}</small>` : ''}</span>` +
+        `<span class="num mx">${euro(maxC(it))}${dif && !st.theo ? `<small>${euro(it.c[m.maxT])}</small>` : ''}</span></div>`;
+    }
+  }
+  spacer.innerHTML = h;
+  if (st.active >= 0) list.setAttribute('aria-activedescendant', 'r' + items[st.active].z); else list.removeAttribute('aria-activedescendant');
+}
+let raf = 0;
+list.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; render(); }); });
+new ResizeObserver(() => { $('main').classList.toggle('compact', list.clientWidth < 860); heads(); render(); }).observe(list);
+
+list.addEventListener('click', e => {
+  const g = e.target.closest('.ghead');
+  if (g) { const a = +g.dataset.h; st.collapsed.has(a) ? st.collapsed.delete(a) : st.collapsed.add(a); apply(); return; }
+  const r = e.target.closest('.row');
+  if (r) { st.active = +r.dataset.i; open(items[st.active].z); }
+});
+function scrollToIdx(i){
+  const top = tops[i], h = items[i].h !== undefined ? HEADH : ROWH;
+  if (top < list.scrollTop + HEADH) list.scrollTop = Math.max(0, top - HEADH);
+  else if (top + h > list.scrollTop + list.clientHeight) list.scrollTop = top + h - list.clientHeight;
+}
+function move(d){
+  let i = st.active;
+  if (i < 0) i = d > 0 ? -1 : items.length;
+  do { i += d; } while (i >= 0 && i < items.length && items[i].h !== undefined);
+  if (i < 0 || i >= items.length) return;
+  st.active = i; scrollToIdx(i); render();
+  if (st.sel !== null) open(items[i].z, true);
+}
+list.addEventListener('keydown', e => {
+  if (e.key==='ArrowDown') { move(1); e.preventDefault(); }
+  else if (e.key==='ArrowUp') { move(-1); e.preventDefault(); }
+  else if (e.key==='PageDown') { for (let i=0;i<10;i++) move(1); e.preventDefault(); }
+  else if (e.key==='PageUp') { for (let i=0;i<10;i++) move(-1); e.preventDefault(); }
+  else if (e.key==='Home') { st.active = -1; move(1); e.preventDefault(); }
+  else if (e.key==='End') { st.active = items.length; move(-1); e.preventDefault(); }
+  else if (e.key==='Enter' && st.active >= 0) { open(items[st.active].z); e.preventDefault(); }
+});
+
+/* ---------- Detailbereich ---------- */
+const kombi = s => esc(s);
+function open(z, keepFocus){
+  const r = BYZ.get(z); if (!r) return;
+  st.sel = z;
+  const m = r.m, a = D.abschnitte[r.a], dif = m.maxT !== m.maxP, kap = D.kapitel.find(k => k.k===a.kap);
+  let h = `<h2><span>Ziffer ${r.z}</span><button class="btn close" id="close" aria-label="Detailbereich schließen">Schließen <kbd>Esc</kbd></button></h2>` +
+    `<div class="crumb">Kapitel ${a.kap}${kap.titel ? ' – ' + esc(kap.titel) : ''} · ${esc(a.name)}</div>` +
+    `<p class="leistung">${esc(r.t)}</p>` +
+    (r.zus ? `<p class="zusatz"><b>Zusatz laut Gebührenverzeichnis:</b> ${esc(r.zus)}</p>` : '') +
+    `<div class="kpis${dif ? '' : ' two'}"><div class="kpi"><span>Gebühr (×1,0)</span><b>${euro(r.g)}</b></div>` +
+    `<div class="kpi"><span>Max. praktisch ×${m.moegl[m.maxP].f}</span><b>${euro(r.c[m.maxP])}</b></div>` +
+    (dif ? `<div class="kpi t"><span>Nur theoretisch ×${m.moegl[m.maxT].f}</span><b>${euro(r.c[m.maxT])}</b></div>` : '') + `</div>`;
+
+  h += `<h3>Szenario</h3><div class="szen" id="szen">` +
+    Object.entries(m.gruende).map(([k,f]) => `<label><input type="checkbox" value="${k}"><span class="ltr c${k}">${k}</span>${esc(GR[k].name)} <span class="num" style="margin-left:auto">×${f}</span></label>`).join('') +
+    `<div class="res none" id="szres" aria-live="polite"></div><div id="szwarn"></div>` +
+    `<div class="note">Annahme: mehrere Gründe multiplizieren sich.</div></div>`;
+
+  h += `<h3>Möglichkeiten</h3><table class="mo"><thead><tr><th>Faktor</th><th>Zusammensetzung</th><th class="num">Gebührensatz</th><th>Kennzeichen</th></tr></thead><tbody>` +
+    m.moegl.map((x,i) => `<tr class="${x.status}"><td class="f num">×${x.f}</td><td>${x.prakt.length ? x.prakt.map(kombi).join(' | ') : '–'}` +
+      (x.theo.length ? `<span class="th">nur theoretisch: <s>${x.theo.map(kombi).join(' | ')}</s></span>` : '') +
+      `</td><td class="e num">${euro(r.c[i])}</td><td>${x.status==='p' ? '✓ praktisch' : '✗ nur theoretisch'}</td></tr>`).join('') + `</tbody></table>`;
+
+  h += `<h3>Zutreffende Steigerungsgründe</h3>` + Object.entries(m.gruende).map(([k,f]) => {
+    const g = GR[k];
+    const fund = g.fundstellen.map(x => x.status==='eindeutig'
+      ? `<div><span class="abid">${esc(x.id)}</span> Seite ${x.seite}<div class="wort">${esc(x.text)}</div></div>`
+      : `<span class="abid" title="${x.status==='mehrdeutig' ? 'im PDF mehrdeutig' : 'Wortlaut nicht hinterlegt'}">${esc(x.id)}</span>`).join('');
+    const fehlt = g.fundstellen.some(x => x.status!=='eindeutig');
+    return `<details class="grund c${k}" open><summary><span class="ltr">${k}</span>${esc(g.name)}<span class="fx">×${f}</span></summary><dl>` +
+      `<dt>Rechtsgrundlage (AB-ID)</dt><dd>${fund}${fehlt ? '<div class="missing">Wortlaut und Seitenzahl nicht hinterlegt – die Allgemeinen Bestimmungen lagen beim Build nicht vor (offener Punkt).</div>' : ''}</dd>` +
+      `<dt>Geltungsbereich</dt><dd>${esc(g.geltung)}</dd><dt>Voraussetzung</dt><dd>${esc(g.voraussetzung)}</dd>` +
+      `<dt>Notwendige Begründung / Nachweis</dt><dd>${esc(g.nachweis)}</dd><dt>Ausnahme</dt><dd>${esc(g.ausnahme)}</dd></dl></details>`;
+  }).join('');
+
+  const pm = [];
+  if (r.bauch !== '–') pm.push('Eingriff im Bauchraum: ' + r.bauch);
+  if (r.ct !== '–') pm.push('CT/MRT-Untersuchung: ' + r.ct);
+  if (pm.length) h += `<h3>Prüfmerkmale (Vorbelegung der Matrix)</h3><div style="font-size:13px">${pm.map(esc).join(' · ')}</div>`;
+  h += `<div class="link">Direktlink: <a href="#${r.z}">#${r.z}</a></div>`;
+
+  const dr = $('#drawer'); dr.innerHTML = h; dr.scrollTop = 0;
+  $('#app').classList.add('drawer-open');
+  if (location.hash !== '#' + z) history.replaceState(null, '', '#' + z);
+  const upd = () => {
+    const sel = [...dr.querySelectorAll('#szen input:checked')].map(i => i.value);
+    const res = $('#szres'), w = $('#szwarn');
+    if (!sel.length) { res.className = 'res none'; res.innerHTML = `<span>Kein Grund gewählt · ×1,0</span><span>${euro(r.g)}</span>`; w.innerHTML = ''; return; }
+    const [idx, theo] = m.sub[KEYS.filter(k => sel.includes(k)).join('')];
+    res.className = 'res' + (theo ? ' theo' : '');
+    res.innerHTML = `<span>${sel.join('×')} · Faktor ×${m.moegl[idx].f}</span><span>${euro(r.c[idx])}</span>`;
+    w.innerHTML = theo ? `<div class="warn">✗ Nur theoretisch möglich – diese Kombination ist laut Matrix praktisch ausgeschlossen (S×F bzw. B×F).</div>` : '';
+  };
+  dr.querySelector('#szen').addEventListener('change', upd); upd();
+  $('#close').onclick = closeDrawer;
+  render();
+  if (!keepFocus) dr.focus({preventScroll:true});
+}
+function closeDrawer(){
+  st.sel = null; $('#app').classList.remove('drawer-open'); history.replaceState(null, '', location.pathname + location.search);
+  render(); list.focus();
+}
+function goto(z){
+  if (!BYZ.has(z)) return false;
+  let i = items.indexOf(BYZ.get(z));
+  if (i < 0) { st.kap = st.abs = null; st.q = ''; $('#q').value = ''; st.gr.clear(); st.fmax = ''; st.collapsed.clear(); renderNav(); renderFmax(); apply(); i = items.indexOf(BYZ.get(z)); }
+  st.active = i; list.scrollTop = Math.max(0, tops[i] - HEADH - ROWH); open(z, true);
+  return true;
+}
+
+/* ---------- Bedienelemente ---------- */
+let qt = 0;
+const syncQ = () => { const v = $('#q').value.trim(); if (v !== st.q) { st.q = v; apply(); list.scrollTop = 0; } };
+$('#q').addEventListener('input', () => { clearTimeout(qt); qt = setTimeout(syncQ, 80); });
+$('#q').addEventListener('search', syncQ);
+$('#q').addEventListener('keydown', e => {
+  if (e.key==='Enter') { clearTimeout(qt); st.q = e.target.value.trim(); apply();
+    const exact = /^\d+$/.test(st.q) && result.find(r => r.zs===st.q);
+    const first = exact || items.find(it => it.h === undefined);
+    if (first) { st.active = items.indexOf(first); scrollToIdx(st.active); open(first.z, true); } }
+  else if (e.key==='ArrowDown') { list.focus(); move(1); e.preventDefault(); }
+});
+$('#chips').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; const k = b.dataset.k; st.gr.has(k) ? st.gr.delete(k) : st.gr.add(k); apply(); list.scrollTop = 0; $(`.chip[data-k=${k}]`).focus(); });
+$('#fmax').addEventListener('change', e => { st.fmax = e.target.value; apply(); list.scrollTop = 0; });
+$('#theo').addEventListener('change', e => { st.theo = e.target.checked; renderFmax(); apply(); });
+$('#reset').addEventListener('click', () => { st.kap = st.abs = null; st.q = ''; $('#q').value = ''; st.gr.clear(); st.fmax = ''; st.collapsed.clear(); st.sort = 'z'; st.dir = 1; renderNav(); renderFmax(); apply(); list.scrollTop = 0; });
+$('#colhead').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (st.sort===b.dataset.s) st.dir = -st.dir; else { st.sort = b.dataset.s; st.dir = (b.dataset.s==='f'||b.dataset.s==='m') ? -1 : 1; } apply(); });
+document.addEventListener('keydown', e => {
+  const inField = /INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName);
+  if (e.key==='/' && !inField) { $('#q').focus(); $('#q').select(); e.preventDefault(); }
+  else if (e.key==='Escape') { if (st.sel !== null) { closeDrawer(); if (inField) e.preventDefault(); } else setTimeout(syncQ, 0); }
+});
+$('#csv').addEventListener('click', () => {
+  const q = s => '"' + String(s).replace(/"/g,'""') + '"', dez = c => euro(c).replace(/[. €]/g,'');
+  const head = ['Ziffer','Kapitel','Abschnitt','Leistung','Gebühr (€)','Gründe', st.theo ? 'max. Faktor (inkl. theoretisch)' : 'max. Faktor', st.theo ? 'max. Gebührensatz (€, inkl. theoretisch)' : 'max. Gebührensatz (€)'];
+  const lines = [head.map(q).join(';')];
+  const seen = new Map(); result.forEach(r => { if (!seen.has(r.a)) seen.set(r.a, []); seen.get(r.a).push(r); });
+  for (const rs of seen.values()) for (const r of rs) {
+    const a = D.abschnitte[r.a];
+    lines.push([r.z, q(a.kap), q(a.name), q(r.t), dez(r.g), q(Object.entries(r.m.gruende).map(([k,f]) => k+' ×'+f).join(', ')), q(maxF(r)), dez(maxC(r))].join(';'));
+  }
+  const blob = new Blob(['﻿' + lines.join('\r\n')], {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'GOAeneu_Steigerung_Export.csv';
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+});
+function fromHash(){ const z = parseInt(location.hash.slice(1), 10); if (z) goto(z); }
+window.addEventListener('hashchange', fromHash);
+
+renderNav(); renderFmax(); apply(); fromHash();
+</script>
+</body>
+</html>
