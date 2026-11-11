@@ -132,6 +132,10 @@ table.mo .th s{text-decoration:line-through}
 .nosteig{margin-top:12px;border:1px solid #b9c1cc;border-left:4px solid #55606e;border-radius:6px;padding:10px 12px;background:#f3f5f8;font-size:13px}
 .nosteig b{display:flex;align-items:center;gap:8px;margin-bottom:4px;font-size:14px}
 .link{font-size:12.5px;margin-top:14px;color:var(--ink-soft)}
+#tip{position:fixed;z-index:50;max-width:460px;background:#fff;border:1px solid var(--c);border-top:4px solid var(--c);border-radius:6px;padding:9px 12px;box-shadow:0 8px 24px rgba(10,25,45,.22);font-size:12.5px;line-height:1.45;pointer-events:none}
+#tip b{display:flex;align-items:center;gap:7px;font-size:13.5px;margin-bottom:5px}
+#tip p{margin:0 0 6px}
+#tip small{color:var(--ink-soft)}
 kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:3px;padding:0 4px;font:11px ui-monospace,monospace;background:#fff}
 </style>
 </head>
@@ -144,6 +148,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:3px;paddi
     <div id="toolbar">
       <input id="q" type="search" placeholder="Ziffer oder Leistung suchen …  ( / )" aria-label="Suche nach Ziffer oder Leistungsbezeichnung" autocomplete="off">
       <div class="chips" id="chips" role="group" aria-label="Steigerungsgründe (alle gewählten müssen zutreffen)"></div>
+      <label>Anzahl AB-Gründe <select id="anz" aria-label="Filter nach Anzahl möglicher AB-Steigerungsgründe"></select></label>
       <label>Max. Faktor <select id="fmax" aria-label="Filter maximaler Faktor"></select></label>
       <label><input type="checkbox" id="theo"> Theoretische Kombinationen einbeziehen</label>
       <button class="btn" id="reset">Filter zurücksetzen</button>
@@ -168,11 +173,11 @@ const euro = c => { const s = String(c).padStart(3,'0'); return s.slice(0,-2).re
 const fnum = f => parseFloat(f.replace(',','.'));   // nur zum Sortieren/Filtern, nie zum Rechnen
 const GR = Object.fromEntries(D.gruende.map(g => [g.k, g]));
 const KEYS = D.gruende.map(g => g.k);
-const R = D.rows.map(r => { const m = r[6] < 0 ? null : D.muster[r[6]]; return {z:r[0], a:r[1], t:r[2], g:r[3], bauch:r[4], ct:r[5], m, c:r[7], zus:r[8], seite:r[9], lt:r[2].toLowerCase(), zs:String(r[0])}; });
+const R = D.rows.map(r => { const m = r[6] < 0 ? null : D.muster[r[6]]; return {z:r[0], a:r[1], t:r[2], g:r[3], bauch:r[4], ct:r[5], m, c:r[7], zus:r[8], seite:r[9], n: m ? Object.keys(m.gruende).length : 0, lt:r[2].toLowerCase(), zs:String(r[0])}; });
 const BYZ = new Map(R.map(r => [r.z, r]));
 const ROWH = 38, HEADH = 36;
 
-const st = {kap:null, abs:null, q:'', gr:new Set(), ohne:false, fmax:'', theo:false, sort:'z', dir:1, collapsed:new Set(D.abschnitte.map((_,i) => i)), sel:null, active:-1};
+const st = {kap:null, abs:null, q:'', gr:new Set(), ohne:false, anz:'', fmax:'', theo:false, sort:'z', dir:1, collapsed:new Set(D.abschnitte.map((_,i) => i)), sel:null, active:-1};
 let items = [], tops = [], total = 0, result = [];
 
 const KEIN = '1,0';   // Ziffer steht nicht in der Steigerungsmatrix: keine AB-Steigerung, Faktor 1,0
@@ -214,6 +219,11 @@ function renderFmax(){
   if (!cnt.has(st.fmax)) st.fmax = '';
   $('#fmax').innerHTML = '<option value="">alle</option>' + opts.map(([f,n]) => `<option value="${f}"${f===st.fmax?' selected':''}>×${f}${f===KEIN ? ' – keine AB-Steigerung' : ''} (${n.toLocaleString('de-DE')})</option>`).join('');
 }
+(function(){
+  const cnt = new Map(); R.forEach(r => cnt.set(r.n, (cnt.get(r.n)||0)+1));
+  $('#anz').innerHTML = '<option value="">alle</option>' + [...cnt].sort((a,b) => a[0]-b[0]).map(([n,c]) =>
+    `<option value="${n}">${n===0 ? '0 – nicht steigerfähig' : n===1 ? '1 Grund' : n+' Gründe'} (${c.toLocaleString('de-DE')})</option>`).join('');
+})();
 function matchQ(r, toks){
   for (const t of toks) {
     if (/^\d+$/.test(t)) { if (!r.zs.startsWith(t)) return false; }
@@ -224,12 +234,12 @@ function matchQ(r, toks){
 function apply(keepActive){
   const toks = st.q.toLowerCase().split(/\s+/).filter(Boolean);
   const base = R.filter(r => (st.abs===null || r.a===st.abs) && (st.kap===null || D.abschnitte[r.a].kap===st.kap)
-    && (!st.fmax || maxF(r)===st.fmax) && matchQ(r, toks));
+    && (!st.fmax || maxF(r)===st.fmax) && (st.anz==='' || r.n===+st.anz) && matchQ(r, toks));
   const cnt = Object.fromEntries(KEYS.map(k => [k,0]));
   let nOhne = 0;
   base.forEach(r => { if (!r.m) { nOhne++; return; } for (const k in r.m.gruende) cnt[k]++; });
   $('#chips').innerHTML = D.gruende.map(g =>
-    `<button class="chip c${g.k}" data-k="${g.k}" aria-pressed="${st.gr.has(g.k)}" title="${esc(g.name)} ×${g.faktor}"><span class="ltr">${g.k}</span><span class="nm">${esc(g.name.replace(/ BMI.*| ≥.*| unter.*/,''))}</span> ×${g.faktor}<span class="cnt">${cnt[g.k].toLocaleString('de-DE')}</span></button>`).join('') +
+    `<button class="chip c${g.k}" data-k="${g.k}" aria-pressed="${st.gr.has(g.k)}" data-tip="${g.k}"><span class="ltr">${g.k}</span><span class="nm">${esc(g.name.replace(/ BMI.*| ≥.*| unter.*/,''))}</span> ×${g.faktor}<span class="cnt">${cnt[g.k].toLocaleString('de-DE')}</span></button>`).join('') +
     `<button class="chip cN" data-k="ohne" aria-pressed="${st.ohne}" title="Ziffer steht nicht in der Steigerungsmatrix: keiner der 5 AB-Gründe greift"><span class="ltr">–</span><span class="nm">Nicht durch AB steigerfähig</span><span class="cnt">${nOhne.toLocaleString('de-DE')}</span></button>`;
   result = base.filter(r => { if (st.ohne) return !r.m; for (const k of st.gr) if (!r.m || !(k in r.m.gruende)) return false; return true; });
 
@@ -266,7 +276,7 @@ const list = $('#list'), spacer = $('#spacer');
 function firstAt(y){ let lo=0, hi=tops.length-1; while (lo<hi) { const mid=(lo+hi+1)>>1; if (tops[mid]<=y) lo=mid; else hi=mid-1; } return lo; }
 function badges(r){
   if (!r.m) return `<span class="badge cN" title="Nicht durch AB steigerfähig">–<i>keine AB-Steigerung</i></span>`;
-  return Object.entries(r.m.gruende).map(([k,f]) => `<span class="badge c${k}" title="${esc(GR[k].name)} ×${f}">${k}<i>×${f}</i></span>`).join('');
+  return Object.entries(r.m.gruende).map(([k,f]) => `<span class="badge c${k}" data-tip="${k}">${k}<i>×${f}</i></span>`).join('');
 }
 function render(){
   if (!items.length) { spacer.innerHTML = '<div id="empty">Keine Ziffer entspricht den Filtern.</div>'; return; }
@@ -341,7 +351,7 @@ function open(z, keepFocus){
 
   if (m) {
   h += `<h3>Szenario</h3><div class="szen" id="szen">` +
-    Object.entries(m.gruende).map(([k,f]) => `<label><input type="checkbox" value="${k}"><span class="ltr c${k}">${k}</span>${esc(GR[k].name)} <span class="num" style="margin-left:auto">×${f}</span></label>`).join('') +
+    Object.entries(m.gruende).map(([k,f]) => `<label data-tip="${k}"><input type="checkbox" value="${k}"><span class="ltr c${k}">${k}</span>${esc(GR[k].name)} <span class="num" style="margin-left:auto">×${f}</span></label>`).join('') +
     `<div class="res none" id="szres" aria-live="polite"></div><div id="szwarn"></div>` +
     `<div class="note">Annahme: mehrere Gründe multiplizieren sich.</div></div>`;
 
@@ -357,7 +367,8 @@ function open(z, keepFocus){
       : `<span class="abid" title="${x.status==='mehrdeutig' ? 'im PDF mehrdeutig' : 'Wortlaut nicht hinterlegt'}">${esc(x.id)}</span>`).join('');
     const fehlt = g.fundstellen.some(x => x.status!=='eindeutig');
     return `<details class="grund c${k}" open><summary><span class="ltr">${k}</span>${esc(g.name)}<span class="fx">×${f}</span></summary><dl>` +
-      `<dt>Rechtsgrundlage (AB-ID)</dt><dd>${fund}${fehlt ? '<div class="missing">Wortlaut und Seitenzahl nicht hinterlegt – die Allgemeinen Bestimmungen lagen beim Build nicht vor (offener Punkt).</div>' : ''}</dd>` +
+      `<dt>Rechtsgrundlage (AB-ID)</dt><dd>${fund}${fehlt && !g.wortlaut ? '<div class="missing">Wortlaut und Seitenzahl nicht hinterlegt – die Allgemeinen Bestimmungen lagen beim Build nicht vor (offener Punkt).</div>' : ''}</dd>` +
+      (g.wortlaut ? `<dt>Wortlaut der AB-Regel</dt><dd><div class="wort">${esc(g.wortlaut)}</div>${fehlt ? '<div class="missing">Wortlaut wie geliefert, nicht am Entwurf geprüft; Seitenzahl nicht hinterlegt.</div>' : ''}</dd>` : '') +
       `<dt>Geltungsbereich</dt><dd>${esc(g.geltung)}</dd><dt>Voraussetzung</dt><dd>${esc(g.voraussetzung)}</dd>` +
       `<dt>Notwendige Begründung / Nachweis</dt><dd>${esc(g.nachweis)}</dd><dt>Ausnahme</dt><dd>${esc(g.ausnahme)}</dd></dl></details>`;
   }).join('');
@@ -394,7 +405,7 @@ function goto(z){
   if (!BYZ.has(z)) return false;
   if (st.collapsed.delete(BYZ.get(z).a)) apply();
   let i = items.indexOf(BYZ.get(z));
-  if (i < 0) { st.kap = st.abs = null; st.q = ''; $('#q').value = ''; st.gr.clear(); st.ohne = false; st.fmax = ''; renderNav(); renderFmax(); apply(); i = items.indexOf(BYZ.get(z)); }
+  if (i < 0) { st.kap = st.abs = null; st.q = ''; $('#q').value = ''; st.gr.clear(); st.ohne = false; st.anz = ''; $('#anz').value = ''; st.fmax = ''; renderNav(); renderFmax(); apply(); i = items.indexOf(BYZ.get(z)); }
   st.active = i; list.scrollTop = Math.max(0, tops[i] - HEADH - ROWH); open(z, true);
   return true;
 }
@@ -412,9 +423,10 @@ $('#q').addEventListener('keydown', e => {
   else if (e.key==='ArrowDown') { list.focus(); move(1); e.preventDefault(); }
 });
 $('#chips').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; const k = b.dataset.k; if (k==='ohne') { st.ohne = !st.ohne; st.gr.clear(); } else { st.ohne = false; st.gr.has(k) ? st.gr.delete(k) : st.gr.add(k); } apply(); list.scrollTop = 0; $(`.chip[data-k=${k}]`).focus(); });
+$('#anz').addEventListener('change', e => { st.anz = e.target.value; apply(); list.scrollTop = 0; });
 $('#fmax').addEventListener('change', e => { st.fmax = e.target.value; apply(); list.scrollTop = 0; });
 $('#theo').addEventListener('change', e => { st.theo = e.target.checked; renderFmax(); apply(); });
-$('#reset').addEventListener('click', () => { st.kap = st.abs = null; st.q = ''; $('#q').value = ''; st.gr.clear(); st.ohne = false; st.fmax = ''; st.collapsed = new Set(D.abschnitte.map((_,i) => i)); st.sort = 'z'; st.dir = 1; renderNav(); renderFmax(); apply(); list.scrollTop = 0; });
+$('#reset').addEventListener('click', () => { st.kap = st.abs = null; st.q = ''; $('#q').value = ''; st.gr.clear(); st.ohne = false; st.anz = ''; $('#anz').value = ''; st.fmax = ''; st.collapsed = new Set(D.abschnitte.map((_,i) => i)); st.sort = 'z'; st.dir = 1; renderNav(); renderFmax(); apply(); list.scrollTop = 0; });
 $('#colhead').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (st.sort===b.dataset.s) st.dir = -st.dir; else { st.sort = b.dataset.s; st.dir = (b.dataset.s==='f'||b.dataset.s==='m') ? -1 : 1; } apply(); });
 document.addEventListener('keydown', e => {
   const inField = /INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName);
@@ -434,6 +446,28 @@ $('#csv').addEventListener('click', () => {
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'GOAeneu_Steigerung_Export.csv';
   document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 });
+/* ---------- Tooltip mit Wortlaut der AB-Regel ---------- */
+const tip = document.createElement('div'); tip.id = 'tip'; tip.setAttribute('role', 'tooltip'); tip.hidden = true; document.body.appendChild(tip);
+let tipEl = null;
+function showTip(el){
+  if (el === tipEl) return;
+  tipEl = el; const g = GR[el.dataset.tip];
+  tip.className = 'c' + g.k;
+  tip.innerHTML = `<b><span class="ltr">${g.k}</span>${esc(g.name)} · ×${g.faktor}</b>` +
+    (g.wortlaut ? `<p>${esc(g.wortlaut)}</p>` : `<p>${esc(g.voraussetzung)}</p>`) +
+    `<small>Rechtsgrundlage: ${g.ids.map(esc).join(' · ')}</small>`;
+  tip.hidden = false;
+  const r = el.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
+  let x = Math.min(Math.max(8, r.left), innerWidth - w - 8), y = r.bottom + 6;
+  if (y + h > innerHeight - 8) y = Math.max(8, r.top - h - 6);
+  tip.style.left = x + 'px'; tip.style.top = y + 'px';
+}
+function hideTip(){ tipEl = null; tip.hidden = true; }
+document.addEventListener('mouseover', e => { const el = e.target.closest && e.target.closest('[data-tip]'); el ? showTip(el) : hideTip(); });
+document.addEventListener('focusin', e => { const el = e.target.closest('[data-tip]'); el ? showTip(el) : hideTip(); });
+document.addEventListener('scroll', hideTip, true);
+document.addEventListener('keydown', e => { if (e.key==='Escape') hideTip(); }, true);
+
 function fromHash(){ const z = parseInt(location.hash.slice(1), 10); if (z) goto(z); }
 window.addEventListener('hashchange', fromHash);
 

@@ -4,7 +4,7 @@
 - Gebührenverzeichnis des Entwurfs (Excel): `input/gesetz/Gebuehrenverzeichnis_v6_20260715.xlsx`
 - Zuordnung Ziffer → Kapitel/Abschnitt (JSON): `input/kapitel/GOAeneu_Ziffer_zu_Kapitel.json`
 - Gesetzesentwurf mit Allgemeinen Bestimmungen (PDF): **lag beim Build nicht vor**
-- Abnahmetests Daten: **17 von 17 bestanden**
+- Abnahmetests Daten: **19 von 19 bestanden**
 
 ## 1. Abnahmetests (Daten)
 
@@ -15,6 +15,8 @@
 | Nicht durch AB steigerfähig = Gesamt − Matrix (3.581) | ✅ bestanden | 3581 |
 | Alle Matrixziffern in der Zuordnungsdatei, Kapitel/Abschnitt identisch | ✅ bestanden | 0 fehlend, 0 abweichend |
 | Ziffer 4500: Kapitel G, III. Psychotherapieverfahren …, 145,00 €, nicht durch AB steigerfähig | ✅ bestanden | Kapitel G · III. Psychotherapieverfahren, -methoden und -techniken · 145,00 € · kein Steigerungsgrund |
+| Anzahl möglicher AB-Gründe je Ziffer: 0 → 3.581 · 1 → 197 · 2 → 95 · 3 → 1.472 · 4 → 235 | ✅ bestanden | 0 → 3581 · 1 → 197 · 2 → 95 · 3 → 1472 · 4 → 235 |
+| Wortlaut der AB-Regel für alle 5 Gründe hinterlegt | ✅ bestanden | G: 972 Zeichen · B: 367 Zeichen · S: 313 Zeichen · F: 386 Zeichen · V: 272 Zeichen |
 | Jede nicht steigerfähige Ziffer hat eine Leistungsbezeichnung | ✅ bestanden | 0 ohne Text |
 | Keine doppelten Ziffern | ✅ bestanden | 1999 eindeutig |
 | Steigerfähige Ziffern je Kapitel C=100 · D=2 · F=31 · L=1.705 · O=161 | ✅ bestanden | C=100 · D=2 · F=31 · L=1705 · O=161 |
@@ -35,14 +37,19 @@
 | Startansicht: Status „5.580 von 5.580 Ziffern“ | ✅ bestanden | 5.580 von 5.580 Ziffern |
 | Navigation: 17 Kapitel (B bis S) mit Titel, z. B. „L Chirurgie 2.478“ | ✅ bestanden | 17 Kapitel; G Neurologische, psychiatrische, psychotherapeutische und psychosomatische Leistungen 135 | L Chirurgie 2.478 |
 | Navigation: Klick auf Kapitel L zeigt dessen Abschnitte und filtert auf 2.478 Ziffern | ✅ bestanden | 20 Abschnitte; 2.478 von 5.580 Ziffern |
-| Virtualisierung: weniger als 80 Zeilen im DOM | ✅ bestanden | 24 Elemente |
+| Virtualisierung: weniger als 80 Zeilen im DOM | ✅ bestanden | 23 Elemente |
 | Faktorfilter zeigt Verteilung 142 / 55 / 58 / 37 / 1.470 / 2 / 235 | ✅ bestanden | ×1,0 – keine AB-Steigerung (3.581) ×1,5 (142) ×2,0 (55) ×2,25 (58) ×3,0 (37) ×4,0 (1.470) ×4,5 (2) ×6,0 (235) |
-| Startansicht: alle Abschnitte eingeklappt | ✅ bestanden | 24 eingeklappt, 0 Zeilen |
+| Startansicht: alle Abschnitte eingeklappt | ✅ bestanden | 23 eingeklappt, 0 Zeilen |
 | Klick auf Abschnitt klappt auf (B I, erste Ziffer 1) | ✅ bestanden | 1 |
 | Suche „1200“ + Enter öffnet Ziffer 1200: 21,00 €, B ×1,5, max. 31,50 € | ✅ bestanden | Ziffer 1200 Schließen Esc Kapitel C – Nichtgebietsbezogene Sonderleistungen · VI. Sonographische Leistungen · Seite 92 Sonographische (Teil-)Untersuchung mit Be |
 | URL-Hash gesetzt (#1200) | ✅ bestanden | GOAeneu_Steigerungsdashboard.html#1200 |
 | Filter Chips G + S: 235 Ziffern | ✅ bestanden | 235 von 5.580 Ziffern |
 | Schalter „theoretisch“: Faktorfilter nennt theoretische Höchstwerte (×6,0 → 1.470, ×12,0 → 235) | ✅ bestanden | ×1,0 – keine AB-Steigerung (3.581) ×1,5 (142) ×2,0 (55) ×2,25 (58) ×3,0 (37) ×4,5 (2) ×6,0 (1.470) ×12,0 (235) |
+| Filter „Anzahl AB-Gründe“: 0 → 3.581 · 1 → 197 · 2 → 95 · 3 → 1.472 · 4 → 235 | ✅ bestanden | 0 – nicht steigerfähig (3.581) | 1 Grund (197) | 2 Gründe (95) | 3 Gründe (1.472) | 4 Gründe (235) |
+| Anzahl = 1 + Suche „sonograph“: nur Ziffern mit genau einem Grund, darunter 1200 | ✅ bestanden | 66 von 5.580 Ziffern |
+| Anzahl = 3: 1.472 Ziffern | ✅ bestanden | 1.472 von 5.580 Ziffern |
+| Hover auf Tag B zeigt Wortlaut („Body-Mass-Index (BMI) ≥ 40 … 1,5fache Gebühr“) | ✅ bestanden | B Adipositas BMI ≥ 40 · ×1,5 Bei Patienten mit einem Body-Mass-Index (BMI) ≥ 40 (bei Kindern und Jugendlichen > 97. gesc |
+| Hover auf Badge G in der Liste zeigt Wortlaut („Bei Gerinnungsstörungen …“) | ✅ bestanden | G Gerinnungsstörung · ×2,0 Bei Gerinnungsstörungen unter Therapie mit Vitamin K-Antagonisten, Gerinnungsstörun |
 | Chip „Nicht durch AB steigerfähig“: 3.581 Ziffern | ✅ bestanden | 3.581 von 5.580 Ziffern |
 | Ziffer 4500 (PSY): Kapitel G, 145,00 €, „Nicht durch AB steigerfähig“, max. Faktor ×1,0, kein Szenario | ✅ bestanden | Ziffer 4500 Schließen Esc Kapitel G – Neurologische, psychiatrische, psychotherapeutische und psychosomatische Leistungen · III. Psychotherapieverfahren, -methoden und -techniken · Seite 256 Analytische Psychotherapie, E |
 | Direktlink #5600: 43,46 €, praktisch ×4,0 = 173,84 €, theoretisch ×6,0 = 260,76 € | ✅ bestanden | Ziffer 5600 Schließen Esc Kapitel L – Chirurgie · I. Plastische Chirurgie, Oberflächenchirurgie, Replantationschirurgie · Seite 323 Exzision eines kleinen kutanen Prozesses (Tumor, entzündlicher Proze |
@@ -56,7 +63,7 @@
 | Offline: keine externen Anfragen | ✅ bestanden | keine |
 | Keine JavaScript-Fehler | ✅ bestanden | keine |
 
-Screenshots: `output/screenshots/01_startansicht.png`, `output/screenshots/02_gefilterte_ansicht.png`, `output/screenshots/05_nicht_steigerfaehig.png`, `output/screenshots/03_detailbereich.png`, `output/screenshots/04_laptop_1280.png`
+Screenshots: `output/screenshots/01_startansicht.png`, `output/screenshots/02_gefilterte_ansicht.png`, `output/screenshots/06_tooltip_wortlaut.png`, `output/screenshots/05_nicht_steigerfaehig.png`, `output/screenshots/03_detailbereich.png`, `output/screenshots/04_laptop_1280.png`
 
 ## 3. Verifikation des Excel-Aufbaus
 
@@ -159,7 +166,7 @@ Nicht durchgeführt: kein PDF in `input/`. Die PDF-Auswertung im Build-Skript (S
 
 ## 5. Offene Punkte
 
-1. **Wortlaut der 11 AB-IDs fehlt** (02.03-4, 03.01-6, 05.03-1, L-8, 14.01-10, 02.06-3, L-11, 14.01-11, L-9, L-10, 14.01-12): Das gelieferte Gebührenverzeichnis enthält die Allgemeinen Bestimmungen nicht. Das Dashboard zeigt je Grund die AB-IDs sowie Voraussetzung, Nachweis, Ausnahme und Geltungsbereich aus der Matrix, aber keinen Gesetzeswortlaut und keine Seitenzahl. Benötigt wird der Entwurf mit den AB (PDF nach `input/` oder Excel-Export der AB).
+1. **Wortlaut der AB-Regeln nicht am Entwurf geprüft:** Der Wortlaut je Steigerungsgrund stammt aus `input/ab_wortlaut.json` (vom Auftraggeber geliefert, unverändert übernommen) und wird im Dashboard beim Überfahren der Grund-Tags und im Detailbereich gezeigt. Es gibt einen Text je Grund, nicht je AB-ID: Ob er für alle 11 AB-IDs (02.03-4, 03.01-6, 05.03-1, L-8, 14.01-10, 02.06-3, L-11, 14.01-11, L-9, L-10, 14.01-12) wortgleich gilt, ist nicht geprüft; Seitenzahlen fehlen. Im Text zu G steht „Xa-lnhibitoren“ mit kleinem L statt großem I (vermutlich Kopierfehler, nicht korrigiert).
 2. **Rundungsregel** (Matrix verweist auf Kap. A Nr. 23): im Gebührenverzeichnis nicht enthalten, daher nicht geprüft. Gerechnet wird kaufmännisch auf den Cent (Decimal, ROUND_HALF_UP).
 3. **Stand des Entwurfs:** nur aus dem Dateinamen des Gebührenverzeichnisses abgeleitet (v6, 15.07.2026). Bitte bestätigen oder offiziellen Stand nennen.
 4. **Vollständigkeit der Matrix:** Die Matrix enthält je Abschnitt weniger Ziffern als das Gebührenverzeichnis (Tabelle in Abschnitt 4). Ob alle steigerungsfähigen Hauptleistungen erfasst sind, ist eine fachliche Frage und wurde nicht geprüft oder korrigiert.

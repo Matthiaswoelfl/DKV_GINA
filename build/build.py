@@ -454,6 +454,11 @@ def tests(daten, js=None, kap=None):
         t("Ziffer 4500: Kapitel G, III. Psychotherapieverfahren …, 145,00 €, nicht durch AB steigerfähig",
           r and r[6] < 0 and r[3] == 14500 and a["kap"] == "G" and a["name"].startswith("III. Psychotherapieverfahren"),
           f"Kapitel {a['kap']} · {a['name']} · {fmt_euro(r[3])} · {'kein Steigerungsgrund' if r[6] < 0 else 'steigerfähig'}" if r else "fehlt")
+        anz = Counter(len(js["muster"][r[6]]["gruende"]) if r[6] >= 0 else 0 for r in js["rows"])
+        t("Anzahl möglicher AB-Gründe je Ziffer: 0 → 3.581 · 1 → 197 · 2 → 95 · 3 → 1.472 · 4 → 235",
+          dict(anz) == {0: 3581, 1: 197, 2: 95, 3: 1472, 4: 235}, " · ".join(f"{k} → {anz[k]}" for k in sorted(anz)))
+        t("Wortlaut der AB-Regel für alle 5 Gründe hinterlegt", all(g["wortlaut"] for g in js["gruende"]),
+          " · ".join(f"{g['k']}: {len(g['wortlaut'])} Zeichen" for g in js["gruende"]))
         t("Jede nicht steigerfähige Ziffer hat eine Leistungsbezeichnung", all(r[2] for r in js["rows"]),
           f"{sum(1 for r in js['rows'] if not r[2])} ohne Text")
     t("Keine doppelten Ziffern", len(rows) == len(daten["rows"]), f"{len(rows)} eindeutig")
@@ -493,8 +498,15 @@ def tests(daten, js=None, kap=None):
 
 
 # ---------------------------------------------------------------- Ausgabe
+def lese_wortlaut() -> dict:
+    """Wortlaut der AB-Regeln je Grund (input/ab_wortlaut.json), solange kein Entwurf mit AB vorliegt."""
+    p = INPUT / "ab_wortlaut.json"
+    return json.loads(p.read_text(encoding="utf-8"))["gruende"] if p.exists() else {}
+
+
 def baue_json(daten, pdf, gesetz, kap):
     matrix = {r["z"]: r for r in daten["rows"]}
+    wortlaut = lese_wortlaut()
     zus = gesetz.get("zusatz", {})
     alle = gesetz.get("alle", {})
     abs_liste, abs_idx, titel, rows = [], {}, {}, []
@@ -536,6 +548,7 @@ def baue_json(daten, pdf, gesetz, kap):
     for g in daten["gruende"]:
         d = {k: v for k, v in g.items() if not k.startswith("_")}
         d["fundstellen"] = [dict(id=i, **pdf["fundstellen"].get(i, {"status": "pdf fehlt"})) for i in g["ids"]]
+        d["wortlaut"] = wortlaut.get(g["k"], "")
         gruende.append(d)
     muster = [{k: v for k, v in m.items() if not k.startswith("_")} | {
         "moegl": [{k: v for k, v in x.items() if not k.startswith("_")} for x in m["moegl"]]}
@@ -633,10 +646,11 @@ def schreibe_bericht(daten, pdf, gesetz, kap, res, ui, excel_name):
             vorh = "kein Abschnittscode (Kapitel-Bestimmung)" if cnt is None else (f"ja ({cnt} Nummern)" if cnt else "**nein**")
             L.append(f"| {ab} | {pre} | {vorh} | nicht enthalten |")
         offen += [
-            "**Wortlaut der 11 AB-IDs fehlt** (" + ", ".join(SOLL_AB_IDS) + "): Das gelieferte Gebührenverzeichnis "
-            "enthält die Allgemeinen Bestimmungen nicht. Das Dashboard zeigt je Grund die AB-IDs sowie Voraussetzung, "
-            "Nachweis, Ausnahme und Geltungsbereich aus der Matrix, aber keinen Gesetzeswortlaut und keine Seitenzahl. "
-            "Benötigt wird der Entwurf mit den AB (PDF nach `input/` oder Excel-Export der AB).",
+            "**Wortlaut der AB-Regeln nicht am Entwurf geprüft:** Der Wortlaut je Steigerungsgrund stammt aus "
+            "`input/ab_wortlaut.json` (vom Auftraggeber geliefert, unverändert übernommen) und wird im Dashboard beim "
+            "Überfahren der Grund-Tags und im Detailbereich gezeigt. Es gibt einen Text je Grund, nicht je AB-ID: Ob er "
+            "für alle 11 AB-IDs (" + ", ".join(SOLL_AB_IDS) + ") wortgleich gilt, ist nicht geprüft; Seitenzahlen fehlen. "
+            "Im Text zu G steht „Xa-lnhibitoren“ mit kleinem L statt großem I (vermutlich Kopierfehler, nicht korrigiert).",
             "**Rundungsregel** (Matrix verweist auf Kap. A Nr. 23): im Gebührenverzeichnis nicht enthalten, daher nicht "
             "geprüft. Gerechnet wird kaufmännisch auf den Cent (Decimal, ROUND_HALF_UP).",
             *([] if kap["datei"] else ["**Kapiteltitel** (C, D, F, L, O): im Gebührenverzeichnis nicht enthalten; die Navigation zeigt nur die Buchstaben."]),

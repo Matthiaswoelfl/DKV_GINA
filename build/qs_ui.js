@@ -61,6 +61,29 @@ const path = require('path');
     optsT.some(o => o.replace(/\s/g, '') === '×6,0(1.470)') && optsT.some(o => o.replace(/\s/g, '') === '×12,0(235)'), optsT.slice(1).join(' '));
   await page.click('#theo');
 
+  // Anzahl AB-Gründe + Tooltip
+  const anz = (await page.locator('#anz option').allInnerTexts()).slice(1).join(' | ');
+  check('Filter „Anzahl AB-Gründe“: 0 → 3.581 · 1 → 197 · 2 → 95 · 3 → 1.472 · 4 → 235',
+    anz === '0 – nicht steigerfähig (3.581) | 1 Grund (197) | 2 Gründe (95) | 3 Gründe (1.472) | 4 Gründe (235)', anz);
+  await page.selectOption('#anz', '1');
+  await page.fill('#q', 'sonograph');
+  await page.waitForTimeout(200);
+  const one = await page.locator('.row').evaluateAll(rs => rs.every(r => r.querySelectorAll('.badge').length === 1) && rs.some(r => r.id === 'r1200'));
+  check('Anzahl = 1 + Suche „sonograph“: nur Ziffern mit genau einem Grund, darunter 1200', one, await txt('#status'));
+  await page.selectOption('#anz', '3');
+  await page.fill('#q', '');
+  await page.waitForTimeout(200);
+  check('Anzahl = 3: 1.472 Ziffern', (await txt('#status')).startsWith('1.472 von'), await txt('#status'));
+  await page.hover('.chip[data-k=B]');
+  let tp = (await txt('#tip')).replace(/\s+/g, ' ');
+  check('Hover auf Tag B zeigt Wortlaut („Body-Mass-Index (BMI) ≥ 40 … 1,5fache Gebühr“)', tp.includes('Bei Patienten mit einem Body-Mass-Index (BMI) ≥ 40') && tp.includes('1,5fache Gebühr') && tp.includes('02.06-3'), tp.slice(0, 120));
+  await page.locator('.ghead').first().click().catch(() => {});
+  await page.locator('.row .badge.cG').first().hover();
+  tp = (await txt('#tip')).replace(/\s+/g, ' ');
+  check('Hover auf Badge G in der Liste zeigt Wortlaut („Bei Gerinnungsstörungen …“)', tp.includes('Bei Gerinnungsstörungen unter Therapie mit Vitamin K-Antagonisten'), tp.slice(0, 110));
+  await shot('06_tooltip_wortlaut.png');
+  await page.click('#reset');
+
   // Nicht durch AB steigerfähig
   await page.click('.chip[data-k=ohne]');
   check('Chip „Nicht durch AB steigerfähig“: 3.581 Ziffern', (await txt('#status')).startsWith('3.581 von'), await txt('#status'));
