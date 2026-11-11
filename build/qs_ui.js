@@ -30,7 +30,11 @@ const path = require('path');
   const opts = await page.locator('#fmax option').allInnerTexts();
   check('Faktorfilter zeigt Verteilung 142 / 55 / 58 / 37 / 1.470 / 2 / 235',
     opts.slice(1).join(' ') === '×1,5 (142) ×2,0 (55) ×2,25 (58) ×3,0 (37) ×4,0 (1.470) ×4,5 (2) ×6,0 (235)', opts.slice(1).join(' '));
+  check('Startansicht: alle 23 Abschnitte eingeklappt', await page.locator('.ghead[aria-expanded=false]').count() === 23 && await page.locator('.row').count() === 0, (await page.locator('.ghead[aria-expanded=false]').count()) + ' eingeklappt, ' + (await page.locator('.row').count()) + ' Zeilen');
   await shot('01_startansicht.png');
+  await page.locator('.ghead').first().click();
+  check('Klick auf Abschnitt klappt auf (C III: 22 Ziffern)', await page.locator('.row').count() >= 15 && (await page.locator('.row .z').first().innerText()) === '900', (await page.locator('.row .z').first().innerText()));
+  await page.locator('.ghead').first().click();
 
   // Suche 1200 -> eine Eingabe + Enter
   await page.keyboard.press('/');

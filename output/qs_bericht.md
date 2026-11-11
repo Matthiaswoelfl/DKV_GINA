@@ -29,8 +29,10 @@
 | Startansicht: Status „1.999 von 1.999 Ziffern“ | ✅ bestanden | 1.999 von 1.999 Ziffern |
 | Navigation: Kapitel C, D, F, L, O mit 100 / 2 / 31 / 1.705 / 161 | ✅ bestanden | Kapitel C 100 | Kapitel D 2 | Kapitel F 31 | Kapitel L 1.705 | Kapitel O 161 |
 | Navigation: 23 Abschnitte | ✅ bestanden | 23 |
-| Virtualisierung: weniger als 80 Zeilen im DOM | ✅ bestanden | 24 Elemente |
+| Virtualisierung: weniger als 80 Zeilen im DOM | ✅ bestanden | 23 Elemente |
 | Faktorfilter zeigt Verteilung 142 / 55 / 58 / 37 / 1.470 / 2 / 235 | ✅ bestanden | ×1,5 (142) ×2,0 (55) ×2,25 (58) ×3,0 (37) ×4,0 (1.470) ×4,5 (2) ×6,0 (235) |
+| Startansicht: alle 23 Abschnitte eingeklappt | ✅ bestanden | 23 eingeklappt, 0 Zeilen |
+| Klick auf Abschnitt klappt auf (C III: 22 Ziffern) | ✅ bestanden | 900 |
 | Suche „1200“ + Enter öffnet Ziffer 1200: 21,00 €, B ×1,5, max. 31,50 € | ✅ bestanden | Ziffer 1200 Schließen Esc Kapitel C · VI. Sonographische Leistungen Sonographische (Teil-)Untersuchung mit Bezug auf ein Organ oder sonographische Verlaufsunter |
 | URL-Hash gesetzt (#1200) | ✅ bestanden | GOAeneu_Steigerungsdashboard.html#1200 |
 | Filter Chips G + S: 235 Ziffern | ✅ bestanden | 235 von 1.999 Ziffern |
