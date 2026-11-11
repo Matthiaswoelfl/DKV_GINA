@@ -36,15 +36,15 @@
 | Navigation: 17 Kapitel (B bis S) mit Titel, z. B. „L Chirurgie 2.478“ | ✅ bestanden | 17 Kapitel; G Neurologische, psychiatrische, psychotherapeutische und psychosomatische Leistungen 135 | L Chirurgie 2.478 |
 | Navigation: Klick auf Kapitel L zeigt dessen Abschnitte und filtert auf 2.478 Ziffern | ✅ bestanden | 20 Abschnitte; 2.478 von 5.580 Ziffern |
 | Virtualisierung: weniger als 80 Zeilen im DOM | ✅ bestanden | 24 Elemente |
-| Faktorfilter zeigt Verteilung 142 / 55 / 58 / 37 / 1.470 / 2 / 235 | ✅ bestanden | keine AB-Steigerung (3.581) ×1,5 (142) ×2,0 (55) ×2,25 (58) ×3,0 (37) ×4,0 (1.470) ×4,5 (2) ×6,0 (235) |
+| Faktorfilter zeigt Verteilung 142 / 55 / 58 / 37 / 1.470 / 2 / 235 | ✅ bestanden | ×1,0 – keine AB-Steigerung (3.581) ×1,5 (142) ×2,0 (55) ×2,25 (58) ×3,0 (37) ×4,0 (1.470) ×4,5 (2) ×6,0 (235) |
 | Startansicht: alle Abschnitte eingeklappt | ✅ bestanden | 24 eingeklappt, 0 Zeilen |
 | Klick auf Abschnitt klappt auf (B I, erste Ziffer 1) | ✅ bestanden | 1 |
 | Suche „1200“ + Enter öffnet Ziffer 1200: 21,00 €, B ×1,5, max. 31,50 € | ✅ bestanden | Ziffer 1200 Schließen Esc Kapitel C – Nichtgebietsbezogene Sonderleistungen · VI. Sonographische Leistungen · Seite 92 Sonographische (Teil-)Untersuchung mit Be |
 | URL-Hash gesetzt (#1200) | ✅ bestanden | GOAeneu_Steigerungsdashboard.html#1200 |
 | Filter Chips G + S: 235 Ziffern | ✅ bestanden | 235 von 5.580 Ziffern |
-| Schalter „theoretisch“: Faktorfilter nennt theoretische Höchstwerte (×6,0 → 1.470, ×12,0 → 235) | ✅ bestanden | keine AB-Steigerung (3.581) ×1,5 (142) ×2,0 (55) ×2,25 (58) ×3,0 (37) ×4,5 (2) ×6,0 (1.470) ×12,0 (235) |
+| Schalter „theoretisch“: Faktorfilter nennt theoretische Höchstwerte (×6,0 → 1.470, ×12,0 → 235) | ✅ bestanden | ×1,0 – keine AB-Steigerung (3.581) ×1,5 (142) ×2,0 (55) ×2,25 (58) ×3,0 (37) ×4,5 (2) ×6,0 (1.470) ×12,0 (235) |
 | Chip „Nicht durch AB steigerfähig“: 3.581 Ziffern | ✅ bestanden | 3.581 von 5.580 Ziffern |
-| Ziffer 4500 (PSY): Kapitel G, 145,00 €, „Nicht durch AB steigerfähig“, kein Szenario | ✅ bestanden | Ziffer 4500 Schließen Esc Kapitel G – Neurologische, psychiatrische, psychotherapeutische und psychosomatische Leistungen · III. Psychotherapieverfahren, -methoden und -techniken · Seite 256 Analytische Psychotherapie, E |
+| Ziffer 4500 (PSY): Kapitel G, 145,00 €, „Nicht durch AB steigerfähig“, max. Faktor ×1,0, kein Szenario | ✅ bestanden | Ziffer 4500 Schließen Esc Kapitel G – Neurologische, psychiatrische, psychotherapeutische und psychosomatische Leistungen · III. Psychotherapieverfahren, -methoden und -techniken · Seite 256 Analytische Psychotherapie, E |
 | Direktlink #5600: 43,46 €, praktisch ×4,0 = 173,84 €, theoretisch ×6,0 = 260,76 € | ✅ bestanden | Ziffer 5600 Schließen Esc Kapitel L – Chirurgie · I. Plastische Chirurgie, Oberflächenchirurgie, Replantationschirurgie · Seite 323 Exzision eines kleinen kutanen Prozesses (Tumor, entzündlicher Proze |
 | Ziffer 5600: Tabelle der Möglichkeiten | ✅ bestanden | p:×1,5:65,19 € p:×2,0:86,92 € p:×3,0:130,38 € p:×4,0:173,84 € t:×6,0:260,76 € |
 | Szenario 5600 G+F: ×4,0 = 173,84 € (praktisch) | ✅ bestanden | G×F · Faktor ×4,0 173,84 € |

@@ -175,11 +175,11 @@ const ROWH = 38, HEADH = 36;
 const st = {kap:null, abs:null, q:'', gr:new Set(), ohne:false, fmax:'', theo:false, sort:'z', dir:1, collapsed:new Set(D.abschnitte.map((_,i) => i)), sel:null, active:-1};
 let items = [], tops = [], total = 0, result = [];
 
-const KEIN = '–';   // Ziffer steht nicht in der Steigerungsmatrix
+const KEIN = '1,0';   // Ziffer steht nicht in der Steigerungsmatrix: keine AB-Steigerung, Faktor 1,0
 const mi = r => st.theo ? r.m.maxT : r.m.maxP;
 const maxF = r => r.m ? r.m.moegl[mi(r)].f : KEIN;
 const maxC = r => r.m ? r.c[mi(r)] : r.g;
-const fsort = f => f === KEIN ? 1 : fnum(f);
+const fsort = fnum;
 
 /* ---------- Hinweisleiste ---------- */
 (function(){
@@ -212,7 +212,7 @@ function renderFmax(){
   R.forEach(r => cnt.set(maxF(r), (cnt.get(maxF(r))||0)+1));
   const opts = [...cnt].sort((a,b) => fsort(a[0])-fsort(b[0]));
   if (!cnt.has(st.fmax)) st.fmax = '';
-  $('#fmax').innerHTML = '<option value="">alle</option>' + opts.map(([f,n]) => `<option value="${f}"${f===st.fmax?' selected':''}>${f===KEIN ? 'keine AB-Steigerung' : '×'+f} (${n.toLocaleString('de-DE')})</option>`).join('');
+  $('#fmax').innerHTML = '<option value="">alle</option>' + opts.map(([f,n]) => `<option value="${f}"${f===st.fmax?' selected':''}>×${f}${f===KEIN ? ' – keine AB-Steigerung' : ''} (${n.toLocaleString('de-DE')})</option>`).join('');
 }
 function matchQ(r, toks){
   for (const t of toks) {
@@ -282,7 +282,7 @@ function render(){
       h += `<div class="row grid${m?'':' ohne'}${i===st.active?' active':''}${it.z===st.sel?' sel':''}" style="top:${tops[i]}px" data-i="${i}" role="option" aria-selected="${it.z===st.sel}" id="r${it.z}">` +
         `<span class="z">${it.z}</span><span class="t" title="${esc(it.t)}">${esc(it.t)}</span><span class="num">${euro(it.g)}</span>` +
         `<span class="badges">${badges(it)}</span>` +
-        `<span class="num mx">${m?'×':''}${maxF(it)}${dif && !st.theo ? `<small title="theoretischer Höchstwert">theor. ×${m.moegl[m.maxT].f}</small>` : ''}</span>` +
+        `<span class="num mx">×${maxF(it)}${dif && !st.theo ? `<small title="theoretischer Höchstwert">theor. ×${m.moegl[m.maxT].f}</small>` : ''}</span>` +
         `<span class="num mx">${euro(maxC(it))}${dif && !st.theo ? `<small>${euro(it.c[m.maxT])}</small>` : ''}</span></div>`;
     }
   }
@@ -332,8 +332,8 @@ function open(z, keepFocus){
     `<div class="crumb">Kapitel ${a.kap}${kap.titel ? ' – ' + esc(kap.titel) : ''} · ${esc(a.name)}${r.seite ? ' · Seite ' + r.seite : ''}</div>` +
     `<p class="leistung">${esc(r.t)}</p>` +
     (r.zus ? `<p class="zusatz"><b>Zusatz laut Gebührenverzeichnis:</b> ${esc(r.zus)}</p>` : '') +
-    (m ? '' : `<div class="kpis two"><div class="kpi"><span>Gebühr (×1,0)</span><b>${euro(r.g)}</b></div></div>` +
-      `<div class="nosteig"><b><span class="ltr cN">–</span> Nicht durch AB steigerfähig</b>Die Ziffer steht nicht in der Steigerungsmatrix: Keiner der 5 Steigerungsgründe aus den Allgemeinen Bestimmungen (G, B, S, F, V) greift. Nicht abgebildet sind § 2 (individuell vereinbarter höherer Faktor), Zuschläge und Minderungen.</div>` +
+    (m ? '' : `<div class="kpis two"><div class="kpi"><span>Gebühr (×1,0)</span><b>${euro(r.g)}</b></div><div class="kpi"><span>Max. Faktor ×1,0</span><b>${euro(r.g)}</b></div></div>` +
+      `<div class="nosteig"><b><span class="ltr cN">–</span> Nicht durch AB steigerfähig</b>Die Ziffer steht nicht in der Steigerungsmatrix: Keiner der 5 Steigerungsgründe aus den Allgemeinen Bestimmungen (G, B, S, F, V) greift, der maximale Faktor ist daher 1,0. Nicht abgebildet sind § 2 (individuell vereinbarter höherer Faktor), Zuschläge und Minderungen.</div>` +
       `<div class="link">Direktlink: <a href="#${r.z}">#${r.z}</a></div>`);
   if (m) h += `<div class="kpis${dif ? '' : ' two'}"><div class="kpi"><span>Gebühr (×1,0)</span><b>${euro(r.g)}</b></div>` +
     `<div class="kpi"><span>Max. praktisch ×${m.moegl[m.maxP].f}</span><b>${euro(r.c[m.maxP])}</b></div>` +

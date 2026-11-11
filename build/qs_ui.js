@@ -30,7 +30,7 @@ const path = require('path');
   check('Virtualisierung: weniger als 80 Zeilen im DOM', dom < 80, dom + ' Elemente');
   const opts = await page.locator('#fmax option').allInnerTexts();
   check('Faktorfilter zeigt Verteilung 142 / 55 / 58 / 37 / 1.470 / 2 / 235',
-    opts.slice(1).join(' ') === 'keine AB-Steigerung (3.581) ×1,5 (142) ×2,0 (55) ×2,25 (58) ×3,0 (37) ×4,0 (1.470) ×4,5 (2) ×6,0 (235)', opts.slice(1).join(' '));
+    opts.slice(1).join(' ') === '×1,0 – keine AB-Steigerung (3.581) ×1,5 (142) ×2,0 (55) ×2,25 (58) ×3,0 (37) ×4,0 (1.470) ×4,5 (2) ×6,0 (235)', opts.slice(1).join(' '));
   check('Startansicht: alle Abschnitte eingeklappt', await page.locator('.ghead[aria-expanded=true]').count() === 0 && await page.locator('.ghead').count() > 5 && await page.locator('.row').count() === 0, (await page.locator('.ghead[aria-expanded=false]').count()) + ' eingeklappt, ' + (await page.locator('.row').count()) + ' Zeilen');
   await shot('01_startansicht.png');
   await page.locator('.ghead').first().click();
@@ -67,8 +67,8 @@ const path = require('path');
   await page.fill('#q', '4500');
   await page.keyboard.press('Enter');
   d = (await txt('#drawer')).replace(/\s+/g, ' ');
-  check('Ziffer 4500 (PSY): Kapitel G, 145,00 €, „Nicht durch AB steigerfähig“, kein Szenario',
-    d.includes('Ziffer 4500') && d.includes('Kapitel G') && d.includes('145,00 €') && d.includes('Nicht durch AB steigerfähig') && await page.locator('#szen').count() === 0, d.slice(0, 220));
+  check('Ziffer 4500 (PSY): Kapitel G, 145,00 €, „Nicht durch AB steigerfähig“, max. Faktor ×1,0, kein Szenario',
+    d.includes('Ziffer 4500') && d.includes('Kapitel G') && d.includes('145,00 €') && d.includes('Nicht durch AB steigerfähig') && d.includes('Max. Faktor ×1,0 145,00 €') && await page.locator('#szen').count() === 0, d.slice(0, 220));
   await shot('05_nicht_steigerfaehig.png');
   await page.keyboard.press('Escape');
   await page.click('#reset');
