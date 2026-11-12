@@ -190,7 +190,8 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:3px;paddi
       <div class="chips" id="chipsnb" role="group" aria-label="Art der Nebeneinander-Regel"></div>
       <label>Genannte Ziffern <select id="nbanz" aria-label="Filter nach Anzahl der in den Regeln genannten Ziffern"></select></label>
       <label>Regelart <select id="nbart" aria-label="Filter nach Art der Regel"></select></label>
-      <label title="Zählt eine Ziffer auch dann, wenn sie nur in der Regel einer anderen Ziffer genannt wird"><input type="checkbox" id="nbrev"> Nennungen bei anderen Ziffern einbeziehen</label>
+      <label title="Zählt eine Ziffer auch dann, wenn sie nur in der Regel einer anderen Ziffer genannt wird (Gegenrichtung: Ableitung, kein Gesetzeswortlaut)"><input type="checkbox" id="nbrev"> Nennungen bei anderen Ziffern einbeziehen</label>
+      <button class="btn" id="abbtn">Allgemeine Bestimmungen</button>
       </span>
       <button class="btn" id="reset">Filter zurücksetzen</button>
       <button class="btn" id="csv">CSV exportieren</button>
@@ -214,19 +215,30 @@ const euro = c => { const s = String(c).padStart(3,'0'); return s.slice(0,-2).re
 const fnum = f => parseFloat(f.replace(',','.'));   // nur zum Sortieren/Filtern, nie zum Rechnen
 const GR = Object.fromEntries(D.gruende.map(g => [g.k, g]));
 const KEYS = D.gruende.map(g => g.k);
-const R = D.rows.map(r => { const m = r[6] < 0 ? null : D.muster[r[6]]; return {z:r[0], a:r[1], t:r[2], g:r[3], bauch:r[4], ct:r[5], m, c:r[7], zus:r[8], seite:r[9], n: m ? Object.keys(m.gruende).length : 0, lt:r[2].toLowerCase(), zs:String(r[0]), s:r[10]||[], rg:r[11]||[], pN:[], pU:[], qN:[], qU:[], oN:false, oU:false, fl:false}; });
+const R = D.rows.map(r => { const m = r[6] < 0 ? null : D.muster[r[6]]; return {z:r[0], a:r[1], t:r[2], g:r[3], bauch:r[4], ct:r[5], m, c:r[7], zus:r[8], seite:r[9], n: m ? Object.keys(m.gruende).length : 0, lt:r[2].toLowerCase(), zs:String(r[0]), rg:r[10]||[], we:r[11]||[], pN:[], pU:[], qN:[], qU:[], gen:[], oN:false, oU:false, fl:false, hE:false, hB:false, hAB:false}; });
 const BYZ = new Map(R.map(r => [r.z, r]));
 const ROWH = 38, HEADH = 36;
-/* Nebeneinanderberechnung: eigene Regeln (p*) und Nennungen in Regeln anderer Ziffern (q*) */
-const NBT = {N:{name:'Nicht neben', kurz:'Nicht', cls:'cNN', tip:'Die Ziffer ist neben den genannten Ziffern nicht berechnungsfähig (laut Abrechnungsbestimmung).'},
-             U:{name:'Nur neben', kurz:'Nur', cls:'cNU', tip:'Die Ziffer ist nur neben den genannten Ziffern berechnungsfähig (laut Abrechnungsbestimmung).'}};
-R.forEach(r => { for (const [t, f, , ps] of r.rg) { r['o'+t] = true; if (f) r.fl = true; const set = new Set(r['p'+t]); ps.forEach(x => set.add(x)); r['p'+t] = [...set].sort((a,b) => a-b); } });
-R.forEach(r => { for (const t of 'NU') for (const x of r['p'+t]) BYZ.get(x)['q'+t].push(r.z); });
+/* Nebeneinanderberechnung – ausschließlich aus dem Regelpaket (D.regeln).
+   Eigene Regeln einer Ziffer: p* = genannte Ziel-Ziffern; q* = Ziffern, deren Regeln diese Ziffer nennen (Gegenrichtung, Ableitung). */
+const RL = D.regeln;
+const NBT = {N:{name:'Nicht neben', kurz:'Nicht', cls:'cNN', tip:'Die Ziffer ist neben den genannten Ziffern nicht berechnungsfähig (gilt für jede genannte Ziffer einzeln).'},
+             U:{name:'Nur neben', kurz:'Nur', cls:'cNU', tip:'Die Ziffer ist nur zusammen mit mindestens einer der genannten Ziffern berechnungsfähig (z. B. Zuschlag zur Hauptleistung).'}};
+const WT = {E:'Neben erlaubt', B:'Neben nur mit Begründung', A:'Neben nur mit Abschlag', X:'Auslegungsregel', S:'Sonderfall'};
+R.forEach(r => { for (const i of r.rg) { const x = RL[i], t = x.t;
+  if (x.e !== 'Ziffer') r.hAB = true;
+  if (t === 'E') r.hE = true; if (t === 'B') r.hB = true;
+  if (t !== 'N' && t !== 'U') continue;
+  r['o'+t] = true;
+  if (x.bd || x.zt || !x.zz.length || !x.sz.includes(r.z)) r.fl = true;
+  if (x.sz.includes(r.z)) { const set = new Set(r['p'+t]); x.zz.forEach(v => { if (v !== r.z) set.add(v); }); r['p'+t] = [...set].sort((a,b) => a-b); } } });
+RL.forEach((x, i) => { if (x.t !== 'N' && x.t !== 'U') return;
+  for (const v of x.zz) { const tr = BYZ.get(v); if (!tr || x.sz.includes(v)) continue;
+    tr.gen.push(i); const set = new Set(tr['q'+x.t]); x.sz.forEach(sv => set.add(sv)); tr['q'+x.t] = [...set].sort((a,b) => a-b); } });
 const nbHas = (r, t) => r['o'+t] || (st.nbrev && r['q'+t].length > 0);
 const nbP = (r, t) => st.nbrev && r['q'+t].length ? [...new Set([...r['p'+t], ...r['q'+t]])].sort((a,b) => a-b) : r['p'+t];
 const nbCount = r => new Set([...nbP(r,'N'), ...nbP(r,'U')]).size;
 const nbBucket = n => n === 0 ? '0' : n === 1 ? '1' : n <= 5 ? '2-5' : n <= 20 ? '6-20' : '21+';
-const nbArt = r => !r.rg.length ? '' : r.fl ? 'b' : 'e';
+const ART = {e: r => (r.oN || r.oU) && !r.fl, b: r => r.fl, ab: r => r.hAB, E: r => r.hE, B: r => r.hB, w: r => r.we.length > 0};
 
 const st = {view:'ab', nb:new Set(), nbohne:false, nbanz:'', nbart:'', nbrev:false, kap:null, abs:null, q:'', gr:new Set(), ohne:false, anz:'', fmax:'', theo:false, sort:'z', dir:1, collapsed:new Set(D.abschnitte.map((_,i) => i)), sel:null, active:-1};
 let items = [], tops = [], total = 0, result = [];
@@ -243,8 +255,9 @@ function renderHinweis(){
   const entwurf = `<span><b>Entwurf:</b> Gesetzesentwurf, nicht in Kraft${stand ? ' · ' + esc(stand) : ' · Stand nicht hinterlegt'}.</span>`;
   $('#sub').textContent = st.view === 'nb' ? '„Nicht neben“- und „Nur neben“-Regeln je Ziffer' : 'AB-Steigerungsgründe, Faktoren und maximaler Gebührensatz je Ziffer';
   $('#hinweis').innerHTML = entwurf + (st.view === 'nb'
-    ? `<span><b>Quelle:</b> Spalte „Abrechnungsbestimmung“ des Gebührenverzeichnisses. Die Regeln sind automatisch aus dem Wortlaut erkannt – maßgeblich ist der zitierte Satz, besonders bei Bedingungen.</span>` +
-      `<span><b>Nicht enthalten:</b> Ausschlüsse aus den Allgemeinen Bestimmungen der Kapitel und Abschnitte sowie Bezüge, die nur in Legende oder Zusatz stehen (z. B. „Zuschlag zu der Leistung nach Nummer …“).</span>`
+    ? `<span><b>Quelle:</b> Regelpaket zum Entwurf (Paragraphenteil, Allgemeine Bestimmungen, alle Ziffern). Maßgeblich ist der zitierte Satz; Bedingungen sind im Wortlaut übernommen, nicht ausgewertet (⚑).</span>` +
+      `<span><b>Sitzungsbezug:</b> Ausschlüsse beziehen sich auf dieselbe Sitzung (Kapitel A Nr. 8). „Nur neben“ heißt: mindestens eine der genannten Ziffern muss mit abgerechnet sein.</span>` +
+      `<span><b>Gegenrichtung:</b> Dass B auch nicht neben A geht, ist eine Ableitung, kein Gesetzeswortlaut – nur über den Schalter einbezogen.</span>`
     : `<span><b>Annahme:</b> Mehrere Gründe werden multipliziert – der Entwurf regelt die Kumulation nicht ausdrücklich.</span>` +
       `<span><b>Nicht enthalten:</b> § 2 (individuell vereinbarter höherer Faktor), Zuschläge und alle Minderungen (z. B. 0,9× ab der 2. Hauptleistung, § 6a).</span>`);
 }
@@ -301,7 +314,7 @@ function apply(keepActive){
   build(keepActive);
 }
 function applyNb(nav, keepActive){
-  const base = R.filter(r => nav(r) && (st.nbanz==='' || ((nbHas(r,'N') || nbHas(r,'U')) && nbBucket(nbCount(r))===st.nbanz)) && (st.nbart==='' || nbArt(r)===st.nbart));
+  const base = R.filter(r => nav(r) && (st.nbanz==='' || ((nbHas(r,'N') || nbHas(r,'U')) && nbBucket(nbCount(r))===st.nbanz)) && (st.nbart==='' || ART[st.nbart](r)));
   const c = {N:0, U:0, o:0};
   base.forEach(r => { const n = nbHas(r,'N'), u = nbHas(r,'U'); if (n) c.N++; if (u) c.U++; if (!n && !u) c.o++; });
   $('#chipsnb').innerHTML = ['N','U'].map(t =>
@@ -350,7 +363,7 @@ function badgesNb(r){
 }
 function preview(r){
   const all = [...new Set([...nbP(r,'N'), ...nbP(r,'U')])].sort((a,b) => a-b);
-  if (!all.length) return r.rg.length ? 'Bezug nur im Wortlaut' : '';
+  if (!all.length) return (r.oN || r.oU) ? 'Bezug nur im Wortlaut' : '';
   return (r.fl ? '⚑ ' : '') + all.slice(0, 12).join(', ') + (all.length > 12 ? ` … (+${all.length - 12})` : '');
 }
 function badges(r){
@@ -369,7 +382,7 @@ function render(){
     } else {
       const m = it.m, dif = m && m.maxT !== m.maxP;
       if (st.view === 'nb') { const pv = preview(it);
-        h += `<div class="row grid${it.rg.length || pv ? '' : ' ohne'}${i===st.active?' active':''}${it.z===st.sel?' sel':''}" style="top:${tops[i]}px" data-i="${i}" role="option" aria-selected="${it.z===st.sel}" id="r${it.z}">` +
+        h += `<div class="row grid${it.oN || it.oU || pv ? '' : ' ohne'}${i===st.active?' active':''}${it.z===st.sel?' sel':''}" style="top:${tops[i]}px" data-i="${i}" role="option" aria-selected="${it.z===st.sel}" id="r${it.z}">` +
           `<span class="z">${it.z}</span><span class="t" title="${esc(it.t)}">${esc(it.t)}</span><span class="num">${euro(it.g)}</span>` +
           `<span class="badges">${badgesNb(it)}</span><span class="pv" title="${it.fl ? 'Mindestens eine Regel mit Bedingung oder Textbezug – Wortlaut beachten. ' : ''}${esc(pv)}">${esc(pv)}</span></div>`;
         continue; }
@@ -404,7 +417,7 @@ function move(d){
   do { i += d; } while (i >= 0 && i < items.length && items[i].h !== undefined);
   if (i < 0 || i >= items.length) return;
   st.active = i; scrollToIdx(i); render();
-  if (st.sel !== null) open(items[i].z, true);
+  if (st.sel !== null && st.sel > 0) open(items[i].z, true);
 }
 list.addEventListener('keydown', e => {
   if (e.key==='ArrowDown') { move(1); e.preventDefault(); }
@@ -492,26 +505,49 @@ function open(z, keepFocus){
 const hashFor = z => st.view === 'nb' ? '#neben/' + z : '#' + z;
 const zbtn = z => { const x = BYZ.get(z); return `<button class="zl" data-z="${z}" title="${esc(x.t)}"><b>${z}</b> <span>${esc(x.t)}</span></button>`; };
 const zliste = (zs, n = 8) => zs.slice(0, n).map(zbtn).join('') + (zs.length > n ? `<details class="mehr"><summary>alle ${zs.length} Ziffern anzeigen</summary>${zs.slice(n).map(zbtn).join('')}</details>` : '');
+function quelle(x){
+  const ab = x.e !== 'Ziffer';
+  return (ab ? `Allgemeine Bestimmung${x.ab ? ' ' + esc(x.ab) : ''}${x.gb ? ' (' + esc(x.gb) + ')' : ' (' + esc(x.e) + ')'}` : `Ziffer ${x.q}`) + (x.p ? `, Seite ${x.p}` : '');
+}
+function regelKarte(x, z, typ){
+  const t = x.t, cls = NBT[t] ? NBT[t].cls : 'cN', name = NBT[t] ? NBT[t].name : WT[t];
+  const subj = z !== null && x.sz.includes(z), ps = (subj || z === null ? x.zz : x.sz).filter(v => v !== z);
+  const flag = x.bd || x.zt || (NBT[t] && !x.zz.length) || (z !== null && !subj);
+  return `<div class="regel ${cls}"><div class="rk"><span class="badge ${cls}">${name}</span>${x.e !== 'Ziffer' ? '<span class="badge cN">AB</span>' : ''}${flag ? '<span class="bed">⚑ Bedingung oder Textbezug – Wortlaut beachten</span>' : ''}</div>` +
+    `<blockquote>${esc(x.satz)}</blockquote>` +
+    (x.bd ? `<div class="anz"><b>Bedingung:</b> ${esc(x.bd)}</div>` : '') +
+    (z !== null && !subj && x.st ? `<div class="anz"><b>Betroffen (neben dieser Ziffer ${t === 'N' ? 'nicht' : ''} berechnungsfähig):</b> ${esc(x.st)}</div>` : '') +
+    (z === null && (x.sz.length || x.st) ? `<div class="anz"><b>Betrifft:</b> ${esc([x.sz.join(', '), x.st].filter(Boolean).join(' · '))}</div>` : '') +
+    (ps.length ? `<div class="anz">${t === 'U' ? 'Mindestens eine von ' : ''}${ps.length} ${ps.length === 1 ? 'genannten Ziffer' : 'genannten Ziffern'}:</div>${zliste(ps, typ === 'kurz' ? 4 : 8)}` : '') +
+    (x.zt && (subj || z === null) ? `<div class="anz"><b>${ps.length ? 'Außerdem' : 'Bezug'}:</b> ${esc(x.zt)}</div>` : '') +
+    `<div class="anz">Quelle: ${quelle(x)}${x.hk ? ' · ' + esc(x.hk) : ''}</div></div>`;
+}
 function detailNb(r){
   let h = `<div class="kpis two"><div class="kpi"><span>Gebühr</span><b>${euro(r.g)}</b></div></div>`;
   for (const t of 'NU') {
-    const rs = r.rg.filter(x => x[0] === t); if (!rs.length) continue;
-    h += `<h3>${NBT[t].name} – Regeln dieser Ziffer</h3>` + rs.map(([ , f, i, ps]) =>
-      `<div class="regel ${NBT[t].cls}"><div class="rk"><span class="badge ${NBT[t].cls}">${NBT[t].name}</span>${f ? '<span class="bed">⚑ Bedingung oder Textbezug – Wortlaut beachten</span>' : ''}</div>` +
-      `<blockquote>${esc(r.s[i])}</blockquote>` +
-      (ps.length ? `<div class="anz">${ps.length} genannte ${ps.length === 1 ? 'Ziffer' : 'Ziffern'}:</div>${zliste(ps)}` : '<div class="missing">Keine einzelne Ziffer genannt – der Bezug ergibt sich nur aus dem Wortlaut.</div>') + `</div>`).join('');
+    const rs = r.rg.filter(i => RL[i].t === t); if (!rs.length) continue;
+    h += `<h3>${NBT[t].name} – Regeln dieser Ziffer (${rs.length})</h3>` + rs.map(i => regelKarte(RL[i], r.z)).join('');
   }
-  if (!r.rg.length) h += `<div class="nosteig"><b><span class="ltr cN">–</span> Keine Neben-Regel</b>Die Abrechnungsbestimmung dieser Ziffer enthält keine „Nicht neben“- oder „Nur neben“-Regel.${r.s.length ? '' : ' Zu dieser Ziffer gibt es keine Abrechnungsbestimmung.'}</div>`;
-  const gen = [];
-  for (const t of 'NU') for (const q of r['q'+t]) { const x = BYZ.get(q); x.rg.forEach(([tt, , i, ps]) => { if (tt === t && ps.includes(r.z)) gen.push([t, q, x.s[i]]); }); }
-  if (gen.length) {
-    const item = ([t, q, satz]) => `<div class="gen">${zbtn(q)}<span class="badge ${NBT[t].cls}">${NBT[t].name}</span><q>${esc(satz)}</q></div>`;
-    h += `<h3>In Regeln anderer Ziffern genannt (${gen.length})</h3>` + gen.slice(0, 6).map(item).join('') +
-      (gen.length > 6 ? `<details class="mehr"><summary>alle ${gen.length} Nennungen anzeigen</summary>${gen.slice(6).map(item).join('')}</details>` : '');
+  if (!r.oN && !r.oU) h += `<div class="nosteig"><b><span class="ltr cN">–</span> Keine Neben-Regel</b>Für diese Ziffer gibt es im Regelpaket keine eigene „Nicht neben“- oder „Nur neben“-Regel.</div>`;
+  const rest = r.rg.filter(i => !NBT[RL[i].t]);
+  if (rest.length) h += `<h3>Weitere Regeln dieser Ziffer (${rest.length})</h3>` + rest.map(i => regelKarte(RL[i], r.z)).join('');
+  if (r.gen.length) {
+    const item = i => { const x = RL[i]; return `<div class="gen">${x.sz.length ? x.sz.slice(0, 3).map(zbtn).join('') + (x.sz.length > 3 ? `<div class="anz">und ${x.sz.length - 3} weitere Ziffern</div>` : '') : `<div class="anz"><b>${esc(x.st || 'Allgemeine Bestimmung')}</b></div>`}<span class="badge ${NBT[x.t].cls}">${NBT[x.t].name}</span>${x.bd ? ' <span class="bed">⚑ bedingt</span>' : ''}<q>${esc(x.satz)}</q></div>`; };
+    h += `<h3>In Regeln anderer Ziffern genannt (${r.gen.length})</h3><div class="anz">Gegenrichtung: Ableitung, kein Gesetzeswortlaut.</div>` + r.gen.slice(0, 5).map(item).join('') +
+      (r.gen.length > 5 ? `<details class="mehr"><summary>alle ${r.gen.length} Nennungen anzeigen</summary>${r.gen.slice(5).map(item).join('')}</details>` : '');
   }
-  const used = new Set(r.rg.map(x => x[2])), rest = r.s.filter((_, i) => !used.has(i));
-  if (rest.length) h += `<h3>Übrige Abrechnungsbestimmungen</h3><ul class="rest">${rest.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;
+  if (r.we.length) h += `<h3>Weitere Ausschlüsse ohne „neben“ (${r.we.length})</h3><ul class="rest">${r.we.map(([k, satz]) => `<li>${esc(satz)}<div class="anz">${esc(k)}</div></li>`).join('')}</ul>`;
+  const kap = D.abschnitte[r.a].kap, allg = RL.filter(x => x.e !== 'Ziffer' && !x.sz.length && (x.k === kap));
+  if (allg.length) h += `<details class="mehr"><summary>Allgemeine Bestimmungen des Kapitels ${kap} ohne einzelne Ziffern (${allg.length})</summary>${allg.map(x => regelKarte(x, null, 'kurz')).join('')}</details>`;
   return h + `<div class="link">Direktlink: <a href="#neben/${r.z}">#neben/${r.z}</a></div>`;
+}
+function openAB(){
+  const rs = RL.filter(x => x.e !== 'Ziffer');
+  const order = ['Paragraphenteil', 'Übergeordnet (Kapitel A)', 'Kapitel', 'Abschnitt'];
+  let h = `<h2><span>Allgemeine Bestimmungen</span><button class="btn close" id="close" aria-label="Detailbereich schließen">Schließen <kbd>Esc</kbd></button></h2>` +
+    `<div class="crumb">${rs.length} Regeln zur Nebeneinanderberechnung aus Paragraphenteil, Kapitel A sowie Kapitel- und Abschnittsbestimmungen</div>`;
+  for (const e of order) { const g = rs.filter(x => x.e === e); if (g.length) h += `<h3>${esc(e)} (${g.length})</h3>` + g.map(x => regelKarte(x, null, 'kurz')).join(''); }
+  st.sel = -1; const dr = $('#drawer'); dr.innerHTML = h; dr.scrollTop = 0; $('#app').classList.add('drawer-open'); $('#close').onclick = closeDrawer; render(); dr.focus({preventScroll:true});
 }
 $('#drawer').addEventListener('click', e => { const b = e.target.closest('.zl'); if (b) goto(+b.dataset.z); });
 function closeDrawer(){
@@ -546,12 +582,16 @@ $('#q').addEventListener('keydown', e => {
 $('#chips').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; const k = b.dataset.k; if (k==='ohne') { st.ohne = !st.ohne; st.gr.clear(); } else { st.ohne = false; st.gr.has(k) ? st.gr.delete(k) : st.gr.add(k); } apply(); list.scrollTop = 0; $(`.chip[data-k=${k}]`).focus(); });
 $('#chipsnb').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; const k = b.dataset.k; if (k==='ohne') { st.nbohne = !st.nbohne; st.nb.clear(); } else { st.nbohne = false; st.nb.has(k) ? st.nb.delete(k) : st.nb.add(k); } apply(); list.scrollTop = 0; $(`#chipsnb .chip[data-k=${k}]`).focus(); });
 function renderNbSel(){
-  const cnt = new Map(), art = {e:0, b:0};
-  R.forEach(r => { if (nbHas(r,'N') || nbHas(r,'U')) { const b = nbBucket(nbCount(r)); cnt.set(b, (cnt.get(b)||0)+1); } const a = nbArt(r); if (a) art[a]++; });
+  const cnt = new Map(), art = {};
+  for (const k in ART) art[k] = 0;
+  R.forEach(r => { if (nbHas(r,'N') || nbHas(r,'U')) { const b = nbBucket(nbCount(r)); cnt.set(b, (cnt.get(b)||0)+1); } for (const k in ART) if (ART[k](r)) art[k]++; });
   const lab = {'0':'0 – Bezug nur im Wortlaut', '1':'1 Ziffer', '2-5':'2 bis 5 Ziffern', '6-20':'6 bis 20 Ziffern', '21+':'mehr als 20 Ziffern'};
   $('#nbanz').innerHTML = '<option value="">alle</option>' + Object.keys(lab).filter(k => cnt.has(k)).map(k => `<option value="${k}"${k===st.nbanz?' selected':''}>${lab[k]} (${cnt.get(k).toLocaleString('de-DE')})</option>`).join('');
-  $('#nbart').innerHTML = `<option value="">alle</option><option value="e"${st.nbart==='e'?' selected':''}>eindeutig – nur Ziffern genannt (${art.e.toLocaleString('de-DE')})</option><option value="b"${st.nbart==='b'?' selected':''}>mit Bedingung oder Textbezug (${art.b.toLocaleString('de-DE')})</option>`;
+  const al = {e:'eindeutig – nur Ziffern genannt', b:'mit Bedingung oder Textbezug (⚑)', ab:'mit Regel aus Allgemeinen Bestimmungen', E:'mit Ausnahme „neben erlaubt“', B:'neben nur mit Begründung', w:'mit weiterem Ausschluss ohne „neben“'};
+  $('#nbart').innerHTML = '<option value="">alle</option>' + Object.keys(al).map(k => `<option value="${k}"${st.nbart===k?' selected':''}>${al[k]} (${art[k].toLocaleString('de-DE')})</option>`).join('');
+  $('#abbtn').textContent = `Allgemeine Bestimmungen (${RL.filter(x => x.e !== 'Ziffer').length})`;
 }
+$('#abbtn').addEventListener('click', openAB);
 $('#nbanz').addEventListener('change', e => { st.nbanz = e.target.value; apply(); list.scrollTop = 0; });
 $('#nbart').addEventListener('change', e => { st.nbart = e.target.value; apply(); list.scrollTop = 0; });
 $('#nbrev').addEventListener('change', e => { st.nbrev = e.target.checked; st.nbanz = ''; renderNbSel(); apply(); });
@@ -563,7 +603,8 @@ function setView(v, keepHash){
   $('main').classList.toggle('nb', v === 'nb');
   document.title = v === 'nb' ? 'GOÄneu – Nebeneinanderberechnung' : 'GOÄneu – Steigerungsmatrix';
   renderHinweis(); apply(true);
-  if (st.sel !== null) open(st.sel, true);
+  if (st.sel !== null && st.sel > 0) open(st.sel, true);
+  else if (st.sel === -1) closeDrawer();
   else if (!keepHash) history.replaceState(null, '', v === 'nb' ? '#neben' : location.pathname + location.search);
 }
 $('#tabs').addEventListener('click', e => { const b = e.target.closest('button'); if (b) setView(b.dataset.v); });
@@ -584,7 +625,7 @@ $('#csv').addEventListener('click', () => {
     const lines = [['Ziffer','Kapitel','Abschnitt','Leistung','Gebühr (€)','Nicht neben (Ziffern)','Nur neben (Ziffern)','Bedingung/Textbezug','Regeltext'].map(q).join(';')];
     const seen = new Map(); result.forEach(r => { if (!seen.has(r.a)) seen.set(r.a, []); seen.get(r.a).push(r); });
     for (const rs of seen.values()) for (const r of rs) { const a = D.abschnitte[r.a];
-      lines.push([r.z, q(a.kap), q(a.name), q(r.t), dez(r.g), q(nbP(r,'N').join(', ')), q(nbP(r,'U').join(', ')), q(r.fl ? 'ja' : ''), q(r.rg.map(x => r.s[x[2]]).join(' '))].join(';')); }
+      lines.push([r.z, q(a.kap), q(a.name), q(r.t), dez(r.g), q(nbP(r,'N').join(', ')), q(nbP(r,'U').join(', ')), q(r.fl ? 'ja' : ''), q(r.rg.filter(i => NBT[RL[i].t]).map(i => RL[i].satz).join(' | '))].join(';')); }
     const blob = new Blob(['\ufeff' + lines.join('\r\n')], {type:'text/csv;charset=utf-8'});
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'GOAeneu_Nebeneinanderberechnung_Export.csv';
     document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
