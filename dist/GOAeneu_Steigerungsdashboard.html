@@ -569,11 +569,11 @@ function goto(z){
 
 /* ---------- Bedienelemente ---------- */
 let qt = 0;
-const syncQ = () => { const v = $('#q').value.trim(); if (v !== st.q) { st.q = v; if (v) st.collapsed.clear(); apply(); list.scrollTop = 0; } };
+const syncQ = () => { const v = $('#q').value.trim(); if (v !== st.q) { st.q = v; st.collapsed = v ? new Set() : new Set(D.abschnitte.map((_,i) => i)); apply(); list.scrollTop = 0; } };
 $('#q').addEventListener('input', () => { clearTimeout(qt); qt = setTimeout(syncQ, 80); });
 $('#q').addEventListener('search', syncQ);
 $('#q').addEventListener('keydown', e => {
-  if (e.key==='Enter') { clearTimeout(qt); st.q = e.target.value.trim(); if (st.q) st.collapsed.clear(); apply();
+  if (e.key==='Enter') { clearTimeout(qt); if (e.target.value.trim() !== st.q) { st.q = e.target.value.trim(); st.collapsed = st.q ? new Set() : new Set(D.abschnitte.map((_,i) => i)); } apply();
     const exact = /^\d+$/.test(st.q) && result.find(r => r.zs===st.q);
     const first = exact || items.find(it => it.h === undefined);
     if (first) { st.active = items.indexOf(first); scrollToIdx(st.active); open(first.z, true); } }

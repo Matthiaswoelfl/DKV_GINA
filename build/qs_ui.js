@@ -47,6 +47,12 @@ const path = require('path');
   check('URL-Hash gesetzt (#1200)', page.url().endsWith('#1200'), page.url().split('/').pop());
   await page.keyboard.press('Escape');
 
+  await page.fill('#q', '1200');
+  await page.waitForTimeout(200);
+  const offen = await page.locator('.row').count();
+  await page.fill('#q', '');
+  await page.waitForTimeout(200);
+  check('Suche geleert: wieder alle 5.580 Ziffern, alle Abschnitte eingeklappt', offen > 0 && (await txt('#status')).startsWith('5.580 von') && await page.locator('.row').count() === 0 && await page.locator('.ghead[aria-expanded=true]').count() === 0, (await txt('#status')) + ', ' + (await page.locator('.row').count()) + ' Zeilen offen');
   // Filter: Chips G + S, Faktor 6,0
   await page.fill('#q', '');
   await page.click('.chip[data-k=S]');
