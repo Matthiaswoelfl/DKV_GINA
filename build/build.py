@@ -301,6 +301,85 @@ def lese_kapitel(daten, gesetz):
     return info
 
 
+# ---------------------------------------------------------------- Nebeneinanderberechnung
+ABK = r"(?:bzw|z\.B|ggf|u\.a|inkl|etc|Nr|ca|d\.h|o\.g|sog|evtl|max|min|mind|einschl|usw|o\.ä|u\.ä|vgl|Abs)"
+SATZANFANG = r"(?:Die|Der|Das|Neben|Bei|Wird|Werden|Danach|Für|Im|In|Eine|Ein|Je|Gesonderte|Erfolgt|Sofern|Wenn)"
+NEBEN_RE = re.compile(r"\b[Nn]eben(?:einander(?:berechnung)?)?\b")
+NUR_RE = re.compile(r"\bnur neben\b")
+NICHT_RE = re.compile(r"\bnicht\b(?! gesondert)[^.;]*?(?:be|ab)rechnun\w*fähig|\bnicht (?:mehr )?berechnet|\bkeine (?:weiteren |anderen )?Leistungen\b.*berechnungsfähig|\bausgeschlossen\b")
+NUMLISTE_RE = re.compile(r"(?:Nummern?|(?<=Leistung )nach|(?<=Leistungen )nach)\s+(\d+(?:\s*(?:,\s*oder|,\s*und|,|oder|und/oder|und|bis|sowie)\s*\d+)*)(?!\s*(?:Stunden|Minuten|Tage|Wochen|Monate|Jahre))")
+_L = r"(?:der |dem |den |die )?(?:Leistung|Leistungen|Zuschlag|Zuschlägen|Zuschläge)?\s?nach (?:den )?(?:Nummern? )?#"
+EINFACH_RE = [re.compile(x) for x in (
+    r"^(?:Die Leistung|Der Zuschlag|Die Leistungen|Die Zuschläge) nach (?:den )?Nummern? # (?:ist|sind) (?:nicht )?neben (?:oder anstelle )?" + _L + r" (?:nicht )?berechnun(?:g)?sfähig\.?$",
+    r"^Neben (?:der Leistung|dem Zuschlag) nach Nummer # (?:ist|sind) " + _L + r" nicht berechnungsfähig\.?$",
+    r"^(?:Die Leistung|Der Zuschlag|Die \w+gebühr)(?: nach Nummer #)? ist nur neben " + _L + r" berechnungsfähig\.?$",
+)]
+
+
+def saetze(text: str) -> list[str]:
+    """Abrechnungsbestimmung in Sätze zerlegen (Zeilenumbrüche der Quelle sind Satzgrenzen)."""
+    out = []
+    for zeile in re.split(r"(?:_x000D_)?\s*\n\s*|_x000D_", (text or "").replace("\xa0", " ")):
+        zeile = re.sub(r"\s+", " ", zeile).strip()
+        if not zeile:
+            continue
+        zeile = re.sub(r"(fähig\.)(?=[A-ZÄÖÜ])", r"\1 ", zeile)
+        teile = re.split(r"(?<=[a-zäöüß\)]\.)\s+(?=[A-ZÄÖÜ])|(?<=\d\.)\s+(?=" + SATZANFANG + r"\s)", zeile)
+        puffer = ""
+        for t in teile:
+            puffer = (puffer + " " + t).strip()
+            if re.search(r"(?:^|[\s(])" + ABK + r"\.$", puffer):
+                continue
+            out.append(puffer)
+            puffer = ""
+        if puffer:
+            out.append(puffer)
+    return out
+
+
+def lese_neben(alle: dict) -> dict:
+    """Je Ziffer: Sätze der Abrechnungsbestimmung und daraus erkannte Regeln
+    'N' (nicht neben) / 'U' (nur neben) mit den genannten Ziffern."""
+    ziffern = sorted(alle)
+    zset = set(ziffern)
+    out = {"je": {}, "sonstige": [], "n_regeln": Counter(), "n_einfach": Counter(), "unbekannt": []}
+    for z in ziffern:
+        ss = saetze(alle[z]["abr"])
+        regeln = []
+        for i, satz in enumerate(ss):
+            if not NEBEN_RE.search(satz):
+                continue
+            typ = "U" if NUR_RE.search(satz) else ("N" if NICHT_RE.search(satz) else None)
+            if typ is None:
+                out["sonstige"].append((z, satz))
+                continue
+            partner = []
+            for m in NUMLISTE_RE.finditer(satz):
+                teile = re.split(r"(\bbis\b)", m.group(1))
+                letzte = None
+                for j, t in enumerate(teile):
+                    if t == "bis":
+                        continue
+                    nums = [int(x) for x in re.findall(r"\d+", t)]
+                    if j and teile[j - 1] == "bis" and nums and letzte is not None:
+                        partner += [x for x in ziffern if letzte < x <= nums[0]]
+                        nums = nums[1:]
+                    partner += nums
+                    letzte = nums[-1] if nums else letzte
+            for x in partner:
+                if x not in zset and x != z:
+                    out["unbekannt"].append((z, x, satz))
+            partner = sorted({x for x in partner if x in zset and x != z})
+            norm = NUMLISTE_RE.sub(lambda m: m.group(0).split()[0] + " #", satz)
+            einfach = bool(partner) and any(r.match(norm) for r in EINFACH_RE)
+            regeln.append([typ, 0 if einfach else 1, i, partner])
+            out["n_regeln"][typ] += 1
+            out["n_einfach"][typ] += einfach
+        if ss:
+            out["je"][z] = (ss, regeln)
+    return out
+
+
 def lese_gesetz(daten):
     """Gebührenverzeichnis des Entwurfs. Dient nur dem Abgleich (Gebühr, Bezeichnung,
     Abschnittscode) und liefert den Zusatztext je Ziffer. Zuordnungen kommen nie von hier."""
@@ -319,6 +398,7 @@ def lese_gesetz(daten):
 
     c_nr = max(i for i, k in enumerate(kopf) if k.lower().startswith("nummer"))   # jüngste Nummernspalte
     c_leg, c_zus, c_abs, c_bew = spalte("legende"), spalte("zusatz"), spalte("abschnitt"), spalte("bewertung")
+    c_abr = spalte("abrechnungsbestimmung")
     G, doppelt, je_code = {}, [], Counter()
     for r in ws.iter_rows(min_row=2, values_only=True):
         if r[c_nr] is None:
@@ -354,7 +434,8 @@ def lese_gesetz(daten):
         info["codes"].setdefault((r["kap"], r["abs"]), Counter())[str(g[c_abs])] += 1
     info["je_code"] = je_code
     info["alle"] = {z: {"t": norm_text(g[c_leg]).rstrip(",").strip(), "zus": zusatz_text(g[c_zus]),
-                        "g": dec(g[c_bew]), "code": str(g[c_abs])} for z, g in G.items()}
+                        "g": dec(g[c_bew]), "code": str(g[c_abs]), "abr": g[c_abr] or ""} for z, g in G.items()}
+    info["neben"] = lese_neben(info["alle"])
     # AB-IDs: Präfix (z. B. 02.03 aus 02.03-4) als Abschnittscode vorhanden?
     info["ab_praefix"] = {}
     for gr in daten["gruende"]:
@@ -426,7 +507,7 @@ def lese_pdf(daten):
 
 
 # ---------------------------------------------------------------- Tests
-def tests(daten, js=None, kap=None):
+def tests(daten, js=None, kap=None, gesetz=None):
     rows = {r["z"]: r for r in daten["rows"]}
     mus = daten["muster"]
     res = []
@@ -459,6 +540,18 @@ def tests(daten, js=None, kap=None):
           dict(anz) == {0: 3581, 1: 197, 2: 95, 3: 1472, 4: 235}, " · ".join(f"{k} → {anz[k]}" for k in sorted(anz)))
         t("Wortlaut der AB-Regel für alle 5 Gründe hinterlegt", all(g["wortlaut"] for g in js["gruende"]),
           " · ".join(f"{g['k']}: {len(g['wortlaut'])} Zeichen" for g in js["gruende"]))
+        if gesetz and gesetz.get("neben"):
+            nb = gesetz["neben"]["je"]
+            r1, r310 = nb.get(1, ([], [])), nb.get(310, ([], []))
+            t("Nebeneinander – Ziffer 1: „Nicht neben“ Ziffer 2", [x[0] for x in r1[1]] == ["N"] and r1[1][0][3] == [2],
+              "; ".join(f"{x[0]} {x[3]}" for x in r1[1]))
+            t("Nebeneinander – Ziffer 310: „Nur neben“ 306, 307, 308, 309",
+              [x[0] for x in r310[1]] == ["U"] and r310[1][0][3] == [306, 307, 308, 309], "; ".join(f"{x[0]} {x[3]}" for x in r310[1]))
+            zn = sum(1 for _, rg in nb.values() if any(x[0] == "N" for x in rg))
+            zu = sum(1 for _, rg in nb.values() if any(x[0] == "U" for x in rg))
+            t("Nebeneinander – Ziffern mit „Nicht neben“-Regel: 1.051, mit „Nur neben“-Regel: 6", (zn, zu) == (1051, 6), f"{zn} / {zu}")
+            t("Nebeneinander – alle genannten Ziffern existieren im Gebührenverzeichnis", not gesetz["neben"]["unbekannt"],
+              f"{len(gesetz['neben']['unbekannt'])} unbekannte Nennungen")
         t("Jede nicht steigerfähige Ziffer hat eine Leistungsbezeichnung", all(r[2] for r in js["rows"]),
           f"{sum(1 for r in js['rows'] if not r[2])} ohne Text")
     t("Keine doppelten Ziffern", len(rows) == len(daten["rows"]), f"{len(rows)} eindeutig")
@@ -541,6 +634,10 @@ def baue_json(daten, pdf, gesetz, kap):
             abs_liste[i]["n"] += 1
             abs_liste[i]["ab"] += 1
             rows.append([r["z"], i, r["t"], int(r["_g"] * 100), r["bauch"], r["ct"], r["m"], r["c"], zus.get(r["z"], ""), None])
+    neben = gesetz.get("neben", {}).get("je", {})
+    for row in rows:
+        ss, rg = neben.get(row[0], ([], []))
+        row += [ss, rg]
     kapitel = [{"k": k, "titel": titel.get(k) or pdf["kapiteltitel"].get(k),
                 "n": sum(a["n"] for a in abs_liste if a["kap"] == k)}
                for k in dict.fromkeys(a["kap"] for a in abs_liste)]
@@ -702,6 +799,54 @@ def schreibe_bericht(daten, pdf, gesetz, kap, res, ui, excel_name):
             "mindestens ein Erhöhungsgrund greift (Zuschläge ausgenommen). Ob diese Auswahl vollständig ist, wurde nicht geprüft.",
         ]
 
+    L += ["", "## 4c. Nebeneinanderberechnung („Nicht neben“ / „Nur neben“)", ""]
+    if not gesetz.get("neben"):
+        L.append("Nicht durchgeführt: kein Gebührenverzeichnis.")
+    else:
+        nb = gesetz["neben"]
+        je = nb["je"]
+        zn = sum(1 for _, rg in je.values() if any(x[0] == "N" for x in rg))
+        zu = sum(1 for _, rg in je.values() if any(x[0] == "U" for x in rg))
+        ohne_z = sum(1 for _, rg in je.values() for x in rg if not x[3])
+        L += ["Quelle ist ausschließlich die Spalte „Abrechnungsbestimmung“ des Gebührenverzeichnisses. Der Text wird in Sätze "
+              "zerlegt; ein Satz mit „neben“ gilt als **Nur neben**, wenn er „nur neben“ enthält, sonst als **Nicht neben**, wenn "
+              "er eine Verneinung der Berechnungsfähigkeit enthält („nicht … berechnungsfähig“, „nicht neben“, „keine Leistungen … "
+              "berechnungsfähig“, „ausgeschlossen“). Genannte Ziffern werden aus „Nummer(n) …“-Aufzählungen gelesen, „bis“-Bereiche "
+              "auf die vorhandenen Ziffern aufgelöst.", "",
+              "| Kennzahl | Wert |", "|---|---|",
+              f"| Ziffern mit Abrechnungsbestimmung | {len(je)} |",
+              f"| Ziffern mit „Nicht neben“-Regel | {zn} ({nb['n_regeln']['N']} Regelsätze) |",
+              f"| Ziffern mit „Nur neben“-Regel | {zu} ({nb['n_regeln']['U']} Regelsätze) |",
+              f"| Regelsätze im Standardwortlaut (eindeutig, nur Ziffern) | {nb['n_einfach']['N'] + nb['n_einfach']['U']} |",
+              f"| Regelsätze mit Bedingung oder Textbezug (im Dashboard mit ⚑ markiert) | {sum(nb['n_regeln'].values()) - nb['n_einfach']['N'] - nb['n_einfach']['U']} |",
+              f"| … davon ohne einzelne genannte Ziffer (Bezug nur im Wortlaut) | {ohne_z} |",
+              f"| Genannte Nummern, die es im Gebührenverzeichnis nicht gibt | {len(nb['unbekannt'])} |",
+              f"| Sätze mit „neben“, die keiner der beiden Kategorien zugeordnet wurden | {len(nb['sonstige'])} |", "",
+              "„Nur neben“-Regeln:", ""]
+        for z, (ss, rg) in je.items():
+            for x in rg:
+                if x[0] == "U":
+                    L.append(f"- Ziffer {z}: „{ss[x[2]]}“")
+        L += ["", "<details><summary>Nicht zugeordnete Sätze mit „neben“ (" + str(len(nb["sonstige"])) + ")</summary>", ""]
+        L += [f"- Ziffer {z}: „{satz}“" for z, satz in nb["sonstige"]]
+        L += ["", "</details>"]
+        offen += [
+            "**Nebeneinanderberechnung – Erkennung aus dem Wortlaut:** Die Zuordnung „Nicht neben“/„Nur neben“ ist eine automatische "
+            "Textauswertung, keine fachliche Prüfung. Regeln mit Bedingung („wenn …“, „an demselben Kalendertag“, „für dasselbe "
+            "Material“) oder Textbezug („Leistungen des Kapitels B“) sind als „Nicht neben“ geführt und mit ⚑ markiert; der Satz "
+            "wird immer wörtlich gezeigt.",
+            f"**Nur {zu} Ziffern mit „Nur neben“-Regel:** Nur diese enthalten in der Abrechnungsbestimmung „nur neben“. Zuschläge, "
+            "deren Bindung allein in der Legende steht („Zuschlag zu der Leistung nach Nummer …“), sowie Formulierungen wie „nur in "
+            "engem zeitlichen Zusammenhang mit …“ sind nicht als „Nur neben“ gewertet. Soll das erweitert werden?",
+            f"**{len(nb['sonstige'])} Sätze mit „neben“ ohne Zuordnung** (z. B. „ist neben … berechnungsfähig“, „nur mit medizinischer "
+            "Begründung“, „bis zu zweimal neben …“): im Detailbereich unter „Übrige Abrechnungsbestimmungen“ sichtbar, Liste in "
+            "Abschnitt 4c. Bitte prüfen, ob daraus weitere Kategorien werden sollen.",
+            "**Nebeneinanderberechnung – nicht erfasst:** Ausschlüsse aus den Allgemeinen Bestimmungen der Kapitel/Abschnitte liegen "
+            "nicht vor. Bezüge auf ganze Kapitel oder Abschnitte werden nicht in einzelne Ziffern aufgelöst.",
+            "**Schalter „Nennungen bei anderen Ziffern einbeziehen“** (Standard: aus): zählt eine Ziffer auch dann als betroffen, "
+            "wenn sie nur in der Regel einer anderen Ziffer genannt ist. Ob Ausschlüsse fachlich immer wechselseitig gelten, ist nicht entschieden.",
+        ]
+
     L += ["", "## 4b. Abgleich mit dem PDF (Allgemeine Bestimmungen)", ""]
     if not pdf["datei"]:
         L.append("Nicht durchgeführt: kein PDF in `input/`. Die PDF-Auswertung im Build-Skript (Suche der AB-IDs mit "
@@ -761,7 +906,7 @@ def main():
     gesetz = lese_gesetz(daten)
     kap = lese_kapitel(daten, gesetz)
     js_obj = baue_json(daten, pdf, gesetz, kap)
-    res = tests(daten, js_obj, kap)
+    res = tests(daten, js_obj, kap, gesetz)
 
     js = json.dumps(js_obj, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     html = TEMPLATE.read_text(encoding="utf-8").replace("/*__DATA__*/", js)

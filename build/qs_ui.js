@@ -129,6 +129,45 @@ const path = require('path');
   const csv = fs.readFileSync(await dl.path(), 'utf8').replace(/^﻿/, '').split('\r\n');
   check('CSV-Export (Filter V): Kopf + 60 Zeilen, deutsche Dezimalzahlen', csv.length === 61 && csv[0].startsWith('"Ziffer";"Kapitel";"Abschnitt";"Leistung";"Gebühr (€)";"Gründe";"max. Faktor";"max. Gebührensatz (€)"') && /;\d+,\d{2}$/.test(csv[1]), csv.length + ' Zeilen; ' + csv[1].slice(0, 30) + ' … ' + csv[1].slice(-28));
 
+  // ---------- Reiter Nebeneinanderberechnung ----------
+  await page.goto('file://' + html);
+  await page.reload();
+  await page.click('#tabs button[data-v=nb]');
+  const chipsNb = (await page.locator('#chipsnb .chip').allInnerTexts()).map(t => t.replace(/\s+/g, ' ')).join(' | ');
+  check('Reiter „Nebeneinanderberechnung“: Chips Nicht neben 1.051 · Nur neben 6 · Keine Neben-Regel 4.525',
+    chipsNb === '≠ Nicht neben 1.051 | + Nur neben 6 | – Keine Neben-Regel 4.525' && await page.locator('#f-ab').isHidden(), chipsNb);
+  await shot('07_neben_start.png');
+  await page.click('#chipsnb .chip[data-k=U]');
+  check('Chip „Nur neben“: 6 Ziffern', (await txt('#status')).startsWith('6 von'), await txt('#status'));
+  await page.fill('#q', '310');
+  await page.keyboard.press('Enter');
+  d = (await txt('#drawer')).replace(/\s+/g, ' ');
+  const p310 = (await page.locator('#drawer .regel .zl b').allInnerTexts()).join(',');
+  check('Ziffer 310: „Nur neben“ mit Wortlaut und Ziffern 306, 307, 308, 309', d.includes('Die Schreibgebühr ist nur neben der Leistung nach Nummer 306, 307, 308 oder 309 berechnungsfähig.') && p310 === '306,307,308,309' && page.url().endsWith('#neben/310'), p310 + ' · ' + page.url().split('/').slice(-2).join('/'));
+  await shot('08_neben_detail_310.png');
+  await page.locator('#drawer .regel .zl').first().click();
+  d = (await txt('#drawer')).replace(/\s+/g, ' ');
+  check('Klick auf genannte Ziffer 306 öffnet diese und zeigt „In Regeln anderer Ziffern genannt“ (310, 311)', d.includes('Ziffer 306') && /in regeln anderer ziffern genannt \(2\)/i.test(d) && d.includes('Schreibgebühr') && d.includes('Kopiergebühr'), d.slice(0, 90));
+  await page.goto('file://' + html + '#neben/1');
+  await page.reload();
+  d = (await txt('#drawer')).replace(/\s+/g, ' ');
+  check('Direktlink #neben/1: „Nicht neben“ Ziffer 2 mit Wortlaut', d.includes('Die Leistung nach Nummer 1 ist neben der Leistung nach Nummer 2 nicht berechnungsfähig.') && (await page.locator('#drawer .regel .zl b').first().innerText()) === '2' && await page.locator('#tabs button[data-v=nb][aria-selected=true]').count() === 1, d.slice(0, 60));
+  await page.keyboard.press('Escape');
+  await page.click('#reset');
+  await page.selectOption('#nbart', 'b');
+  const nArt = await txt('#status');
+  await page.selectOption('#nbart', '');
+  await page.check('#nbrev');
+  const chipsRev = (await page.locator('#chipsnb .chip').allInnerTexts()).map(t => t.replace(/\s+/g, ' ')).join(' | ');
+  check('Filter „Regelart“ und Schalter „Nennungen einbeziehen“ ändern die Treffer', /^\d/.test(nArt) && !nArt.startsWith('5.580') && chipsRev !== chipsNb, nArt + ' · ' + chipsRev);
+  await page.uncheck('#nbrev');
+  await page.click('#chipsnb .chip[data-k=U]');
+  const [dl2] = await Promise.all([page.waitForEvent('download'), page.click('#csv')]);
+  const csv2 = fs.readFileSync(await dl2.path(), 'utf8').replace(/^\ufeff/, '').split('\r\n');
+  check('CSV-Export Nebeneinander (Filter Nur neben): Kopf + 6 Zeilen', csv2.length === 7 && csv2[0].includes('"Nicht neben (Ziffern)";"Nur neben (Ziffern)"') && csv2[1].includes('"306, 307, 308, 309"'), csv2.length + ' Zeilen; ' + csv2[1].slice(0, 60));
+  await page.click('#tabs button[data-v=ab]');
+  check('Zurück zum Reiter „AB-Steigerungsgründe“: AB-Filter wieder sichtbar, 5.580 Ziffern', await page.locator('#f-nb').isHidden() && await page.locator('#chips .chip').count() === 6 && (await txt('#status')).startsWith('5.580 von'), await txt('#status'));
+
   // Laptop-Breite
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.goto('file://' + html + '#13399');
