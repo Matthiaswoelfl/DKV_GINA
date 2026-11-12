@@ -373,6 +373,104 @@ def lese_regeln(ziffern: set) -> dict:
     return info
 
 
+# ---------------------------------------------------------------- Intervalle
+_TAG = r"Kalendertag|\bpro Tag\b|\bje Tag\b|\ban einem Tag\b|\btäglich\b|Behandlungstag|\bam selben Tag\b|\ban demselben Tag\b"
+_KHJ = r"Kalenderhalbjahr|\bHalbjahr"
+# Muster je Intervall; "lz" = auch in Legende/Zusatz suchen (sonst nur Abrechnungsbestimmung)
+INTERVALL_RE = {
+    "sitzung": (r"\bSitzung(?:en)?\b", r"\b(?:je|pro) Sitzung\b|\bin (?:einer|derselben|der gleichen|gleicher) Sitzung\b|\bSitzungen im\b"),
+    "tag": (_TAG, r"\b(?:je|pro) (?:Kalendertag|Tag|Behandlungstag)\b|\btäglich\b"),
+    "kalenderjahr": (r"Kalenderjahr", r"Kalenderjahr"),
+    "kalenderhalbjahr": (_KHJ, _KHJ),
+    "quartal": (r"\bQuartal|Kalendervierteljahr|\bVierteljahr", r"\bQuartal|Kalendervierteljahr|\bVierteljahr"),
+    "jahr365": (r"innerhalb (?:eines|von einem) Jahr|innerhalb von (?:12|zwölf) Monaten|\bbinnen eines Jahres|\b(?:je|pro) Jahr\b|365 Tage", None),
+    "monat30": (r"innerhalb (?:eines|von einem) Monat|innerhalb von (?:30|dreißig) Tagen|\b(?:je|pro) Monat\b|30 Tage", None),
+    "behandlungsfall_alt": (r"Behandlungsfall", r"Behandlungsfall"),
+    "mindestabstand_tag": (r"Abstand von mindestens|Mindestabstand", r"Abstand von mindestens|Mindestabstand"),
+    "rollierend_24h": (r"(?:innerhalb von|je vollendete|je|binnen|in) 24 Stunden", None),
+    "kalenderwoche": (r"Kalenderwoche", r"Kalenderwoche"),
+    "kalendermonat": (r"Kalendermonats?\b", r"Kalendermonats?\b"),
+    "rollierend_7tage": (r"innerhalb von (?:sieben|7) Tagen", None),
+    "rollierend_3kalendermonate": (r"(?:in|innerhalb von) (?:drei|3) Kalendermonaten", None),
+    "rollierend_6monate_staffel": (r"Zeitraume?s? von (?:6|sechs) Monaten", None),
+    "krankheitsfall": (r"Krankheitsfall", r"Krankheitsfall"),
+    "behandlungsfall_neu": (r"Behandlungsfall", r"Behandlungsfall"),
+    "abstand_vorgaenger": (r"frühestens\b.*\bnach\b", None),
+    "zeitfenster_ereignis": (r"nach Erstdialyse|innerhalb der ersten\b.*\bnach\b", None),
+    "mindestkontakte": (r"Kontakte? innerhalb|mindestens \w+ (?:Arzt-Patienten-)?Kontakte", None),
+    "zyklus_versuch": (r"\bZyklus\b|Behandlungszyklus|\bVersuch(?:e?s)?\b", r"\bje Zyklus\b|\bje Versuch\b|Behandlungszyklus"),
+}
+# Kombinierte Limits: beide Teilmuster im selben Satz
+INTERVALL_KOMBI = {
+    "kombi_tag_behandlungsfall": (_TAG, r"Behandlungsfall"),
+    "kombi_krankheitsfall_halbjahr": (r"Krankheitsfall", _KHJ),
+    "kombi_krankheitsfall_woche": (r"Krankheitsfall", r"\b(?:pro|je) Woche\b"),
+    "zaehlgrenze_halbjahr": (_KHJ, r"für bis zu \d+ Sitzungen"),
+}
+ZEITWORT_RE = re.compile(r"Kalender(?:jahr|halbjahr|monat|woche|tag)|\bSitzung|Behandlungsfall|Krankheitsfall|\bStunden\b|\bMonat|\bWochen?\b|\bTagen?\b|\bJahr(?:es|en)?\b|Quartal|Zyklus|Versuch|frühestens|Abstand")
+HAEUFIG_RE = re.compile(r"(?:nur |höchstens |maximal |insgesamt )?(?:bis zu )?(?:(?:ein|zwei|drei|vier|fünf|sechs|sieben|acht|neun|zehn|elf|zwölf|fünfzehn|sechzehn|zwanzig)mal|\d+[- ]?(?:mal|Mal)\b|maximal \w+ Leistungen)")
+ABK = r"(?:bzw|z\.B|ggf|u\.a|inkl|etc|Nr|ca|d\.h|o\.g|sog|evtl|max|min|mind|einschl|usw|o\.ä|u\.ä|vgl|Abs)"
+
+
+def saetze(text: str) -> list[str]:
+    """Text in Sätze zerlegen (Zeilenumbrüche der Quelle sind Satzgrenzen)."""
+    out = []
+    for zeile in re.split(r"(?:_x000D_)?\s*\n\s*|_x000D_", (text or "").replace("\xa0", " ")):
+        zeile = re.sub(r"\s+", " ", zeile).strip()
+        if not zeile:
+            continue
+        zeile = re.sub(r"(fähig\.)(?=[A-ZÄÖÜ])", r"\1 ", zeile)
+        puffer = ""
+        for t in re.split(r"(?<=[a-zäöüß\)]\.)\s+(?=[A-ZÄÖÜ])", zeile):
+            puffer = (puffer + " " + t).strip()
+            if re.search(r"(?:^|[\s(])" + ABK + r"\.$", puffer):
+                continue
+            out.append(puffer)
+            puffer = ""
+        if puffer:
+            out.append(puffer)
+    return out
+
+
+def lese_intervalle(roh_texte: dict) -> dict:
+    """Ordnet Ziffern über den Wortlaut des Gebührenverzeichnisses den Intervallen aus input/intervalle.json zu.
+    roh_texte: Ziffer -> (Legende, Zusatz, Abrechnungsbestimmung)."""
+    f = INPUT / "intervalle.json"
+    info = {"datei": None}
+    if not f.exists() or not roh_texte:
+        return info
+    defs = json.loads(f.read_text(encoding="utf-8"))["intervalle"]
+    idx = {d["id"]: i for i, d in enumerate(defs)}
+    fehlend = [k for k in list(INTERVALL_RE) + list(INTERVALL_KOMBI) if k not in idx] + [d["id"] for d in defs if d["id"] not in INTERVALL_RE and d["id"] not in INTERVALL_KOMBI]
+    je, rest = {}, []
+    for z in sorted(roh_texte):
+        leg, zus, abr = roh_texte[z]
+        fragmente = [("A", s) for s in saetze(abr)] + [("L", norm_text(leg))] + [("Z", s) for s in saetze(zus)]
+        treffer = []
+        for quelle, satz in fragmente:
+            if not satz:
+                continue
+            ids = []
+            for k, (re_a, re_lz) in INTERVALL_RE.items():
+                pat = re_a if quelle == "A" else re_lz
+                if pat and k in idx and re.search(pat, satz):
+                    ids.append(idx[k])
+            for k, (p1, p2) in INTERVALL_KOMBI.items():
+                if k in idx and re.search(p1, satz) and re.search(p2, satz):
+                    ids.append(idx[k])
+            if ids:
+                treffer.append([sorted(ids), quelle, satz, "; ".join(dict.fromkeys(m.group(0) for m in HAEUFIG_RE.finditer(satz)))])
+            elif quelle == "A" and ZEITWORT_RE.search(satz):
+                rest.append((z, satz))
+        if treffer:
+            je[z] = treffer
+    zahl = Counter(i for v in je.values() for i in {i for t in v for i in t[0]})
+    bsp_fehlt = [(d["name"], z) for i, d in enumerate(defs) for z in d["beispiele"]
+                 if not any(i in t[0] for t in je.get(z, []))]
+    info.update(datei=f.name, defs=defs, je=je, rest=rest, zahl=zahl, bsp_fehlt=bsp_fehlt, ohne_muster=fehlend)
+    return info
+
+
 def lese_gesetz(daten):
     """Gebührenverzeichnis des Entwurfs. Dient nur dem Abgleich (Gebühr, Bezeichnung,
     Abschnittscode) und liefert den Zusatztext je Ziffer. Zuordnungen kommen nie von hier."""
@@ -427,6 +525,8 @@ def lese_gesetz(daten):
     info["je_code"] = je_code
     info["alle"] = {z: {"t": norm_text(g[c_leg]).rstrip(",").strip(), "zus": zusatz_text(g[c_zus]),
                         "g": dec(g[c_bew]), "code": str(g[c_abs])} for z, g in G.items()}
+    c_abr = spalte("abrechnungsbestimmung")
+    info["roh"] = {z: (g[c_leg], g[c_zus], g[c_abr]) for z, g in G.items()}
     # AB-IDs: Präfix (z. B. 02.03 aus 02.03-4) als Abschnittscode vorhanden?
     info["ab_praefix"] = {}
     for gr in daten["gruende"]:
@@ -498,7 +598,7 @@ def lese_pdf(daten):
 
 
 # ---------------------------------------------------------------- Tests
-def tests(daten, js=None, kap=None, gesetz=None, regeln=None):
+def tests(daten, js=None, kap=None, gesetz=None, regeln=None, intervalle=None):
     rows = {r["z"]: r for r in daten["rows"]}
     mus = daten["muster"]
     res = []
@@ -556,6 +656,29 @@ def tests(daten, js=None, kap=None, gesetz=None, regeln=None):
             ohne = [z for z in zus if not any(RG[i]["t"] == "U" for i in je.get(z, []))]
             t("Nebeneinander – jede Ziffer, deren Bezeichnung mit „Zuschlag“ beginnt, hat eine „Nur neben“-Regel",
               not ohne, f"{len(zus)} Zuschlagsziffern, {len(ohne)} ohne Regel" + (f" (z. B. {ohne[:5]})" if ohne else ""))
+        if intervalle and intervalle["datei"]:
+            defs, ije = intervalle["defs"], intervalle["je"]
+
+            def hat(z, iid):
+                i = next(k for k, d in enumerate(defs) if d["id"] == iid)
+                return any(i in tr[0] for tr in ije.get(z, []))
+
+            t("Intervalle – 25 Intervalle (8 bestehend, 17 neu), jedes mit Erkennungsmuster",
+              len(defs) == 25 and Counter(d["status"] for d in defs) == {"bestehend": 8, "neu": 17} and not intervalle["ohne_muster"],
+              f"{len(defs)} Intervalle; " + " · ".join(f"{k} {v}" for k, v in Counter(d['status'] for d in defs).items()))
+            proben = [(1022, "mindestabstand_tag"), (1100, "rollierend_24h"), (1800, "rollierend_24h"), (2702, "kalenderwoche"),
+                      (2702, "abstand_vorgaenger"), (4444, "kalendermonat"), (208, "kalendermonat"), (1123, "rollierend_7tage"),
+                      (119, "rollierend_3kalendermonate"), (305, "rollierend_3kalendermonate"), (13618, "rollierend_6monate_staffel"),
+                      (4404, "krankheitsfall"), (1017, "kombi_tag_behandlungsfall"), (13800, "kombi_krankheitsfall_halbjahr"),
+                      (13802, "kombi_krankheitsfall_woche"), (4525, "zaehlgrenze_halbjahr"), (3415, "zeitfenster_ereignis"),
+                      (3801, "mindestkontakte"), (13118, "zyklus_versuch"), (1200, "sitzung"), (2, "tag")]
+            miss = [f"{z}/{i}" for z, i in proben if not hat(z, i)]
+            t("Intervalle – Stichprobe aus der Vorgabe (21 Ziffer-Intervall-Paare, z. B. 1022 Mindestabstand, 4444 Kalendermonat, 13802 Krankheitsfall und Woche)",
+              not miss, "alle gefunden" if not miss else "fehlend: " + ", ".join(miss))
+            bsp = sum(len(d["beispiele"]) for d in defs)
+            t("Intervalle – Beispielziffern der Vorgabe gefunden (7 ungerade Ziffern 2705–2717 je zweimal ohne passenden Wortlaut)",
+              len(intervalle["bsp_fehlt"]) == 14 and all(2705 <= z <= 2717 and z % 2 for _, z in intervalle["bsp_fehlt"]),
+              f"{bsp - len(intervalle['bsp_fehlt'])} von {bsp} gefunden")
         t("Jede nicht steigerfähige Ziffer hat eine Leistungsbezeichnung", all(r[2] for r in js["rows"]),
           f"{sum(1 for r in js['rows'] if not r[2])} ohne Text")
     t("Keine doppelten Ziffern", len(rows) == len(daten["rows"]), f"{len(rows)} eindeutig")
@@ -601,7 +724,7 @@ def lese_wortlaut() -> dict:
     return json.loads(p.read_text(encoding="utf-8"))["gruende"] if p.exists() else {}
 
 
-def baue_json(daten, pdf, gesetz, kap, regeln):
+def baue_json(daten, pdf, gesetz, kap, regeln, intervalle):
     matrix = {r["z"]: r for r in daten["rows"]}
     wortlaut = lese_wortlaut()
     zus = gesetz.get("zusatz", {})
@@ -639,7 +762,7 @@ def baue_json(daten, pdf, gesetz, kap, regeln):
             abs_liste[i]["ab"] += 1
             rows.append([r["z"], i, r["t"], int(r["_g"] * 100), r["bauch"], r["ct"], r["m"], r["c"], zus.get(r["z"], ""), None])
     for row in rows:
-        row += [regeln.get("je", {}).get(row[0], []), regeln.get("weitere", {}).get(row[0], [])]
+        row += [regeln.get("je", {}).get(row[0], []), regeln.get("weitere", {}).get(row[0], []), intervalle.get("je", {}).get(row[0], [])]
     kapitel = [{"k": k, "titel": titel.get(k) or pdf["kapiteltitel"].get(k),
                 "n": sum(a["n"] for a in abs_liste if a["kap"] == k)}
                for k in dict.fromkeys(a["kap"] for a in abs_liste)]
@@ -658,10 +781,11 @@ def baue_json(daten, pdf, gesetz, kap, regeln):
         "gesetz": {"datei": gesetz["datei"], "stand": gesetz.get("stand")},
         "gruende": gruende, "kapitel": kapitel, "abschnitte": abs_liste, "muster": muster, "rows": rows,
         "regeln": regeln.get("regeln", []),
+        "intervalle": [{k: v for k, v in d.items() if k != "beispiele"} | {"bsp": d["beispiele"]} for d in intervalle.get("defs", [])],
     }
 
 
-def schreibe_bericht(daten, pdf, gesetz, kap, regeln, res, ui, excel_name, daten_alle=()):
+def schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, res, ui, excel_name, daten_alle=()):
     L = []
     ok = sum(1 for _, o, _ in res if o)
     L += ["# QS-Bericht – GOÄneu Steigerungsdashboard", "",
@@ -846,6 +970,45 @@ def schreibe_bericht(daten, pdf, gesetz, kap, regeln, res, ui, excel_name, daten
             "über der Liste, wird aber nicht je Regel ausgewertet.",
         ]
 
+    L += ["", "## 4d. Intervalle", ""]
+    if not intervalle["datei"]:
+        L.append("Nicht vorhanden: `input/intervalle.json` oder Gebührenverzeichnis fehlt.")
+    else:
+        defs, ije = intervalle["defs"], intervalle["je"]
+        L += ["Die Systematik (bestehend/neu, Cluster, Beispielziffern) steht in `input/intervalle.json` und entspricht der Vorgabe. "
+              "Die Zuordnung der Ziffern erfolgt über Textmuster im Gebührenverzeichnis: in jedem Satz der Abrechnungsbestimmung, "
+              "bei eindeutigen Formulierungen („je Sitzung“, „je Kalendertag“ …) auch in Legende und Zusatz. Jeder Treffer wird im "
+              "Dashboard mit Wortlaut und Quelle gezeigt.", "",
+              f"Ziffern mit mindestens einem Intervall: **{len(ije)}** von {len(daten_alle)}.", "",
+              "| Status | Cluster | Intervall | Ziffern |", "|---|---|---|---|"]
+        for i, d in enumerate(defs):
+            L.append(f"| {d['status']} | {d['cluster']}: {d['cluster_name']} | {d['name']} | {intervalle['zahl'][i]} |")
+        L += ["", "Beispielziffern der Vorgabe ohne passenden Wortlaut im Gebührenverzeichnis:", ""]
+        nach = {}
+        for name, z in intervalle["bsp_fehlt"]:
+            nach.setdefault(name, []).append(z)
+        L += [f"- {name}: {', '.join(map(str, zs))}" for name, zs in nach.items()] or ["- keine"]
+        L += ["", "Sätze der Abrechnungsbestimmung mit Zeitangabe, die keinem Intervall zugeordnet wurden (" + str(len(intervalle["rest"])) + "):", ""]
+        L += [f"- Ziffer {z}: „{satz}“" for z, satz in intervalle["rest"]]
+        offen += [
+            "**Intervalle – Erkennung aus dem Wortlaut:** Die Zuordnung Ziffer → Intervall ist eine Textauswertung des "
+            "Gebührenverzeichnisses, keine fachliche Prüfung. Bei „Sitzung“ zählt jede Nennung in der Abrechnungsbestimmung, auch "
+            "wenn sie Teil einer Nicht-neben-Regel ist („in gleicher Sitzung …“).",
+            "**Intervalle – Kalenderwoche und Mindestabstand zur Vorgängerziffer:** Die Vorgabe nennt „2702, 2704 bis 2718“ bzw. "
+            "„2702 bis 2718“. Den Wortlaut („frühestens fünf Tage nach … einmal je Kalenderwoche“) haben nur 2702 und die geraden "
+            "Ziffern 2704 bis 2718; die ungeraden 2705 bis 2717 sind die Vorgängerziffern („einmal zu Beginn der Behandlung“) und "
+            "wurden nicht zugeordnet. Bitte bestätigen.",
+            "**Intervalle – Hyperfraktionierung (Mindestabstand 6 Stunden):** im Gebührenverzeichnis nicht gefunden; vermutlich in "
+            "den Allgemeinen Bestimmungen, die nicht vorliegen. Unter „Mindestabstand am selben Tag“ stehen daher nur 1022 und 1023.",
+            "**Intervalle – Jahr (365 Tage) und Monat (30 Tage):** Im Gebührenverzeichnis gibt es dafür keinen Wortlaut; beide "
+            "Intervalle haben 0 Ziffern. Ob sie in der neuen GOÄ entfallen, ist fachlich zu bewerten.",
+            "**Intervalle – Behandlungsfall:** Ziffern mit „Behandlungsfall“ stehen sowohl unter dem bestehenden Intervall als auch "
+            "unter „Behandlungsfall (geänderte Definition)“, weil die bestehende Prüfung auf die neue Definition umzustellen ist. "
+            "Falls sie nur unter einem der beiden erscheinen sollen, bitte melden.",
+            "**Intervalle – fallbezogene Definitionen (AB A Nr. 5 und Nr. 6)** und alle Intervall-Regeln aus Allgemeinen "
+            "Bestimmungen sind nicht ausgewertet; die Beschreibungen stammen aus der Vorgabe.",
+        ]
+
     L += ["", "## 4b. Abgleich mit dem PDF (Allgemeine Bestimmungen)", ""]
     if not pdf["datei"]:
         L.append("Nicht durchgeführt: kein PDF in `input/`. Die PDF-Auswertung im Build-Skript (Suche der AB-IDs mit "
@@ -905,8 +1068,9 @@ def main():
     gesetz = lese_gesetz(daten)
     kap = lese_kapitel(daten, gesetz)
     regeln = lese_regeln({int(z) for z in kap["K"]} if kap["datei"] else {r["z"] for r in daten["rows"]})
-    js_obj = baue_json(daten, pdf, gesetz, kap, regeln)
-    res = tests(daten, js_obj, kap, gesetz, regeln)
+    intervalle = lese_intervalle(gesetz.get("roh", {}))
+    js_obj = baue_json(daten, pdf, gesetz, kap, regeln, intervalle)
+    res = tests(daten, js_obj, kap, gesetz, regeln, intervalle)
 
     js = json.dumps(js_obj, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     html = TEMPLATE.read_text(encoding="utf-8").replace("/*__DATA__*/", js)
@@ -923,7 +1087,7 @@ def main():
         ui = json.loads(UI_JSON.read_text(encoding="utf-8"))
         UI_JSON.unlink()
 
-    schreibe_bericht(daten, pdf, gesetz, kap, regeln, res, ui, excels[0].name, [r[0] for r in js_obj["rows"]])
+    schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, res, ui, excels[0].name, [r[0] for r in js_obj["rows"]])
     for name, ok, ist in res:
         print(("OK   " if ok else "FAIL ") + name + "  →  " + ist)
     for c in (ui or {}).get("checks", []):

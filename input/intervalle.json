@@ -1,0 +1,346 @@
+{
+ "quelle": "Intervall-Systematik (bestehend/neu, Cluster, Beispielziffern) laut Vorgabe des Auftraggebers. Die Zuordnung der Ziffern erfolgt im Build-Skript über den Wortlaut des Gebührenverzeichnisses.",
+ "intervalle": [
+  {
+   "id": "sitzung",
+   "status": "bestehend",
+   "cluster": 1,
+   "cluster_name": "Sitzung und Tag",
+   "name": "Sitzung",
+   "lang": "Sitzungen innerhalb eines Beleges (unter Berücksichtigung der Uhrzeit)",
+   "hinweis": "",
+   "beispiele": []
+  },
+  {
+   "id": "tag",
+   "status": "bestehend",
+   "cluster": 1,
+   "cluster_name": "Sitzung und Tag",
+   "name": "Behandlungstag / Kalendertag",
+   "lang": "Behandlungstage (Historie, z. B. Ziffer ist 3x pro Tag berechenbar)",
+   "hinweis": "",
+   "beispiele": []
+  },
+  {
+   "id": "kalenderjahr",
+   "status": "bestehend",
+   "cluster": 2,
+   "cluster_name": "Feste Kalenderzeiträume",
+   "name": "Kalenderjahr",
+   "lang": "Kalenderjahr (01.01. bis 31.12.)",
+   "hinweis": "",
+   "beispiele": []
+  },
+  {
+   "id": "kalenderhalbjahr",
+   "status": "bestehend",
+   "cluster": 2,
+   "cluster_name": "Feste Kalenderzeiträume",
+   "name": "Kalender-Halbjahr",
+   "lang": "Kalender-Halbjahr (01.01. bis 30.06. und 01.07. bis 31.12.)",
+   "hinweis": "",
+   "beispiele": []
+  },
+  {
+   "id": "quartal",
+   "status": "bestehend",
+   "cluster": 2,
+   "cluster_name": "Feste Kalenderzeiträume",
+   "name": "Quartal",
+   "lang": "Quartal (Q1, Q2, Q3, Q4)",
+   "hinweis": "",
+   "beispiele": []
+  },
+  {
+   "id": "jahr365",
+   "status": "bestehend",
+   "cluster": 3,
+   "cluster_name": "Rollierende Zeiträume ab Leistungsdatum",
+   "name": "Jahr (taggenau 365 Tage)",
+   "lang": "Jahr (taggenau 365 Tage)",
+   "hinweis": "",
+   "beispiele": []
+  },
+  {
+   "id": "monat30",
+   "status": "bestehend",
+   "cluster": 3,
+   "cluster_name": "Rollierende Zeiträume ab Leistungsdatum",
+   "name": "Monat (taggenau 30 Tage)",
+   "lang": "Monat (taggenau 30 Tage)",
+   "hinweis": "",
+   "beispiele": []
+  },
+  {
+   "id": "behandlungsfall_alt",
+   "status": "bestehend",
+   "cluster": 4,
+   "cluster_name": "Fallbezogene Zeiträume",
+   "name": "Behandlungsfall (selber Arzt, selbe Diagnose)",
+   "lang": "Behandlungsfall (selber Arzt, selbe Diagnose)",
+   "hinweis": "Im Entwurf gilt die geänderte Definition, siehe „Behandlungsfall (geänderte Definition)“ unter Neu.",
+   "beispiele": []
+  },
+  {
+   "id": "mindestabstand_tag",
+   "status": "neu",
+   "cluster": 1,
+   "cluster_name": "Sitzung und Tag",
+   "name": "Mindestabstand am selben Tag",
+   "lang": "Mindestabstand zwischen zwei Leistungen am selben Tag",
+   "hinweis": "1022, 1023: mindestens 30 Minuten; Hyperfraktionierung: mindestens 6 Stunden",
+   "beispiele": [
+    1022,
+    1023
+   ]
+  },
+  {
+   "id": "rollierend_24h",
+   "status": "neu",
+   "cluster": 1,
+   "cluster_name": "Sitzung und Tag",
+   "name": "Rollierende 24 Stunden",
+   "lang": "Rollierende 24 Stunden",
+   "hinweis": "",
+   "beispiele": [
+    1100,
+    1101,
+    1108,
+    1110,
+    1111,
+    1112,
+    1113,
+    1800,
+    1801
+   ]
+  },
+  {
+   "id": "kalenderwoche",
+   "status": "neu",
+   "cluster": 2,
+   "cluster_name": "Feste Kalenderzeiträume",
+   "name": "Kalenderwoche",
+   "lang": "Kalenderwoche",
+   "hinweis": "",
+   "beispiele": [
+    2702,
+    2704,
+    2705,
+    2706,
+    2707,
+    2708,
+    2709,
+    2710,
+    2711,
+    2712,
+    2713,
+    2714,
+    2715,
+    2716,
+    2717,
+    2718
+   ]
+  },
+  {
+   "id": "kalendermonat",
+   "status": "neu",
+   "cluster": 2,
+   "cluster_name": "Feste Kalenderzeiträume",
+   "name": "Kalendermonat",
+   "lang": "Kalendermonat",
+   "hinweis": "Das ist etwas anderes als der bisherige „Monat (taggenau 30 Tage)“.",
+   "beispiele": [
+    4444,
+    208
+   ]
+  },
+  {
+   "id": "rollierend_7tage",
+   "status": "neu",
+   "cluster": 3,
+   "cluster_name": "Rollierende Zeiträume ab Leistungsdatum",
+   "name": "Rollierende 7 Tage",
+   "lang": "Rollierende 7 Tage",
+   "hinweis": "",
+   "beispiele": [
+    1123
+   ]
+  },
+  {
+   "id": "rollierend_3kalendermonate",
+   "status": "neu",
+   "cluster": 3,
+   "cluster_name": "Rollierende Zeiträume ab Leistungsdatum",
+   "name": "Rollierende drei Kalendermonate",
+   "lang": "Rollierende drei Kalendermonate",
+   "hinweis": "Das ist etwas anderes als das feste Quartal.",
+   "beispiele": [
+    119,
+    120,
+    305,
+    1800,
+    1801,
+    4405
+   ]
+  },
+  {
+   "id": "rollierend_6monate_staffel",
+   "status": "neu",
+   "cluster": 3,
+   "cluster_name": "Rollierende Zeiträume ab Leistungsdatum",
+   "name": "Rollierende sechs Monate mit Mengenstaffel",
+   "lang": "Rollierende sechs Monate mit Mengenstaffel",
+   "hinweis": "13618: bis zu 8x, 13619: bis zu 15x",
+   "beispiele": [
+    13618,
+    13619
+   ]
+  },
+  {
+   "id": "krankheitsfall",
+   "status": "neu",
+   "cluster": 4,
+   "cluster_name": "Fallbezogene Zeiträume",
+   "name": "Krankheitsfall",
+   "lang": "Krankheitsfall: ein Jahr ab der jeweils ersten Inanspruchnahme des Arztes, selbe Erkrankung (AB A Nr. 6)",
+   "hinweis": "",
+   "beispiele": [
+    4404,
+    13630,
+    13641,
+    13642,
+    13800,
+    13801,
+    13802
+   ]
+  },
+  {
+   "id": "behandlungsfall_neu",
+   "status": "neu",
+   "cluster": 4,
+   "cluster_name": "Fallbezogene Zeiträume",
+   "name": "Behandlungsfall (geänderte Definition)",
+   "lang": "Behandlungsfall (geänderte Definition, AB A Nr. 5): ein Monat ab der jeweils ersten Inanspruchnahme des Arztes, nur vorwärts, selbe Erkrankung",
+   "hinweis": "",
+   "beispiele": []
+  },
+  {
+   "id": "kombi_tag_behandlungsfall",
+   "status": "neu",
+   "cluster": 5,
+   "cluster_name": "Kombinierte Limits",
+   "name": "Kalendertag und Behandlungsfall",
+   "lang": "Kalendertag und Behandlungsfall",
+   "hinweis": "1017 bis 1021: je Kalendertag bis zu 2x oder 4x und je Behandlungsfall bis zu 15x oder 16x",
+   "beispiele": [
+    1017,
+    1018,
+    1019,
+    1020,
+    1021
+   ]
+  },
+  {
+   "id": "kombi_krankheitsfall_halbjahr",
+   "status": "neu",
+   "cluster": 5,
+   "cluster_name": "Kombinierte Limits",
+   "name": "Krankheitsfall und Kalenderhalbjahr",
+   "lang": "Krankheitsfall und Kalenderhalbjahr",
+   "hinweis": "13800: einmal, 13801: bis zu 4x",
+   "beispiele": [
+    13800,
+    13801
+   ]
+  },
+  {
+   "id": "kombi_krankheitsfall_woche",
+   "status": "neu",
+   "cluster": 5,
+   "cluster_name": "Kombinierte Limits",
+   "name": "Krankheitsfall und Woche",
+   "lang": "Krankheitsfall und Woche",
+   "hinweis": "13802: einmal pro Woche",
+   "beispiele": [
+    13802
+   ]
+  },
+  {
+   "id": "zaehlgrenze_halbjahr",
+   "status": "neu",
+   "cluster": 5,
+   "cluster_name": "Kombinierte Limits",
+   "name": "Zählgrenze im Kalenderhalbjahr",
+   "lang": "Zählgrenze im Kalenderhalbjahr",
+   "hinweis": "4525, 4526: Zuschlag nur für bis zu 10 Sitzungen. Sitzungen im Status Quo nicht vorhanden.",
+   "beispiele": [
+    4525,
+    4526
+   ]
+  },
+  {
+   "id": "abstand_vorgaenger",
+   "status": "neu",
+   "cluster": 6,
+   "cluster_name": "Bezug zu anderen Leistungen oder Ereignissen",
+   "name": "Mindestabstand zu einer Vorgängerziffer",
+   "lang": "Mindestabstand zu einer Vorgängerziffer",
+   "hinweis": "2702 bis 2718: frühestens fünf Tage nach 2701, 2703 usw.",
+   "beispiele": [
+    2702,
+    2704,
+    2705,
+    2706,
+    2707,
+    2708,
+    2709,
+    2710,
+    2711,
+    2712,
+    2713,
+    2714,
+    2715,
+    2716,
+    2717,
+    2718
+   ]
+  },
+  {
+   "id": "zeitfenster_ereignis",
+   "status": "neu",
+   "cluster": 6,
+   "cluster_name": "Bezug zu anderen Leistungen oder Ereignissen",
+   "name": "Zeitfenster ab Ereignis",
+   "lang": "Zeitfenster ab Ereignis",
+   "hinweis": "3415: zwei Monate nach Erstdialyse, bis zu 25x",
+   "beispiele": [
+    3415
+   ]
+  },
+  {
+   "id": "mindestkontakte",
+   "status": "neu",
+   "cluster": 6,
+   "cluster_name": "Bezug zu anderen Leistungen oder Ereignissen",
+   "name": "Mindestanzahl Kontakte im Zeitraum",
+   "lang": "Mindestanzahl Kontakte im Zeitraum als Voraussetzung",
+   "hinweis": "3801: drei Kontakte in sechs Kalendermonaten, davon einer persönlich",
+   "beispiele": [
+    3801
+   ]
+  },
+  {
+   "id": "zyklus_versuch",
+   "status": "neu",
+   "cluster": 6,
+   "cluster_name": "Bezug zu anderen Leistungen oder Ereignissen",
+   "name": "Behandlungszyklus, Zyklus oder Versuch",
+   "lang": "Behandlungszyklus, Zyklus oder Versuch",
+   "hinweis": "13118, 13122; aus Belegdaten schwer prüfbar",
+   "beispiele": [
+    13118,
+    13122
+   ]
+  }
+ ]
+}

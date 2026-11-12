@@ -190,6 +190,40 @@ const path = require('path');
   await page.click('#tabs button[data-v=ab]');
   check('Zurück zum Reiter „AB-Steigerungsgründe“: AB-Filter wieder sichtbar, 5.580 Ziffern', await page.locator('#f-nb').isHidden() && await page.locator('#chips .chip').count() === 6 && (await txt('#status')).startsWith('5.580 von'), await txt('#status'));
 
+  // ---------- Reiter Intervalle ----------
+  await page.goto('file://' + html);
+  await page.reload();
+  await page.click('#tabs button[data-v=iv]');
+  const chipsIv = (await page.locator('#chipsiv .chip').allInnerTexts()).map(t => t.replace(/\s+/g, ' ')).join(' | ');
+  const groups = await page.locator('#ivsel optgroup').evaluateAll(g => g.map(x => x.label));
+  check('Reiter „Intervalle“: Chips Bestehend / Neu / Kein Intervall, Auswahlfeld mit 25 Intervallen in 10 Cluster-Gruppen',
+    /^B Bestehend [\d.]+ \| N Neu [\d.]+ \| – Kein Intervall [\d.]+$/.test(chipsIv) && await page.locator('#ivsel option').count() === 26 && groups.length === 10 && groups[0] === 'Bestehend · Cluster 1: Sitzung und Tag' && groups[9].startsWith('Neu · Cluster 6'), chipsIv + ' · ' + groups.length + ' Gruppen');
+  await shot('10_intervalle_start.png');
+  await page.selectOption('#ivsel', { label: 'Rollierende drei Kalendermonate (6)' });
+  const zi = (await page.locator('.row .z').allInnerTexts()).join(',');
+  check('Intervall „Rollierende drei Kalendermonate“: 119, 120, 305, 1800, 1801, 4405 – Infotext mit Hinweis „etwas anderes als das feste Quartal“', zi === '119,120,305,1800,1801,4405' && (await txt('#ivinfo')).includes('etwas anderes als das feste Quartal'), zi);
+  await page.locator('.row', { hasText: '1800' }).first().click();
+  d = (await txt('#drawer')).replace(/\s+/g, ' ');
+  check('Ziffer 1800: neu „Rollierende drei Kalendermonate“ und „Rollierende 24 Stunden“ mit Wortlaut, Direktlink #intervalle/1800', d.includes('Rollierende drei Kalendermonate') && d.includes('Rollierende 24 Stunden') && d.includes('ist innerhalb von drei Kalendermonaten einmal berechnungsfähig') && page.url().endsWith('#intervalle/1800'), page.url().split('#')[1]);
+  await shot('11_intervalle_detail.png');
+  await page.keyboard.press('Escape');
+  await page.selectOption('#ivsel', { label: 'Jahr (taggenau 365 Tage) (0)' });
+  check('Intervall ohne Wortlaut („Jahr (taggenau 365 Tage)“): 0 Ziffern, Hinweis im Infotext', (await txt('#status')).startsWith('0 von') && (await txt('#ivinfo')).includes('kein Wortlaut gefunden'), await txt('#status'));
+  await page.click('#reset');
+  await page.goto('file://' + html + '#intervalle/1017');
+  await page.reload();
+  d = (await txt('#drawer')).replace(/\s+/g, ' ');
+  check('Direktlink #intervalle/1017: kombiniertes Limit „Kalendertag und Behandlungsfall“, Häufigkeit „bis zu viermal; bis zu 15 Mal“', d.includes('Kalendertag und Behandlungsfall') && d.includes('bis zu viermal; bis zu 15 Mal') && /bestehend \(2\)/i.test(d), d.slice(0, 70));
+  await page.keyboard.press('Escape');
+  await page.click('#reset');
+  await page.selectOption('#ivsel', { label: 'Kalendermonat (2)' });
+  const [dl3] = await Promise.all([page.waitForEvent('download'), page.click('#csv')]);
+  const csv3 = fs.readFileSync(await dl3.path(), 'utf8').replace(/^\ufeff/, '').split('\r\n');
+  check('CSV-Export Intervalle (Kalendermonat): Kopf + 2 Zeilen (208, 4444)', csv3.length === 3 && csv3[0].includes('"Intervalle bestehend";"Intervalle neu"') && csv3[1].startsWith('208;') && csv3[2].startsWith('4444;'), csv3.length + ' Zeilen; ' + csv3.slice(1).map(l => l.split(';')[0]).join(', '));
+  await page.click('#reset');
+  await page.click('#tabs button[data-v=ab]');
+  check('Zurück zu „AB-Steigerungsgründe“ nach Intervalle: 5.580 Ziffern, Intervall-Filter ausgeblendet', await page.locator('#f-iv').isHidden() && await page.locator('#ivinfo').isHidden() && (await txt('#status')).startsWith('5.580 von'), await txt('#status'));
+
   // Laptop-Breite
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.goto('file://' + html + '#13399');

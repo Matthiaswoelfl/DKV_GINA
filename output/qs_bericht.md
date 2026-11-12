@@ -5,7 +5,7 @@
 - Zuordnung Ziffer → Kapitel/Abschnitt (JSON): `input/kapitel/GOAeneu_Ziffer_zu_Kapitel.json`
 - Kombinationsregeln (Nebeneinanderberechnung): `input/neben/` (regeln.json, ziffer_index.json, weitere_ausschluesse.csv)
 - Gesetzesentwurf mit Allgemeinen Bestimmungen (PDF): **lag beim Build nicht vor**
-- Abnahmetests Daten: **28 von 28 bestanden**
+- Abnahmetests Daten: **31 von 31 bestanden**
 
 ## 1. Abnahmetests (Daten)
 
@@ -27,6 +27,9 @@
 | Nebeneinander – alle in Regeln genannten Ziffern existieren | ✅ bestanden | 0 unbekannt |
 | Nebeneinander – Zuordnung je Ziffer stimmt mit ziffer_index.json überein | ✅ bestanden | 0 Abweichungen |
 | Nebeneinander – jede Ziffer, deren Bezeichnung mit „Zuschlag“ beginnt, hat eine „Nur neben“-Regel | ✅ bestanden | 1325 Zuschlagsziffern, 0 ohne Regel |
+| Intervalle – 25 Intervalle (8 bestehend, 17 neu), jedes mit Erkennungsmuster | ✅ bestanden | 25 Intervalle; bestehend 8 · neu 17 |
+| Intervalle – Stichprobe aus der Vorgabe (21 Ziffer-Intervall-Paare, z. B. 1022 Mindestabstand, 4444 Kalendermonat, 13802 Krankheitsfall und Woche) | ✅ bestanden | alle gefunden |
+| Intervalle – Beispielziffern der Vorgabe gefunden (7 ungerade Ziffern 2705–2717 je zweimal ohne passenden Wortlaut) | ✅ bestanden | 61 von 75 gefunden |
 | Jede nicht steigerfähige Ziffer hat eine Leistungsbezeichnung | ✅ bestanden | 0 ohne Text |
 | Keine doppelten Ziffern | ✅ bestanden | 1999 eindeutig |
 | Steigerfähige Ziffern je Kapitel C=100 · D=2 · F=31 · L=1.705 · O=161 | ✅ bestanden | C=100 · D=2 · F=31 · L=1705 · O=161 |
@@ -80,11 +83,18 @@
 | Schaltfläche „Allgemeine Bestimmungen (39)“ listet die 39 AB-Regeln, u. a. A-8 Sitzungsbezug | ✅ bestanden | 39 Regeln |
 | CSV-Export Nebeneinander (Suche „schreibgebühr“, Nur neben): Kopf + 1 Zeile mit 306, 307, 308, 309 | ✅ bestanden | 2 Zeilen; 310;"B";"IV. Berichte, Briefe";"Schreibgebühr, je angefangen |
 | Zurück zum Reiter „AB-Steigerungsgründe“: AB-Filter wieder sichtbar, 5.580 Ziffern | ✅ bestanden | 5.580 von 5.580 Ziffern |
+| Reiter „Intervalle“: Chips Bestehend / Neu / Kein Intervall, Auswahlfeld mit 25 Intervallen in 10 Cluster-Gruppen | ✅ bestanden | B Bestehend 687 | N Neu 109 | – Kein Intervall 4.849 · 10 Gruppen |
+| Intervall „Rollierende drei Kalendermonate“: 119, 120, 305, 1800, 1801, 4405 – Infotext mit Hinweis „etwas anderes als das feste Quartal“ | ✅ bestanden | 119,120,305,1800,1801,4405 |
+| Ziffer 1800: neu „Rollierende drei Kalendermonate“ und „Rollierende 24 Stunden“ mit Wortlaut, Direktlink #intervalle/1800 | ✅ bestanden | intervalle/1800 |
+| Intervall ohne Wortlaut („Jahr (taggenau 365 Tage)“): 0 Ziffern, Hinweis im Infotext | ✅ bestanden | 0 von 5.580 Ziffern |
+| Direktlink #intervalle/1017: kombiniertes Limit „Kalendertag und Behandlungsfall“, Häufigkeit „bis zu viermal; bis zu 15 Mal“ | ✅ bestanden | Ziffer 1017 Schließen Esc Kapitel C – Nichtgebietsbezogene Sonderleist |
+| CSV-Export Intervalle (Kalendermonat): Kopf + 2 Zeilen (208, 4444) | ✅ bestanden | 3 Zeilen; 208, 4444 |
+| Zurück zu „AB-Steigerungsgründe“ nach Intervalle: 5.580 Ziffern, Intervall-Filter ausgeblendet | ✅ bestanden | 5.580 von 5.580 Ziffern |
 | Laptop 1280×720 mit offenem Detailbereich: kein horizontaler Überlauf | ✅ bestanden | kein Überlauf |
 | Offline: keine externen Anfragen | ✅ bestanden | keine |
 | Keine JavaScript-Fehler | ✅ bestanden | keine |
 
-Screenshots: `output/screenshots/01_startansicht.png`, `output/screenshots/02_gefilterte_ansicht.png`, `output/screenshots/06_tooltip_wortlaut.png`, `output/screenshots/05_nicht_steigerfaehig.png`, `output/screenshots/03_detailbereich.png`, `output/screenshots/07_neben_start.png`, `output/screenshots/08_neben_detail_1200.png`, `output/screenshots/09_neben_allgemeine_bestimmungen.png`, `output/screenshots/04_laptop_1280.png`
+Screenshots: `output/screenshots/01_startansicht.png`, `output/screenshots/02_gefilterte_ansicht.png`, `output/screenshots/06_tooltip_wortlaut.png`, `output/screenshots/05_nicht_steigerfaehig.png`, `output/screenshots/03_detailbereich.png`, `output/screenshots/07_neben_start.png`, `output/screenshots/08_neben_detail_1200.png`, `output/screenshots/09_neben_allgemeine_bestimmungen.png`, `output/screenshots/10_intervalle_start.png`, `output/screenshots/11_intervalle_detail.png`, `output/screenshots/04_laptop_1280.png`
 
 ## 3. Verifikation des Excel-Aufbaus
 
@@ -210,6 +220,53 @@ Der Reiter beruht **ausschließlich** auf dem gelieferten Paket `input/neben/` (
 | Abweichungen zwischen eigener Zuordnung und `ziffer_index.json` | 0 |
 
 
+## 4d. Intervalle
+
+Die Systematik (bestehend/neu, Cluster, Beispielziffern) steht in `input/intervalle.json` und entspricht der Vorgabe. Die Zuordnung der Ziffern erfolgt über Textmuster im Gebührenverzeichnis: in jedem Satz der Abrechnungsbestimmung, bei eindeutigen Formulierungen („je Sitzung“, „je Kalendertag“ …) auch in Legende und Zusatz. Jeder Treffer wird im Dashboard mit Wortlaut und Quelle gezeigt.
+
+Ziffern mit mindestens einem Intervall: **731** von 5580.
+
+| Status | Cluster | Intervall | Ziffern |
+|---|---|---|---|
+| bestehend | 1: Sitzung und Tag | Sitzung | 563 |
+| bestehend | 1: Sitzung und Tag | Behandlungstag / Kalendertag | 75 |
+| bestehend | 2: Feste Kalenderzeiträume | Kalenderjahr | 20 |
+| bestehend | 2: Feste Kalenderzeiträume | Kalender-Halbjahr | 18 |
+| bestehend | 2: Feste Kalenderzeiträume | Quartal | 2 |
+| bestehend | 3: Rollierende Zeiträume ab Leistungsdatum | Jahr (taggenau 365 Tage) | 0 |
+| bestehend | 3: Rollierende Zeiträume ab Leistungsdatum | Monat (taggenau 30 Tage) | 0 |
+| bestehend | 4: Fallbezogene Zeiträume | Behandlungsfall (selber Arzt, selbe Diagnose) | 57 |
+| neu | 1: Sitzung und Tag | Mindestabstand am selben Tag | 2 |
+| neu | 1: Sitzung und Tag | Rollierende 24 Stunden | 10 |
+| neu | 2: Feste Kalenderzeiträume | Kalenderwoche | 9 |
+| neu | 2: Feste Kalenderzeiträume | Kalendermonat | 2 |
+| neu | 3: Rollierende Zeiträume ab Leistungsdatum | Rollierende 7 Tage | 1 |
+| neu | 3: Rollierende Zeiträume ab Leistungsdatum | Rollierende drei Kalendermonate | 6 |
+| neu | 3: Rollierende Zeiträume ab Leistungsdatum | Rollierende sechs Monate mit Mengenstaffel | 2 |
+| neu | 4: Fallbezogene Zeiträume | Krankheitsfall | 7 |
+| neu | 4: Fallbezogene Zeiträume | Behandlungsfall (geänderte Definition) | 57 |
+| neu | 5: Kombinierte Limits | Kalendertag und Behandlungsfall | 6 |
+| neu | 5: Kombinierte Limits | Krankheitsfall und Kalenderhalbjahr | 2 |
+| neu | 5: Kombinierte Limits | Krankheitsfall und Woche | 1 |
+| neu | 5: Kombinierte Limits | Zählgrenze im Kalenderhalbjahr | 2 |
+| neu | 6: Bezug zu anderen Leistungen oder Ereignissen | Mindestabstand zu einer Vorgängerziffer | 9 |
+| neu | 6: Bezug zu anderen Leistungen oder Ereignissen | Zeitfenster ab Ereignis | 1 |
+| neu | 6: Bezug zu anderen Leistungen oder Ereignissen | Mindestanzahl Kontakte im Zeitraum | 1 |
+| neu | 6: Bezug zu anderen Leistungen oder Ereignissen | Behandlungszyklus, Zyklus oder Versuch | 11 |
+
+Beispielziffern der Vorgabe ohne passenden Wortlaut im Gebührenverzeichnis:
+
+- Kalenderwoche: 2705, 2707, 2709, 2711, 2713, 2715, 2717
+- Mindestabstand zu einer Vorgängerziffer: 2705, 2707, 2709, 2711, 2713, 2715, 2717
+
+Sätze der Abrechnungsbestimmung mit Zeitangabe, die keinem Intervall zugeordnet wurden (5):
+
+- Ziffer 206: „Im Zusammenhang mit dem Beistand bei einer Geburt darf die Verweilgebühr nur für ein nach Ablauf von zwei Stunden notwendiges weiteres Verweilen berechnet werden.“
+- Ziffer 1007: „Die Ablesung des Testergebnisses, auch an darauffolgenden Tagen, ist nicht gesondert berechnungsfähig.“
+- Ziffer 4308: „Eine EEG-gestützte Narkoseüberwachung ist nach dieser Leistung nicht berechnungsfähig, auch wenn die Dauer mehr als 18 Stunden beträgt.“
+- Ziffer 4309: „Eine EEG-gestützte Narkoseüberwachung ist nach dieser Leistung nicht berechnungsfähig, auch wenn die Dauer mehr als 18 Stunden beträgt.“
+- Ziffer 12457: „Kosten für Versuchstiere sind nicht gesondert berechnungsfähig.“
+
 ## 4b. Abgleich mit dem PDF (Allgemeine Bestimmungen)
 
 Nicht durchgeführt: kein PDF in `input/`. Die PDF-Auswertung im Build-Skript (Suche der AB-IDs mit Seitenzahl, Kapiteltitel) ist vorbereitet, aber mangels Datei nicht erprobt.
@@ -228,10 +285,16 @@ Nicht durchgeführt: kein PDF in `input/`. Die PDF-Auswertung im Build-Skript (S
 10. **Nebeneinander – Regeln ohne einzelne Ziffern:** Regeln aus Allgemeinen Bestimmungen, deren Subjekt ein ganzes Kapitel, ein Abschnitt oder Freitext ist (z. B. Inklusionslisten, Zuschläge zu Abschnitten mit Gebührengrenze), werden nicht in einzelne Ziffern aufgelöst. Sie erscheinen im Detailbereich unter „Allgemeine Bestimmungen des Kapitels“ und in der Gesamtliste „Regeln aus Allgemeinen Bestimmungen“.
 11. **Nebeneinander – Bedingungen** sind laut README im Wortlaut übernommen, nicht ausgewertet. Das Dashboard markiert solche Regeln mit ⚑ und zeigt die Bedingung an.
 12. **Nebeneinander – Sitzungsbezug (Kapitel A Nr. 8):** Ausschlüsse beziehen sich auf dieselbe Sitzung; steht als Hinweis über der Liste, wird aber nicht je Regel ausgewertet.
-13. **Multiplikationsannahme:** Die Excel multipliziert mehrere Gründe; der Entwurf regelt die Kumulation laut Excel-Hinweis nicht ausdrücklich. Das Dashboard übernimmt die Annahme und weist sie in der Hinweisleiste und im Szenario aus. Fachliche Bestätigung steht aus.
-14. **Mehrfachauswahl der Grund-Chips:** umgesetzt als UND-Verknüpfung (Ziffer muss alle gewählten Gründe haben). Falls ODER gewünscht ist, bitte melden.
-15. **Schalter „Theoretische Kombinationen einbeziehen“:** umgesetzt so, dass max. Faktor, max. Gebührensatz, Faktorfilter und CSV dann den theoretischen Höchstwert verwenden. Bitte bestätigen.
-16. **Prüfmerkmale Bauchraum und CT/MRT** sind laut Excel per Stichwort vorbelegt („Indiz“). Das Dashboard übernimmt die Vorbelegung unverändert und zeigt sie im Detailbereich an; eine fachliche Prüfung der Vorbelegung ist nicht Teil dieses Builds.
+13. **Intervalle – Erkennung aus dem Wortlaut:** Die Zuordnung Ziffer → Intervall ist eine Textauswertung des Gebührenverzeichnisses, keine fachliche Prüfung. Bei „Sitzung“ zählt jede Nennung in der Abrechnungsbestimmung, auch wenn sie Teil einer Nicht-neben-Regel ist („in gleicher Sitzung …“).
+14. **Intervalle – Kalenderwoche und Mindestabstand zur Vorgängerziffer:** Die Vorgabe nennt „2702, 2704 bis 2718“ bzw. „2702 bis 2718“. Den Wortlaut („frühestens fünf Tage nach … einmal je Kalenderwoche“) haben nur 2702 und die geraden Ziffern 2704 bis 2718; die ungeraden 2705 bis 2717 sind die Vorgängerziffern („einmal zu Beginn der Behandlung“) und wurden nicht zugeordnet. Bitte bestätigen.
+15. **Intervalle – Hyperfraktionierung (Mindestabstand 6 Stunden):** im Gebührenverzeichnis nicht gefunden; vermutlich in den Allgemeinen Bestimmungen, die nicht vorliegen. Unter „Mindestabstand am selben Tag“ stehen daher nur 1022 und 1023.
+16. **Intervalle – Jahr (365 Tage) und Monat (30 Tage):** Im Gebührenverzeichnis gibt es dafür keinen Wortlaut; beide Intervalle haben 0 Ziffern. Ob sie in der neuen GOÄ entfallen, ist fachlich zu bewerten.
+17. **Intervalle – Behandlungsfall:** Ziffern mit „Behandlungsfall“ stehen sowohl unter dem bestehenden Intervall als auch unter „Behandlungsfall (geänderte Definition)“, weil die bestehende Prüfung auf die neue Definition umzustellen ist. Falls sie nur unter einem der beiden erscheinen sollen, bitte melden.
+18. **Intervalle – fallbezogene Definitionen (AB A Nr. 5 und Nr. 6)** und alle Intervall-Regeln aus Allgemeinen Bestimmungen sind nicht ausgewertet; die Beschreibungen stammen aus der Vorgabe.
+19. **Multiplikationsannahme:** Die Excel multipliziert mehrere Gründe; der Entwurf regelt die Kumulation laut Excel-Hinweis nicht ausdrücklich. Das Dashboard übernimmt die Annahme und weist sie in der Hinweisleiste und im Szenario aus. Fachliche Bestätigung steht aus.
+20. **Mehrfachauswahl der Grund-Chips:** umgesetzt als UND-Verknüpfung (Ziffer muss alle gewählten Gründe haben). Falls ODER gewünscht ist, bitte melden.
+21. **Schalter „Theoretische Kombinationen einbeziehen“:** umgesetzt so, dass max. Faktor, max. Gebührensatz, Faktorfilter und CSV dann den theoretischen Höchstwert verwenden. Bitte bestätigen.
+22. **Prüfmerkmale Bauchraum und CT/MRT** sind laut Excel per Stichwort vorbelegt („Indiz“). Das Dashboard übernimmt die Vorbelegung unverändert und zeigt sie im Detailbereich an; eine fachliche Prüfung der Vorbelegung ist nicht Teil dieses Builds.
 
 ## 6. Reproduktion
 

@@ -32,12 +32,22 @@ header{align-items:center;padding-bottom:0;padding-top:0}
 #tabs button:focus-visible{outline-color:#fff}
 .fset{display:contents}
 [hidden]{display:none!important}
-main.nb #hf,main.nb #hm,main:not(.nb) #hp{display:none}
+main.alt #hf,main.alt #hm,main:not(.alt) #hp{display:none}
 #hp{grid-column:span 2;text-align:left}
 .cNN{--c:#a3231b;--cb:#fbe6e3}.cNU{--c:#0f4f9e;--cb:#e0ecfb}
 .badge .sh{display:none}
 .compact .badge .lg{display:none}.compact .badge .sh{display:inline}
-main.nb.compact .badge i{display:inline}
+main.alt.compact .badge i{display:inline}
+main.alt .grid{grid-template-columns:64px minmax(0,1.3fr) 92px 200px minmax(0,1fr) 0}
+main.alt.compact .grid{grid-template-columns:50px minmax(0,1.1fr) 76px 98px minmax(0,1fr) 0}
+.cIB{--c:#3d4a5c;--cb:#e9edf2}.cIN{--c:#0b6b3a;--cb:#dff3e6}
+#ivinfo{background:#fff;border-bottom:1px solid var(--line);padding:10px 14px;font-size:13px;color:var(--ink-soft)}
+#ivinfo b{color:var(--ink);font-size:14px;display:block;margin-bottom:2px}
+#ivinfo .badge{margin-right:6px}
+#ivsel{max-width:360px}
+.regel h4{margin:0 0 2px;font-size:14px}
+.regel .lang{font-size:12.5px;color:var(--ink-soft);margin-bottom:6px}
+.regel blockquote + .anz{margin-top:-2px;margin-bottom:8px}
 .row .pv{grid-column:span 2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums;color:var(--ink-soft);font-size:13px}
 .regel{border:1px solid var(--line);border-left:4px solid var(--c);border-radius:6px;padding:8px 10px;margin-bottom:8px}
 .regel .rk{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:5px}
@@ -71,7 +81,7 @@ nav .kb{flex:none;width:16px}
 nav .kt{overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 nav .abs{padding-left:26px;font-size:13px}
 
-main{display:grid;grid-template-rows:auto auto 1fr;min-width:0;min-height:0}
+main{display:grid;grid-template-rows:auto auto auto 1fr;min-width:0;min-height:0}
 #toolbar{background:var(--panel);border-bottom:1px solid var(--line);padding:10px 14px;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
 #q{flex:1 1 100%;min-width:180px;padding:7px 10px;border:1px solid #8c98a8;border-radius:6px;background:#fff}
 .chips{display:flex;gap:6px;flex-wrap:wrap}
@@ -173,6 +183,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:3px;paddi
   <div id="tabs" role="tablist" aria-label="Ansicht">
     <button role="tab" data-v="ab" aria-selected="true">AB-Steigerungsgründe</button>
     <button role="tab" data-v="nb" aria-selected="false">Nebeneinanderberechnung</button>
+    <button role="tab" data-v="iv" aria-selected="false">Intervalle</button>
   </div><span id="sub"></span></header>
 <div id="hinweis" role="note"></div>
 <div id="app">
@@ -193,10 +204,17 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:3px;paddi
       <label title="Zählt eine Ziffer auch dann, wenn sie nur in der Regel einer anderen Ziffer genannt wird (Gegenrichtung: Ableitung, kein Gesetzeswortlaut)"><input type="checkbox" id="nbrev"> Nennungen bei anderen Ziffern einbeziehen</label>
       <button class="btn" id="abbtn">Allgemeine Bestimmungen</button>
       </span>
+      <span class="fset" id="f-iv" hidden>
+      <div class="chips" id="chipsiv" role="group" aria-label="Status des Intervalls"></div>
+      <label>Intervall <select id="ivsel" aria-label="Intervall auswählen"></select></label>
+      <label>Quelle <select id="ivq" aria-label="Fundstelle des Wortlauts">
+        <option value="">alle</option><option value="A">Abrechnungsbestimmung</option><option value="LZ">Legende oder Zusatz</option></select></label>
+      </span>
       <button class="btn" id="reset">Filter zurücksetzen</button>
       <button class="btn" id="csv">CSV exportieren</button>
       <span id="status" role="status" aria-live="polite"></span>
     </div>
+    <div id="ivinfo" hidden></div>
     <div id="colhead" class="grid">
       <button data-s="z">Ziffer</button><button data-s="t">Leistung</button><button data-s="g" class="num">Gebühr</button>
       <span id="hg">Steigerungsgründe</span><button data-s="f" class="num" id="hf">Max. Faktor</button><button data-s="m" class="num" id="hm">Max. Gebührensatz</button><button data-s="p" id="hp">Genannte Ziffern</button>
@@ -215,7 +233,7 @@ const euro = c => { const s = String(c).padStart(3,'0'); return s.slice(0,-2).re
 const fnum = f => parseFloat(f.replace(',','.'));   // nur zum Sortieren/Filtern, nie zum Rechnen
 const GR = Object.fromEntries(D.gruende.map(g => [g.k, g]));
 const KEYS = D.gruende.map(g => g.k);
-const R = D.rows.map(r => { const m = r[6] < 0 ? null : D.muster[r[6]]; return {z:r[0], a:r[1], t:r[2], g:r[3], bauch:r[4], ct:r[5], m, c:r[7], zus:r[8], seite:r[9], n: m ? Object.keys(m.gruende).length : 0, lt:r[2].toLowerCase(), zs:String(r[0]), rg:r[10]||[], we:r[11]||[], pN:[], pU:[], qN:[], qU:[], gen:[], oN:false, oU:false, fl:false, hE:false, hB:false, hAB:false}; });
+const R = D.rows.map(r => { const m = r[6] < 0 ? null : D.muster[r[6]]; return {z:r[0], a:r[1], t:r[2], g:r[3], bauch:r[4], ct:r[5], m, c:r[7], zus:r[8], seite:r[9], n: m ? Object.keys(m.gruende).length : 0, lt:r[2].toLowerCase(), zs:String(r[0]), rg:r[10]||[], we:r[11]||[], iv:r[12]||[], pN:[], pU:[], qN:[], qU:[], gen:[], oN:false, oU:false, fl:false, hE:false, hB:false, hAB:false}; });
 const BYZ = new Map(R.map(r => [r.z, r]));
 const ROWH = 38, HEADH = 36;
 /* Nebeneinanderberechnung – ausschließlich aus dem Regelpaket (D.regeln).
@@ -240,7 +258,7 @@ const nbCount = r => new Set([...nbP(r,'N'), ...nbP(r,'U')]).size;
 const nbBucket = n => n === 0 ? '0' : n === 1 ? '1' : n <= 5 ? '2-5' : n <= 20 ? '6-20' : '21+';
 const ART = {e: r => (r.oN || r.oU) && !r.fl, b: r => r.fl, ab: r => r.hAB, E: r => r.hE, B: r => r.hB, w: r => r.we.length > 0};
 
-const st = {view:'ab', nb:new Set(), nbohne:false, nbanz:'', nbart:'', nbrev:false, kap:null, abs:null, q:'', gr:new Set(), ohne:false, anz:'', fmax:'', theo:false, sort:'z', dir:1, collapsed:new Set(D.abschnitte.map((_,i) => i)), sel:null, active:-1};
+const st = {view:'ab', ivsel:'', ivq:'', ivst:new Set(), ivohne:false, nb:new Set(), nbohne:false, nbanz:'', nbart:'', nbrev:false, kap:null, abs:null, q:'', gr:new Set(), ohne:false, anz:'', fmax:'', theo:false, sort:'z', dir:1, collapsed:new Set(D.abschnitte.map((_,i) => i)), sel:null, active:-1};
 let items = [], tops = [], total = 0, result = [];
 
 const KEIN = '1,0';   // Ziffer steht nicht in der Steigerungsmatrix: keine AB-Steigerung, Faktor 1,0
@@ -249,12 +267,72 @@ const maxF = r => r.m ? r.m.moegl[mi(r)].f : KEIN;
 const maxC = r => r.m ? r.c[mi(r)] : r.g;
 const fsort = fnum;
 
+/* ---------- Intervalle ---------- */
+const IV = D.intervalle;
+const IVST = {bestehend:{name:'Bestehend', cls:'cIB', tip:'Diese Prüfung gibt es heute schon; sie muss auf die neue GOÄ umgestellt werden.'},
+              neu:{name:'Neu', cls:'cIN', tip:'Dieses Intervall ist in der neuen GOÄ neu.'}};
+const QL = {A:'Abrechnungsbestimmung', L:'Legende', Z:'Zusatz'};
+const ivTr = r => st.ivq === '' ? r.iv : r.iv.filter(t => st.ivq === 'A' ? t[1] === 'A' : t[1] !== 'A');
+const ivIds = r => { const s = new Set(); ivTr(r).forEach(t => t[0].forEach(i => s.add(i))); return [...s].sort((a,b) => a-b); };
+function applyIv(nav, keepActive){
+  const base = R.filter(nav).map(r => [r, ivIds(r)]);
+  const c = {bestehend:0, neu:0, o:0};
+  const sel = st.ivsel === '' ? null : +st.ivsel;
+  const pool = sel === null ? base : base.filter(([, ids]) => ids.includes(sel));
+  pool.forEach(([, ids]) => { if (!ids.length) c.o++; if (ids.some(i => IV[i].status === 'bestehend')) c.bestehend++; if (ids.some(i => IV[i].status === 'neu')) c.neu++; });
+  $('#chipsiv').innerHTML = ['bestehend','neu'].map(k =>
+    `<button class="chip ${IVST[k].cls}" data-k="${k}" aria-pressed="${st.ivst.has(k)}" title="${IVST[k].tip}"><span class="ltr">${k === 'neu' ? 'N' : 'B'}</span>${IVST[k].name}<span class="cnt">${c[k].toLocaleString('de-DE')}</span></button>`).join('') +
+    `<button class="chip cN" data-k="ohne" aria-pressed="${st.ivohne}" title="Im Wortlaut der Ziffer wurde kein Intervall erkannt"><span class="ltr">–</span>Kein Intervall<span class="cnt">${c.o.toLocaleString('de-DE')}</span></button>`;
+  result = pool.filter(([, ids]) => { if (st.ivohne) return !ids.length; for (const k of st.ivst) if (!ids.some(i => IV[i].status === k)) return false; return true; }).map(x => x[0]);
+  const info = $('#ivinfo');
+  if (sel === null) info.innerHTML = `<b>Intervalle je Ziffer</b>Zeigt je Ziffer, welche zeitlichen Abrechnungsgrenzen der Wortlaut des Gebührenverzeichnisses nennt (z. B. „je Sitzung bis zu dreimal“, „im Kalenderhalbjahr einmal“). „Bestehend“ sind Prüfungen, die es heute schon gibt und die auf die neue GOÄ umzustellen sind; „Neu“ sind Intervalle, die neu hinzukommen. Ein einzelnes Intervall wählst du im Auswahlfeld „Intervall“.`;
+  else { const d = IV[sel]; info.innerHTML = `<b><span class="badge ${IVST[d.status].cls}">${IVST[d.status].name}</span>Cluster ${d.cluster}: ${esc(d.cluster_name)} › ${esc(d.name)}</b>${esc(d.lang)}${d.hinweis ? ' – ' + esc(d.hinweis) : ''}${d.status === 'bestehend' ? ' Diese Prüfung gibt es heute schon und muss auf die neue GOÄ umgestellt werden.' : ''}${pool.length ? '' : ' <b style="display:inline;font-size:13px">Im Gebührenverzeichnis wurde dafür kein Wortlaut gefunden.</b>'}`; }
+  build(keepActive);
+}
+function renderIvSel(){
+  const cnt = IV.map(() => 0);
+  R.forEach(r => ivIds(r).forEach(i => cnt[i]++));
+  let h = '<option value="">alle Intervalle</option>';
+  for (const s of ['bestehend','neu']) { let cl = null;
+    IV.forEach((d, i) => { if (d.status !== s) return;
+      if (d.cluster !== cl) { if (cl !== null) h += '</optgroup>'; cl = d.cluster; h += `<optgroup label="${IVST[s].name} · Cluster ${d.cluster}: ${esc(d.cluster_name)}">`; }
+      h += `<option value="${i}"${String(i) === st.ivsel ? ' selected' : ''}>${esc(d.name)} (${cnt[i].toLocaleString('de-DE')})</option>`; });
+    h += '</optgroup>'; }
+  $('#ivsel').innerHTML = h;
+}
+function badgesIv(r){
+  const ids = ivIds(r); if (!ids.length) return `<span class="badge cN" title="Kein Intervall erkannt">–<i>kein Intervall</i></span>`;
+  return ['bestehend','neu'].map(k => { const n = ids.filter(i => IV[i].status === k).length;
+    return n ? `<span class="badge ${IVST[k].cls}" title="${IVST[k].tip}"><span class="lg">${IVST[k].name}</span><span class="sh">${k === 'neu' ? 'N' : 'B'}</span><i>${n}</i></span>` : ''; }).join('');
+}
+function previewIv(r){
+  const ids = ivIds(r); if (!ids.length) return '';
+  const sel = st.ivsel === '' ? null : +st.ivsel;
+  const hf = [...new Set(ivTr(r).filter(t => sel === null || t[0].includes(sel)).map(t => t[3]).filter(Boolean))].join('; ');
+  const names = [...new Set(ids.filter(i => IV[i].id !== 'behandlungsfall_alt' || !ids.some(j => IV[j].id === 'behandlungsfall_neu')).map(i => IV[i].name.replace(' (geänderte Definition)', '')))];
+  return names.join(' · ') + (hf ? ' – ' + hf : '');
+}
+function detailIv(r){
+  let h = `<div class="kpis two"><div class="kpi"><span>Gebühr</span><b>${euro(r.g)}</b></div></div>`;
+  const ids = ivIds(r);
+  if (!ids.length) h += `<div class="nosteig"><b><span class="ltr cN">–</span> Kein Intervall</b>Im Wortlaut dieser Ziffer (Abrechnungsbestimmung, Legende, Zusatz) wurde keine zeitliche Abrechnungsgrenze erkannt.</div>`;
+  for (const s of ['bestehend','neu']) { const g = ids.filter(i => IV[i].status === s); if (!g.length) continue;
+    h += `<h3>${IVST[s].name} (${g.length})</h3>` + g.map(i => { const d = IV[i];
+      return `<div class="regel ${IVST[s].cls}"><div class="rk"><span class="badge ${IVST[s].cls}">${IVST[s].name}</span><span class="anz" style="margin:0">Cluster ${d.cluster}: ${esc(d.cluster_name)}</span></div>` +
+        `<h4>${esc(d.name)}</h4><div class="lang">${esc(d.lang)}${d.hinweis ? ' – ' + esc(d.hinweis) : ''}</div>` +
+        ivTr(r).filter(t => t[0].includes(i)).map(t => `<blockquote>${esc(t[2])}</blockquote><div class="anz">Quelle: ${QL[t[1]]}${t[3] ? ' · Häufigkeit laut Wortlaut: <b>' + esc(t[3]) + '</b>' : ''}</div>`).join('') + `</div>`; }).join(''); }
+  return h + `<div class="link">Direktlink: <a href="#intervalle/${r.z}">#intervalle/${r.z}</a></div>`;
+}
+
 /* ---------- Hinweisleiste ---------- */
 function renderHinweis(){
   const stand = D.pdf.stand || D.gesetz.stand;
   const entwurf = `<span><b>Entwurf:</b> Gesetzesentwurf, nicht in Kraft${stand ? ' · ' + esc(stand) : ' · Stand nicht hinterlegt'}.</span>`;
-  $('#sub').textContent = st.view === 'nb' ? '„Nicht neben“- und „Nur neben“-Regeln je Ziffer' : 'AB-Steigerungsgründe, Faktoren und maximaler Gebührensatz je Ziffer';
-  $('#hinweis').innerHTML = entwurf + (st.view === 'nb'
+  $('#sub').textContent = st.view === 'nb' ? '„Nicht neben“- und „Nur neben“-Regeln je Ziffer' : st.view === 'iv' ? 'Zeitliche Abrechnungsgrenzen je Ziffer, bestehend und neu' : 'AB-Steigerungsgründe, Faktoren und maximaler Gebührensatz je Ziffer';
+  $('#hinweis').innerHTML = entwurf + (st.view === 'iv'
+    ? `<span><b>Quelle:</b> Wortlaut des Gebührenverzeichnisses (Abrechnungsbestimmung, Legende, Zusatz); die Zuordnung zu den Intervallen ist eine automatische Textauswertung – maßgeblich ist der zitierte Satz.</span>` +
+      `<span><b>Nicht enthalten:</b> Intervall-Regeln aus den Allgemeinen Bestimmungen, z. B. die Definitionen von Behandlungsfall und Krankheitsfall (AB A Nr. 5 und 6).</span>`
+    : st.view === 'nb'
     ? `<span><b>Quelle:</b> Regelpaket zum Entwurf (Paragraphenteil, Allgemeine Bestimmungen, alle Ziffern). Maßgeblich ist der zitierte Satz; Bedingungen sind im Wortlaut übernommen, nicht ausgewertet (⚑).</span>` +
       `<span><b>Sitzungsbezug:</b> Ausschlüsse beziehen sich auf dieselbe Sitzung (Kapitel A Nr. 8). „Nur neben“ heißt: mindestens eine der genannten Ziffern muss mit abgerechnet sein.</span>` +
       `<span><b>Gegenrichtung:</b> Dass B auch nicht neben A geht, ist eine Ableitung, kein Gesetzeswortlaut – nur über den Schalter einbezogen.</span>`
@@ -302,6 +380,7 @@ function apply(keepActive){
   const toks = st.q.toLowerCase().split(/\s+/).filter(Boolean);
   const nav = r => (st.abs===null || r.a===st.abs) && (st.kap===null || D.abschnitte[r.a].kap===st.kap) && matchQ(r, toks);
   if (st.view === 'nb') { applyNb(nav, keepActive); return; }
+  if (st.view === 'iv') { applyIv(nav, keepActive); return; }
   const base = R.filter(r => nav(r) && (!st.fmax || maxF(r)===st.fmax) && (st.anz==='' || r.n===+st.anz));
   const cnt = Object.fromEntries(KEYS.map(k => [k,0]));
   let nOhne = 0;
@@ -324,8 +403,8 @@ function applyNb(nav, keepActive){
   build(keepActive);
 }
 function build(keepActive){
-  if (st.view === 'nb' ? (st.sort==='f' || st.sort==='m') : st.sort==='p') { st.sort = 'z'; st.dir = 1; }
-  const key = {z:r=>r.z, t:r=>r.lt, g:r=>r.g, f:r=>fsort(maxF(r)), m:r=>maxC(r), p:r=>nbCount(r)}[st.sort];
+  if (st.view !== 'ab' ? (st.sort==='f' || st.sort==='m') : st.sort==='p') { st.sort = 'z'; st.dir = 1; }
+  const key = {z:r=>r.z, t:r=>r.lt, g:r=>r.g, f:r=>fsort(maxF(r)), m:r=>maxC(r), p:r=>st.view === 'iv' ? ivIds(r).length : nbCount(r)}[st.sort];
   const groups = new Map();
   result.forEach(r => { if (!groups.has(r.a)) groups.set(r.a, []); groups.get(r.a).push(r); });
   items = []; tops = []; total = 0;
@@ -342,10 +421,10 @@ function build(keepActive){
 }
 function heads(){
   const c = $('main').classList.contains('compact');
-  const lab = {z:'Ziffer', t:'Leistung', g:'Gebühr', p:'Genannte Ziffern',
+  const lab = {z:'Ziffer', t:'Leistung', g:'Gebühr', p: st.view === 'iv' ? 'Intervall · Häufigkeit' : 'Genannte Ziffern',
     f: c ? (st.theo ? 'Theor. ×' : 'Max. ×') : (st.theo ? 'Max. Faktor (theor.)' : 'Max. Faktor'),
     m: c ? (st.theo ? 'Theor. Satz' : 'Max. Satz') : (st.theo ? 'Max. Satz (theor.)' : 'Max. Gebührensatz')};
-  $('#hg').textContent = st.view === 'nb' ? 'Regel' : c ? 'Gründe' : 'Steigerungsgründe';
+  $('#hg').textContent = st.view === 'iv' ? 'Status' : st.view === 'nb' ? 'Regel' : c ? 'Gründe' : 'Steigerungsgründe';
   document.querySelectorAll('#colhead button').forEach(b => {
     const on = b.dataset.s===st.sort;
     if (on) b.setAttribute('aria-sort', st.dir>0?'ascending':'descending'); else b.removeAttribute('aria-sort');
@@ -381,6 +460,11 @@ function render(){
       h += `<button class="ghead" style="top:${tops[i]}px" data-h="${it.h}" aria-expanded="${!st.collapsed.has(it.h)}" tabindex="-1"><span class="car">▾</span>Kapitel ${a.kap} · ${esc(a.name)} <span class="n">${it.n.toLocaleString('de-DE')} ${it.n===1?'Ziffer':'Ziffern'}</span></button>`;
     } else {
       const m = it.m, dif = m && m.maxT !== m.maxP;
+      if (st.view === 'iv') { const pv = previewIv(it);
+        h += `<div class="row grid${pv ? '' : ' ohne'}${i===st.active?' active':''}${it.z===st.sel?' sel':''}" style="top:${tops[i]}px" data-i="${i}" role="option" aria-selected="${it.z===st.sel}" id="r${it.z}">` +
+          `<span class="z">${it.z}</span><span class="t" title="${esc(it.t)}">${esc(it.t)}</span><span class="num">${euro(it.g)}</span>` +
+          `<span class="badges">${badgesIv(it)}</span><span class="pv" title="${esc(pv)}">${esc(pv)}</span></div>`;
+        continue; }
       if (st.view === 'nb') { const pv = preview(it);
         h += `<div class="row grid${it.oN || it.oU || pv ? '' : ' ohne'}${i===st.active?' active':''}${it.z===st.sel?' sel':''}" style="top:${tops[i]}px" data-i="${i}" role="option" aria-selected="${it.z===st.sel}" id="r${it.z}">` +
           `<span class="z">${it.z}</span><span class="t" title="${esc(it.t)}">${esc(it.t)}</span><span class="num">${euro(it.g)}</span>` +
@@ -439,8 +523,8 @@ function open(z, keepFocus){
     `<div class="crumb">Kapitel ${a.kap}${kap.titel ? ' – ' + esc(kap.titel) : ''} · ${esc(a.name)}${r.seite ? ' · Seite ' + r.seite : ''}</div>` +
     `<p class="leistung">${esc(r.t)}</p>` +
     (r.zus ? `<p class="zusatz"><b>Zusatz laut Gebührenverzeichnis:</b> ${esc(r.zus)}</p>` : '');
-  if (st.view === 'nb') {
-    const dr = $('#drawer'); dr.innerHTML = h + detailNb(r); dr.scrollTop = 0;
+  if (st.view !== 'ab') {
+    const dr = $('#drawer'); dr.innerHTML = h + (st.view === 'iv' ? detailIv(r) : detailNb(r)); dr.scrollTop = 0;
     $('#app').classList.add('drawer-open');
     if (location.hash !== hashFor(z)) history.replaceState(null, '', hashFor(z));
     $('#close').onclick = closeDrawer; render();
@@ -502,7 +586,8 @@ function open(z, keepFocus){
   render();
   if (!keepFocus) dr.focus({preventScroll:true});
 }
-const hashFor = z => st.view === 'nb' ? '#neben/' + z : '#' + z;
+const VH = {ab:'', nb:'neben', iv:'intervalle'};
+const hashFor = z => st.view === 'ab' ? '#' + z : '#' + VH[st.view] + '/' + z;
 const zbtn = z => { const x = BYZ.get(z); return `<button class="zl" data-z="${z}" title="${esc(x.t)}"><b>${z}</b> <span>${esc(x.t)}</span></button>`; };
 const zliste = (zs, n = 8) => zs.slice(0, n).map(zbtn).join('') + (zs.length > n ? `<details class="mehr"><summary>alle ${zs.length} Ziffern anzeigen</summary>${zs.slice(n).map(zbtn).join('')}</details>` : '');
 function quelle(x){
@@ -551,12 +636,13 @@ function openAB(){
 }
 $('#drawer').addEventListener('click', e => { const b = e.target.closest('.zl'); if (b) goto(+b.dataset.z); });
 function closeDrawer(){
-  st.sel = null; $('#app').classList.remove('drawer-open'); history.replaceState(null, '', st.view === 'nb' ? '#neben' : location.pathname + location.search);
+  st.sel = null; $('#app').classList.remove('drawer-open'); history.replaceState(null, '', st.view !== 'ab' ? '#' + VH[st.view] : location.pathname + location.search);
   render(); list.focus();
 }
 function clearFilters(){
   st.kap = st.abs = null; st.q = ''; $('#q').value = ''; st.gr.clear(); st.ohne = false; st.anz = ''; $('#anz').value = ''; st.fmax = '';
   st.nb.clear(); st.nbohne = false; st.nbanz = ''; st.nbart = ''; $('#nbanz').value = ''; $('#nbart').value = '';
+  st.ivsel = ''; st.ivq = ''; st.ivst.clear(); st.ivohne = false; $('#ivsel').value = ''; $('#ivq').value = '';
 }
 function goto(z){
   if (!BYZ.has(z)) return false;
@@ -599,16 +685,19 @@ function setView(v, keepHash){
   if (st.view === v) return;
   st.view = v;
   document.querySelectorAll('#tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.v === v));
-  $('#f-ab').hidden = v !== 'ab'; $('#f-nb').hidden = v !== 'nb';
-  $('main').classList.toggle('nb', v === 'nb');
-  document.title = v === 'nb' ? 'GOÄneu – Nebeneinanderberechnung' : 'GOÄneu – Steigerungsmatrix';
+  $('#f-ab').hidden = v !== 'ab'; $('#f-nb').hidden = v !== 'nb'; $('#f-iv').hidden = v !== 'iv'; $('#ivinfo').hidden = v !== 'iv';
+  $('main').classList.toggle('alt', v !== 'ab');
+  document.title = v === 'nb' ? 'GOÄneu – Nebeneinanderberechnung' : v === 'iv' ? 'GOÄneu – Intervalle' : 'GOÄneu – Steigerungsmatrix';
   renderHinweis(); apply(true);
   if (st.sel !== null && st.sel > 0) open(st.sel, true);
   else if (st.sel === -1) closeDrawer();
-  else if (!keepHash) history.replaceState(null, '', v === 'nb' ? '#neben' : location.pathname + location.search);
+  else if (!keepHash) history.replaceState(null, '', v !== 'ab' ? '#' + VH[v] : location.pathname + location.search);
 }
+$('#chipsiv').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; const k = b.dataset.k; if (k==='ohne') { st.ivohne = !st.ivohne; st.ivst.clear(); } else { st.ivohne = false; st.ivst.has(k) ? st.ivst.delete(k) : st.ivst.add(k); } apply(); list.scrollTop = 0; $(`#chipsiv .chip[data-k=${k}]`).focus(); });
+$('#ivsel').addEventListener('change', e => { st.ivsel = e.target.value; if (st.ivsel !== '') { st.ivohne = false; st.collapsed.clear(); } else st.collapsed = new Set(D.abschnitte.map((_,i) => i)); apply(); list.scrollTop = 0; });
+$('#ivq').addEventListener('change', e => { st.ivq = e.target.value; renderIvSel(); apply(); list.scrollTop = 0; });
 $('#tabs').addEventListener('click', e => { const b = e.target.closest('button'); if (b) setView(b.dataset.v); });
-$('#tabs').addEventListener('keydown', e => { if (e.key==='ArrowRight' || e.key==='ArrowLeft') { const v = st.view === 'ab' ? 'nb' : 'ab'; setView(v); $(`#tabs button[data-v=${v}]`).focus(); } });
+$('#tabs').addEventListener('keydown', e => { if (e.key==='ArrowRight' || e.key==='ArrowLeft') { const vs = ['ab','nb','iv'], v = vs[(vs.indexOf(st.view) + (e.key==='ArrowRight' ? 1 : 2)) % 3]; setView(v); $(`#tabs button[data-v=${v}]`).focus(); } });
 $('#anz').addEventListener('change', e => { st.anz = e.target.value; apply(); list.scrollTop = 0; });
 $('#fmax').addEventListener('change', e => { st.fmax = e.target.value; apply(); list.scrollTop = 0; });
 $('#theo').addEventListener('change', e => { st.theo = e.target.checked; renderFmax(); apply(); });
@@ -621,6 +710,16 @@ document.addEventListener('keydown', e => {
 });
 $('#csv').addEventListener('click', () => {
   const q = s => '"' + String(s).replace(/"/g,'""') + '"', dez = c => euro(c).replace(/[. €]/g,'');
+  if (st.view === 'iv') {
+    const lines = [['Ziffer','Kapitel','Abschnitt','Leistung','Gebühr (€)','Intervalle bestehend','Intervalle neu','Häufigkeit laut Wortlaut','Wortlaut'].map(q).join(';')];
+    const seen = new Map(); result.forEach(r => { if (!seen.has(r.a)) seen.set(r.a, []); seen.get(r.a).push(r); });
+    for (const rs of seen.values()) for (const r of rs) { const a = D.abschnitte[r.a], ids = ivIds(r), tr = ivTr(r);
+      lines.push([r.z, q(a.kap), q(a.name), q(r.t), dez(r.g), q(ids.filter(i => IV[i].status === 'bestehend').map(i => IV[i].name).join(', ')), q(ids.filter(i => IV[i].status === 'neu').map(i => IV[i].name).join(', ')), q([...new Set(tr.map(t => t[3]).filter(Boolean))].join('; ')), q(tr.map(t => t[2]).join(' | '))].join(';')); }
+    const blob = new Blob(['\ufeff' + lines.join('\r\n')], {type:'text/csv;charset=utf-8'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'GOAeneu_Intervalle_Export.csv';
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    return;
+  }
   if (st.view === 'nb') {
     const lines = [['Ziffer','Kapitel','Abschnitt','Leistung','Gebühr (€)','Nicht neben (Ziffern)','Nur neben (Ziffern)','Bedingung/Textbezug','Regeltext'].map(q).join(';')];
     const seen = new Map(); result.forEach(r => { if (!seen.has(r.a)) seen.set(r.a, []); seen.get(r.a).push(r); });
@@ -665,13 +764,13 @@ document.addEventListener('scroll', hideTip, true);
 document.addEventListener('keydown', e => { if (e.key==='Escape') hideTip(); }, true);
 
 function fromHash(){
-  const m = /^#(neben)?\/?(\d+)?$/.exec(location.hash); if (!m) return;
-  setView(m[1] ? 'nb' : 'ab', true);
+  const m = /^#(neben|intervalle)?\/?(\d+)?$/.exec(location.hash); if (!m) return;
+  setView(m[1] === 'neben' ? 'nb' : m[1] === 'intervalle' ? 'iv' : 'ab', true);
   if (m[2]) goto(+m[2]);
 }
 window.addEventListener('hashchange', fromHash);
 
-renderHinweis(); renderNav(); renderFmax(); renderNbSel(); apply(); fromHash();
+renderHinweis(); renderNav(); renderFmax(); renderNbSel(); renderIvSel(); apply(); fromHash();
 </script>
 </body>
 </html>
