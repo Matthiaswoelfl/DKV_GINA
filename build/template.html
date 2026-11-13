@@ -25,8 +25,10 @@ button{cursor:pointer}
 header{background:#0b3157;color:#fff;padding:8px 16px;display:flex;align-items:baseline;gap:18px}
 header h1{font-size:17px;margin:0;font-weight:650}
 header{align-items:center;padding-bottom:0;padding-top:0}
-#tabs{display:flex;gap:2px;align-self:flex-end;margin-top:6px}
-#tabs button{border:0;background:rgba(255,255,255,.1);color:#dbe7f3;padding:8px 16px;border-radius:7px 7px 0 0;font-weight:600;font-size:14px}
+@media (max-width:1500px){#sub{display:none}#tabs button{padding:8px 9px;font-size:13px}header{gap:12px}}
+header #sub{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#tabs{display:flex;flex:none;gap:2px;align-self:flex-end;margin-top:6px}
+#tabs button{white-space:nowrap;border:0;background:rgba(255,255,255,.1);color:#dbe7f3;padding:8px 12px;border-radius:7px 7px 0 0;font-weight:600;font-size:14px}
 #tabs button:hover{background:rgba(255,255,255,.2)}
 #tabs button[aria-selected=true]{background:#fff7dd;color:#0b3157}
 #tabs button:focus-visible{outline-color:#fff}
@@ -44,6 +46,11 @@ main.mpa.compact .grid{grid-template-columns:50px minmax(0,1.1fr) 98px minmax(0,
 main.mpa #colhead [data-s=g]{display:none}
 main.alt.compact .grid{grid-template-columns:50px minmax(0,1.1fr) 76px 98px minmax(0,1fr) 0}
 .cMS{--c:#1d6b2e;--cb:#dff3e3}.cMP{--c:#0f4f9e;--cb:#e0ecfb}.cMU{--c:#8a5300;--cb:#fbefd2}.cMK{--c:#a3231b;--cb:#fbe6e3}.cMX{--c:#5c3399;--cb:#ede4f8}
+.cGW{--c:#8a2b72;--cb:#f8e4f3}.cGM{--c:#0f4f9e;--cb:#e0ecfb}.cGG{--c:#8a5300;--cb:#fbefd2}.cGA{--c:#55606e;--cb:#eceff3}
+.gebox{border:1px solid var(--line);border-left:4px solid var(--c);border-radius:6px;padding:10px 12px;margin-top:12px}
+.gebox .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.gebox .big{font-size:20px;font-weight:700;color:var(--c)}
+.gebox dl{margin:8px 0 0;font-size:13px}.gebox dt{font-size:11.5px;color:var(--ink-soft);font-weight:650;margin-top:7px}.gebox dd{margin:1px 0 0}
 .chip .pr{font-weight:650;font-variant-numeric:tabular-nums}
 .seg{display:inline-flex;border:1px solid #8c98a8;border-radius:6px;overflow:hidden}
 .seg button{border:0;background:#fff;padding:5px 12px;font-size:13px}
@@ -203,7 +210,8 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:3px;paddi
     <button role="tab" data-v="ab" aria-selected="true">AB-Steigerungsgründe</button>
     <button role="tab" data-v="nb" aria-selected="false">Nebeneinanderberechnung</button>
     <button role="tab" data-v="iv" aria-selected="false">Intervalle</button>
-    <button role="tab" data-v="mp" aria-selected="false">Ziffern-Mapping alt ↔ neu</button>
+    <button role="tab" data-v="mp" aria-selected="false">Mapping alt ↔ neu</button>
+    <button role="tab" data-v="ge" aria-selected="false">Geschlecht</button>
   </div><span id="sub"></span></header>
 <div id="hinweis" role="note"></div>
 <div id="app">
@@ -236,6 +244,13 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:3px;paddi
       <div class="chips" id="chipsmp" role="group" aria-label="Status der Zuordnung"></div>
       <label>Verhältnis <select id="mpvh" aria-label="Filter nach Verhältnis"></select></label>
       <label>Quelle <select id="mpql" aria-label="Filter nach Quelle der Zuordnung"></select></label>
+      </span>
+      <span class="fset" id="f-ge" hidden>
+      <div class="chips" id="chipsge" role="group" aria-label="Geschlechtsbezug"></div>
+      <label>Bezugsart <select id="gebz" aria-label="Filter nach Bezugsart"></select></label>
+      <label>Konfidenz <select id="gekf" aria-label="Filter nach Konfidenz"></select></label>
+      <label>Quelle <select id="geql" aria-label="Filter nach Herkunft der Ziffer"></select></label>
+      <label>Zuschlag <select id="gezu" aria-label="Filter Zuschlag"></select></label>
       </span>
       <button class="btn" id="reset">Filter zurücksetzen</button>
       <button class="btn" id="csv">CSV exportieren</button>
@@ -282,6 +297,14 @@ const ALT = {rows:[], abs:[], kap:[], by:new Map()};
   });
 })();
 R.forEach(r => r.alt.sort((x, y) => (y[1] === null ? y[0].p : y[1]) - (x[1] === null ? x[0].p : x[1])));   // bestes Pendant zuerst
+/* ---------- Geschlecht ---------- */
+const GE = {}; for (const z in D.geschlecht) GE[z] = D.geschlecht[z];
+R.forEach(r => { const g = GE[r.z]; r.ge = g || null; r.gs = !g ? '-' : g[0] === 'H' ? g[1] : g[0]; r.gb = g ? g[2] : ''; r.gk = g && g[0] === 'H' ? g[4] : ''; r.gq = g && g[0] === 'H' ? (g[5] === 'NEU' ? 'neu gefunden' : 'Vorgabe') : ''; r.gz = g && g[0] !== 'A' ? (g[3] ? 'Zuschlag' : 'Hauptleistung') : ''; });
+const GST = {W:{name:'Weiblich', ltr:'W', cls:'cGW', tip:'Leistungsinhalt ist obligatorisch weiblich (Organ, Schwangerschaft, Legende).'},
+             M:{name:'Männlich', ltr:'M', cls:'cGM', tip:'Leistungsinhalt ist obligatorisch männlich (Organ, Legende).'},
+             G:{name:'Grenzfall', ltr:'G', cls:'cGG', tip:'Geschlechtsbezug nicht obligatorisch: nur Hinweis, keine Aussteuerung.'},
+             A:{name:'Nicht aufgenommen', ltr:'A', cls:'cGA', tip:'Geprüft und bewusst nicht aufgenommen (z. B. „und/oder“, „z. B.“, Auswahl mehrerer Organsysteme).'},
+             '-':{name:'Kein Geschlechtsbezug', ltr:'–', cls:'cN', tip:'Keine Erwähnung im Paket: kein geschlechtsspezifischer Leistungsinhalt erkannt.'}};
 const NEU = {rows:R, abs:D.abschnitte, kap:D.kapitel, by:BYZ};
 const U = () => st.view === 'mp' && st.mpdir === 'alt' ? ALT : NEU;
 const allCollapsed = () => new Set(U().abs.map((_,i) => i));
@@ -307,7 +330,7 @@ const nbCount = r => new Set([...nbP(r,'N'), ...nbP(r,'U')]).size;
 const nbBucket = n => n === 0 ? '0' : n === 1 ? '1' : n <= 5 ? '2-5' : n <= 20 ? '6-20' : '21+';
 const ART = {e: r => (r.oN || r.oU) && !r.fl, b: r => r.fl, ab: r => r.hAB, E: r => r.hE, B: r => r.hB, w: r => r.we.length > 0};
 
-const st = {view:'ab', mpdir:'alt', mpst:new Set(), mpvh:'', mpql:'', ivsel:'', ivq:'', ivst:new Set(), ivohne:false, nb:new Set(), nbohne:false, nbanz:'', nbart:'', nbrev:false, kap:null, abs:null, q:'', gr:new Set(), ohne:false, anz:'', fmax:'', theo:false, sort:'z', dir:1, collapsed:new Set(D.abschnitte.map((_,i) => i)), sel:null, active:-1};
+const st = {view:'ab', gst:new Set(), gbz:'', gkf:'', gql:'', gzu:'', mpdir:'alt', mpst:new Set(), mpvh:'', mpql:'', ivsel:'', ivq:'', ivst:new Set(), ivohne:false, nb:new Set(), nbohne:false, nbanz:'', nbart:'', nbrev:false, kap:null, abs:null, q:'', gr:new Set(), ohne:false, anz:'', fmax:'', theo:false, sort:'z', dir:1, collapsed:new Set(D.abschnitte.map((_,i) => i)), sel:null, active:-1};
 let items = [], tops = [], total = 0, result = [];
 
 const KEIN = '1,0';   // Ziffer steht nicht in der Steigerungsmatrix: keine AB-Steigerung, Faktor 1,0
@@ -371,6 +394,46 @@ function detailIv(r){
         `<h4>${esc(d.name)}</h4><div class="lang">${esc(d.lang)}${d.hinweis ? ' – ' + esc(d.hinweis) : ''}</div>` +
         ivTr(r).filter(t => t[0].includes(i)).map(t => `<blockquote>${esc(t[2])}</blockquote><div class="anz">Quelle: ${QL[t[1]]}${t[3] ? ' · Häufigkeit laut Wortlaut: <b>' + esc(t[3]) + '</b>' : ''}</div>`).join('') + `</div>`; }).join(''); }
   return h + `<div class="link">Direktlink: <a href="#intervalle/${r.z}">#intervalle/${r.z}</a></div>`;
+}
+
+function applyGe(nav, keepActive){
+  const base = R.filter(r => nav(r) && (st.gbz === '' || r.gb === st.gbz) && (st.gkf === '' || r.gk === st.gkf) && (st.gql === '' || r.gq === st.gql) && (st.gzu === '' || r.gz === st.gzu));
+  const c = {}; base.forEach(r => { c[r.gs] = (c[r.gs] || 0) + 1; });
+  $('#chipsge').innerHTML = ['W','M','G','A','-'].map(k =>
+    `<button class="chip ${GST[k].cls}" data-k="${k}" aria-pressed="${st.gst.has(k)}" title="${esc(GST[k].tip)}"><span class="ltr">${GST[k].ltr}</span>${GST[k].name}<span class="cnt">${(c[k] || 0).toLocaleString('de-DE')}</span></button>`).join('');
+  result = base.filter(r => !st.gst.size || st.gst.has(r.gs));
+  $('#ivinfo').innerHTML = `<b>Geschlechtsbezug je Ziffer – weiche Prüfung</b>Nach Kap. A, Allgemeine Bestimmung Nr. 4 zählt bei geschlechtsspezifischem Leistungsinhalt nicht der Personenstandseintrag, sondern der individuelle medizinische Bedarf. Ein Widerspruch führt deshalb nur zur Aussteuerung an die Sachbearbeitung, nie zur automatischen Ablehnung. „Weiblich“ und „Männlich“ sind Ziffern, bei denen der Geschlechtsbezug obligatorischer Leistungsinhalt ist; „Grenzfall“ ist nur ein Hinweis.`;
+  build(keepActive);
+}
+function renderGeSel(){
+  const cnt = (f) => { const m = new Map(); R.forEach(r => { const v = f(r); if (v) m.set(v, (m.get(v) || 0) + 1); }); return [...m]; };
+  const opt = (arr, cur) => '<option value="">alle</option>' + arr.map(([k, n]) => `<option value="${esc(k)}"${k === cur ? ' selected' : ''}>${esc(k)} (${n.toLocaleString('de-DE')})</option>`).join('');
+  $('#gebz').innerHTML = opt(cnt(r => r.gb).sort((a, b) => b[1] - a[1]), st.gbz);
+  $('#gekf').innerHTML = opt(cnt(r => r.gk).sort((a, b) => a[0] < b[0] ? 1 : -1), st.gkf);
+  $('#geql').innerHTML = opt(cnt(r => r.gq).sort((a, b) => b[1] - a[1]), st.gql);
+  $('#gezu').innerHTML = opt(cnt(r => r.gz).sort((a, b) => b[1] - a[1]), st.gzu);
+}
+function badgesGe(r){
+  const k = r.gs; if (k === '-') return `<span class="badge cN" title="${esc(GST['-'].tip)}">–<i>kein Bezug</i></span>`;
+  return `<span class="badge ${GST[k].cls}" title="${esc(GST[k].tip)}"><span class="lg">${GST[k].name}</span><span class="sh">${GST[k].ltr}</span></span>` +
+    (r.ge[0] === 'H' && r.gk === 'mittel' ? '<span class="badge cGG" title="Konfidenz mittel: fachlich abgeleitet"><span class="lg">Konfidenz mittel</span><span class="sh">mittel</span></span>' : '') +
+    (r.ge[0] !== 'A' && r.ge[3] ? '<span class="badge cN" title="Zuschlag"><span class="lg">Zuschlag</span><span class="sh">Z</span></span>' : '');
+}
+const previewGe = r => !r.ge ? '' : r.ge[0] === 'A' ? 'Auffällig: ' + r.ge[2] : r.ge[0] === 'G' ? r.ge[2] + (r.ge[1] && r.ge[1] !== '—' ? ' (Vorschlag ' + r.ge[1] + ')' : '') : r.ge[2];
+function detailGe(r){
+  const g = r.ge, k = r.gs;
+  let h = `<div class="kpis two"><div class="kpi"><span>Gebühr</span><b>${euro(r.g)}</b></div>${g && g[0] !== 'A' && g[8] ? `<div class="kpi"><span>Seite im Entwurf</span><b>${g[8]}</b></div>` : ''}</div>`;
+  if (!g) return h + `<div class="nosteig"><b><span class="ltr cN">–</span> Kein Geschlechtsbezug</b>Im Paket zur Geschlechtsprüfung ist diese Ziffer weder aufgenommen noch als Grenzfall oder bewusst nicht aufgenommene Ziffer geführt. Es wurde kein geschlechtsspezifischer Leistungsinhalt erkannt.</div><div class="link">Direktlink: <a href="#geschlecht/${r.z}">#geschlecht/${r.z}</a></div>`;
+  if (g[0] === 'H') h += `<div class="gebox ${GST[k].cls}"><div class="top"><span class="badge ${GST[k].cls}">${GST[k].name}</span><span class="big">${k === 'W' ? 'Weiblicher' : 'Männlicher'} Leistungsinhalt</span></div><dl>` +
+      `<dt>Bezugsart</dt><dd>${esc(g[2])}</dd><dt>Konfidenz</dt><dd><b>${esc(g[4])}</b>${g[4] === 'hoch' ? ' – Geschlecht steht in der Legende, oder das Organ bzw. Material gehört nur einem Geschlecht.' : ' – fachlich abgeleitet, bitte fachlich bestätigen.'}</dd>` +
+      `<dt>Begründung</dt><dd>${esc(g[6])}</dd><dt>Herkunft</dt><dd>${g[5] === 'NEU' ? 'Neu gefunden bei der erneuten Analyse des Entwurfs' : 'Aus der Vorgabeliste übernommen'}${g[3] ? ' · Zuschlag (Geschlecht von den Hauptleistungen vererbt)' : ''}</dd>` +
+      `<dt>Prüfung</dt><dd>Weiche Prüfung: Aussteuerung an die Sachbearbeitung, keine automatische Ablehnung (Kap. A Nr. 4).</dd></dl></div>`;
+  else if (g[0] === 'G') h += `<div class="gebox ${GST.G.cls}"><div class="top"><span class="badge ${GST.G.cls}">Grenzfall</span><span class="big">Geschlechtsbezug nicht obligatorisch</span></div><dl>` +
+      `<dt>Bezugsart</dt><dd>${esc(g[2])}</dd><dt>Vorschlag</dt><dd>${g[1] && g[1] !== '—' ? (g[1] === 'W' ? 'Weiblich' : 'Männlich') + ' (nur Hinweis)' : 'kein Geschlecht'}</dd>` +
+      `<dt>Begründung</dt><dd>${esc(g[6])}</dd><dt>Empfehlung zur Systemreaktion</dt><dd>${esc(g[7])}</dd></dl></div>`;
+  else h += `<div class="gebox ${GST.A.cls}"><div class="top"><span class="badge ${GST.A.cls}">Nicht aufgenommen</span><span class="big">Geprüft, kein Geschlechtsbezug</span></div><dl>` +
+      `<dt>Auffälliger Begriff</dt><dd>${esc(g[2])}</dd><dt>Grund der Nichtaufnahme</dt><dd>${esc(g[6])}</dd></dl></div>`;
+  return h + `<div class="link">Direktlink: <a href="#geschlecht/${r.z}">#geschlecht/${r.z}</a></div>`;
 }
 
 function applyMp(nav, keepActive){
@@ -448,8 +511,13 @@ function renderHinweis(){
   const entwurf = `<span><b>Entwurf:</b> Gesetzesentwurf, nicht in Kraft${stand ? ' · ' + esc(stand) : ' · Stand nicht hinterlegt'}.</span>`;
   $('#sub').textContent = st.view === 'nb' ? '„Nicht neben“- und „Nur neben“-Regeln je Ziffer' : st.view === 'iv' ? 'Zeitliche Abrechnungsgrenzen je Ziffer, bestehend und neu' : 'AB-Steigerungsgründe, Faktoren und maximaler Gebührensatz je Ziffer';
   $('#q').placeholder = st.view === 'mp' ? 'Alte oder neue Ziffer oder Leistung suchen, z. B. 863 oder 4500 …  ( / )' : 'Ziffer oder Leistung suchen …  ( / )';
+  if (st.view === 'ge') $('#sub').textContent = 'Ziffern mit geschlechtsspezifischem Leistungsinhalt und weiche Plausibilitätsprüfung';
   if (st.view === 'mp') $('#sub').textContent = 'Heutige GOÄ → neue Ziffer und umgekehrt, mit Wahrscheinlichkeit';
-  $('#hinweis').innerHTML = entwurf + (st.view === 'mp'
+  $('#hinweis').innerHTML = entwurf + (st.view === 'ge'
+    ? `<span><b>Regel:</b> Kap. A, AB Nr. 4 – maßgeblich ist der individuelle medizinische Bedarf, nicht der Personenstandseintrag. Deshalb nur weiche Prüfung (Aussteuerung), keine automatische Ablehnung.</span>` +
+      `<span><b>Aufnahmekriterium:</b> Geschlechtsbezug ist obligatorischer Leistungsinhalt (Legende, Organ/Material, Schwangerschaft/Geburt, Laborindikation). Nicht aufgenommen bei „und/oder“, „z. B.“, „ggf.“ oder Alternativen.</span>` +
+      `<span><b>Zuschläge:</b> Geschlecht vererbt, wenn alle Hauptleistungen dasselbe haben; Abschnittszuschläge erben das Geschlecht der abgerechneten Hauptleistung.</span>`
+    : st.view === 'mp'
     ? `<span><b>Quelle:</b> Mapping-Paket alte Kurz-GOÄ${D.mapping.stand ? ' (Stand ' + esc(D.mapping.stand) + ')' : ''} → Entwurf. Die Wahrscheinlichkeit ist eine Schätzung, kein Messwert; manuell geprüft sind nur die alten Abschnitte B und G.</span>` +
       `<span><b>Nummernkollision:</b> Alte und neue GOÄ nutzen teils dieselbe Nummer für verschiedene Leistungen (alt 4500 = Labor, neu 4500 = Psychotherapie).</span>` +
       `<span><b>Nicht enthalten:</b> die alten Zuschläge A bis K und die Allgemeinen Bestimmungen der alten GOÄ.</span>`
@@ -507,6 +575,7 @@ function apply(keepActive){
   if (st.view === 'nb') { applyNb(nav, keepActive); return; }
   if (st.view === 'iv') { applyIv(nav, keepActive); return; }
   if (st.view === 'mp') { applyMp(nav, keepActive); return; }
+  if (st.view === 'ge') { applyGe(nav, keepActive); return; }
   const base = R.filter(r => nav(r) && (!st.fmax || maxF(r)===st.fmax) && (st.anz==='' || r.n===+st.anz));
   const cnt = Object.fromEntries(KEYS.map(k => [k,0]));
   let nOhne = 0;
@@ -531,7 +600,7 @@ function applyNb(nav, keepActive){
 function build(keepActive){
   if (st.view !== 'ab' ? (st.sort==='f' || st.sort==='m') : st.sort==='p') { st.sort = 'z'; st.dir = 1; }
   if (st.view === 'mp' && st.mpdir === 'alt' && st.sort === 'g') { st.sort = 'z'; st.dir = 1; }
-  const key = {z:r=>r.zn, t:r=>r.lt, g:r=>r.g, f:r=>fsort(maxF(r)), m:r=>maxC(r), p:r=>st.view === 'mp' ? (r.p === null ? -1 : r.p) : st.view === 'iv' ? ivIds(r).length : nbCount(r)}[st.sort];
+  const key = {z:r=>r.zn, t:r=>r.lt, g:r=>r.g, f:r=>fsort(maxF(r)), m:r=>maxC(r), p:r=>st.view === 'ge' ? r.gb : st.view === 'mp' ? (r.p === null ? -1 : r.p) : st.view === 'iv' ? ivIds(r).length : nbCount(r)}[st.sort];
   const groups = new Map();
   result.forEach(r => { if (!groups.has(r.a)) groups.set(r.a, []); groups.get(r.a).push(r); });
   items = []; tops = []; total = 0;
@@ -549,10 +618,10 @@ function build(keepActive){
 function heads(){
   const c = $('main').classList.contains('compact');
   const mpa = st.view === 'mp' && st.mpdir === 'alt';
-  const lab = {z: st.view === 'mp' ? (mpa ? 'Alt' : 'Neu') : 'Ziffer', t: mpa ? 'Leistung (alte GOÄ)' : 'Leistung', g: 'Gebühr', p: st.view === 'mp' ? (mpa ? 'Neue Ziffer(n)' : 'Alte Ziffer(n)') : st.view === 'iv' ? 'Intervall · Häufigkeit' : 'Genannte Ziffern',
+  const lab = {z: st.view === 'mp' ? (mpa ? 'Alt' : 'Neu') : 'Ziffer', t: mpa ? 'Leistung (alte GOÄ)' : 'Leistung', g: 'Gebühr', p: st.view === 'ge' ? 'Bezugsart' : st.view === 'mp' ? (mpa ? 'Neue Ziffer(n)' : 'Alte Ziffer(n)') : st.view === 'iv' ? 'Intervall · Häufigkeit' : 'Genannte Ziffern',
     f: c ? (st.theo ? 'Theor. ×' : 'Max. ×') : (st.theo ? 'Max. Faktor (theor.)' : 'Max. Faktor'),
     m: c ? (st.theo ? 'Theor. Satz' : 'Max. Satz') : (st.theo ? 'Max. Satz (theor.)' : 'Max. Gebührensatz')};
-  $('#hg').textContent = st.view === 'mp' ? 'Zuordnung' : st.view === 'iv' ? 'Status' : st.view === 'nb' ? 'Regel' : c ? 'Gründe' : 'Steigerungsgründe';
+  $('#hg').textContent = st.view === 'ge' ? 'Geschlecht' : st.view === 'mp' ? 'Zuordnung' : st.view === 'iv' ? 'Status' : st.view === 'nb' ? 'Regel' : c ? 'Gründe' : 'Steigerungsgründe';
   document.querySelectorAll('#colhead button').forEach(b => {
     const on = b.dataset.s===st.sort;
     if (on) b.setAttribute('aria-sort', st.dir>0?'ascending':'descending'); else b.removeAttribute('aria-sort');
@@ -588,6 +657,11 @@ function render(){
       h += `<button class="ghead" style="top:${tops[i]}px" data-h="${it.h}" aria-expanded="${!st.collapsed.has(it.h)}" tabindex="-1"><span class="car">▾</span>${U() === ALT ? 'Alte GOÄ · ' : ''}Kapitel ${a.kap} · ${esc(a.name)} <span class="n">${it.n.toLocaleString('de-DE')} ${it.n===1?'Ziffer':'Ziffern'}</span></button>`;
     } else {
       const m = it.m, dif = m && m.maxT !== m.maxP;
+      if (st.view === 'ge') { const pv = previewGe(it);
+        h += `<div class="row grid${it.ge ? '' : ' ohne'}${i===st.active?' active':''}${it.z===st.sel?' sel':''}" style="top:${tops[i]}px" data-i="${i}" role="option" aria-selected="${it.z===st.sel}" id="r${it.z}">` +
+          `<span class="z">${it.z}</span><span class="t" title="${esc(it.t)}">${esc(it.t)}</span><span class="num">${euro(it.g)}</span>` +
+          `<span class="badges">${badgesGe(it)}</span><span class="pv" title="${esc(pv)}">${esc(pv)}</span></div>`;
+        continue; }
       if (st.view === 'mp') { const q = st.q.trim().toLowerCase();
         h += `<div class="row grid${it.mst === 'NEU' || it.mst === 'KEINE_ENTSPRECHUNG_ERKENNBAR' ? ' ohne' : ''}${i===st.active?' active':''}${it.z===st.sel?' sel':''}" style="top:${tops[i]}px" data-i="${i}" role="option" aria-selected="${it.z===st.sel}" id="r${esc(it.z)}">` +
           `<span class="z">${hit(it.z, /^\d/.test(q) && String(it.zs) === q)}</span><span class="t" title="${esc(it.t)}">${esc(it.t)}</span>${st.mpdir === 'alt' ? '' : `<span class="num">${euro(it.g)}</span>`}` +
@@ -658,7 +732,7 @@ function open(z, keepFocus){
     `<p class="leistung">${esc(r.t)}</p>` +
     (r.zus ? `<p class="zusatz"><b>Zusatz laut Gebührenverzeichnis:</b> ${esc(r.zus)}</p>` : '');
   if (st.view !== 'ab') {
-    const dr = $('#drawer'); dr.innerHTML = h + (st.view === 'iv' ? detailIv(r) : detailNb(r)); dr.scrollTop = 0;
+    const dr = $('#drawer'); dr.innerHTML = h + (st.view === 'ge' ? detailGe(r) : st.view === 'iv' ? detailIv(r) : detailNb(r)); dr.scrollTop = 0;
     $('#app').classList.add('drawer-open');
     if (location.hash !== hashFor(z)) history.replaceState(null, '', hashFor(z));
     $('#close').onclick = closeDrawer; render();
@@ -720,7 +794,7 @@ function open(z, keepFocus){
   render();
   if (!keepFocus) dr.focus({preventScroll:true});
 }
-const VH = {ab:'', nb:'neben', iv:'intervalle', mp:'mapping'};
+const VH = {ab:'', nb:'neben', iv:'intervalle', mp:'mapping', ge:'geschlecht'};
 const hashFor = z => st.view === 'ab' ? '#' + z : st.view === 'mp' ? '#mapping/' + st.mpdir + '/' + z : '#' + VH[st.view] + '/' + z;
 const zbtn = z => { const x = BYZ.get(z); return `<button class="zl" data-z="${z}" title="${esc(x.t)}"><b>${z}</b> <span>${esc(x.t)}</span></button>`; };
 const zliste = (zs, n = 8) => zs.slice(0, n).map(zbtn).join('') + (zs.length > n ? `<details class="mehr"><summary>alle ${zs.length} Ziffern anzeigen</summary>${zs.slice(n).map(zbtn).join('')}</details>` : '');
@@ -777,6 +851,7 @@ function closeDrawer(){
 function clearFilters(){
   st.kap = st.abs = null; st.q = ''; $('#q').value = ''; st.gr.clear(); st.ohne = false; st.anz = ''; $('#anz').value = ''; st.fmax = '';
   st.nb.clear(); st.nbohne = false; st.nbanz = ''; st.nbart = ''; $('#nbanz').value = ''; $('#nbart').value = '';
+  st.gst.clear(); st.gbz = st.gkf = st.gql = st.gzu = ''; for (const id of ['#gebz','#gekf','#geql','#gezu']) $(id).value = '';
   st.mpst.clear(); st.mpvh = ''; st.mpql = ''; $('#mpvh').value = ''; $('#mpql').value = '';
   st.ivsel = ''; st.ivq = ''; st.ivst.clear(); st.ivohne = false; $('#ivsel').value = ''; $('#ivq').value = '';
 }
@@ -823,11 +898,11 @@ function setView(v, keepHash){
   const uAlt = U();
   st.view = v;
   if (U() !== uAlt) { st.kap = st.abs = null; st.sel = null; st.active = -1; $('#app').classList.remove('drawer-open'); st.collapsed = st.q ? new Set() : allCollapsed(); renderNav(); }
-  $('#f-mp').hidden = v !== 'mp';
+  $('#f-mp').hidden = v !== 'mp'; $('#f-ge').hidden = v !== 'ge';
   document.querySelectorAll('#tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.v === v));
-  $('#f-ab').hidden = v !== 'ab'; $('#f-nb').hidden = v !== 'nb'; $('#f-iv').hidden = v !== 'iv'; $('#ivinfo').hidden = v !== 'iv' && v !== 'mp';
+  $('#f-ab').hidden = v !== 'ab'; $('#f-nb').hidden = v !== 'nb'; $('#f-iv').hidden = v !== 'iv'; $('#ivinfo').hidden = v !== 'iv' && v !== 'mp' && v !== 'ge';
   $('main').classList.toggle('alt', v !== 'ab'); $('main').classList.toggle('mpa', v === 'mp' && st.mpdir === 'alt');
-  document.title = v === 'mp' ? 'GOÄneu – Ziffern-Mapping' : v === 'nb' ? 'GOÄneu – Nebeneinanderberechnung' : v === 'iv' ? 'GOÄneu – Intervalle' : 'GOÄneu – Steigerungsmatrix';
+  document.title = v === 'ge' ? 'GOÄneu – Geschlecht' : v === 'mp' ? 'GOÄneu – Ziffern-Mapping' : v === 'nb' ? 'GOÄneu – Nebeneinanderberechnung' : v === 'iv' ? 'GOÄneu – Intervalle' : 'GOÄneu – Steigerungsmatrix';
   renderHinweis(); apply(true);
   if (st.sel !== null && st.sel !== -1) open(st.sel, true);
   else if (st.sel === -1) closeDrawer();
@@ -837,11 +912,13 @@ $('#mpdir').addEventListener('click', e => { const b = e.target.closest('button'
 $('#chipsmp').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; const k = b.dataset.k; st.mpst.has(k) ? st.mpst.delete(k) : st.mpst.add(k); if (st.mpst.size) st.collapsed.clear(); apply(); list.scrollTop = 0; const n = $(`#chipsmp .chip[data-k=${k}]`); if (n) n.focus(); });
 $('#mpvh').addEventListener('change', e => { st.mpvh = e.target.value; apply(); list.scrollTop = 0; });
 $('#mpql').addEventListener('change', e => { st.mpql = e.target.value; apply(); list.scrollTop = 0; });
+$('#chipsge').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; const k = b.dataset.k; st.gst.has(k) ? st.gst.delete(k) : st.gst.add(k); if (st.gst.size) st.collapsed.clear(); apply(); list.scrollTop = 0; const n = $(`#chipsge .chip[data-k="${k}"]`); if (n) n.focus(); });
+for (const [id, key] of [['#gebz','gbz'],['#gekf','gkf'],['#geql','gql'],['#gezu','gzu']]) $(id).addEventListener('change', e => { st[key] = e.target.value; apply(); list.scrollTop = 0; });
 $('#chipsiv').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; const k = b.dataset.k; if (k==='ohne') { st.ivohne = !st.ivohne; st.ivst.clear(); } else { st.ivohne = false; st.ivst.has(k) ? st.ivst.delete(k) : st.ivst.add(k); } apply(); list.scrollTop = 0; $(`#chipsiv .chip[data-k=${k}]`).focus(); });
 $('#ivsel').addEventListener('change', e => { st.ivsel = e.target.value; if (st.ivsel !== '') { st.ivohne = false; st.collapsed.clear(); } else st.collapsed = allCollapsed(); apply(); list.scrollTop = 0; });
 $('#ivq').addEventListener('change', e => { st.ivq = e.target.value; renderIvSel(); apply(); list.scrollTop = 0; });
 $('#tabs').addEventListener('click', e => { const b = e.target.closest('button'); if (b) setView(b.dataset.v); });
-$('#tabs').addEventListener('keydown', e => { if (e.key==='ArrowRight' || e.key==='ArrowLeft') { const vs = ['ab','nb','iv','mp'], v = vs[(vs.indexOf(st.view) + (e.key==='ArrowRight' ? 1 : 3)) % 4]; setView(v); $(`#tabs button[data-v=${v}]`).focus(); } });
+$('#tabs').addEventListener('keydown', e => { if (e.key==='ArrowRight' || e.key==='ArrowLeft') { const vs = ['ab','nb','iv','mp','ge'], v = vs[(vs.indexOf(st.view) + (e.key==='ArrowRight' ? 1 : 4)) % 5]; setView(v); $(`#tabs button[data-v=${v}]`).focus(); } });
 $('#anz').addEventListener('change', e => { st.anz = e.target.value; apply(); list.scrollTop = 0; });
 $('#fmax').addEventListener('change', e => { st.fmax = e.target.value; apply(); list.scrollTop = 0; });
 $('#theo').addEventListener('change', e => { st.theo = e.target.checked; renderFmax(); apply(); });
@@ -854,6 +931,16 @@ document.addEventListener('keydown', e => {
 });
 $('#csv').addEventListener('click', () => {
   const q = s => '"' + String(s).replace(/"/g,'""') + '"', dez = c => euro(c).replace(/[. €]/g,'');
+  if (st.view === 'ge') {
+    const lines = [['Ziffer','Kapitel','Abschnitt','Leistung','Gebühr (€)','Einordnung','Geschlecht','Bezugsart','Zuschlag','Konfidenz','Herkunft','Begründung','Empfehlung'].map(q).join(';')];
+    const seen = new Map(); result.forEach(r => { if (!seen.has(r.a)) seen.set(r.a, []); seen.get(r.a).push(r); });
+    for (const rs of seen.values()) for (const r of rs) { const a = D.abschnitte[r.a], g = r.ge;
+      lines.push([r.z, q(a.kap), q(a.name), q(r.t), dez(r.g), q(GST[r.gs].name), q(g && g[0] !== 'A' && g[1] && g[1] !== '—' ? g[1] : ''), q(g ? g[2] : ''), q(g && g[0] !== 'A' ? (g[3] ? 'ja' : 'nein') : ''), q(r.gk), q(r.gq), q(g ? g[6] : ''), q(g ? g[7] : '')].join(';')); }
+    const blob = new Blob(['\ufeff' + lines.join('\r\n')], {type:'text/csv;charset=utf-8'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'GOAeneu_Geschlechtsbezug_Export.csv';
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    return;
+  }
   if (st.view === 'mp') {
     const alt = st.mpdir === 'alt', pz = p => p === null ? '' : String(p).replace('.', ',');
     const lines = [(alt ? ['Alte Ziffer','Kapitel alt','Leistung alt','Punkte','Neue Ziffern','Verhältnis','Wahrscheinlichkeit','Status','Quelle','Begründung']
@@ -923,13 +1010,13 @@ document.addEventListener('keydown', e => { if (e.key==='Escape') hideTip(); }, 
 function fromHash(){
   const t = location.hash.slice(1).split('/');
   if (t[0] === 'mapping') { setView('mp', true); const d = t[1] === 'neu' ? 'neu' : 'alt'; if (d !== st.mpdir) setDir(d); if (t[2]) goto(d === 'neu' ? +t[2] : decodeURIComponent(t[2])); return; }
-  const m = /^#(neben|intervalle)?\/?(\d+)?$/.exec(location.hash); if (!m) return;
-  setView(m[1] === 'neben' ? 'nb' : m[1] === 'intervalle' ? 'iv' : 'ab', true);
+  const m = /^#(neben|intervalle|geschlecht)?\/?(\d+)?$/.exec(location.hash); if (!m) return;
+  setView(m[1] === 'neben' ? 'nb' : m[1] === 'intervalle' ? 'iv' : m[1] === 'geschlecht' ? 'ge' : 'ab', true);
   if (m[2]) goto(+m[2]);
 }
 window.addEventListener('hashchange', fromHash);
 
-renderHinweis(); renderNav(); renderFmax(); renderNbSel(); renderIvSel(); renderMpSel(); apply(); fromHash();
+renderHinweis(); renderNav(); renderFmax(); renderNbSel(); renderIvSel(); renderMpSel(); renderGeSel(); apply(); fromHash();
 </script>
 </body>
 </html>

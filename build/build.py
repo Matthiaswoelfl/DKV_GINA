@@ -466,6 +466,70 @@ def lese_mapping(neu_gebuehr: dict) -> dict:
     return info
 
 
+# ---------------------------------------------------------------- Geschlechtsbezug
+GESCHLECHT_DIR = INPUT / "geschlecht"
+SOLL_GESCHLECHT = {"W": 230, "M": 112, "Vorgabe": 274, "NEU": 68, "Zuschlag": 52, "Grenzfälle": 83, "Abgrenzung": 76}
+SOLL_BEZUGSART = {"Geschlechtsspezifisches Organ": 174, "Explizite Geschlechtsangabe in der Legende": 49,
+                  "Schwangerschaft / Geburt / Pränatalmedizin": 83, "Reproduktionsmedizin (Kinderwunsch)": 22,
+                  "Labor – geschlechtsbezogene Indikation / Material": 14}
+
+
+def lese_geschlecht(neu_gebuehr: dict, kap_k: dict) -> dict:
+    """Geschlechtsbezug je Ziffer (input/geschlecht): Hauptliste, Grenzfälle, Abgrenzung. Nichts wird neu bewertet."""
+    info = {"datei": None}
+    fj = GESCHLECHT_DIR / "geschlechtsbezug.json"
+    if not fj.exists():
+        return info
+    import csv
+    haupt = json.loads(fj.read_text(encoding="utf-8"))
+    grenz = json.loads((GESCHLECHT_DIR / "grenzfaelle.json").read_text(encoding="utf-8"))
+    abgr = list(csv.DictReader((GESCHLECHT_DIR / "abgrenzung.csv").open(encoding="utf-8-sig"), delimiter=";"))
+    je, abw_geb, abw_kap, unbekannt = {}, [], [], []
+
+    def pruefe(z, geb, kapitel):
+        if z not in neu_gebuehr:
+            unbekannt.append(z)
+            return
+        if geb is not None and int((dec(geb) * 100).to_integral_value(rounding=ROUND_HALF_UP)) != neu_gebuehr[z]:
+            abw_geb.append((z, geb, neu_gebuehr[z]))
+        if kap_k and kapitel and kap_k.get(z) != kapitel:
+            abw_kap.append((z, kapitel, kap_k.get(z)))
+
+    for a in haupt:
+        z = a["ziffer"]
+        pruefe(z, a["gebuehr_eur"], a["kapitel"])
+        je[z] = ["H", a["geschlecht"], a["bezugsart"], 1 if a["zuschlag"] == "ja" else 0, a["konfidenz"], a["quelle"],
+                 a["begruendung"], "", a["seite"]]
+    doppelt = [a["ziffer"] for a in grenz if a["ziffer"] in je]
+    for a in grenz:
+        z = a["ziffer"]
+        pruefe(z, None, a["kapitel"])
+        je.setdefault(z, ["G", a["geschlecht_vorschlag"], a["bezugsart"], 1 if a["zuschlag"] == "ja" else 0, "", "",
+                          a["begruendung"], a["empfehlung"], a["seite"]])
+    for a in abgr:
+        z = int(a["ziffer"])
+        pruefe(z, None, None)
+        if z in je:
+            doppelt.append(z)
+            continue
+        je[z] = ["A", "", a["auffaelliger_begriff"], 0, "", "", a["grund_nicht_aufgenommen"], "", None]
+    # Gegenprobe mit der Arbeitsmappe des Pakets (Hauptliste Zeile für Zeile)
+    xl_abw = []
+    xf = GESCHLECHT_DIR / "GOAeneu_Geschlechtsbezug_Ziffern.xlsx"
+    if xf.exists():
+        ws = openpyxl.load_workbook(xf, data_only=True)["Ziffern_Geschlechtsbezug"]
+        xl = {r[0]: r for r in ws.iter_rows(min_row=2, values_only=True) if isinstance(r[0], int)}
+        if set(xl) != {a["ziffer"] for a in haupt}:
+            xl_abw.append(("Ziffernmenge", len(set(xl) ^ {a["ziffer"] for a in haupt})))
+        for a in haupt:
+            r = xl.get(a["ziffer"])
+            if r and (r[5] != a["geschlecht"] or r[6] != a["bezugsart"] or r[9] != a["quelle"] or r[10] != a["konfidenz"]):
+                xl_abw.append((a["ziffer"], "Geschlecht/Bezugsart/Quelle/Konfidenz"))
+    info.update(datei=fj.name, je=je, haupt=haupt, grenz=grenz, abgr=abgr, abw_geb=abw_geb, abw_kap=abw_kap, unbekannt=unbekannt,
+                doppelt=doppelt, xl_abw=xl_abw, xl=xf.exists())
+    return info
+
+
 # ---------------------------------------------------------------- Intervalle
 _TAG = r"Kalendertag|\bpro Tag\b|\bje Tag\b|\ban einem Tag\b|\btäglich\b|Behandlungstag|\bam selben Tag\b|\ban demselben Tag\b"
 _KHJ = r"Kalenderhalbjahr|\bHalbjahr"
@@ -691,7 +755,7 @@ def lese_pdf(daten):
 
 
 # ---------------------------------------------------------------- Tests
-def tests(daten, js=None, kap=None, gesetz=None, regeln=None, intervalle=None, mapping=None):
+def tests(daten, js=None, kap=None, gesetz=None, regeln=None, intervalle=None, mapping=None, geschlecht=None):
     rows = {r["z"]: r for r in daten["rows"]}
     mus = daten["muster"]
     res = []
@@ -802,6 +866,26 @@ def tests(daten, js=None, kap=None, gesetz=None, regeln=None, intervalle=None, m
                 q = mapping["pdf"]["gefunden"] / max(1, mapping["pdf"]["geprueft"])
                 t("Mapping – alte Ziffern mit Betrag in der alten GOÄ (PDF) wiedergefunden (mindestens 98 %)", q >= 0.98,
                   f"{mapping['pdf']['gefunden']} von {mapping['pdf']['geprueft']} ({q:.1%})")
+        if geschlecht and geschlecht["datei"]:
+            H = {a["ziffer"]: a for a in geschlecht["haupt"]}
+            ist = {"W": sum(1 for a in H.values() if a["geschlecht"] == "W"), "M": sum(1 for a in H.values() if a["geschlecht"] == "M"),
+                   "Vorgabe": sum(1 for a in H.values() if a["quelle"] == "Vorgabe"), "NEU": sum(1 for a in H.values() if a["quelle"] == "NEU"),
+                   "Zuschlag": sum(1 for a in H.values() if a["zuschlag"] == "ja"), "Grenzfälle": len(geschlecht["grenz"]), "Abgrenzung": len(geschlecht["abgr"])}
+            t("Geschlecht – 342 Ziffern (W 230, M 112; Vorgabe 274, neu gefunden 68; Zuschläge 52), 83 Grenzfälle, 76 Abgrenzungen",
+              ist == SOLL_GESCHLECHT and len(H) == 342, " · ".join(f"{k} {v}" for k, v in ist.items()))
+            ba = Counter(a["bezugsart"] for a in H.values())
+            t("Geschlecht – Bezugsarten wie in der Übersicht des Pakets (174 / 49 / 83 / 22 / 14)", dict(ba) == SOLL_BEZUGSART, " · ".join(f"{v}" for v in ba.values()))
+            t("Geschlecht – Hauptliste, Grenzfälle und Abgrenzung überschneiden sich nicht; jede Ziffer genau einmal",
+              not geschlecht["doppelt"] and len(geschlecht["je"]) == 342 + 83 + 76, f"{len(geschlecht['je'])} Ziffern, {len(geschlecht['doppelt'])} Überschneidungen")
+            t("Geschlecht – alle Ziffern existieren, Gebühren und Kapitel stimmen mit dem Gebührenverzeichnis überein",
+              not geschlecht["unbekannt"] and not geschlecht["abw_geb"] and not geschlecht["abw_kap"],
+              f"{len(geschlecht['unbekannt'])} unbekannt, {len(geschlecht['abw_geb'])} Gebührenabweichungen, {len(geschlecht['abw_kap'])} Kapitelabweichungen")
+            t("Geschlecht – JSON und Arbeitsmappe des Pakets stimmen Zeile für Zeile überein", geschlecht["xl"] and not geschlecht["xl_abw"],
+              f"{len(geschlecht['xl_abw'])} Abweichungen")
+            jr = {int(z): v for z, v in js["geschlecht"].items()}
+            t("Geschlecht – Beispiele: 111 W (Schwangerschaft), 114 W neu gefunden, 115 M, 926 Grenzfall (Brust), 17 bewusst nicht aufgenommen",
+              jr[111][:2] == ["H", "W"] and jr[114][:2] == ["H", "W"] and jr[114][5] == "NEU" and jr[115][:2] == ["H", "M"] and jr[926][0] == "G" and jr[17][0] == "A",
+              " · ".join(f"{z}: {jr[z][0]}{jr[z][1]}" for z in (111, 114, 115, 926, 17)))
         t("Jede nicht steigerfähige Ziffer hat eine Leistungsbezeichnung", all(r[2] for r in js["rows"]),
           f"{sum(1 for r in js['rows'] if not r[2])} ohne Text")
     t("Keine doppelten Ziffern", len(rows) == len(daten["rows"]), f"{len(rows)} eindeutig")
@@ -847,7 +931,7 @@ def lese_wortlaut() -> dict:
     return json.loads(p.read_text(encoding="utf-8"))["gruende"] if p.exists() else {}
 
 
-def baue_json(daten, pdf, gesetz, kap, regeln, intervalle, mapping):
+def baue_json(daten, pdf, gesetz, kap, regeln, intervalle, mapping, geschlecht):
     matrix = {r["z"]: r for r in daten["rows"]}
     wortlaut = lese_wortlaut()
     zus = gesetz.get("zusatz", {})
@@ -905,11 +989,12 @@ def baue_json(daten, pdf, gesetz, kap, regeln, intervalle, mapping):
         "gruende": gruende, "kapitel": kapitel, "abschnitte": abs_liste, "muster": muster, "rows": rows,
         "regeln": regeln.get("regeln", []),
         "intervalle": [{k: v for k, v in d.items() if k != "beispiele"} | {"bsp": d["beispiele"]} for d in intervalle.get("defs", [])],
+        "geschlecht": {str(z): v for z, v in geschlecht.get("je", {}).items()},
         "mapping": {"alt": mapping.get("alt", []), "titel": mapping.get("titel", {}), "stand": mapping.get("pdf", {}).get("stand")},
     }
 
 
-def schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, mapping, res, ui, excel_name, daten_alle=()):
+def schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, mapping, geschlecht, res, ui, excel_name, daten_alle=()):
     L = []
     ok = sum(1 for _, o, _ in res if o)
     L += ["# QS-Bericht – GOÄneu Steigerungsdashboard", "",
@@ -918,6 +1003,7 @@ def schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, mapping, res, 
           f"- Zuordnung Ziffer → Kapitel/Abschnitt (JSON): {'`input/kapitel/' + kap['datei'] + '`' if kap['datei'] else '**lag beim Build nicht vor**'}",
           f"- Kombinationsregeln (Nebeneinanderberechnung): {'`input/neben/` (regeln.json, ziffer_index.json, weitere_ausschluesse.csv)' if regeln['datei'] else '**lagen beim Build nicht vor**'}",
           f"- Mapping alte GOÄ → GOÄneu: {'`input/mapping/` und `input/goae_alt/`' if mapping['datei'] else '**lag beim Build nicht vor**'}",
+          f"- Geschlechtsbezug: {'`input/geschlecht/`' if geschlecht['datei'] else '**lag beim Build nicht vor**'}",
           f"- Gesetzesentwurf mit Allgemeinen Bestimmungen (PDF): {'`input/' + pdf['datei'] + '`' if pdf['datei'] else '**lag beim Build nicht vor**'}",
           f"- Abnahmetests Daten: **{ok} von {len(res)} bestanden**", "",
           "## 1. Abnahmetests (Daten)", "", "| Test | Ergebnis | Ist-Wert |", "|---|---|---|"]
@@ -1095,6 +1181,34 @@ def schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, mapping, res, 
             "über der Liste, wird aber nicht je Regel ausgewertet.",
         ]
 
+    L += ["", "## 4f. Geschlechtsbezug", ""]
+    if not geschlecht["datei"]:
+        L.append("Nicht vorhanden: `input/geschlecht/` fehlt.")
+    else:
+        H = geschlecht["haupt"]
+        L += ["Der Reiter beruht ausschließlich auf dem gelieferten Paket `input/geschlecht/` (`geschlechtsbezug.json`, `grenzfaelle.json`, "
+              "`abgrenzung.csv`, Arbeitsmappe, Beschreibung in `README.md`). Bewertung, Konfidenz und Begründung sind unverändert übernommen; "
+              "das Dashboard bewertet nichts neu. Titel und Gebühr zeigt das Dashboard aus dem Gebührenverzeichnis (das Paket kürzt Titel).", "",
+              "| Kennzahl | Wert |", "|---|---|",
+              f"| Ziffern mit Geschlechtsbezug (Hauptliste) | {len(H)} (W {sum(1 for a in H if a['geschlecht'] == 'W')}, M {sum(1 for a in H if a['geschlecht'] == 'M')}) |",
+              f"| … davon aus der Vorgabe / neu gefunden | {sum(1 for a in H if a['quelle'] == 'Vorgabe')} / {sum(1 for a in H if a['quelle'] == 'NEU')} |",
+              f"| … davon Zuschläge | {sum(1 for a in H if a['zuschlag'] == 'ja')} |",
+              f"| … Konfidenz „mittel“ (fachlich abgeleitet) | {sum(1 for a in H if a['konfidenz'] == 'mittel')} |",
+              f"| Grenzfälle (nur Hinweis, nicht in der Hauptliste) | {len(geschlecht['grenz'])} |",
+              f"| Bewusst nicht aufgenommen (Abgrenzung) | {len(geschlecht['abgr'])} |",
+              f"| Abweichungen Gebühr / Kapitel gegen das Gebührenverzeichnis | {len(geschlecht['abw_geb'])} / {len(geschlecht['abw_kap'])} |",
+              f"| Abweichungen JSON gegen Arbeitsmappe | {len(geschlecht['xl_abw'])} |", ""]
+        offen += [
+            "**Geschlecht – weiche Prüfung:** Nach Kap. A, AB Nr. 4 zählt der individuelle medizinische Bedarf, nicht der Personenstandseintrag. "
+            "Das Dashboard zeigt deshalb nur Hinweise und Aussteuerungsempfehlungen, nie eine Ablehnung.",
+            "**Geschlecht – Konfidenz „mittel“:** 25 Ziffern sind laut Paket fachlich abgeleitet (Reproduktionsmedizin mit Paarbezug, "
+            "Douglasraum 919, Rektozele 9905/9906). Bitte fachlich bestätigen.",
+            "**Geschlecht – Grenzfälle:** 83 Ziffern (Brust 60, Beckenboden/Inkontinenz 7, Reproduktion 7, Transition 5, Organ 4) stehen nur als "
+            "Hinweis. Eine eigene Aussteuerung ist dafür nicht vorgesehen; bei Transition nur Hinweis. Bitte bestätigen.",
+            "**Geschlecht – Abschnittszuschläge** (9996–10000, 10275–10277, 4776–4778, 5122–5124) stehen laut Paket nicht in der Liste: "
+            "Es gilt das Geschlecht der tatsächlich abgerechneten Hauptleistung. Das Dashboard weist darauf bei den Ziffern nicht eigens hin.",
+        ]
+
     L += ["", "## 4e. Mapping alte GOÄ → GOÄneu", ""]
     if not mapping["datei"]:
         L.append("Nicht vorhanden: `input/mapping/` fehlt.")
@@ -1242,8 +1356,10 @@ def main():
     regeln = lese_regeln({int(z) for z in kap["K"]} if kap["datei"] else {r["z"] for r in daten["rows"]})
     intervalle = lese_intervalle(gesetz.get("roh", {}))
     mapping = lese_mapping({int(z): int(v["_g"] * 100) for z, v in kap["K"].items()} if kap["datei"] else {})
-    js_obj = baue_json(daten, pdf, gesetz, kap, regeln, intervalle, mapping)
-    res = tests(daten, js_obj, kap, gesetz, regeln, intervalle, mapping)
+    geschlecht = lese_geschlecht({int(z): int(v["_g"] * 100) for z, v in kap["K"].items()} if kap["datei"] else {},
+                                 {int(z): v["kapitel"] for z, v in kap["K"].items()} if kap["datei"] else {})
+    js_obj = baue_json(daten, pdf, gesetz, kap, regeln, intervalle, mapping, geschlecht)
+    res = tests(daten, js_obj, kap, gesetz, regeln, intervalle, mapping, geschlecht)
 
     js = json.dumps(js_obj, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     html = TEMPLATE.read_text(encoding="utf-8").replace("/*__DATA__*/", js)
@@ -1260,7 +1376,7 @@ def main():
         ui = json.loads(UI_JSON.read_text(encoding="utf-8"))
         UI_JSON.unlink()
 
-    schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, mapping, res, ui, excels[0].name, [r[0] for r in js_obj["rows"]])
+    schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, mapping, geschlecht, res, ui, excels[0].name, [r[0] for r in js_obj["rows"]])
     for name, ok, ist in res:
         print(("OK   " if ok else "FAIL ") + name + "  →  " + ist)
     for c in (ui or {}).get("checks", []):

@@ -272,6 +272,49 @@ const path = require('path');
   await page.click('#tabs button[data-v=ab]');
   check('Zurück zu „AB-Steigerungsgründe“ nach Mapping: wieder neue Ziffern (5.580), Navigation mit 17 Kapiteln', (await txt('#status')).startsWith('5.580 von 5.580 Ziffern') && await page.locator('#nav button.kap').count() === 17 && await page.locator('#f-mp').isHidden(), await txt('#status'));
 
+  // ---------- Reiter Geschlecht ----------
+  await page.goto('file://' + html);
+  await page.reload();
+  await page.click('#tabs button[data-v=ge]');
+  const chipsGe = (await page.locator('#chipsge .chip').allInnerTexts()).map(t => t.replace(/\s+/g, ' ')).join(' | ');
+  check('Reiter „Geschlecht“: Chips Weiblich 230 · Männlich 112 · Grenzfall 83 · Nicht aufgenommen 76 · Kein Geschlechtsbezug 5.079',
+    chipsGe === 'W Weiblich 230 | M Männlich 112 | G Grenzfall 83 | A Nicht aufgenommen 76 | – Kein Geschlechtsbezug 5.079' && await page.locator('#f-ab').isHidden(), chipsGe);
+  await page.fill('#q', '115');
+  await page.keyboard.press('Enter');
+  d = (await txt('#drawer')).replace(/\s+/g, ' ');
+  check('Suche „115“: Männlich, Konfidenz hoch, Begründung (Prostata), neu gefunden, weiche Prüfung, Direktlink #geschlecht/115',
+    d.includes('Männlicher Leistungsinhalt') && d.includes('Prostata') && d.includes('Neu gefunden') && d.includes('Weiche Prüfung') && page.url().endsWith('#geschlecht/115'), d.slice(0, 60) + ' … ' + page.url().split('#')[1]);
+  await shot('15_geschlecht_115.png');
+  await page.keyboard.press('Escape');
+  await page.click('#reset');
+  await page.click('#chipsge .chip[data-k=W]');
+  await page.selectOption('#gebz', 'Schwangerschaft / Geburt / Pränatalmedizin');
+  check('Filter Weiblich + Bezugsart Schwangerschaft/Geburt: 83 Ziffern', (await txt('#status')).startsWith('83 von'), await txt('#status'));
+  await shot('16_geschlecht_gefiltert.png');
+  await page.click('#reset');
+  await page.goto('file://' + html + '#geschlecht/926');
+  await page.reload();
+  d = (await txt('#drawer')).replace(/\s+/g, ' ');
+  check('Direktlink #geschlecht/926: Grenzfall (Brust), Empfehlung „Nur Hinweis“', d.includes('Geschlechtsbezug nicht obligatorisch') && d.includes('Brust') && d.includes('Nur Hinweis'), d.slice(0, 70));
+  await page.goto('file://' + html + '#geschlecht/17');
+  await page.reload();
+  d = (await txt('#drawer')).replace(/\s+/g, ' ');
+  check('Direktlink #geschlecht/17: bewusst nicht aufgenommen mit Grund', d.includes('Geprüft, kein Geschlechtsbezug') && d.includes('Grund der Nichtaufnahme') && d.includes('Auswahl'), d.slice(0, 70));
+  await page.goto('file://' + html + '#geschlecht/1200');
+  await page.reload();
+  check('Ziffer 1200 (sonographisch, ohne Eintrag): „Kein Geschlechtsbezug“', (await txt('#drawer')).includes('Kein Geschlechtsbezug'), '');
+  await page.keyboard.press('Escape');
+  await page.click('#reset');
+  await page.click('#chipsge .chip[data-k=M]');
+  await page.selectOption('#gezu', 'Zuschlag');
+  const nZ = await txt('#status');
+  const [dl5] = await Promise.all([page.waitForEvent('download'), page.click('#csv')]);
+  const csv5 = fs.readFileSync(await dl5.path(), 'utf8').replace(/^\ufeff/, '').split('\r\n');
+  check('Filter Männlich + Zuschlag und CSV-Export mit Einordnung, Bezugsart und Begründung', /^\d+ von 5\.580/.test(nZ) && csv5.length === parseInt(nZ) + 1 && csv5[0].includes('"Einordnung";"Geschlecht";"Bezugsart";"Zuschlag";"Konfidenz"'), nZ + ' · ' + csv5.length + ' CSV-Zeilen');
+  await page.click('#reset');
+  await page.click('#tabs button[data-v=ab]');
+  check('Zurück zu „AB-Steigerungsgründe“ nach Geschlecht: 5.580 Ziffern, Geschlecht-Filter ausgeblendet', await page.locator('#f-ge').isHidden() && (await txt('#status')).startsWith('5.580 von'), await txt('#status'));
+
   // Laptop-Breite
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.goto('file://' + html + '#13399');
