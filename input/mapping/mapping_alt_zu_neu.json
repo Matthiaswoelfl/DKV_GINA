@@ -3304,13 +3304,13 @@
   "alt_euro_1fach": 6.41,
   "neu": [
    {
-    "neu": "604",
+    "neu": "",
     "score": 0.075,
-    "p": 0.16,
-    "kapitel": "C",
-    "abschnitt": "02.01",
-    "titel": "Gewickelter zirkulärer Verband oder stabilisierender Verband des Kopfes oder des Rumpfes, ggf. einschließlich - Entfernen von altem Verbandsmaterial - Aufbringen von Externa - Wundauflagen - Wundverba",
-    "euro": 16.04
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -3331,9 +3331,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.16,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.075
  },
@@ -5865,7 +5865,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.12
  },
@@ -6246,13 +6246,13 @@
   "alt_euro_1fach": 2.91,
   "neu": [
    {
-    "neu": "9965",
+    "neu": "",
     "score": 0.095,
-    "p": 0.18,
-    "kapitel": "L",
-    "abschnitt": "11.13",
-    "titel": "Operative Beseitigung einer oder mehrerer Uterusmissbildung(en), einschließlich - Sondierung - Dilatation - Einmalkatheterisierung",
-    "euro": 685.99
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -6273,9 +6273,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.18,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.095
  },
@@ -6562,7 +6562,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.126
  },
@@ -6685,7 +6685,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.123
  },
@@ -7107,13 +7107,13 @@
   "alt_euro_1fach": 2.91,
   "neu": [
    {
-    "neu": "1000",
+    "neu": "",
     "score": 0.094,
-    "p": 0.18,
-    "kapitel": "C",
-    "abschnitt": "02.04",
-    "titel": "Schutzimpfung mit Injektion (z.B. intramuskulär, subkutan) oder orale oder nasale Gabe, ggf. einschließlich Eintragung in den Impfpass, je Gabe Art der Impfung und Gabe sind in der Rechnung anzugeben.",
-    "euro": 14.28
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -7134,9 +7134,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.18,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.094
  },
@@ -7148,13 +7148,13 @@
   "alt_euro_1fach": 6.99,
   "neu": [
    {
-    "neu": "11017",
+    "neu": "",
     "score": 0.059,
-    "p": 0.15,
-    "kapitel": "M",
-    "abschnitt": "12.01",
-    "titel": "Vaginalsekret klinisch-chemische Schnelltestformate (vorgefertigter Reagenzträger [Vaginal pH-Teststreifen]); Auswertung: simultan-visuell-semiquantitativ oder simultan-apparativ-semiquantitativ",
-    "euro": 1.81
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -7175,9 +7175,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.15,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.059
  },
@@ -7353,13 +7353,13 @@
   "alt_euro_1fach": 2.33,
   "neu": [
    {
-    "neu": "1008",
+    "neu": "",
     "score": 0.04,
-    "p": 0.13,
-    "kapitel": "C",
-    "abschnitt": "02.04",
-    "titel": "Pricktest (1. bis 20. Test je Behandlungsfall), je Test",
-    "euro": 6.03
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -7380,9 +7380,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.13,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.04
  },
@@ -7722,13 +7722,13 @@
   "alt_euro_1fach": 17.49,
   "neu": [
    {
-    "neu": "11120",
+    "neu": "",
     "score": 0.092,
-    "p": 0.18,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Höchstwert für die mit H4 gekennzeichneten Leistungen Gebührennummern 11998, 11999, 12030, 12031 oder 12713.",
-    "euro": 29.11
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -7749,9 +7749,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.18,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.092
  },
@@ -7804,13 +7804,13 @@
   "alt_euro_1fach": 32.64,
   "neu": [
    {
-    "neu": "11120",
+    "neu": "",
     "score": 0.087,
-    "p": 0.17,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Höchstwert für die mit H4 gekennzeichneten Leistungen Gebührennummern 11998, 11999, 12030, 12031 oder 12713.",
-    "euro": 29.11
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -7831,9 +7831,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.17,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.087
  },
@@ -7886,13 +7886,13 @@
   "alt_euro_1fach": 44.3,
   "neu": [
    {
-    "neu": "11120",
+    "neu": "",
     "score": 0.087,
-    "p": 0.17,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Höchstwert für die mit H4 gekennzeichneten Leistungen Gebührennummern 11998, 11999, 12030, 12031 oder 12713.",
-    "euro": 29.11
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -7913,9 +7913,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.17,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.087
  },
@@ -7968,13 +7968,13 @@
   "alt_euro_1fach": 23.31,
   "neu": [
    {
-    "neu": "1117",
+    "neu": "",
     "score": 0.085,
-    "p": 0.17,
-    "kapitel": "C",
-    "abschnitt": "02.05",
-    "titel": "Zuschlag zu der Leistung nach Nummer 1107 für eines der folgenden endoskopischen Verfahren: Gastroskopie oder Koloskopie",
-    "euro": 68.0
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -7995,9 +7995,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.17,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.085
  },
@@ -8867,7 +8867,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.14
  },
@@ -9031,7 +9031,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.136
  },
@@ -9113,7 +9113,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.124
  },
@@ -9236,7 +9236,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.131
  },
@@ -9330,13 +9330,13 @@
   "alt_euro_1fach": 34.97,
   "neu": [
    {
-    "neu": "5201",
+    "neu": "",
     "score": 0.099,
-    "p": 0.04,
-    "kapitel": "L",
+    "p": 0.05,
+    "kapitel": "",
     "abschnitt": "",
-    "titel": "Zuschlag bei ambulanter Durchführung von operativen Leistungen des Kapitels L, die mit einem nicht unterschreitbaren Gebührensatz von mehr als 55 EUR bis zu 301,00 EUR bewertet sind",
-    "euro": 72.02
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -9357,8 +9357,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.04,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.099
@@ -9412,13 +9412,13 @@
   "alt_euro_1fach": 4.43,
   "neu": [
    {
-    "neu": "7539",
+    "neu": "",
     "score": 0.036,
-    "p": 0.13,
-    "kapitel": "L",
-    "abschnitt": "11.02",
-    "titel": "Geschlossene Mobilisation eines kleinen Gelenks in Narkose und/oder Regionalanästhesie, als selbständige Leistung Die Leistung nach Nummer 7539 ist für präoperative Bewegungsprüfung oder Lagerung nich",
-    "euro": 50.0
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -9439,9 +9439,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.13,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.036
  },
@@ -9494,13 +9494,13 @@
   "alt_euro_1fach": 11.07,
   "neu": [
    {
-    "neu": "1725",
+    "neu": "",
     "score": 0.085,
-    "p": 0.03,
-    "kapitel": "D",
-    "abschnitt": "03.01",
-    "titel": "Zuschlag zu der Leistung nach Nummer 1715 oder 1719 für die intravenöse Sedierung und/oder Analgesie zusätzlich zu Regional- und/oder Lokalanästhesien",
-    "euro": 27.27
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -9521,8 +9521,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.03,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.085
@@ -9535,13 +9535,13 @@
   "alt_euro_1fach": 12.24,
   "neu": [
    {
-    "neu": "7539",
+    "neu": "",
     "score": 0.042,
-    "p": 0.13,
-    "kapitel": "L",
-    "abschnitt": "11.02",
-    "titel": "Geschlossene Mobilisation eines kleinen Gelenks in Narkose und/oder Regionalanästhesie, als selbständige Leistung Die Leistung nach Nummer 7539 ist für präoperative Bewegungsprüfung oder Lagerung nich",
-    "euro": 50.0
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -9562,9 +9562,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.13,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.042
  },
@@ -11635,13 +11635,13 @@
   "alt_euro_1fach": 8.74,
   "neu": [
    {
-    "neu": "4125",
+    "neu": "",
     "score": 0.032,
-    "p": 0.13,
-    "kapitel": "F",
-    "abschnitt": "05.13",
-    "titel": "Ätzung im Enddarmbereich, als selbständige Leistung, je Sitzung",
-    "euro": 11.83
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -11662,9 +11662,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.13,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.032
  },
@@ -11849,13 +11849,13 @@
   "alt_euro_1fach": 2.16,
   "neu": [
    {
-    "neu": "4222",
+    "neu": "",
     "score": 0.093,
-    "p": 0.18,
-    "kapitel": "F",
-    "abschnitt": "05.14",
-    "titel": "Radiale Stoßwellenbehandlung, ggf. einschließlich - Lokalanästhesie - Ultraschallkontrolle, je Sitzung Die Leistung nach Nummer 4222 ist bis zu fünfmal je Behandlungsfall berechnungsfähig.",
-    "euro": 89.73
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -11876,9 +11876,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.18,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.093
  },
@@ -12218,13 +12218,13 @@
   "alt_euro_1fach": 1.81,
   "neu": [
    {
-    "neu": "2302",
+    "neu": "",
     "score": 0.064,
-    "p": 0.15,
-    "kapitel": "E",
-    "abschnitt": "04.05",
-    "titel": "Behandlung einer Körperregion mit Ultraschall, je Sitzung",
-    "euro": 7.49
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -12245,9 +12245,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.15,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.064
  },
@@ -12288,7 +12288,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.128
  },
@@ -12341,13 +12341,13 @@
   "alt_euro_1fach": 5.3,
   "neu": [
    {
-    "neu": "4128",
+    "neu": "",
     "score": 0.084,
-    "p": 0.03,
-    "kapitel": "F",
-    "abschnitt": "05.13",
-    "titel": "Zuschlag zu der Leistung nach Nummer 4127 für jedes weitere Bestrahlungsfeld bis zu 30 cm²",
-    "euro": 13.75
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -12368,8 +12368,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.03,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.084
@@ -12505,13 +12505,13 @@
   "alt_euro_1fach": 1.75,
   "neu": [
    {
-    "neu": "1011",
+    "neu": "",
     "score": 0.096,
-    "p": 0.18,
-    "kapitel": "C",
-    "abschnitt": "02.04",
-    "titel": "Reib-, Scratch- oder Skarifikationstest (bis zu 10 Tests je Behandlungsfall), je Test",
-    "euro": 4.69
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -12532,9 +12532,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.18,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.096
  },
@@ -12698,7 +12698,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.139
  },
@@ -12892,13 +12892,13 @@
   "alt_euro_1fach": 14.11,
   "neu": [
    {
-    "neu": "11959",
+    "neu": "",
     "score": 0.079,
-    "p": 0.17,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Von-Willebrand-Faktor-spaltende Protease (ADAMTS-13), Aktivität Abklärung thrombotische Mikroangiopathie; Citratplasma, Serum; Substrat (z.B. vWF-Wildtyp, vWF-Fragmente); Verdünnungsreihe, Inkubation;",
-    "euro": 38.73
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -12919,9 +12919,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.17,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.079
  },
@@ -13499,7 +13499,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.137
  },
@@ -13663,7 +13663,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.136
  },
@@ -13827,7 +13827,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.123
  },
@@ -14278,7 +14278,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.143
  },
@@ -14331,13 +14331,13 @@
   "alt_euro_1fach": 35.26,
   "neu": [
    {
-    "neu": "1008",
+    "neu": "",
     "score": 0.02,
-    "p": 0.12,
-    "kapitel": "C",
-    "abschnitt": "02.04",
-    "titel": "Pricktest (1. bis 20. Test je Behandlungsfall), je Test",
-    "euro": 6.03
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -14358,9 +14358,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.12,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.02
  },
@@ -14401,7 +14401,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.132
  },
@@ -14442,7 +14442,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.24,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.15
  },
@@ -14946,13 +14946,13 @@
   "alt_euro_1fach": 7.05,
   "neu": [
    {
-    "neu": "12935",
+    "neu": "",
     "score": 0.072,
-    "p": 0.16,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Kohlenhydrate-/Fettsäuren-Intermediärstoffwechsel-Enzyme, je Enzym Abklärung angeborene Stoffwechselanomalien (z.B. Alpha-Glukosidase, Beta-Galaktosidase, Biotinidase, Phosphomannomutase); z.B. Serum ",
-    "euro": 18.56
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -14973,9 +14973,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.16,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.072
  },
@@ -14987,13 +14987,13 @@
   "alt_euro_1fach": 13.23,
   "neu": [
    {
-    "neu": "12935",
+    "neu": "",
     "score": 0.07,
-    "p": 0.16,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Kohlenhydrate-/Fettsäuren-Intermediärstoffwechsel-Enzyme, je Enzym Abklärung angeborene Stoffwechselanomalien (z.B. Alpha-Glukosidase, Beta-Galaktosidase, Biotinidase, Phosphomannomutase); z.B. Serum ",
-    "euro": 18.56
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -15014,9 +15014,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.16,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.07
  },
@@ -15221,7 +15221,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.142
  },
@@ -15590,7 +15590,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.137
  },
@@ -15877,7 +15877,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.24,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.15
  },
@@ -16205,7 +16205,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.123
  },
@@ -16328,7 +16328,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.135
  },
@@ -16668,13 +16668,13 @@
   "alt_euro_1fach": 14.63,
   "neu": [
    {
-    "neu": "11120",
+    "neu": "",
     "score": 0.075,
-    "p": 0.16,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Höchstwert für die mit H4 gekennzeichneten Leistungen Gebührennummern 11998, 11999, 12030, 12031 oder 12713.",
-    "euro": 29.11
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -16695,9 +16695,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.16,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.075
  },
@@ -17506,13 +17506,13 @@
   "alt_euro_1fach": 7.05,
   "neu": [
    {
-    "neu": "4102",
+    "neu": "",
     "score": 0.089,
-    "p": 0.18,
-    "kapitel": "F",
-    "abschnitt": "05.13",
-    "titel": "Minimalinvasiver Hautfunktionstest I, Bestimmung der Alkali-Neutralisationszeit, Bestimmung der Alkali-Resistenz, Nitrazingelbtest, Kälte-Wärme-Druck-Test, Dimethylglyoxim-Nickel-Test, Chloroform-Meth",
-    "euro": 17.66
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -17533,9 +17533,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.18,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.089
  },
@@ -17658,7 +17658,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.24,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.148
  },
@@ -17875,13 +17875,13 @@
   "alt_euro_1fach": 14.11,
   "neu": [
    {
-    "neu": "4865",
+    "neu": "",
     "score": 0.065,
-    "p": 0.15,
-    "kapitel": "I",
-    "abschnitt": "08.00",
-    "titel": "Injektionsbehandlung des Blepharospasmus und/oder des spastischen Entropiums, z.B. mit Botulinum-Toxin, je Auge",
-    "euro": 36.74
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -17902,9 +17902,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.15,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.065
  },
@@ -19094,13 +19094,13 @@
   "alt_euro_1fach": 9.21,
   "neu": [
    {
-    "neu": "4347",
+    "neu": "",
     "score": 0.083,
-    "p": 0.17,
-    "kapitel": "G",
-    "abschnitt": "06.01",
-    "titel": "Planung, Koordination oder Organisation eines multimodalen Behandlungskonzepts mit komplementären Versorgungsstrukturen oder intensivierter medikamentöser oder somatischer Therapiemaßnahmen bei Patien",
-    "euro": 84.08
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -19121,9 +19121,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.17,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.083
  },
@@ -19478,7 +19478,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.142
  },
@@ -20687,7 +20687,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.12
  },
@@ -20822,13 +20822,13 @@
   "alt_euro_1fach": 75.77,
   "neu": [
    {
-    "neu": "4725",
+    "neu": "",
     "score": 0.098,
-    "p": 0.18,
-    "kapitel": "H",
-    "abschnitt": "07.02",
-    "titel": "Intraamniale Injektion zur Beendigung der Schwangerschaft, einschließlich Applikation des wehenfördernden Medikamentes und Ultraschallkontrolle",
-    "euro": 128.26
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -20849,9 +20849,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.18,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.098
  },
@@ -21361,7 +21361,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.145
  },
@@ -21402,7 +21402,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.134
  },
@@ -21484,7 +21484,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.125
  },
@@ -21660,13 +21660,13 @@
   "alt_euro_1fach": 10.78,
   "neu": [
    {
-    "neu": "7731",
+    "neu": "",
     "score": 0.085,
-    "p": 0.17,
-    "kapitel": "L",
-    "abschnitt": "11.02",
-    "titel": "Spülung einer Sehnenscheide ohne weitere operative Maßnahmen",
-    "euro": 112.46
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -21687,9 +21687,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.17,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.085
  },
@@ -21865,13 +21865,13 @@
   "alt_euro_1fach": 10.78,
   "neu": [
    {
-    "neu": "10603",
+    "neu": "",
     "score": 0.096,
-    "p": 0.04,
-    "kapitel": "L",
-    "abschnitt": "11.17",
-    "titel": "Zuschlag zu der Leistung nach Nummer 10601 für die Eröffnung eines oder mehrerer Abszesse",
-    "euro": 68.29
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -21892,8 +21892,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.04,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.096
@@ -23054,13 +23054,13 @@
   "alt_euro_1fach": 17.25,
   "neu": [
    {
-    "neu": "4719",
+    "neu": "",
     "score": 0.038,
-    "p": 0.13,
-    "kapitel": "H",
-    "abschnitt": "07.02",
-    "titel": "Diagnostische Hysteroskopie, einschließlich Dehnung des inneren Muttermundes (Isthmus), ggf. einschließlich Inspektion der Tubenabgänge",
-    "euro": 118.62
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -23081,9 +23081,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.13,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.038
  },
@@ -23095,13 +23095,13 @@
   "alt_euro_1fach": 24.48,
   "neu": [
    {
-    "neu": "1115",
+    "neu": "",
     "score": 0.035,
-    "p": 0.02,
-    "kapitel": "C",
-    "abschnitt": "02.05",
-    "titel": "Zuschlag zu der Leistung nach Nummer 1107 für Messung des intrakraniellen Drucks mittels Hirndrucksonde",
-    "euro": 33.5
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -23122,8 +23122,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.02,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.035
@@ -23370,7 +23370,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.137
  },
@@ -23669,13 +23669,13 @@
   "alt_euro_1fach": 32.29,
   "neu": [
    {
-    "neu": "9971",
+    "neu": "",
     "score": 0.086,
-    "p": 0.17,
-    "kapitel": "L",
-    "abschnitt": "11.13",
-    "titel": "Zervixstumpfexstirpation",
-    "euro": 467.91
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -23696,9 +23696,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.17,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.086
  },
@@ -24108,7 +24108,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.132
  },
@@ -24887,7 +24887,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.126
  },
@@ -26463,7 +26463,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.13
  },
@@ -26504,7 +26504,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.136
  },
@@ -26882,7 +26882,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.127
  },
@@ -27251,7 +27251,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.138
  },
@@ -27292,7 +27292,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.133
  },
@@ -27497,7 +27497,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.24,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.149
  },
@@ -27600,13 +27600,13 @@
   "alt_euro_1fach": 43.07,
   "neu": [
    {
-    "neu": "8316",
+    "neu": "",
     "score": 0.077,
-    "p": 0.03,
-    "kapitel": "L",
-    "abschnitt": "11.05",
-    "titel": "Zuschlag zu der Leistung nach Nummer 8315 für die zusätzliche Naht oder Versenkung im Muskel und/oder Knochen",
-    "euro": 116.52
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -27627,8 +27627,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.03,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.077
@@ -27641,13 +27641,13 @@
   "alt_euro_1fach": 64.7,
   "neu": [
    {
-    "neu": "8580",
+    "neu": "",
     "score": 0.094,
-    "p": 0.18,
-    "kapitel": "L",
-    "abschnitt": "11.06",
-    "titel": "Nicht-operative Verlängerung oder Verkürzung eines mitwachsenden Implantates an der Wirbelsäule",
-    "euro": 149.89
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -27668,9 +27668,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.18,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.094
  },
@@ -27752,7 +27752,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.24,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.148
  },
@@ -27793,7 +27793,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.133
  },
@@ -27805,13 +27805,13 @@
   "alt_euro_1fach": 1.75,
   "neu": [
    {
-    "neu": "9914",
+    "neu": "",
     "score": 0.089,
-    "p": 0.17,
-    "kapitel": "L",
-    "abschnitt": "11.13",
-    "titel": "Levatorplastik, ein- oder beidseitig",
-    "euro": 506.73
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -27832,9 +27832,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.17,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.089
  },
@@ -27875,7 +27875,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.14
  },
@@ -27969,13 +27969,13 @@
   "alt_euro_1fach": 17.25,
   "neu": [
    {
-    "neu": "10529",
+    "neu": "",
     "score": 0.076,
-    "p": 0.16,
-    "kapitel": "L",
-    "abschnitt": "11.16",
-    "titel": "Operation einer Zwerchfellrelaxation und/oder Transposition des Zwerchfells und/oder Implantation eines Zwerchfellschrittmachers, auch minimalinvasiv",
-    "euro": 817.54
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -27996,9 +27996,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.16,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.076
  },
@@ -28039,7 +28039,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.125
  },
@@ -28253,7 +28253,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.24,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.146
  },
@@ -28704,7 +28704,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.141
  },
@@ -28745,7 +28745,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.24,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.147
  },
@@ -28786,7 +28786,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.24,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.146
  },
@@ -28798,13 +28798,13 @@
   "alt_euro_1fach": 138.14,
   "neu": [
    {
-    "neu": "9734",
+    "neu": "",
     "score": 0.064,
-    "p": 0.15,
-    "kapitel": "L",
-    "abschnitt": "11.12",
-    "titel": "Sperroperation bei portalem Hochdruck",
-    "euro": 693.1
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -28825,9 +28825,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.15,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.064
  },
@@ -28950,7 +28950,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.132
  },
@@ -29114,7 +29114,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.142
  },
@@ -29155,7 +29155,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.141
  },
@@ -29196,7 +29196,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.24,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.147
  },
@@ -29729,7 +29729,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.122
  },
@@ -29934,7 +29934,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.145
  },
@@ -31109,7 +31109,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.124
  },
@@ -31396,7 +31396,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.132
  },
@@ -32603,7 +32603,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.129
  },
@@ -33567,13 +33567,13 @@
   "alt_euro_1fach": 21.57,
   "neu": [
    {
-    "neu": "4989",
+    "neu": "",
     "score": 0.084,
-    "p": 0.17,
-    "kapitel": "J",
-    "abschnitt": "09.00",
-    "titel": "Stimmtherapie bei Kehlkopflosen (Speiseröhren-Ersatzstimme, Stimmprothese oder elektronische Ersatzstimme), je Sitzung",
-    "euro": 31.31
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -33594,9 +33594,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.17,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.084
  },
@@ -34220,7 +34220,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.122
  },
@@ -34302,7 +34302,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.131
  },
@@ -34721,7 +34721,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.13
  },
@@ -35582,7 +35582,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.24,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.148
  },
@@ -35705,7 +35705,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.128
  },
@@ -37431,7 +37431,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.143
  },
@@ -37484,13 +37484,13 @@
   "alt_euro_1fach": 4.31,
   "neu": [
    {
-    "neu": "10131",
+    "neu": "",
     "score": 0.072,
-    "p": 0.16,
-    "kapitel": "L",
-    "abschnitt": "11.14",
-    "titel": "Meatusplastik, einschließlich Inzision, Schleimhautrekonstruktion",
-    "euro": 111.98
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -37511,9 +37511,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.16,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.072
  },
@@ -37841,7 +37841,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.142
  },
@@ -38099,13 +38099,13 @@
   "alt_euro_1fach": 10.49,
   "neu": [
    {
-    "neu": "1116",
+    "neu": "",
     "score": 0.096,
-    "p": 0.04,
-    "kapitel": "C",
-    "abschnitt": "02.05",
-    "titel": "Zuschlag zu der Leistung nach Nummer 1107 für eines der folgenden sonographischen Verfahren: Farbdoppler-Sonographie, Kontrastmittel-Sonographie, Transösophageale Echokardiographie (TEE) oder Transtho",
-    "euro": 36.2
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -38126,8 +38126,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.04,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.096
@@ -39485,7 +39485,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.132
  },
@@ -39690,7 +39690,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.143
  },
@@ -41009,13 +41009,13 @@
   "alt_euro_1fach": 86.27,
   "neu": [
    {
-    "neu": "10144",
+    "neu": "",
     "score": 0.099,
-    "p": 0.18,
-    "kapitel": "L",
-    "abschnitt": "11.14",
-    "titel": "Perkutane Rekonstruktion der Niere mit Erweiterung der Nierenkelchhälse, Anlage einer Nierenfistel oder Pyelostomie(n)",
-    "euro": 450.45
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -41036,9 +41036,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.18,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.099
  },
@@ -41243,7 +41243,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.123
  },
@@ -41325,7 +41325,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.139
  },
@@ -41908,7 +41908,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.128
  },
@@ -42298,13 +42298,13 @@
   "alt_euro_1fach": 3.67,
   "neu": [
    {
-    "neu": "8723",
+    "neu": "",
     "score": 0.093,
-    "p": 0.18,
-    "kapitel": "L",
-    "abschnitt": "11.07",
-    "titel": "Primärer Verschluss des weichen Gaumens mit Muskelplastik",
-    "euro": 342.15
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -42325,9 +42325,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.18,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.093
  },
@@ -42380,13 +42380,13 @@
   "alt_euro_1fach": 5.25,
   "neu": [
    {
-    "neu": "7103",
+    "neu": "",
     "score": 0.074,
-    "p": 0.16,
-    "kapitel": "L",
-    "abschnitt": "11.01",
-    "titel": "Keilexzision Nagelwall, beide Nagelseiten eines Fingers oder einer Zehe, mit totaler Exzision des entzündeten Nagelbettes und Entfernung der entsprechenden Anteile der Nagelwurzel, ggf. einschließlich",
-    "euro": 32.09
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -42407,9 +42407,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.16,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.074
  },
@@ -42573,7 +42573,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.124
  },
@@ -42901,7 +42901,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.145
  },
@@ -43106,7 +43106,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.138
  },
@@ -43434,7 +43434,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.127
  },
@@ -43639,7 +43639,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.126
  },
@@ -43774,13 +43774,13 @@
   "alt_euro_1fach": 107.83,
   "neu": [
    {
-    "neu": "7510",
+    "neu": "",
     "score": 0.072,
-    "p": 0.16,
-    "kapitel": "L",
-    "abschnitt": "11.02",
-    "titel": "Geschlossene Reposition einer einfachen Fraktur oder Epiphysenlösung von einem oder beiden Unterarmknochen einer Seite",
-    "euro": 126.53
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -43801,9 +43801,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.16,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.072
  },
@@ -43856,13 +43856,13 @@
   "alt_euro_1fach": 37.89,
   "neu": [
    {
-    "neu": "8794",
+    "neu": "",
     "score": 0.091,
-    "p": 0.18,
-    "kapitel": "L",
-    "abschnitt": "11.07",
-    "titel": "Versorgung einer isolierten Jochbogenfraktur durch operative osteosynthetische Versorgung",
-    "euro": 279.08
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -43883,9 +43883,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.18,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.091
  },
@@ -44020,13 +44020,13 @@
   "alt_euro_1fach": 26.99,
   "neu": [
    {
-    "neu": "7214",
+    "neu": "",
     "score": 0.068,
-    "p": 0.16,
-    "kapitel": "L",
-    "abschnitt": "11.01",
-    "titel": "Korrektur bei Windmühlendeformität mit Beseitigung von Kontrakturen, ggf. einschließlich - regionales und freies Hauttransplantat (einschließlich Hebung) - Beuge- und Strecksehnenkorrektur sowie Sehne",
-    "euro": 889.48
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -44047,9 +44047,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.16,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.068
  },
@@ -44131,7 +44131,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.131
  },
@@ -44254,7 +44254,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.128
  },
@@ -44307,13 +44307,13 @@
   "alt_euro_1fach": 104.92,
   "neu": [
    {
-    "neu": "7777",
+    "neu": "",
     "score": 0.078,
-    "p": 0.16,
-    "kapitel": "L",
-    "abschnitt": "11.02",
-    "titel": "Fasziektomie an einem Finger bei Morbus Dupuytren als selbständige Leistung, offen chirurgisch, ggf. einschließlich - Neurolyse(n) - Arthrolyse(n) - Arteriolyse(n) - einer oder mehrerer lokaler Hautve",
-    "euro": 600.0
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -44334,9 +44334,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.16,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.078
  },
@@ -44553,13 +44553,13 @@
   "alt_euro_1fach": 32.29,
   "neu": [
    {
-    "neu": "13384",
+    "neu": "",
     "score": 0.071,
-    "p": 0.16,
-    "kapitel": "O",
-    "abschnitt": "14.01",
-    "titel": "Magnetresonanz-Angiographie einer Extremität und/oder deren Abschnitte (Ober- und Unterarm oder Ober- und Unterschenkel), ggf. einschließlich Hand oder Fuß",
-    "euro": 440.0
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -44580,9 +44580,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.16,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.071
  },
@@ -45279,7 +45279,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.137
  },
@@ -46486,7 +46486,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.24,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.147
  },
@@ -47441,13 +47441,13 @@
   "alt_euro_1fach": 17.49,
   "neu": [
    {
-    "neu": "7731",
+    "neu": "",
     "score": 0.096,
-    "p": 0.04,
-    "kapitel": "L",
-    "abschnitt": "11.02",
-    "titel": "Spülung einer Sehnenscheide ohne weitere operative Maßnahmen",
-    "euro": 112.46
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -47468,8 +47468,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.04,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.096
@@ -47675,7 +47675,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.24,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.15
  },
@@ -47798,7 +47798,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.144
  },
@@ -48454,7 +48454,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.24,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.147
  },
@@ -48495,7 +48495,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.125
  },
@@ -48671,13 +48671,13 @@
   "alt_euro_1fach": 27.57,
   "neu": [
    {
-    "neu": "9826",
+    "neu": "",
     "score": 0.09,
-    "p": 0.18,
-    "kapitel": "L",
-    "abschnitt": "11.12",
-    "titel": "Intraoperative Lysebehandlung als Einzelbehandlung von Arterien",
-    "euro": 183.05
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -48698,9 +48698,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.18,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.09
  },
@@ -48823,7 +48823,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.145
  },
@@ -48864,7 +48864,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.126
  },
@@ -49274,7 +49274,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.136
  },
@@ -49327,13 +49327,13 @@
   "alt_euro_1fach": 69.94,
   "neu": [
    {
-    "neu": "9978",
+    "neu": "",
     "score": 0.096,
-    "p": 0.18,
-    "kapitel": "L",
-    "abschnitt": "11.13",
-    "titel": "Peritonektomie im kleinen Becken Die Leistung nach Nummer 9978 ist neben der Leistung nach Nummer 10617 nicht berechnungsfähig.",
-    "euro": 451.73
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -49354,9 +49354,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.18,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.096
  },
@@ -49479,7 +49479,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.142
  },
@@ -49520,7 +49520,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.139
  },
@@ -49778,13 +49778,13 @@
   "alt_euro_1fach": 134.64,
   "neu": [
    {
-    "neu": "7661",
+    "neu": "",
     "score": 0.09,
-    "p": 0.03,
-    "kapitel": "L",
-    "abschnitt": "11.02",
-    "titel": "Zuschlag zu Leistungen der Fraktur- oder Gelenkversorgung des Abschnitts L II für die Osteotomie eines nicht betroffenen Knochens (z.B. Malleolus, Olecranon oder Trochanter major)",
-    "euro": 179.87
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -49805,8 +49805,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.03,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.09
@@ -49983,13 +49983,13 @@
   "alt_euro_1fach": 66.16,
   "neu": [
    {
-    "neu": "629",
+    "neu": "",
     "score": 0.075,
-    "p": 0.16,
-    "kapitel": "C",
-    "abschnitt": "02.01",
-    "titel": "Zirkulärer härtender Verband des Rumpfes als Korsett, individuell angefertigt und modelliert, ggf. einschließlich - Hautabdeckung - Polsterung - Spaltung und Fensterung Die Leistung nach Nummer 629 is",
-    "euro": 102.3
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -50010,9 +50010,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.16,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.075
  },
@@ -50381,7 +50381,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.133
  },
@@ -50463,7 +50463,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.139
  },
@@ -50598,13 +50598,13 @@
   "alt_euro_1fach": 26.99,
   "neu": [
    {
-    "neu": "7713",
+    "neu": "",
     "score": 0.098,
-    "p": 0.04,
-    "kapitel": "L",
-    "abschnitt": "11.02",
-    "titel": "Zuschlag zu der Leistung nach Nummer 7712 für die Abtragung von Osteophyten, Exophyten und/oder Exostosen an einer oder mehreren Lokalisationen, ggf. einschließlich Denervation(en)",
-    "euro": 151.35
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -50625,8 +50625,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.04,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.098
@@ -50668,7 +50668,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.131
  },
@@ -50750,7 +50750,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.12
  },
@@ -50791,7 +50791,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.141
  },
@@ -50832,7 +50832,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.144
  },
@@ -51119,7 +51119,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.126
  },
@@ -51459,13 +51459,13 @@
   "alt_euro_1fach": 8.86,
   "neu": [
    {
-    "neu": "7501",
+    "neu": "",
     "score": 0.079,
-    "p": 0.17,
-    "kapitel": "L",
-    "abschnitt": "11.02",
-    "titel": "Geschlossene Reposition einer einfachen Fraktur oder Epiphysenlösung eines Grund-, Mittel- oder Endgliedknochens eines Fingers oder einer Zehe",
-    "euro": 46.53
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -51486,9 +51486,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.17,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.079
  },
@@ -51570,7 +51570,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.132
  },
@@ -51746,13 +51746,13 @@
   "alt_euro_1fach": 21.57,
   "neu": [
    {
-    "neu": "8554",
+    "neu": "",
     "score": 0.091,
-    "p": 0.18,
-    "kapitel": "L",
-    "abschnitt": "11.06",
-    "titel": "Geschlossene Reposition von luxierten und/oder gebrochenen Wirbelkörpern, -gelenken und/oder -bögen, einschließlich Anlage eines Zugverbands oder einer Extension",
-    "euro": 114.8
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -51773,9 +51773,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.18,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.091
  },
@@ -51898,7 +51898,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.129
  },
@@ -51939,7 +51939,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.133
  },
@@ -51980,7 +51980,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.127
  },
@@ -52144,7 +52144,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.131
  },
@@ -52759,7 +52759,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.145
  },
@@ -53169,7 +53169,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.123
  },
@@ -53181,13 +53181,13 @@
   "alt_euro_1fach": 64.12,
   "neu": [
    {
-    "neu": "9083",
+    "neu": "",
     "score": 0.097,
-    "p": 0.04,
-    "kapitel": "L",
-    "abschnitt": "11.09",
-    "titel": "Zuschlag zu der Leistung nach Nummer 9082 für die komplette Ausräumung der Siebbeinzellen einer Seite von der Nase aus mit Darstellung der Schädelbasis",
-    "euro": 159.89
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -53208,8 +53208,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.04,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.097
@@ -53222,13 +53222,13 @@
   "alt_euro_1fach": 43.07,
   "neu": [
    {
-    "neu": "10268",
+    "neu": "",
     "score": 0.065,
-    "p": 0.15,
-    "kapitel": "L",
-    "abschnitt": "11.14",
-    "titel": "Operative Entfernung einer Penisprothese",
-    "euro": 271.71
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -53249,9 +53249,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.15,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.065
  },
@@ -54859,7 +54859,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.143
  },
@@ -54941,7 +54941,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.123
  },
@@ -55035,13 +55035,13 @@
   "alt_euro_1fach": 233.15,
   "neu": [
    {
-    "neu": "8342",
+    "neu": "",
     "score": 0.071,
-    "p": 0.16,
-    "kapitel": "L",
-    "abschnitt": "11.05",
-    "titel": "Rekonstruktion einer gedeckten Impressionsfraktur des Hirnschädels oder Exzision oder Destruktion von erkranktem Gewebe eines Schädelknochens",
-    "euro": 956.97
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -55062,9 +55062,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.16,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.071
  },
@@ -55893,7 +55893,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.143
  },
@@ -55975,7 +55975,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.24,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.149
  },
@@ -56069,13 +56069,13 @@
   "alt_euro_1fach": 131.15,
   "neu": [
    {
-    "neu": "8062",
+    "neu": "",
     "score": 0.087,
-    "p": 0.17,
-    "kapitel": "L",
-    "abschnitt": "11.04",
-    "titel": "Endoprothetischer Totalersatz des Schultergelenks durch eine anatomische Prothese, ggf. einschließlich - Drainage(n) - Synovialektomie (soweit nicht die Voraussetzung für die Berechnung der Zuschlagsl",
-    "euro": 1146.66
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -56096,9 +56096,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.17,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.087
  },
@@ -56139,7 +56139,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.131
  },
@@ -57264,7 +57264,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.143
  },
@@ -59700,7 +59700,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.24,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.149
  },
@@ -60008,13 +60008,13 @@
   "alt_euro_1fach": 96.76,
   "neu": [
    {
-    "neu": "9953",
+    "neu": "",
     "score": 0.088,
-    "p": 0.17,
-    "kapitel": "L",
-    "abschnitt": "11.13",
-    "titel": "Fisteloperation an den Geschlechtsteilen, ggf. einschließlich der Harnblase und/oder Operation einer Darmscheiden- oder Harnröhrenfistel",
-    "euro": 676.95
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -60035,9 +60035,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.17,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.088
  },
@@ -60213,13 +60213,13 @@
   "alt_euro_1fach": 16.03,
   "neu": [
    {
-    "neu": "4747",
+    "neu": "",
     "score": 0.044,
-    "p": 0.14,
-    "kapitel": "H",
-    "abschnitt": "07.02",
-    "titel": "Schnittentbindung (Sectio caesarea), ggf. einschließlich - manueller Plazentalösung - Kürettage",
-    "euro": 273.07
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -60240,9 +60240,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.14,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.044
  },
@@ -63179,7 +63179,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.144
  },
@@ -63402,7 +63402,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.134
  },
@@ -64217,7 +64217,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.139
  },
@@ -64791,7 +64791,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.144
  },
@@ -66142,13 +66142,13 @@
   "alt_euro_1fach": 233.15,
   "neu": [
    {
-    "neu": "9313",
+    "neu": "",
     "score": 0.1,
-    "p": 0.19,
-    "kapitel": "L",
-    "abschnitt": "11.10",
-    "titel": "Resektion eines schichtübergreifenden Prozesses der Brustwand, einschließlich Resektion einer Rippe",
-    "euro": 655.6
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -66169,9 +66169,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.19,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.1
  },
@@ -66716,13 +66716,13 @@
   "alt_euro_1fach": 151.55,
   "neu": [
    {
-    "neu": "10758",
+    "neu": "",
     "score": 0.076,
-    "p": 0.03,
-    "kapitel": "L",
-    "abschnitt": "11.17",
-    "titel": "Zuschlag zu der Leistung nach Nummer 10757 für Cholezystostomie mittels Jejunum-Interponat, einschließlich Cholezysto-jejunaler Anastomose, Stoma-Anlage an der Bauchwand sowie direkter Rekonstruktion ",
-    "euro": 433.31
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -66743,8 +66743,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.03,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.076
@@ -66827,7 +66827,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.126
  },
@@ -67114,7 +67114,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.138
  },
@@ -67536,13 +67536,13 @@
   "alt_euro_1fach": 116.57,
   "neu": [
    {
-    "neu": "9819",
+    "neu": "",
     "score": 0.071,
-    "p": 0.16,
-    "kapitel": "L",
-    "abschnitt": "11.12",
-    "titel": "Revision eines Hämodialyseshuntes, ggf. einschließlich Phlebographie",
-    "euro": 421.85
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -67563,9 +67563,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.16,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.071
  },
@@ -67606,7 +67606,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.14
  },
@@ -67770,7 +67770,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.137
  },
@@ -67811,7 +67811,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.24,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.149
  },
@@ -68180,7 +68180,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.24,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.147
  },
@@ -68221,7 +68221,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.136
  },
@@ -68672,7 +68672,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.24,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.148
  },
@@ -68807,13 +68807,13 @@
   "alt_euro_1fach": 204.01,
   "neu": [
    {
-    "neu": "9949",
+    "neu": "",
     "score": 0.072,
-    "p": 0.16,
-    "kapitel": "L",
-    "abschnitt": "11.13",
-    "titel": "Totale Kolpektomie",
-    "euro": 568.48
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -68834,9 +68834,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.16,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.072
  },
@@ -69135,13 +69135,13 @@
   "alt_euro_1fach": 161.46,
   "neu": [
    {
-    "neu": "10767",
+    "neu": "",
     "score": 0.086,
-    "p": 0.03,
-    "kapitel": "L",
-    "abschnitt": "11.17",
-    "titel": "Zuschlag zu der Leistung nach Nummer 10737, 10738, 10739, 10740, 10741 oder 10761 für erweiterte Lymphadenektomie, einschließlich parakaval, paraaortal, kleine Magenkurvatur, ggf. einschließlich vorde",
-    "euro": 797.17
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -69162,8 +69162,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.03,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.086
@@ -69217,13 +69217,13 @@
   "alt_euro_1fach": 12.94,
   "neu": [
    {
-    "neu": "10514",
+    "neu": "",
     "score": 0.077,
-    "p": 0.16,
-    "kapitel": "L",
-    "abschnitt": "11.16",
-    "titel": "Operation eines medialen und/oder lateralen Leistenbruches und/oder Schenkelbruches mit alloplastischem Material, offen chirurgisch, ggf. einschließlich - Bruchsackdarstellung und Bruchsackresektion -",
-    "euro": 481.78
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -69244,9 +69244,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.16,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.077
  },
@@ -69613,13 +69613,13 @@
   "alt_euro_1fach": 13.23,
   "neu": [
    {
-    "neu": "3311",
+    "neu": "",
     "score": 0.074,
-    "p": 0.03,
-    "kapitel": "F",
-    "abschnitt": "05.05",
-    "titel": "Zuschlag zu der Leistung nach Nummer 3301 für die Behandlung(en) mittels Clipping oder Ligatur oder Unterspritzung",
-    "euro": 39.04
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -69640,8 +69640,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.03,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.074
@@ -69736,13 +69736,13 @@
   "alt_euro_1fach": 4.43,
   "neu": [
    {
-    "neu": "13384",
+    "neu": "",
     "score": 0.074,
-    "p": 0.16,
-    "kapitel": "O",
-    "abschnitt": "14.01",
-    "titel": "Magnetresonanz-Angiographie einer Extremität und/oder deren Abschnitte (Ober- und Unterarm oder Ober- und Unterschenkel), ggf. einschließlich Hand oder Fuß",
-    "euro": 440.0
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -69763,9 +69763,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.16,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.074
  },
@@ -69847,7 +69847,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.122
  },
@@ -69888,7 +69888,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.124
  },
@@ -69900,13 +69900,13 @@
   "alt_euro_1fach": 22.09,
   "neu": [
    {
-    "neu": "7542",
+    "neu": "",
     "score": 0.095,
-    "p": 0.18,
-    "kapitel": "L",
-    "abschnitt": "11.02",
-    "titel": "Geschlossene Reposition der Luxation eines Schultergelenks",
-    "euro": 70.0
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -69927,9 +69927,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.18,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.095
  },
@@ -69941,13 +69941,13 @@
   "alt_euro_1fach": 27.57,
   "neu": [
    {
-    "neu": "4204",
+    "neu": "",
     "score": 0.087,
-    "p": 0.17,
-    "kapitel": "F",
-    "abschnitt": "05.14",
-    "titel": "Abdruckherstellung an einer unteren Extremität, ggf. einschließlich Erstellen eines Konstruktionsplans Die Leistung nach Nummer 4204 ist zweimal berechnungsfähig, wenn zusätzlich ein Abdruck vom Becke",
-    "euro": 55.14
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -69968,9 +69968,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.17,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.087
  },
@@ -70011,7 +70011,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.124
  },
@@ -70023,13 +70023,13 @@
   "alt_euro_1fach": 55.14,
   "neu": [
    {
-    "neu": "4201",
+    "neu": "",
     "score": 0.099,
-    "p": 0.18,
-    "kapitel": "F",
-    "abschnitt": "05.14",
-    "titel": "Abdruckherstellung am Rumpf, ggf. einschließlich - Einbeziehung des Beckens - Erstellen eines Konstruktionsplans",
-    "euro": 55.14
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -70050,9 +70050,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.18,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.099
  },
@@ -70105,13 +70105,13 @@
   "alt_euro_1fach": 8.86,
   "neu": [
    {
-    "neu": "4201",
+    "neu": "",
     "score": 0.081,
-    "p": 0.17,
-    "kapitel": "F",
-    "abschnitt": "05.14",
-    "titel": "Abdruckherstellung am Rumpf, ggf. einschließlich - Einbeziehung des Beckens - Erstellen eines Konstruktionsplans",
-    "euro": 55.14
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -70132,9 +70132,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.17,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.081
  },
@@ -70174,9 +70174,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.53,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.125
  },
  {
@@ -70594,8 +70594,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.52,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.12
  },
  {
@@ -71004,8 +71004,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.57,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.149
  },
  {
@@ -71016,13 +71016,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "11390",
+    "neu": "",
     "score": 0.097,
-    "p": 0.48,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Streptolysin-O Antikörpernachweis; Serum oder Plasma; z.B. Immunnephelometrie, Immunturbidimetrie, Hämolysehemmungsreaktion; Auswertung: z.B. apparativ- quantitativ-testspezifisch (relative oder inter",
-    "euro": 9.6
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -71043,10 +71043,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.48,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.097
  },
  {
@@ -71209,8 +71209,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.56,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.146
  },
  {
@@ -71454,9 +71454,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.53,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.126
  },
  {
@@ -73555,8 +73555,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.49,
-  "status": "UNSICHER",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.1
  },
  {
@@ -73608,13 +73608,13 @@
   "alt_euro_1fach": 2.04,
   "neu": [
    {
-    "neu": "12703",
+    "neu": "",
     "score": 0.099,
-    "p": 0.48,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Neopterin, IA Serum oder Plasma, Urin, Liquor; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ. Die Leistung nach Nummer 12703 ist neben der Leistung nach Nummer 12762 nicht",
-    "euro": 20.3
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -73635,10 +73635,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.48,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.099
  },
  {
@@ -73813,13 +73813,13 @@
   "alt_euro_1fach": 4.08,
   "neu": [
    {
-    "neu": "1",
+    "neu": "",
     "score": 0.0,
-    "p": 0.33,
-    "kapitel": "B",
-    "abschnitt": "01.01",
-    "titel": "Persönliche Beratung durch den Arzt, Dauer unter 10 Minuten Die Leistung nach Nummer 1 ist neben der Leistung nach Nummer 2 nicht berechnungsfähig.",
-    "euro": 14.11
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -73840,10 +73840,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.33,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.0
  },
  {
@@ -73882,9 +73882,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.54,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.133
  },
  {
@@ -74018,13 +74018,13 @@
   "alt_euro_1fach": 23.31,
   "neu": [
    {
-    "neu": "1319",
+    "neu": "",
     "score": 0.094,
-    "p": 0.48,
-    "kapitel": "C",
-    "abschnitt": "02.06",
-    "titel": "Systematische Untersuchung der fetalen Morphologie im 2. Trimenon gemäß Anlage 1a der Mutterschafts-Richtlinien, je untersuchtem Fetus",
-    "euro": 69.16
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -74045,10 +74045,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.48,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.094
  },
  {
@@ -74169,9 +74169,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.56,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.146
  },
  {
@@ -74333,7 +74333,7 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
+  "verhaeltnis": "1:1",
   "wahrscheinlichkeit": 0.8,
   "status": "PLAUSIBEL",
   "score_top1": 0.317
@@ -74752,7 +74752,7 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
+  "verhaeltnis": "1:1",
   "wahrscheinlichkeit": 0.79,
   "status": "PLAUSIBEL",
   "score_top1": 0.307
@@ -74988,13 +74988,13 @@
   "alt_euro_1fach": 116.57,
   "neu": [
    {
-    "neu": "774",
+    "neu": "",
     "score": 0.09,
-    "p": 0.47,
-    "kapitel": "C",
-    "abschnitt": "02.02",
-    "titel": "Transfusion von Stammzellkonzentraten",
-    "euro": 131.97
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -75015,10 +75015,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.47,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.09
  },
  {
@@ -75181,8 +75181,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.51,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.114
  },
  {
@@ -75271,7 +75271,7 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:m",
+  "verhaeltnis": "1:n",
   "wahrscheinlichkeit": 0.82,
   "status": "SICHER",
   "score_top1": 0.337
@@ -76359,7 +76359,7 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
+  "verhaeltnis": "1:1",
   "wahrscheinlichkeit": 0.69,
   "status": "PLAUSIBEL",
   "score_top1": 0.231
@@ -76659,13 +76659,13 @@
   "alt_euro_1fach": 3.5,
   "neu": [
    {
-    "neu": "12418",
+    "neu": "",
     "score": 0.044,
-    "p": 0.4,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Bacterium-Identifizierung I, je Reinkultur und Test Reinkultur; spezielles kulturelles und/oder biochemisches Einzelverfahren (z.B. Harnstoffspaltung, DNase-Test, Nitratreduktion, Esculinspaltung, Koa",
-    "euro": 4.9
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -76686,10 +76686,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.4,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.044
  },
  {
@@ -77028,13 +77028,13 @@
   "alt_euro_1fach": 26.23,
   "neu": [
    {
-    "neu": "11907",
+    "neu": "",
     "score": 0.036,
-    "p": 0.38,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Gerinnungsfaktor (II, V, VII, X), je Faktor, Konzentration Citratplasma oder Serum; z.B. Laurell-Elektrophorese, Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ (z.B. Peakhö",
-    "euro": 47.82
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -77055,10 +77055,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.38,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.036
  },
  {
@@ -77344,8 +77344,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.5,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.11
  },
  {
@@ -77643,13 +77643,13 @@
   "alt_euro_1fach": 6.99,
   "neu": [
    {
-    "neu": "12652",
+    "neu": "",
     "score": 0.097,
-    "p": 0.48,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Alpha-1-Antitrypsin (Alpha-1-Proteinaseinhibitor) Serum oder Plasma, Stuhl; z.B. Immunnephelometrie, Immunturbidimetrie, radiale Immundiffusion; Auswertung: apparativ-quantitativ (z.B. Extinktion, Rad",
-    "euro": 12.91
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -77670,10 +77670,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.48,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.097
  },
  {
@@ -78277,8 +78277,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.49,
-  "status": "UNSICHER",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.103
  },
  {
@@ -78368,8 +78368,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.57,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.149
  },
  {
@@ -78521,13 +78521,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "10736",
+    "neu": "",
     "score": 0.024,
-    "p": 0.37,
-    "kapitel": "L",
-    "abschnitt": "11.17",
-    "titel": "Implantation, Wechsel und Entfernung eines Port- und/oder Katheterverweilsystems in Leberarterie und/oder Pfortader (z.B. zur Chemotherapie und/oder Embolisation) oder perkutane/offene Pankreas-Inselt",
-    "euro": 534.25
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -78548,10 +78548,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.37,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.024
  },
  {
@@ -79332,8 +79332,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.49,
-  "status": "UNSICHER",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.103
  },
  {
@@ -79423,8 +79423,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.57,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.149
  },
  {
@@ -79576,13 +79576,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "10736",
+    "neu": "",
     "score": 0.024,
-    "p": 0.37,
-    "kapitel": "L",
-    "abschnitt": "11.17",
-    "titel": "Implantation, Wechsel und Entfernung eines Port- und/oder Katheterverweilsystems in Leberarterie und/oder Pfortader (z.B. zur Chemotherapie und/oder Embolisation) oder perkutane/offene Pankreas-Inselt",
-    "euro": 534.25
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -79603,10 +79603,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.37,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.024
  },
  {
@@ -80110,7 +80110,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "keine 1:1-Zuordnung (Sammelposition)",
-  "wahrscheinlichkeit": 0.56,
+  "wahrscheinlichkeit": 0.2,
   "status": "SAMMELPOSITION",
   "score_top1": 0.144
  },
@@ -80122,13 +80122,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "1",
+    "neu": "",
     "score": 0.0,
-    "p": 0.33,
-    "kapitel": "B",
-    "abschnitt": "01.01",
-    "titel": "Persönliche Beratung durch den Arzt, Dauer unter 10 Minuten Die Leistung nach Nummer 1 ist neben der Leistung nach Nummer 2 nicht berechnungsfähig.",
-    "euro": 14.11
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -80149,10 +80149,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.33,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.0
  },
  {
@@ -81115,13 +81115,13 @@
   "alt_euro_1fach": 14.57,
   "neu": [
    {
-    "neu": "11263",
+    "neu": "",
     "score": 0.093,
-    "p": 0.48,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Einzelallergen Einzelallergen (z.B. monospezifischer Extrakt, rekombinante[s] Allergen/Allergenfamilien); Serum oder Plasma, Sekrete (z.B. Atemwegssekret); Signal-(Tracer-)verstärkter Immunoassay; Aus",
-    "euro": 11.92
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -81142,10 +81142,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.48,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.093
  },
  {
@@ -81963,7 +81963,7 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
+  "verhaeltnis": "1:1",
   "wahrscheinlichkeit": 0.98,
   "status": "SICHER",
   "score_top1": 0.681
@@ -83138,9 +83138,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.53,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.128
  },
  {
@@ -83402,7 +83402,7 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
+  "verhaeltnis": "1:1",
   "wahrscheinlichkeit": 0.64,
   "status": "PLAUSIBEL",
   "score_top1": 0.195
@@ -84317,9 +84317,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.53,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.129
  },
  {
@@ -84358,9 +84358,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.56,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.142
  },
  {
@@ -84617,13 +84617,13 @@
   "alt_euro_1fach": 23.31,
   "neu": [
    {
-    "neu": "11541",
+    "neu": "",
     "score": 0.078,
-    "p": 0.45,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Humanes Herpesvirus 6 (HHV-6), IFT quantitativ Antikörpernachweis; Antikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: quantitativ (Titer).",
-    "euro": 41.67
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -84644,10 +84644,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.45,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.078
  },
  {
@@ -84728,8 +84728,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.57,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.149
  },
  {
@@ -84768,9 +84768,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.56,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.148
  },
  {
@@ -84809,9 +84809,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.54,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.131
  },
  {
@@ -84851,8 +84851,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.5,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.11
  },
  {
@@ -85138,8 +85138,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.55,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.138
  },
  {
@@ -85220,8 +85220,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.55,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.138
  },
  {
@@ -85343,8 +85343,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.51,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.112
  },
  {
@@ -85384,8 +85384,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.5,
-  "status": "UNSICHER",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.105
  },
  {
@@ -85425,8 +85425,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.56,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.145
  },
  {
@@ -85465,9 +85465,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.52,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.123
  },
  {
@@ -85802,7 +85802,7 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
+  "verhaeltnis": "1:1",
   "wahrscheinlichkeit": 0.58,
   "status": "PLAUSIBEL",
   "score_top1": 0.154
@@ -85897,13 +85897,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "12418",
+    "neu": "",
     "score": 0.06,
-    "p": 0.42,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Bacterium-Identifizierung I, je Reinkultur und Test Reinkultur; spezielles kulturelles und/oder biochemisches Einzelverfahren (z.B. Harnstoffspaltung, DNase-Test, Nitratreduktion, Esculinspaltung, Koa",
-    "euro": 4.9
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -85924,10 +85924,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.42,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.06
  },
  {
@@ -86518,7 +86518,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "keine 1:1-Zuordnung (Sammelposition)",
-  "wahrscheinlichkeit": 0.57,
+  "wahrscheinlichkeit": 0.2,
   "status": "SAMMELPOSITION",
   "score_top1": 0.15
  },
@@ -86691,8 +86691,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.54,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.131
  },
  {
@@ -87040,13 +87040,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "11939",
+    "neu": "",
     "score": 0.087,
-    "p": 0.46,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Plasminogenaktivator (t-PA), Aktivität Citratplasma; z.B. Photometrie (chromogenes Substrat); Auswertung: apparativ-quantitativ.",
-    "euro": 22.37
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -87067,10 +87067,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.46,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.087
  },
  {
@@ -87081,13 +87081,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "3540",
+    "neu": "",
     "score": 0.087,
-    "p": 0.13,
-    "kapitel": "F",
-    "abschnitt": "05.07",
-    "titel": "Zuschlag zu der Leistung nach Nummer 3539 für Bestimmung der Chloridionenkonzentration",
-    "euro": 35.21
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -87108,9 +87108,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.13,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.087
  },
@@ -87233,7 +87233,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "keine 1:1-Zuordnung (Sammelposition)",
-  "wahrscheinlichkeit": 0.56,
+  "wahrscheinlichkeit": 0.2,
   "status": "SAMMELPOSITION",
   "score_top1": 0.144
  },
@@ -87273,9 +87273,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.55,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.139
  },
  {
@@ -87980,8 +87980,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.56,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.146
  },
  {
@@ -88061,9 +88061,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.52,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.123
  },
  {
@@ -88103,8 +88103,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.51,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.111
  },
  {
@@ -88185,8 +88185,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.5,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.108
  },
  {
@@ -88279,13 +88279,13 @@
   "alt_euro_1fach": 26.23,
   "neu": [
    {
-    "neu": "12077",
+    "neu": "",
     "score": 0.072,
-    "p": 0.44,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Steroidhormonrezeptor Gewebe, einschließlich Probenaufbereitung (Zellüberstand), ggf. einschließlich Dichtegradientenultrazentrifugation; chemischer Rezeptornachweis (z.B. radioaktiv markierter Tracer",
-    "euro": 82.96
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -88306,10 +88306,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.44,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.072
  },
  {
@@ -88566,13 +88566,13 @@
   "alt_euro_1fach": 6.99,
   "neu": [
    {
-    "neu": "12841",
+    "neu": "",
     "score": 0.059,
-    "p": 0.42,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Eisen, AAS z.B. Leberstanze; z.B. Flammen-Atomabsorptionsspektrometrie; Auswertung: apparativ-quantitativ. Die Leistung nach Nummer 12841 ist neben der Leistung nach Nummer 11062 nicht berechnungsfähi",
-    "euro": 23.22
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -88593,10 +88593,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.42,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.059
  },
  {
@@ -88730,13 +88730,13 @@
   "alt_euro_1fach": 16.32,
   "neu": [
    {
-    "neu": "12097",
+    "neu": "",
     "score": 0.086,
-    "p": 0.46,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Lipoproteine-Fraktionierung, insgesamt Serum; Dichtegradienten-Ultrazentrifugation sequenziell; Fraktionierung präparativ. Die Leistung nach Nummer 12097 ist nur berechnungsfähig bei bereits gesichert",
-    "euro": 25.83
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -88757,10 +88757,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.46,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.086
  },
  {
@@ -89128,8 +89128,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.52,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.123
  },
  {
@@ -89825,8 +89825,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.52,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.118
  },
  {
@@ -89948,8 +89948,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.56,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.145
  },
  {
@@ -90452,9 +90452,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.55,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.137
  },
  {
@@ -91244,13 +91244,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "11676",
+    "neu": "",
     "score": 0.079,
-    "p": 0.45,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Antiarrhythmika, je Untersuchung (Chromatogramm), HPLC z.B. Amiodaron, Disopyramid, Flecainid, Lidocain, Procainamid, Propafenon; Serum oder Plasma; Hochdruckflüssigkeitschromatographie (HPLC); Auswer",
-    "euro": 22.3
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -91271,10 +91271,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.45,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.079
  },
  {
@@ -91490,13 +91490,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "11662",
+    "neu": "",
     "score": 0.035,
-    "p": 0.38,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Antiarrhythmika, je Medikament, IA z.B. Chinidin, Flecainid, Lidocain, Propafenon; Serum oder Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ. Das/Die untersuchte(n)",
-    "euro": 18.6
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -91517,10 +91517,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.38,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.035
  },
  {
@@ -91531,13 +91531,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "11734",
+    "neu": "",
     "score": 0.034,
-    "p": 0.38,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Salicylsäure Serum oder Plasma, Urin; Photometrie (Analyt-Farbkomplex [Trinder-Reaktion]); Auswertung: apparativ-quantitativ.",
-    "euro": 19.69
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -91558,10 +91558,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.38,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.034
  },
  {
@@ -91683,8 +91683,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.51,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.112
  },
  {
@@ -91818,13 +91818,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "12945",
+    "neu": "",
     "score": 0.043,
-    "p": 0.39,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Tryptase Serum oder Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ.",
-    "euro": 29.64
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -91845,10 +91845,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.39,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.043
  },
  {
@@ -92707,7 +92707,7 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
+  "verhaeltnis": "1:1",
   "wahrscheinlichkeit": 0.7,
   "status": "PLAUSIBEL",
   "score_top1": 0.236
@@ -92871,9 +92871,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.56,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.145
  },
  {
@@ -93208,9 +93208,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.56,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.147
  },
  {
@@ -93221,13 +93221,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "11319",
+    "neu": "",
     "score": 0.077,
-    "p": 0.45,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Rickettsia, IFT quantitativ Antikörpernachweis, z.B. familienspezifisch, gruppenspezifisch; Serum oder Plasma; (Mikro)Immunfluoreszenzmikroskopie; Auswertung: quantitativ. Bei Gruppen-spezifischem Ant",
-    "euro": 38.48
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -93248,10 +93248,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.45,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.077
  },
  {
@@ -93578,8 +93578,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.55,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.139
  },
  {
@@ -93792,8 +93792,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.54,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.134
  },
  {
@@ -93873,9 +93873,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.56,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.147
  },
  {
@@ -95460,13 +95460,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "11041",
+    "neu": "",
     "score": 0.062,
-    "p": 0.42,
-    "kapitel": "M",
-    "abschnitt": "12.01",
-    "titel": "A-Streptokokken (Nasen-/Rachenraum-Abstrich) Antigennachweis (z.B. C-Substanz); einschließlich Probenaufbereitung (z.B. Extraktion); immunologische Schnelltestformate (z.B. Immunchromatographie, optis",
-    "euro": 6.75
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -95487,10 +95487,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.42,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.062
  },
  {
@@ -95570,7 +95570,7 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
+  "verhaeltnis": "1:1",
   "wahrscheinlichkeit": 0.65,
   "status": "PLAUSIBEL",
   "score_top1": 0.204
@@ -97090,9 +97090,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.55,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.137
  },
  {
@@ -97131,9 +97131,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.55,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.137
  },
  {
@@ -97255,8 +97255,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.5,
-  "status": "UNSICHER",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.106
  },
  {
@@ -97296,8 +97296,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.49,
-  "status": "UNSICHER",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.1
  },
  {
@@ -97481,13 +97481,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "11517",
+    "neu": "",
     "score": 0.088,
-    "p": 0.47,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Alphavirus, sonstige Spezies, IFT quantitativ Antikörpernachweis, Spezies-spezifisch (z.B. Barmah-Forest-Virus, O'Nyong-nyong-Virus, östliches, westliches Pferdeenzephalitis-Virus, Mayoro- Virus, Ross",
-    "euro": 62.84
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -97508,10 +97508,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.47,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.088
  },
  {
@@ -98187,9 +98187,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.55,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.137
  },
  {
@@ -98228,9 +98228,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.55,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.137
  },
  {
@@ -98402,8 +98402,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.5,
-  "status": "UNSICHER",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.106
  },
  {
@@ -98443,8 +98443,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.49,
-  "status": "UNSICHER",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.1
  },
  {
@@ -98669,13 +98669,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "11517",
+    "neu": "",
     "score": 0.088,
-    "p": 0.47,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Alphavirus, sonstige Spezies, IFT quantitativ Antikörpernachweis, Spezies-spezifisch (z.B. Barmah-Forest-Virus, O'Nyong-nyong-Virus, östliches, westliches Pferdeenzephalitis-Virus, Mayoro- Virus, Ross",
-    "euro": 62.84
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -98696,10 +98696,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.47,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.088
  },
  {
@@ -99179,13 +99179,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "12605",
+    "neu": "",
     "score": 0.022,
-    "p": 0.36,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Virus-Nachweis, EM Nativmaterial (z: B. Stuhl, Liquor, Sekret); Elektronenmikroskopie, ggf. einschließlich Immuntechniken (IEM); Auswertung: qualitativ. Das untersuchte Nativmaterial und das/die unter",
-    "euro": 144.28
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -99206,10 +99206,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.36,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.022
  },
  {
@@ -99220,13 +99220,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "12605",
+    "neu": "",
     "score": 0.028,
-    "p": 0.37,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Virus-Nachweis, EM Nativmaterial (z: B. Stuhl, Liquor, Sekret); Elektronenmikroskopie, ggf. einschließlich Immuntechniken (IEM); Auswertung: qualitativ. Das untersuchte Nativmaterial und das/die unter",
-    "euro": 144.28
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -99247,10 +99247,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.37,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.028
  },
  {
@@ -99686,8 +99686,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.5,
-  "status": "UNSICHER",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.106
  },
  {
@@ -99727,8 +99727,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.49,
-  "status": "UNSICHER",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.1
  },
  {
@@ -100113,9 +100113,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.55,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.139
  },
  {
@@ -100155,8 +100155,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.5,
-  "status": "UNSICHER",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.106
  },
  {
@@ -100196,8 +100196,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.49,
-  "status": "UNSICHER",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.1
  },
  {
@@ -101100,13 +101100,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "11041",
+    "neu": "",
     "score": 0.058,
-    "p": 0.42,
-    "kapitel": "M",
-    "abschnitt": "12.01",
-    "titel": "A-Streptokokken (Nasen-/Rachenraum-Abstrich) Antigennachweis (z.B. C-Substanz); einschließlich Probenaufbereitung (z.B. Extraktion); immunologische Schnelltestformate (z.B. Immunchromatographie, optis",
-    "euro": 6.75
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -101127,10 +101127,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.42,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.058
  },
  {
@@ -101223,13 +101223,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "11041",
+    "neu": "",
     "score": 0.058,
-    "p": 0.42,
-    "kapitel": "M",
-    "abschnitt": "12.01",
-    "titel": "A-Streptokokken (Nasen-/Rachenraum-Abstrich) Antigennachweis (z.B. C-Substanz); einschließlich Probenaufbereitung (z.B. Extraktion); immunologische Schnelltestformate (z.B. Immunchromatographie, optis",
-    "euro": 6.75
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -101250,10 +101250,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.42,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.058
  },
  {
@@ -101506,9 +101506,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.53,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.127
  },
  {
@@ -101811,9 +101811,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.53,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.127
  },
  {
@@ -102038,13 +102038,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "11041",
+    "neu": "",
     "score": 0.058,
-    "p": 0.42,
-    "kapitel": "M",
-    "abschnitt": "12.01",
-    "titel": "A-Streptokokken (Nasen-/Rachenraum-Abstrich) Antigennachweis (z.B. C-Substanz); einschließlich Probenaufbereitung (z.B. Extraktion); immunologische Schnelltestformate (z.B. Immunchromatographie, optis",
-    "euro": 6.75
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -102065,10 +102065,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.42,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.058
  },
  {
@@ -102903,13 +102903,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "12430",
+    "neu": "",
     "score": 0.098,
-    "p": 0.48,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Gram-Färbung, je Reinkultur Reinkultur-Ausstrich; Färbung, Hellfeldmikroskopie; Auswertung: qualitativ. Das/Die untersuchte(n) Bacterium/Bacteria ist/sind in der Rechnung anzugeben.",
-    "euro": 4.5
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -102930,10 +102930,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.48,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.098
  },
  {
@@ -103145,9 +103145,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.53,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.126
  },
  {
@@ -103392,7 +103392,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "keine 1:1-Zuordnung (Sammelposition)",
-  "wahrscheinlichkeit": 0.56,
+  "wahrscheinlichkeit": 0.2,
   "status": "SAMMELPOSITION",
   "score_top1": 0.143
  },
@@ -103432,7 +103432,7 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
+  "verhaeltnis": "1:1",
   "wahrscheinlichkeit": 0.57,
   "status": "PLAUSIBEL",
   "score_top1": 0.152
@@ -103474,8 +103474,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.52,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.119
  },
  {
@@ -103514,9 +103514,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.5,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.109
  },
  {
@@ -103596,9 +103596,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.55,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.14
  },
  {
@@ -103637,9 +103637,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.53,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.127
  },
  {
@@ -103650,13 +103650,13 @@
   "alt_euro_1fach": 23.31,
   "neu": [
    {
-    "neu": "12322",
+    "neu": "",
     "score": 0.09,
-    "p": 0.47,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Hochdurchsatz-Sequenzierung, Auswertung pathogenspezifischer Reads mittels bioinformatischer Pipelines Indikationsbeschränkung: einmal je Resistenzuntersuchung [z.B. HIV, HCV, CMV] oder je Untersuchun",
-    "euro": 230.0
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -103677,10 +103677,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.47,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.09
  },
  {
@@ -103732,13 +103732,13 @@
   "alt_euro_1fach": 14.57,
   "neu": [
    {
-    "neu": "12637",
+    "neu": "",
     "score": 0.079,
-    "p": 0.45,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Pilz-Nachweis/Identifizierung, automatisiert, je Untersuchung Nachweis (z.B. Blutkultur) und/oder Identifizierung (z.B. Reinkultur); Gerätebeschickung (standardisiert), apparative, zeitlich eng getakt",
-    "euro": 21.34
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -103759,10 +103759,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.45,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.079
  },
  {
@@ -103773,13 +103773,13 @@
   "alt_euro_1fach": 29.14,
   "neu": [
    {
-    "neu": "12633",
+    "neu": "",
     "score": 0.073,
-    "p": 0.44,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Bacterium-Nachweis/-Identifizierung, automatisiert, je Untersuchung Nachweis (z.B. Blutkultur) und/oder Identifizierung (z.B. Reinkultur); Gerätebeschickung (standardisiert), apparative, zeitlich eng ",
-    "euro": 15.52
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -103800,10 +103800,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.44,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.073
  },
  {
@@ -103843,8 +103843,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.55,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.141
  },
  {
@@ -103883,9 +103883,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.52,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.12
  },
  {
@@ -103924,9 +103924,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.54,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.133
  },
  {
@@ -104101,13 +104101,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "12430",
+    "neu": "",
     "score": 0.098,
-    "p": 0.48,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Gram-Färbung, je Reinkultur Reinkultur-Ausstrich; Färbung, Hellfeldmikroskopie; Auswertung: qualitativ. Das/Die untersuchte(n) Bacterium/Bacteria ist/sind in der Rechnung anzugeben.",
-    "euro": 4.5
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -104128,10 +104128,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.48,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.098
  },
  {
@@ -104302,9 +104302,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.52,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.118
  },
  {
@@ -104630,7 +104630,7 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
+  "verhaeltnis": "1:1",
   "wahrscheinlichkeit": 0.62,
   "status": "PLAUSIBEL",
   "score_top1": 0.18
@@ -104671,9 +104671,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.54,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.13
  },
  {
@@ -104877,7 +104877,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "keine 1:1-Zuordnung (Sammelposition)",
-  "wahrscheinlichkeit": 0.57,
+  "wahrscheinlichkeit": 0.2,
   "status": "SAMMELPOSITION",
   "score_top1": 0.148
  },
@@ -105135,13 +105135,13 @@
   "alt_euro_1fach": 20.4,
   "neu": [
    {
-    "neu": "12407",
+    "neu": "",
     "score": 0.086,
-    "p": 0.46,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Mycobacterium-Anzucht, je Probenmaterial und Nährmedium (Potenziell) infiziertes Probenmaterial, ggf. einschließlich Probenaufbereitung; Festmedien (z.B. Löwenstein-Jensen-Medium), Flüssigmedien (z.B.",
-    "euro": 40.94
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -105162,10 +105162,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.46,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.086
  },
  {
@@ -105204,7 +105204,7 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
+  "verhaeltnis": "1:1",
   "wahrscheinlichkeit": 0.65,
   "status": "PLAUSIBEL",
   "score_top1": 0.201
@@ -105299,13 +105299,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "12461",
+    "neu": "",
     "score": 0.073,
-    "p": 0.44,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Vibrio cholerae, Toxin-Immunoassay Toxinnachweis (Choleratoxin); Kultur (Stuhl); Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-testspezifisch (relative Einheiten). Die Leistung nach N",
-    "euro": 33.98
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -105326,10 +105326,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.44,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.073
  },
  {
@@ -105369,7 +105369,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "keine 1:1-Zuordnung (Sammelposition)",
-  "wahrscheinlichkeit": 0.55,
+  "wahrscheinlichkeit": 0.2,
   "status": "SAMMELPOSITION",
   "score_top1": 0.138
  },
@@ -105409,9 +105409,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.55,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.14
  },
  {
@@ -105697,8 +105697,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.56,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.143
  },
  {
@@ -105738,8 +105738,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.53,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.125
  },
  {
@@ -105902,8 +105902,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.53,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.129
  },
  {
@@ -105914,13 +105914,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "12605",
+    "neu": "",
     "score": 0.063,
-    "p": 0.43,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Virus-Nachweis, EM Nativmaterial (z: B. Stuhl, Liquor, Sekret); Elektronenmikroskopie, ggf. einschließlich Immuntechniken (IEM); Auswertung: qualitativ. Das untersuchte Nativmaterial und das/die unter",
-    "euro": 144.28
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -105941,10 +105941,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.43,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.063
  },
  {
@@ -106106,9 +106106,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.53,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.125
  },
  {
@@ -106160,13 +106160,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "12605",
+    "neu": "",
     "score": 0.06,
-    "p": 0.42,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Virus-Nachweis, EM Nativmaterial (z: B. Stuhl, Liquor, Sekret); Elektronenmikroskopie, ggf. einschließlich Immuntechniken (IEM); Auswertung: qualitativ. Das untersuchte Nativmaterial und das/die unter",
-    "euro": 144.28
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -106187,10 +106187,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.42,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.06
  },
  {
@@ -106406,13 +106406,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "12605",
+    "neu": "",
     "score": 0.063,
-    "p": 0.43,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Virus-Nachweis, EM Nativmaterial (z: B. Stuhl, Liquor, Sekret); Elektronenmikroskopie, ggf. einschließlich Immuntechniken (IEM); Auswertung: qualitativ. Das untersuchte Nativmaterial und das/die unter",
-    "euro": 144.28
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -106433,10 +106433,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.43,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.063
  },
  {
@@ -106538,13 +106538,13 @@
   "alt_euro_1fach": 26.23,
   "neu": [
    {
-    "neu": "12426",
+    "neu": "",
     "score": 0.078,
-    "p": 0.45,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Bacterium-Nachweis und/oder -Identifizierung, je Ansatz (Potenziell) infiziertes Probenmaterial oder Reinkultur; Durchflusszytometrie; Auswertung: apparativ-systemspezifisch (Auswertesoftware). Das/Di",
-    "euro": 16.26
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -106565,10 +106565,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.45,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.078
  },
  {
@@ -106579,13 +106579,13 @@
   "alt_euro_1fach": 14.57,
   "neu": [
    {
-    "neu": "12521",
+    "neu": "",
     "score": 0.08,
-    "p": 0.45,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Parasit, aufwendige Anreicherung, je Untersuchung Nativmaterial; aufwendige Anreicherung (z.B. SAF-Konzentrationsverfahren, MIF-Konzentrationsverfahren, Mirazidienschlüpfverfahren, Larvenanreicherung ",
-    "euro": 17.71
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -106606,10 +106606,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.45,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.08
  },
  {
@@ -106648,9 +106648,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.51,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.113
  },
  {
@@ -106730,9 +106730,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.56,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.148
  },
  {
@@ -106825,13 +106825,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "12605",
+    "neu": "",
     "score": 0.06,
-    "p": 0.42,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Virus-Nachweis, EM Nativmaterial (z: B. Stuhl, Liquor, Sekret); Elektronenmikroskopie, ggf. einschließlich Immuntechniken (IEM); Auswertung: qualitativ. Das untersuchte Nativmaterial und das/die unter",
-    "euro": 144.28
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -106852,10 +106852,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.42,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.06
  },
  {
@@ -106948,13 +106948,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "12605",
+    "neu": "",
     "score": 0.063,
-    "p": 0.43,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Virus-Nachweis, EM Nativmaterial (z: B. Stuhl, Liquor, Sekret); Elektronenmikroskopie, ggf. einschließlich Immuntechniken (IEM); Auswertung: qualitativ. Das untersuchte Nativmaterial und das/die unter",
-    "euro": 144.28
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -106975,10 +106975,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.43,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.063
  },
  {
@@ -107209,8 +107209,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.55,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.141
  },
  {
@@ -107290,7 +107290,7 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
+  "verhaeltnis": "1:1",
   "wahrscheinlichkeit": 0.58,
   "status": "PLAUSIBEL",
   "score_top1": 0.159
@@ -107331,9 +107331,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.54,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.131
  },
  {
@@ -107372,9 +107372,9 @@
   ],
   "quelle": "automatisch",
   "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.55,
-  "status": "PLAUSIBEL",
+  "verhaeltnis": "1:1",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.14
  },
  {
@@ -107385,13 +107385,13 @@
   "alt_euro_1fach": 14.57,
   "neu": [
    {
-    "neu": "11241",
+    "neu": "",
     "score": 0.083,
-    "p": 0.46,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Antigen-Pool, insgesamt Autoantikörpernachweis; Serum oder Plasma; Gemisch aus mindestens zwei Zielantigenen, Signal-(Tracer-)verstärkter Immuinoassay; Auswertung: apparativ semiquantitativ-testspezif",
-    "euro": 26.45
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -107412,10 +107412,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.46,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.083
  },
  {
@@ -107537,8 +107537,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.56,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.146
  },
  {
@@ -107836,13 +107836,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "11422",
+    "neu": "",
     "score": 0.049,
-    "p": 0.4,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Entamoeba histolytica, IFT qualitativ Antikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: qualitativ.",
-    "euro": 27.5
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -107863,10 +107863,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.4,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.049
  },
  {
@@ -107877,13 +107877,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "12506",
+    "neu": "",
     "score": 0.076,
-    "p": 0.45,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Giardia lamblia Nativmaterial; ggf. einschließlich einfacher Färbung (z.B. Lugol, Methylenblau), Lichtmikroskopie (z.B. Hellfeld, Dunkelfeld, Phasenkontrast); Auswertung: qualitativ. Das untersuchte N",
-    "euro": 11.08
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -107904,10 +107904,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.45,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.076
  },
  {
@@ -108082,13 +108082,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "11422",
+    "neu": "",
     "score": 0.049,
-    "p": 0.4,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Entamoeba histolytica, IFT qualitativ Antikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: qualitativ.",
-    "euro": 27.5
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -108109,10 +108109,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.4,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.049
  },
  {
@@ -108123,13 +108123,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "12506",
+    "neu": "",
     "score": 0.076,
-    "p": 0.45,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Giardia lamblia Nativmaterial; ggf. einschließlich einfacher Färbung (z.B. Lugol, Methylenblau), Lichtmikroskopie (z.B. Hellfeld, Dunkelfeld, Phasenkontrast); Auswertung: qualitativ. Das untersuchte N",
-    "euro": 11.08
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -108150,10 +108150,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.45,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.076
  },
  {
@@ -108533,13 +108533,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "11422",
+    "neu": "",
     "score": 0.049,
-    "p": 0.4,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Entamoeba histolytica, IFT qualitativ Antikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: qualitativ.",
-    "euro": 27.5
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -108560,10 +108560,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.4,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.049
  },
  {
@@ -108574,13 +108574,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "12506",
+    "neu": "",
     "score": 0.076,
-    "p": 0.45,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Giardia lamblia Nativmaterial; ggf. einschließlich einfacher Färbung (z.B. Lugol, Methylenblau), Lichtmikroskopie (z.B. Hellfeld, Dunkelfeld, Phasenkontrast); Auswertung: qualitativ. Das untersuchte N",
-    "euro": 11.08
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -108601,10 +108601,10 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.45,
-  "status": "UNSICHER",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.076
  },
  {
@@ -108931,8 +108931,8 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.54,
-  "status": "PLAUSIBEL",
+  "wahrscheinlichkeit": 0.2,
+  "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.133
  },
  {
@@ -109719,7 +109719,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.143
  },
@@ -109760,7 +109760,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.142
  },
@@ -110524,7 +110524,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.13
  },
@@ -112598,13 +112598,13 @@
   "alt_euro_1fach": null,
   "neu": [
    {
-    "neu": "13260",
+    "neu": "",
     "score": 0.076,
-    "p": 0.16,
-    "kapitel": "O",
-    "abschnitt": "14.01",
-    "titel": "Zuschlag zu der Leistung nach Nummer 13258 oder 13259 für die kontrastmittelgestützte Untersuchung",
-    "euro": 30.84
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -112625,9 +112625,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.16,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.076
  },
@@ -112789,13 +112789,13 @@
   "alt_euro_1fach": 34.97,
   "neu": [
    {
-    "neu": "13268",
+    "neu": "",
     "score": 0.084,
-    "p": 0.03,
-    "kapitel": "O",
-    "abschnitt": "14.01",
-    "titel": "Zuschlag zu der Leistung nach Nummer 13267 für weitere Zielläsionen, je weiterer Zielläsion",
-    "euro": 126.21
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -112816,8 +112816,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.03,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.084
@@ -112912,13 +112912,13 @@
   "alt_euro_1fach": 17.49,
   "neu": [
    {
-    "neu": "13284",
+    "neu": "",
     "score": 0.082,
-    "p": 0.03,
-    "kapitel": "O",
-    "abschnitt": "14.01",
-    "titel": "Zuschlag zu der Leistung nach Nummer 13283 für jede weitere Serie, je Serie Bei Berechnung des Zuschlags nach Nummer 13284 ist eine medizinische Begründung in der Rechnung anzugeben.",
-    "euro": 67.8
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -112939,8 +112939,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.03,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.082
@@ -113035,13 +113035,13 @@
   "alt_euro_1fach": 46.63,
   "neu": [
    {
-    "neu": "13268",
+    "neu": "",
     "score": 0.082,
-    "p": 0.03,
-    "kapitel": "O",
-    "abschnitt": "14.01",
-    "titel": "Zuschlag zu der Leistung nach Nummer 13267 für weitere Zielläsionen, je weiterer Zielläsion",
-    "euro": 126.21
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -113062,8 +113062,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.03,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.082
@@ -113117,13 +113117,13 @@
   "alt_euro_1fach": 34.97,
   "neu": [
    {
-    "neu": "13268",
+    "neu": "",
     "score": 0.094,
-    "p": 0.03,
-    "kapitel": "O",
-    "abschnitt": "14.01",
-    "titel": "Zuschlag zu der Leistung nach Nummer 13267 für weitere Zielläsionen, je weiterer Zielläsion",
-    "euro": 126.21
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -113144,8 +113144,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.03,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.094
@@ -113199,13 +113199,13 @@
   "alt_euro_1fach": 34.97,
   "neu": [
    {
-    "neu": "13268",
+    "neu": "",
     "score": 0.093,
-    "p": 0.03,
-    "kapitel": "O",
-    "abschnitt": "14.01",
-    "titel": "Zuschlag zu der Leistung nach Nummer 13267 für weitere Zielläsionen, je weiterer Zielläsion",
-    "euro": 126.21
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -113226,8 +113226,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.03,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.093
@@ -113404,13 +113404,13 @@
   "alt_euro_1fach": 34.97,
   "neu": [
    {
-    "neu": "13268",
+    "neu": "",
     "score": 0.093,
-    "p": 0.03,
-    "kapitel": "O",
-    "abschnitt": "14.01",
-    "titel": "Zuschlag zu der Leistung nach Nummer 13267 für weitere Zielläsionen, je weiterer Zielläsion",
-    "euro": 126.21
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -113431,8 +113431,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.03,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.093
@@ -113597,7 +113597,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.131
  },
@@ -114517,7 +114517,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.135
  },
@@ -114529,13 +114529,13 @@
   "alt_euro_1fach": 174.86,
   "neu": [
    {
-    "neu": "11120",
+    "neu": "",
     "score": 0.07,
-    "p": 0.16,
-    "kapitel": "M",
-    "abschnitt": "12.03",
-    "titel": "Höchstwert für die mit H4 gekennzeichneten Leistungen Gebührennummern 11998, 11999, 12030, 12031 oder 12713.",
-    "euro": 29.11
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -114556,9 +114556,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "n:1",
-  "wahrscheinlichkeit": 0.16,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.07
  },
@@ -114681,7 +114681,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.22,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.136
  },
@@ -114954,7 +114954,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.119
  },
@@ -115886,13 +115886,13 @@
   "alt_euro_1fach": 40.8,
   "neu": [
    {
-    "neu": "13522",
+    "neu": "",
     "score": 0.085,
-    "p": 0.03,
-    "kapitel": "O",
-    "abschnitt": "14.02",
-    "titel": "Zuschlag zu der Leistung nach Nummer 13520 oder 13521 für ein zusätzliches Radionephrogramm als Einzel- oder Wiederholungsuntersuchung, ggf. einschließlich Medikamentengabe Die Indikation (z.B. Tiefen",
-    "euro": 81.05
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -115913,8 +115913,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.03,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.085
@@ -116776,7 +116776,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.125
  },
@@ -116788,13 +116788,13 @@
   "alt_euro_1fach": 116.57,
   "neu": [
    {
-    "neu": "1253",
+    "neu": "",
     "score": 0.084,
-    "p": 0.03,
-    "kapitel": "C",
-    "abschnitt": "02.06",
-    "titel": "Zuschlag zu der Leistung nach Nummer 1244, 1245, 1250 oder 1252 für die Quantifizierung ab einem Stenosegrad von 50% oder zur Quantifizierung nach endovaskulärer oder operativer Therapie, einschließli",
-    "euro": 21.42
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -116815,8 +116815,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.03,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.084
@@ -116870,13 +116870,13 @@
   "alt_euro_1fach": 437.15,
   "neu": [
    {
-    "neu": "13540",
+    "neu": "",
     "score": 0.096,
-    "p": 0.18,
-    "kapitel": "O",
-    "abschnitt": "14.02",
-    "titel": "Funktionsszintigraphie, einschließlich Sequenzszintigraphie und Erstellung von Zeit-Radioaktivitätskurven aus Regionen von Interesse (ROI) und quantifizierender Berechnung (z.B. von Transitzeiten, Imp",
-    "euro": 79.12
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -116897,9 +116897,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.18,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.096
  },
@@ -116952,13 +116952,13 @@
   "alt_euro_1fach": 78.69,
   "neu": [
    {
-    "neu": "13517",
+    "neu": "",
     "score": 0.085,
-    "p": 0.17,
-    "kapitel": "O",
-    "abschnitt": "14.02",
-    "titel": "Verteilungsszintigraphie eines großen Gelenks, einschließlich intraartikulärer Injektion des Radiopharmazeutikums Die Punktion des Gelenks ist gesondert berechnungsfähig.",
-    "euro": 90.26
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -116979,9 +116979,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.17,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.085
  },
@@ -117227,7 +117227,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.138
  },
@@ -117280,13 +117280,13 @@
   "alt_euro_1fach": 250.64,
   "neu": [
    {
-    "neu": "13367",
+    "neu": "",
     "score": 0.093,
-    "p": 0.18,
-    "kapitel": "O",
-    "abschnitt": "14.01",
-    "titel": "Magnetresonanztomographie im Bereich des Thorax oder des Beckens",
-    "euro": 406.78
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -117307,9 +117307,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.18,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.093
  },
@@ -117350,7 +117350,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.21,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.124
  },
@@ -117391,7 +117391,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.14
  },
@@ -117526,13 +117526,13 @@
   "alt_euro_1fach": 58.29,
   "neu": [
    {
-    "neu": "5701",
+    "neu": "",
     "score": 0.069,
-    "p": 0.16,
-    "kapitel": "L",
-    "abschnitt": "11.01",
-    "titel": "Zuschlag zu der Leistung nach Nummer 5700 für jede weiteren 25 cm² Die Fläche über 25 cm² und die Lokalisation sind in der Rechnung anzugeben.",
-    "euro": 18.93
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -117553,9 +117553,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.16,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.069
  },
@@ -117635,13 +117635,13 @@
   "alt_euro_1fach": 349.72,
   "neu": [
    {
-    "neu": "5701",
+    "neu": "",
     "score": 0.076,
-    "p": 0.03,
-    "kapitel": "L",
-    "abschnitt": "11.01",
-    "titel": "Zuschlag zu der Leistung nach Nummer 5700 für jede weiteren 25 cm² Die Fläche über 25 cm² und die Lokalisation sind in der Rechnung anzugeben.",
-    "euro": 18.93
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -117662,8 +117662,8 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
   "wahrscheinlichkeit": 0.03,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.076
@@ -118578,13 +118578,13 @@
   "alt_euro_1fach": 116.57,
   "neu": [
    {
-    "neu": "13643",
+    "neu": "",
     "score": 0.093,
-    "p": 0.18,
-    "kapitel": "O",
-    "abschnitt": "14.03",
-    "titel": "Lokoregionale Hyperthermie in Kombination mit einer Strahlen- und/oder Chemotherapie mit vorangehender Planung, einschließlich - kontinuierlicher Temperaturmessung und Dokumentation der gemessenen Par",
-    "euro": 414.78
+    "p": 0.05,
+    "kapitel": "",
+    "abschnitt": "",
+    "titel": "",
+    "euro": 0
    }
   ],
   "weitere_kandidaten": [
@@ -118605,9 +118605,9 @@
    }
   ],
   "quelle": "automatisch",
-  "bemerkung": "",
-  "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.18,
+  "bemerkung": "Kein Textbezug zur neuen GOÄ (Kurzbezeichnung/Abkürzung); bester Treffer unter Ähnlichkeit 0,10 verworfen",
+  "verhaeltnis": "n:m",
+  "wahrscheinlichkeit": 0.1,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.093
  },
@@ -119058,7 +119058,7 @@
   "quelle": "automatisch",
   "bemerkung": "",
   "verhaeltnis": "1:1",
-  "wahrscheinlichkeit": 0.23,
+  "wahrscheinlichkeit": 0.2,
   "status": "KEINE_ENTSPRECHUNG_ERKENNBAR",
   "score_top1": 0.142
  }

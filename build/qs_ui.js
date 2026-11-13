@@ -229,8 +229,8 @@ const path = require('path');
   await page.reload();
   await page.click('#tabs button[data-v=mp]');
   const chipsMp = (await page.locator('#chipsmp .chip').allInnerTexts()).map(t => t.replace(/\s+/g, ' ')).join(' | ');
-  check('Reiter „Ziffern-Mapping“: 2.831 alte Ziffern, Chips Sicher 522 · Plausibel 884 · Unsicher 829 · Keine Entsprechung 535 · Sammelposition 61',
-    chipsMp === 'S Sicher 522 | P Plausibel 884 | U Unsicher 829 | K Keine Entsprechung 535 | X Sammelposition 61' && (await txt('#status')).startsWith('2.831 von 2.831 alten'), chipsMp + ' · ' + await txt('#status'));
+  check('Reiter „Ziffern-Mapping“: 2.831 alte Ziffern, Chips mit Prozentbereich – Sicher ≥ 80 % 522 · Plausibel 50–79 % 816 · Unsicher 25–49 % 765 · Keine Entsprechung < 25 % 667 · Sammelposition 61',
+    chipsMp === 'S Sicher ≥ 80 % 522 | P Plausibel 50–79 % 816 | U Unsicher 25–49 % 765 | K Keine Entsprechung < 25 % 667 | X Sammelposition 61' && (await txt('#status')).startsWith('2.831 von 2.831 alten'), chipsMp + ' · ' + await txt('#status'));
   const navMp = (await page.locator('#nav button.kap').allInnerTexts()).map(t => t.replace(/\s+/g, ' '));
   check('Navigation zeigt die Kapitel der alten GOÄ (B bis P) mit Titel aus dem PDF', navMp.length === 15 && navMp.includes('G Neurologie, Psychiatrie und Psychotherapie 44') && navMp.includes('M Laboratoriumsuntersuchungen 921'), navMp.length + ' Kapitel; ' + navMp.filter(t => /^[GM] /.test(t)).join(' | '));
   await shot('12_mapping_start.png');

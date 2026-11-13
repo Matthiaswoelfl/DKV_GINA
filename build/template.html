@@ -41,6 +41,7 @@ main.alt.compact .badge i{display:inline}
 main.alt .grid{grid-template-columns:64px minmax(0,1.3fr) 92px 200px minmax(0,1fr) 0}
 main.alt.compact .grid{grid-template-columns:50px minmax(0,1.1fr) 76px 98px minmax(0,1fr) 0}
 .cMS{--c:#1d6b2e;--cb:#dff3e3}.cMP{--c:#0f4f9e;--cb:#e0ecfb}.cMU{--c:#8a5300;--cb:#fbefd2}.cMK{--c:#a3231b;--cb:#fbe6e3}.cMX{--c:#5c3399;--cb:#ede4f8}
+.chip .pr{font-weight:650;font-variant-numeric:tabular-nums}
 .seg{display:inline-flex;border:1px solid #8c98a8;border-radius:6px;overflow:hidden}
 .seg button{border:0;background:#fff;padding:5px 12px;font-size:13px}
 .seg button + button{border-left:1px solid #8c98a8}
@@ -260,8 +261,8 @@ const R = D.rows.map((r, idx) => { const m = r[6] < 0 ? null : D.muster[r[6]]; r
 const BYZ = new Map(R.map(r => [r.z, r]));
 const ROWH = 38, HEADH = 36;
 /* ---------- Mapping alte GOÄ ↔ GOÄneu ---------- */
-const MST = {SICHER:{name:'Sicher', ltr:'S', cls:'cMS'}, PLAUSIBEL:{name:'Plausibel', ltr:'P', cls:'cMP'}, UNSICHER:{name:'Unsicher', ltr:'U', cls:'cMU'},
-  KEINE_ENTSPRECHUNG_ERKENNBAR:{name:'Keine Entsprechung', ltr:'K', cls:'cMK'}, SAMMELPOSITION:{name:'Sammelposition', ltr:'X', cls:'cMX'}, NEU:{name:'Ohne alte Ziffer', ltr:'–', cls:'cN'}};
+const MST = {SICHER:{name:'Sicher', ltr:'S', cls:'cMS', pr:'≥ 80 %'}, PLAUSIBEL:{name:'Plausibel', ltr:'P', cls:'cMP', pr:'50–79 %'}, UNSICHER:{name:'Unsicher', ltr:'U', cls:'cMU', pr:'25–49 %'},
+  KEINE_ENTSPRECHUNG_ERKENNBAR:{name:'Keine Entsprechung', ltr:'K', cls:'cMK', pr:'< 25 %'}, SAMMELPOSITION:{name:'Sammelposition', ltr:'X', cls:'cMX'}, NEU:{name:'Ohne alte Ziffer', ltr:'–', cls:'cN'}};
 const pct = p => p === null || p === undefined ? '' : Math.round(p * 100) + ' %';
 const ALT = {rows:[], abs:[], kap:[], by:new Map()};
 (function(){
@@ -374,7 +375,7 @@ function applyMp(nav, keepActive){
   const base = U().rows.filter(r => nav(r) && (st.mpvh === '' || r.vhs.has(st.mpvh)) && (st.mpql === '' || r.qls.has(st.mpql)));
   const c = {}; base.forEach(r => { c[r.mst] = (c[r.mst] || 0) + 1; });
   $('#chipsmp').innerHTML = Object.keys(MST).filter(k => alt ? k !== 'NEU' : k !== 'SAMMELPOSITION' || c[k]).map(k =>
-    `<button class="chip ${MST[k].cls}" data-k="${k}" aria-pressed="${st.mpst.has(k)}"><span class="ltr">${MST[k].ltr}</span>${MST[k].name}<span class="cnt">${(c[k] || 0).toLocaleString('de-DE')}</span></button>`).join('');
+    `<button class="chip ${MST[k].cls}" data-k="${k}" aria-pressed="${st.mpst.has(k)}"><span class="ltr">${MST[k].ltr}</span>${MST[k].name}${MST[k].pr ? ` <span class="pr">${MST[k].pr}</span>` : ''}<span class="cnt">${(c[k] || 0).toLocaleString('de-DE')}</span></button>`).join('');
   result = base.filter(r => !st.mpst.size || st.mpst.has(r.mst));
   const q = st.q.trim(), info = $('#ivinfo');
   const a = /^\d+$/.test(q) ? ALT.by.get(q) : null, n = /^\d+$/.test(q) ? BYZ.get(+q) : null;

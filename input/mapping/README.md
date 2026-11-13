@@ -30,8 +30,8 @@ Manuell geprüft (`quelle = manuell geprüft`) sind die alten Abschnitte B (Grun
 
 ## Zahlen
 
-- 2831 alte Ziffern (2745 automatisch, 86 manuell geprüft). SICHER 522, PLAUSIBEL 884, UNSICHER 829, KEINE_ENTSPRECHUNG_ERKENNBAR 535, SAMMELPOSITION 61.
-- Neue Ziffern gesamt 5.580, davon 1796 mindestens einer alten Ziffer zugeordnet; die übrigen sind neu geschnitten oder neu (z. B. feinere Aufteilung im Labor und in der Chirurgie, digitale Leistungen).
+- 2831 alte Ziffern (2745 automatisch, 86 manuell geprüft). SICHER 522, PLAUSIBEL 816, UNSICHER 765, KEINE_ENTSPRECHUNG_ERKENNBAR 667, SAMMELPOSITION 61.
+- Neue Ziffern gesamt 5.580, davon 1746 mindestens einer alten Ziffer zugeordnet; die übrigen sind neu geschnitten oder neu (z. B. feinere Aufteilung im Labor und in der Chirurgie, digitale Leistungen).
 
 | Alter Abschnitt | Ziffern | SICHER | PLAUSIBEL | UNSICHER | KEINE | SAMMEL |
 |---|---|---|---|---|---|---|
@@ -46,7 +46,7 @@ Manuell geprüft (`quelle = manuell geprüft`) sind die alten Abschnitte B (Grun
 | J HNO | 153 | 8 | 51 | 60 | 34 | 0 |
 | K Urologie | 133 | 17 | 37 | 48 | 31 | 0 |
 | L Chirurgie/Orthopädie | 676 | 32 | 120 | 309 | 215 | 0 |
-| M Labor | 921 | 307 | 486 | 65 | 2 | 61 |
+| M Labor | 921 | 307 | 418 | 1 | 134 | 61 |
 | N Histologie/Zytologie | 15 | 0 | 1 | 11 | 3 | 0 |
 | O Strahlen/Nuklear/MRT | 207 | 15 | 43 | 93 | 56 | 0 |
 | P Sektion | 9 | 0 | 0 | 3 | 6 | 0 |
@@ -70,6 +70,7 @@ Hinweise:
 
 ## Grenzen
 
+- Ziffern, deren alte Bezeichnung nur eine Abkürzung ist (z. B. „HCl“, „dDNS“), haben keinen Textbezug zur neuen GOÄ; sie sind ohne Zuordnung als KEINE_ENTSPRECHUNG_ERKENNBAR geführt (Ähnlichkeit < 0,10) und brauchen eine manuelle Zuordnung.
 - Der alte Gebührenverzeichnis-Text ist in der Kurz-GOÄ stark verkürzt; kurze Titel („Beratung“, „Resektion“) sind schwer eindeutig zuzuordnen.
 - Die alten Zuschläge A–K und die Allgemeinen Bestimmungen sind nicht Teil des Mappings, nur die nummerierten Gebührenziffern.
 - Labor: Die alten Betragsspalten (1,0-fach) fehlen teilweise, dort bleibt `alt_euro_1fach` leer.

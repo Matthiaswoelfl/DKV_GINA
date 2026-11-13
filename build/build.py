@@ -375,7 +375,7 @@ def lese_regeln(ziffern: set) -> dict:
 
 # ---------------------------------------------------------------- Mapping alte GOÄ -> GOÄneu
 MAP_DIR = INPUT / "mapping"
-SOLL_MAP_STATUS = {"SICHER": 522, "PLAUSIBEL": 884, "UNSICHER": 829, "KEINE_ENTSPRECHUNG_ERKENNBAR": 535, "SAMMELPOSITION": 61}
+SOLL_MAP_STATUS = {"SICHER": 522, "PLAUSIBEL": 816, "UNSICHER": 765, "KEINE_ENTSPRECHUNG_ERKENNBAR": 667, "SAMMELPOSITION": 61}
 MAP_STATUS_TEXT = {
     "SICHER": "Wahrscheinlichkeit ab 80 %: Zuordnung kann übernommen werden (nicht fehlerfrei).",
     "PLAUSIBEL": "Wahrscheinlichkeit 50 bis 79 %: fachlich gegenprüfen.",
@@ -455,6 +455,12 @@ def lese_mapping(neu_gebuehr: dict) -> dict:
         m = re.search(r"Stand:\s*([A-ZÄÖÜa-zäöü]+ \d{4})", text)
         pdf_info = {"datei": pdfs[0].name, "stand": m.group(1) if m else None, "geprueft": len(mit_eur), "gefunden": ok, "seiten": text.count("\f")}
     neu_zugeordnet = {n for a in alt for n, _, _ in a[10]}
+    # Gegenprobe mit der Rückrichtungsdatei des Pakets (zählt Sammelpositionen und reine Nutzervorgaben nicht mit)
+    fr = MAP_DIR / "mapping_neu_zu_alt.csv"
+    rev = {int(r["neu_ziffer"]) for r in csv.DictReader(fr.open(encoding="utf-8-sig"), delimiter=";") if r["alt_ziffern"]} if fr.exists() else set()
+    ohne_sammel = {n for a in alt if a[5] != "SAMMELPOSITION" for n, pp, _ in a[10] if pp is not None}
+    info.update(rev=len(rev), nur_sammel=len({n for a in alt if a[5] == "SAMMELPOSITION" for n, _, _ in a[10]} - ohne_sammel - {n for a in alt for n, pp, _ in a[10] if pp is None}),
+                nur_vorgabe=len({n for a in alt for n, pp, _ in a[10] if pp is None} - ohne_sammel), rev_abw=len(rev ^ ohne_sammel))
     info.update(datei=fj.name, alt=alt, titel=titel, pdf=pdf_info, unbekannt=unbekannt, ohne_csv=ohne_csv,
                 status=Counter(a[5] for a in alt), n_neu=len(neu_zugeordnet), vorgaben=[a[0] for a in alt if a[8] == "Nutzervorgabe"])
     return info
@@ -772,7 +778,7 @@ def tests(daten, js=None, kap=None, gesetz=None, regeln=None, intervalle=None, m
             def neu(z):
                 return [n for n, _, _ in MA[z][10]]
 
-            t("Mapping – 2.831 alte Ziffern, Status wie in der README (522 / 884 / 829 / 535 / 61)",
+            t("Mapping – 2.831 alte Ziffern, Status wie in der README (522 / 816 / 765 / 667 / 61)",
               len(MA) == len(mapping["alt"]) == 2831 and dict(mapping["status"]) == SOLL_MAP_STATUS,
               f"{len(MA)} Ziffern; " + " · ".join(f"{k} {mapping['status'][k]}" for k in SOLL_MAP_STATUS))
             t("Mapping – alt 863 → neu 4500, Wahrscheinlichkeit 0,82, SICHER", neu("863") == [4500] and MA["863"][6] == 0.82 and MA["863"][5] == "SICHER",
@@ -784,6 +790,12 @@ def tests(daten, js=None, kap=None, gesetz=None, regeln=None, intervalle=None, m
             t("Mapping – Rückrichtung: neu 4500 ← alt 863 (und 808); alt 4500 ist eine andere Leistung (Nummernkollision)",
               "863" in [a[0] for a in mapping["alt"] if 4500 in neu(a[0])] and "4500" in MA and neu("4500") != [4500],
               f"neu 4500 ← {[a[0] for a in mapping['alt'] if 4500 in neu(a[0])]}; alt 4500 = {MA['4500'][2][:40]}")
+            ohne_neu = [z for z in ("3662", "3857") if not neu(z) and MA[z][6] <= 0.1 and MA[z][5] == "KEINE_ENTSPRECHUNG_ERKENNBAR"]
+            t("Mapping – 1.746 neue Ziffern mit alter Zuordnung wie im Paket (im Dashboard 1.760: zusätzlich 5 nur aus Nutzervorgabe, 9 nur über Sammelpositionen)",
+              mapping["rev"] == 1746 and mapping["rev_abw"] == 0 and mapping["n_neu"] == 1760 and (mapping["nur_vorgabe"], mapping["nur_sammel"]) == (5, 9),
+              f"Paket {mapping['rev']}; Dashboard {mapping['n_neu']} = {mapping['rev']} + {mapping['nur_vorgabe']} Vorgabe + {mapping['nur_sammel']} Sammelposition")
+            t("Mapping – 3662 und 3857 ohne neue Ziffer, Wahrscheinlichkeit höchstens 0,1, „keine Entsprechung erkennbar“", len(ohne_neu) == 2,
+              "; ".join(f"{z}: {neu(z)} · {MA[z][6]}" for z in ("3662", "3857")))
             t("Mapping – alle zugeordneten neuen Ziffern existieren; jede alte Ziffer hat eine Begründung",
               not mapping["unbekannt"] and all(a[9] for a in mapping["alt"]), f"{len(mapping['unbekannt'])} unbekannt")
             if mapping["pdf"]["datei"]:
@@ -1098,7 +1110,8 @@ def schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, mapping, res, 
         L += [f"| … Status {k} | {mapping['status'][k]} |" for k in SOLL_MAP_STATUS]
         L += [f"| … davon mit Nutzervorgabe | {len(mapping['vorgaben'])} ({', '.join(mapping['vorgaben'])}) |",
               f"| … ohne zugeordnete neue Ziffer | {sum(1 for a in MA if not a[10])} |",
-              f"| Neue Ziffern mit mindestens einer alten Ziffer | {mapping['n_neu']} von {len(daten_alle)} |",
+              f"| Neue Ziffern mit mindestens einer alten Ziffer | {mapping['n_neu']} von {len(daten_alle)} (Paket: {mapping['rev']}; "
+              f"zusätzlich {mapping['nur_vorgabe']} nur aus Nutzervorgabe und {mapping['nur_sammel']} nur über Sammelpositionen) |",
               f"| Zugeordnete neue Ziffern, die es nicht gibt | {len(mapping['unbekannt'])} |",
               f"| Alte Ziffern ohne Betrag (1,0-fach) | {sum(1 for a in MA if a[4] is None)} |"]
         if mapping["pdf"]["datei"]:
@@ -1111,6 +1124,13 @@ def schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, mapping, res, 
             "**Mapping – Wahrscheinlichkeit ist eine Schätzung** (Textähnlichkeit, kalibriert an 104 Stichproben; laut README im "
             "Labor zuverlässiger, in der Chirurgie und bei Zuschlägen schwächer). Manuell geprüft sind nur die alten Abschnitte B "
             "und G. Auch „SICHER“ ist nicht fehlerfrei.",
+            "**Mapping – Prozentbereiche in den Tags** sind die Statusgrenzen laut README (≥ 80 %, 50–79 %, 25–49 %, < 25 %). Bei "
+            "manuell geprüften und gedeckelten Ziffern liegt die Wahrscheinlichkeit vereinzelt genau auf oder knapp über einer "
+            "Grenze (z. B. „Keine Entsprechung“ bis 30 %); der Status stammt unverändert aus dem Paket.",
+            "**Mapping – 1.760 statt 1.746 neue Ziffern mit Pendant:** Das Dashboard zeigt in der Richtung neu → alt auch die 5 "
+            "Ziffern, die nur über die Nutzervorgabe zugeordnet sind (4515 bis 4519), und 9 Laborziffern, auf die nur alte "
+            "Sammelpositionen zeigen (als „Sammelposition“ gekennzeichnet). Das Paket zählt beide Gruppen in der Rückrichtung nicht "
+            "mit. Falls die Sammelpositionen dort nicht erscheinen sollen, bitte melden.",
             "**Mapping – 812/812a (Kurzzeittherapie):** Laut README ist 812 in der Kurz-GOÄ die „Psychiatrische Notfallbehandlung“ "
             "(→ 4422, 4423), 812a existiert dort nicht. Die Vorgabe „812/812a → 4500 bis 4519“ ist deshalb nicht übernommen. "
             "Bitte klären, welche alte Nummer gemeint ist.",

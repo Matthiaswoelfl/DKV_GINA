@@ -1,5 +1,5 @@
 ﻿neu_ziffer;neu_kapitel;neu_abschnitt;neu_leistung;neu_euro_1fach;alt_ziffern;beste_wahrscheinlichkeit;status
-1;B;01.01;Persönliche Beratung durch den Arzt, Dauer unter 10 Minuten Die Leistung nach Nummer 1 ist neben der Leistung nach Nummer 2 nicht berechnungsfähig.;14.11;1|3662|3857;0.8;ZUGEORDNET
+1;B;01.01;Persönliche Beratung durch den Arzt, Dauer unter 10 Minuten Die Leistung nach Nummer 1 ist neben der Leistung nach Nummer 2 nicht berechnungsfähig.;14.11;1;0.8;ZUGEORDNET
 2;B;01.01;Persönliche Beratung durch den Arzt, je vollendete 10 Minuten Die Leistung nach Nummer 2 ist je Kalendertag bis zu fünfmal berechnungsfähig. Die Leistung nach Nummer 2 ist neben der Leistung nach Numm;21.21;3;0.8;ZUGEORDNET
 3;B;01.01;Zuschlag zu der Leistung nach Nummer 1 oder 2 für die palliativmedizinische Betreuung des Patienten Die abrechnungsbegründende Diagnose ist in der Rechnung anzugeben.;80.21;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4;B;01.01;Beratung durch den Arzt mittels Telefon oder elektronischer Kommunikation, Dauer bis zu 10 Minuten Die Leistung nach Nummer 4 ist neben der Leistung nach Nummer 5 nicht berechnungsfähig.;14.01;1;0.8;ZUGEORDNET
@@ -109,7 +109,7 @@
 601;C;02.01;Tape-Verband kleiner Gelenke oder des Rumpfes, individuell angefertigt, auch unter Einschluss der benachbarten Finger oder Zehen, ggf. einschließlich Entfernen von altem Verbandsmaterial Die Leistung ;12.44;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 602;C;02.01;Tape-Verband großer Gelenke (Schulter-, Ellbogen-, Hand-, Hüft-, Knie- oder Sprunggelenk), individuell angefertigt, ggf. einschließlich - Tape-Verband distaler kleiner Gelenke und/oder Phalangen - Zin;16.14;207|206;0.57;ZUGEORDNET
 603;C;02.01;Tape-Verband zur Entlastung von weichteiligen Strukturen, wie z.B. Sehnenspiegel, Haut-, Unterhautgewebe, ggf. einschließlich - Tape-Verband distaler kleiner Gelenke und/oder Phalangen - Zinkleimverba;16.14;207|206;0.54;ZUGEORDNET
-604;C;02.01;Gewickelter zirkulärer Verband oder stabilisierender Verband des Kopfes oder des Rumpfes, ggf. einschließlich - Entfernen von altem Verbandsmaterial - Aufbringen von Externa - Wundauflagen - Wundverba;16.04;200|245;0.48;ZUGEORDNET
+604;C;02.01;Gewickelter zirkulärer Verband oder stabilisierender Verband des Kopfes oder des Rumpfes, ggf. einschließlich - Entfernen von altem Verbandsmaterial - Aufbringen von Externa - Wundauflagen - Wundverba;16.04;200;0.48;ZUGEORDNET
 605;C;02.01;Gewickelter zirkulärer Verband oder stabilisierender Verband des Halses, des Schulter- oder Hüftgelenks (auch Rucksackverband) oder einer Extremität über mindestens zwei große Gelenke, auch als Kompre;18.00;204;0.44;ZUGEORDNET
 606;C;02.01;Kompressionsverband unter Einschluss von kleinen Gelenken (z.B. Finger), ggf. einschließlich - Entfernen von altem Verbandsmaterial - Aufbringen von Externa - Wundauflagen - Wundpflaster;11.13;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 607;C;02.01;Kompressionsverband unter Einschluss von großen Gelenken (z.B. Knie/Hüfte), ggf. einschließlich - Entfernen von altem Verbandsmaterial - Aufbringen von Externa - Wundauflagen - Wundpflaster;16.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -134,7 +134,7 @@
 626;C;02.01;Zirkulärer Gehgipsverband bzw. härtender Verband des Unterschenkels mit Fußeinschluss, ggf. als Gipstutor, individuell angefertigt und modelliert, einschließlich Befestigung bzw. Einarbeitung z.B. ein;37.63;231;0.49;ZUGEORDNET
 627;C;02.01;Zirkulärer härtender Verband mit Einschluss von mindestens zwei großen Gelenken (Schulter-, Ellbogen-, Hand-, Knie-, Sprunggelenk), individuell angefertigt und modelliert, ggf. einschließlich - Hautab;46.73;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 628;C;02.01;Zirkulärer härtender Verband an Kopf und Hals auch mit Kopf-/Schulter-/Oberarmabstützungen, individuell angefertigt und modelliert, ggf. einschließlich - Hautabdeckung - Polsterung - Spaltung und Fens;102.30;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-629;C;02.01;Zirkulärer härtender Verband des Rumpfes als Korsett, individuell angefertigt und modelliert, ggf. einschließlich - Hautabdeckung - Polsterung - Spaltung und Fensterung Die Leistung nach Nummer 629 is;102.30;2280;0.16;ZUGEORDNET
+629;C;02.01;Zirkulärer härtender Verband des Rumpfes als Korsett, individuell angefertigt und modelliert, ggf. einschließlich - Hautabdeckung - Polsterung - Spaltung und Fensterung Die Leistung nach Nummer 629 is;102.30;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 630;C;02.01;Härtender Verband für Schultergürtel mit Arm(en) oder Beckengürtel mit Bein(en), individuell angefertigt und modelliert, ggf. einschließlich - Abduktionsvorrichtung - Hautabdeckung - Polsterung - Spal;102.30;239;0.38;ZUGEORDNET
 631;C;02.01;Gipsbett oder Nachtschale für den Rumpf als Bett-Liegeschale, individuell angefertigt und modelliert, ggf. einschließlich - Abduktionsvorrichtung - Hautabdeckung - Polsterung - Spaltung und Fensterung;83.10;240;0.73;ZUGEORDNET
 632;C;02.01;Gipshülse oder härtender Verband mit Gelenkschienen und/oder zusätzliche Einarbeitung einer Dynamisierungsvorrichtung (z.B. Gummizügel nach Kleinert) in einen Gipsverband bzw. nicht konfektionierten, ;79.85;227;0.4;ZUGEORDNET
@@ -221,7 +221,7 @@
 771;C;02.02;Zuschlag zu der Leistung nach Nummer 767 oder 768 bei einem Neugeborenen, einschließlich Anlage eines Nabelvenenkatheters;37.14;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 772;C;02.02;Bereitstellung von patientenspezifisch ausgewählten Blutkomponenten (z.B. HLA‐, HNA‐, HPA‐System) in Zusammenhang mit der Leistung nach Nummer 767 oder 768;31.75;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 773;C;02.02;Radioaktive Bestrahlung von Blutkomponenten zur Transfusion;24.51;280|281;0.29;ZUGEORDNET
-774;C;02.02;Transfusion von Stammzellkonzentraten;131.97;3700;0.47;ZUGEORDNET
+774;C;02.02;Transfusion von Stammzellkonzentraten;131.97;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 775;C;02.02;Infusion in die Aorta bei einem Neugeborenen mittels transumbilikalen Aortenkatheters, ggf. einschließlich - Gefäßpunktion - Anlage des Katheters - Entfernen des Zuganges - (Kompressions-)Verband - Lo;74.38;283;0.47;ZUGEORDNET
 776;C;02.02;Eigenbluteinspritzung, einschließlich vorheriger Blutentnahme, ggf. Aufbereitung des Blutes und/oder Zugabe von Medikamenten, je Sitzung Die Leistung nach Nummer 776 ist neben der Leistung nach Nummer;22.21;284;0.56;ZUGEORDNET
 777;C;02.02;Zuschlag zu der Leistung nach Nummer 776 für erhöhten Aufwand bei besonderer technisch-apparativer Aufbereitung;11.21;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -273,7 +273,7 @@
 929;C;02.03;Zuschlag zu den Leistungen des Abschnitts C III, die mit einem nicht unterschreitbaren Gebührensatz bis zu 39,00 EUR bewertet sind, für die Durchführung an einem Kind bis zum vollendeten 8. Lebensjahr;10.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 930;C;02.03;Zuschlag zu den Leistungen des Abschnitts C III, die mit einem nicht unterschreitbaren Gebührensatz von mehr als 39,00 EUR bis zu 68,00 EUR bewertet sind, für die Durchführung an einem Kind bis zum vo;20.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 931;C;02.03;Zuschlag zu den Leistungen des Abschnitts C III, die mit einem nicht unterschreitbaren Gebührensatz von mehr als 68,00 EUR bewertet sind, für die Durchführung an einem Kind bis zum vollendeten 8. Lebe;30.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-1000;C;02.04;Schutzimpfung mit Injektion (z.B. intramuskulär, subkutan) oder orale oder nasale Gabe, ggf. einschließlich Eintragung in den Impfpass, je Gabe Art der Impfung und Gabe sind in der Rechnung anzugeben.;14.28;375|376|377;0.65;ZUGEORDNET
+1000;C;02.04;Schutzimpfung mit Injektion (z.B. intramuskulär, subkutan) oder orale oder nasale Gabe, ggf. einschließlich Eintragung in den Impfpass, je Gabe Art der Impfung und Gabe sind in der Rechnung anzugeben.;14.28;375|376;0.65;ZUGEORDNET
 1001;C;02.04;Epikutantest (1. bis 30. Test je Behandlungsfall) oder kutane Testung, je Test;4.69;380|383|381|382;0.92;ZUGEORDNET
 1002;C;02.04;Zuschlag zu der Leistung nach Nummer 1001 ab dem 31. Test, je Test;2.26;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1003;C;02.04;Zuschlag zu der Leistung nach Nummer 1001 ab dem 31. Test bei einem Kind bis zum vollendeten 8. Lebensjahr, je Test;3.01;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -281,10 +281,10 @@
 1005;C;02.04;Zuschlag zu der Leistung nach Nummer 1001 für eine zusätzliche Belichtung bei einem Kind bis zum vollendeten 8. Lebensjahr, je Sitzung;10.09;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1006;C;02.04;Epikutantest mit in eigenem Labor erstelltem, nicht kommerziellem Material, je Test;6.03;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1007;C;02.04;Mendel-Mantoux-Test oder Intrakutantest mit mehreren Antigenen, ggf. einschließlich abdeckendem Verband Die Leistung nach Nummer 1007 ist je Sitzung einmal berechnungsfähig. Die Ablesung des Testergeb;7.37;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-1008;C;02.04;Pricktest (1. bis 20. Test je Behandlungsfall), je Test;6.03;385|386|387|384|646;0.95;ZUGEORDNET
+1008;C;02.04;Pricktest (1. bis 20. Test je Behandlungsfall), je Test;6.03;385|386|387;0.95;ZUGEORDNET
 1009;C;02.04;Zuschlag zu der Leistung nach Nummer 1008 ab dem 21. Test, je Test;3.49;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1010;C;02.04;Zuschlag zu der Leistung nach Nummer 1008 ab dem 21. Test bei einem Kind bis zum vollendeten 8. Lebensjahr, je Test;4.64;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-1011;C;02.04;Reib-, Scratch- oder Skarifikationstest (bis zu 10 Tests je Behandlungsfall), je Test;4.69;388|389|569;0.94;ZUGEORDNET
+1011;C;02.04;Reib-, Scratch- oder Skarifikationstest (bis zu 10 Tests je Behandlungsfall), je Test;4.69;388|389;0.94;ZUGEORDNET
 1012;C;02.04;Zuschlag zu der Leistung nach Nummer 1011 ab dem 11. Test, je Test;3.49;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1013;C;02.04;Zuschlag zu der Leistung nach Nummer 1011 ab dem 11. Test bei einem Kind bis zum vollendeten 8. Lebensjahr, je Test;4.64;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1014;C;02.04;Intrakutantest (1. bis 20. Test je Behandlungsfall), je Test;7.37;390|391;0.95;ZUGEORDNET
@@ -316,9 +316,9 @@
 1112;C;02.05;Zuschlag zu der Leistung nach Nummer 1107 für die Gabe von mindestens 60 ml pro Kilogramm Körpergewicht (Erythrozytenkonzentrat und/oder Thrombozytenkonzentrat und/oder therapeutisches Plasma (FFP)) b;35.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1113;C;02.05;Zuschlag zu der Leistung nach Nummer 1107 für die Durchführung, Steuerung und Überwachung einer kontinuierlichen Hämofiltration und/oder Hämodialyse und/oder Hämodiafiltration und/oder Hämoperfusion (;185.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1114;C;02.05;Zuschlag zu der Leistung nach Nummer 1107 für die Lyse mittels venösem und/oder arteriellem Katheter;45.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-1115;C;02.05;Zuschlag zu der Leistung nach Nummer 1107 für Messung des intrakraniellen Drucks mittels Hirndrucksonde;33.50;1113;0.02;ZUGEORDNET
-1116;C;02.05;Zuschlag zu der Leistung nach Nummer 1107 für eines der folgenden sonographischen Verfahren: Farbdoppler-Sonographie, Kontrastmittel-Sonographie, Transösophageale Echokardiographie (TEE) oder Transtho;36.20;402|422|1754;0.31;ZUGEORDNET
-1117;C;02.05;Zuschlag zu der Leistung nach Nummer 1107 für eines der folgenden endoskopischen Verfahren: Gastroskopie oder Koloskopie;68.00;401|676;0.17;ZUGEORDNET
+1115;C;02.05;Zuschlag zu der Leistung nach Nummer 1107 für Messung des intrakraniellen Drucks mittels Hirndrucksonde;33.50;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
+1116;C;02.05;Zuschlag zu der Leistung nach Nummer 1107 für eines der folgenden sonographischen Verfahren: Farbdoppler-Sonographie, Kontrastmittel-Sonographie, Transösophageale Echokardiographie (TEE) oder Transtho;36.20;402|422;0.31;ZUGEORDNET
+1117;C;02.05;Zuschlag zu der Leistung nach Nummer 1107 für eines der folgenden endoskopischen Verfahren: Gastroskopie oder Koloskopie;68.00;676;0.08;ZUGEORDNET
 1118;C;02.05;Zuschlag zu der Leistung nach Nummer 1107 für eine Bronchoskopie;49.71;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1119;C;02.05;Zuschlag zu der Leistung nach Nummer 1107 für eine Tracheotomie oder Perkutane endoskopische Gastrostomie (PEG-Anlage);68.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1120;C;02.05;Zuschlag zu der Leistung nach Nummer 1107 für invasives Temperaturmanagement bei einem Patienten ab dem 9. Lebensjahr;35.46;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -396,7 +396,7 @@
 1250;C;02.06;Sonographische Untersuchung der intrakraniellen hirnversorgenden Gefäße, beidseits, mittels B-Mode und Farbdoppler-Verfahren, je Sitzung Die Leistung nach Nummer 1250 ist im Behandlungsfall bis zu dre;75.74;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1251;C;02.06;Zuschlag zu der Leistung nach Nummer 1250 für die Untersuchung intrakranieller Venen und Sinus, je Sitzung;53.39;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1252;C;02.06;Sonographische Untersuchung der intrakraniellen Gefäße mittels PW‐Doppler‐Verfahren, je Sitzung Die Leistung nach Nummer 1252 ist im Behandlungsfall bis zu dreimal berechnungsfähig.;67.91;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-1253;C;02.06;Zuschlag zu der Leistung nach Nummer 1244, 1245, 1250 oder 1252 für die Quantifizierung ab einem Stenosegrad von 50% oder zur Quantifizierung nach endovaskulärer oder operativer Therapie, einschließli;21.42;5487;0.03;ZUGEORDNET
+1253;C;02.06;Zuschlag zu der Leistung nach Nummer 1244, 1245, 1250 oder 1252 für die Quantifizierung ab einem Stenosegrad von 50% oder zur Quantifizierung nach endovaskulärer oder operativer Therapie, einschließli;21.42;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1254;C;02.06;Wiederholte sonographische Untersuchung intrakranieller Gefäße mittels PW-Doppler-Verfahren zur Messung der CO2-Reaktivität, einschließlich Verabreichung von Testgas, ggf. einschließlich Überwachung s;124.51;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1255;C;02.06;Kontinuierliche sonographische Untersuchung intrakranieller Gefäße mittels PW-Doppler-Verfahren von mindestens 30 Minuten Dauer zur Detektion mikroembolischer Signale oder zur Detektion eines Rechts-L;93.53;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1256;C;02.06;Therapeutische transkranielle Ultraschallanwendung zur Thrombolyse bei Hirninfarkt, unabhängig von der Dauer der Therapie, je Lysebehandlung und Kalendertag;93.62;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -462,7 +462,7 @@
 1316;C;02.06;Zuschlag zu der Leistung nach Nummer 1221, 1227, 1228, 1237, 1238, 1239, 1243, 1245, 1250, 1257, 1258, 1266, 1286, 1287, 1288, 1292, 1293, 1297, 1301, 1302, 1303, 1304, 1312 oder 1313 für Kontrastmitt;28.38;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1317;C;02.06;Zuschlag zu der Leistung nach Nummern 1312 oder 1313 für zusätzliche Erstellung und Auswertung dopplerechokardiographischer Daten während und nach der Belastung, einschließlich Gradienten bei (Sub-)Ao;19.11;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1318;C;02.06;Sonographische Untersuchung im Rahmen der Mutterschaftsvorsorge mittels B-Mode- (2D-real-time) Verfahren, ggf. einschließlich - Biometrie und Beurteilung der Organentwicklung - CW-Doppler - partieller;52.64;415;0.35;ZUGEORDNET
-1319;C;02.06;Systematische Untersuchung der fetalen Morphologie im 2. Trimenon gemäß Anlage 1a der Mutterschafts-Richtlinien, je untersuchtem Fetus;69.16;3668;0.48;ZUGEORDNET
+1319;C;02.06;Systematische Untersuchung der fetalen Morphologie im 2. Trimenon gemäß Anlage 1a der Mutterschafts-Richtlinien, je untersuchtem Fetus;69.16;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1320;C;02.06;Gezielte weiterführende sonographische Untersuchung zur differenzialdiagnostischen Abklärung und/oder Überwachung bei aufgrund einer Untersuchung nach der Leistung nach Nummer 1318 erhobenem Verdacht ;188.90;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1321;C;02.06;Gezielte sonographische Untersuchung im Rahmen des First-Trimester-Screenings, ggf. einschließlich Bilddokumentation, je Sitzung und untersuchtem Fetus;50.68;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1322;C;02.06;Zuschlag zu der Leistung nach Nummer 1200, 1228, 1232, 1318, 1320 oder 1321 bei transkavitärer bzw. transrektaler und/oder transvaginaler Untersuchung, einschließlich Ein- und Ausbringen des Schallkop;15.12;403;0.35;ZUGEORDNET
@@ -541,7 +541,7 @@
 1722;D;03.01;Zuschlag für die Fortführung und Überwachung der Leistung nach Nummer 1719, je vollendete 20 Minuten, bis zu fünf Stunden;25.81;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1723;D;03.01;Zuschlag zu der Leistung nach Nummer 1704, 1715 oder 1719 für Infusionstherapie ab der dritten Infusion Die Leistung nach Nummer 1723 ist je Sitzung nur einmal berechnungsfähig.;21.67;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1724;D;03.01;Zuschlag zu der Leistung nach Nummer 1704, 1715 oder 1719 für die Messung des arteriellen Drucks oder des zentralen Venendrucks, ggf. einschließlich Anlage eines zentralen Venenkatheters oder einer ar;66.18;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-1725;D;03.01;Zuschlag zu der Leistung nach Nummer 1715 oder 1719 für die intravenöse Sedierung und/oder Analgesie zusätzlich zu Regional- und/oder Lokalanästhesien;27.27;451|452;0.05;ZUGEORDNET
+1725;D;03.01;Zuschlag zu der Leistung nach Nummer 1715 oder 1719 für die intravenöse Sedierung und/oder Analgesie zusätzlich zu Regional- und/oder Lokalanästhesien;27.27;451;0.05;ZUGEORDNET
 1726;D;03.01;Zuschlag zu der Leistung nach Nummer 1715 oder 1719 für die Fortführung und Überwachung über mehr als fünf Stunden, pauschal am ersten Kalendertag;137.06;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1727;D;03.01;Zuschlag zu der Leistung nach Nummer 1715 oder 1719 für Ultraschall zum Auffinden nervaler Strukturen;16.91;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 1728;D;03.01;Zuschlag zu der Leistung nach Nummer 1719 bei Kombination von mindestens zwei Verfahren nach der Leistung nach Nummer 1719 Die jeweiligen Verfahren sind in der Rechnung anzugeben.;45.44;460;0.05;ZUGEORDNET
@@ -627,7 +627,7 @@
 2202;E;04.04;Anwendung eines Dreiviertel-/Vollbades mit und ohne Zusatz (z.B. an- oder absteigendes Vollbad, Überwärmungsbad, Wechselbad), je Sitzung Die Leistung nach Nummer 2202 ist neben der Leistung nach Numme;23.72;532;0.37;ZUGEORDNET
 2300;E;04.05;Kalt- oder Warmpackung(en) oder heiße Rolle, je Sitzung Die Anwendung eines konfektionierten Cold-/Hotpacks erfüllt nicht den Inhalt der Leistung nach Nummer 2300.;5.38;530;0.51;ZUGEORDNET
 2301;E;04.05;Apparative temperaturgesteuerte Kälte- oder Wärmetherapie (z.B. Kaltluftbehandlung, einschließlich Kältekammer, Infrarotbehandlung, Heißluftbehandlung) einer Region, je Sitzung Die Leistung nach Numme;8.73;535|538;0.41;ZUGEORDNET
-2302;E;04.05;Behandlung einer Körperregion mit Ultraschall, je Sitzung;7.49;539|560|669|561;0.65;ZUGEORDNET
+2302;E;04.05;Behandlung einer Körperregion mit Ultraschall, je Sitzung;7.49;539|560|669;0.65;ZUGEORDNET
 2303;E;04.05;Behandlung mehrerer Körperregionen mit Ultraschall, je Sitzung;10.90;539|536|549|562;0.61;ZUGEORDNET
 2400;E;04.06;Anwendung von nieder-, mittel- oder hochfrequentem Strom (auch wechselweise) oder Iontophorese, je Extremität oder Kopf/Rumpf;10.90;552;0.46;ZUGEORDNET
 2401;E;04.06;Gezielte Niederfrequenzbehandlung bei Lähmungen nach Bestimmung der Reizparameter, je Sitzung;8.85;555;0.84;ZUGEORDNET
@@ -866,7 +866,7 @@
 3308;F;05.05;Zuschlag zu der Leistung nach Nummer 3301 für die Entfernung eines Polypen von mehr als 10 mm im Durchmesser mittels Hochfrequenzdiathermieschlinge, ggf. einschließlich Bergung, je Polyp;23.93;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 3309;F;05.05;Zuschlag zu der Leistung nach Nummer 3301 für Mukosektomie(n) mittels Schlinge oder Kappe oder Ligatur, ggf. einschließlich Unterspritzung;59.83;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 3310;F;05.05;Zuschlag zu der Leistung nach Nummer 3301 für die Submukosa-Dissektion, einschließlich Unterspritzung, je Sitzung;78.07;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-3311;F;05.05;Zuschlag zu der Leistung nach Nummer 3301 für die Behandlung(en) mittels Clipping oder Ligatur oder Unterspritzung;39.04;3302;0.03;ZUGEORDNET
+3311;F;05.05;Zuschlag zu der Leistung nach Nummer 3301 für die Behandlung(en) mittels Clipping oder Ligatur oder Unterspritzung;39.04;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 3312;F;05.05;Zuschlag zu der Leistung nach Nummer 3301 für endoskopische Laservaporisation(en) und/oder Argon-Plasma-Koagulation(en), je Sitzung;35.90;706;0.04;ZUGEORDNET
 3313;F;05.05;Zuschlag zu der Leistung nach Nummer 3301 für Ballondilatation oder Bougierung, je Sitzung;27.52;781;0.09;ZUGEORDNET
 3314;F;05.05;Proktoskopie mit starrem Instrument, einschließlich rektal digitaler Untersuchung, ggf. einschließlich Probebiopsie(n), je Sitzung;34.14;705;0.53;ZUGEORDNET
@@ -941,7 +941,7 @@
 3537;F;05.07;Zuschlag zu der Leistung nach Nummer 1104, 3524, 3525, 3526, 3527, 3528 oder 3533 für die Durchführung von zentralen oder peripheren Kryobiopsien;77.10;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 3538;F;05.07;Messung von Kohlenmonoxid (CO) in der Exspirationsluft;13.33;617;0.44;ZUGEORDNET
 3539;F;05.07;Schweißtest (Pilocarpin-Iontophorese), einschließlich Aufbringen von Pilocarpin, ggf. einschließlich Bestimmung der Leitfähigkeit;58.80;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-3540;F;05.07;Zuschlag zu der Leistung nach Nummer 3539 für Bestimmung der Chloridionenkonzentration;35.21;4058;0.13;ZUGEORDNET
+3540;F;05.07;Zuschlag zu der Leistung nach Nummer 3539 für Bestimmung der Chloridionenkonzentration;35.21;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 3541;F;05.07;Einleitung einer nicht-invasiven, apparativen Beatmung Die Leistung nach Nummer 3541 ist nicht für eine CPAP oder eine alleinige O2-Insufflation berechnungsfähig.;80.53;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 3542;F;05.07;Messung der Atemantwort, auf unterschiedliche Konzentrationen von CO2 und/oder O2 in der Inspirationsluft;35.85;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 3543;F;05.07;Zuschlag zu den Leistungen des Abschnitts F VII, die mit einem nicht unterschreitbaren Gebührensatz bis zu 30,00 EUR bewertet sind, für die Durchführung an einem Kind bis zum vollendeten 8. Lebensjahr;15.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -985,7 +985,7 @@
 4013;F;05.12;Transkutane Bilirubinbestimmung;10.10;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4100;F;05.13;Großflächiges Auftragen von Externa bei Hauterkrankungen, mindestens einer Körperregion (Extremität, Kopf, Brust, Bauch, Rücken), je Sitzung;14.87;209;0.46;ZUGEORDNET
 4101;F;05.13;Laserbehandlung von Warzen und anderen Hautveränderungen ausgenommen dermale oder pigmentierte Naevi, je Läsion Die Leistung nach Nummer 4101 ist neben der Leistung nach Nummer 4133 nicht berechnungsf;63.27;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-4102;F;05.13;Minimalinvasiver Hautfunktionstest I, Bestimmung der Alkali-Neutralisationszeit, Bestimmung der Alkali-Resistenz, Nitrazingelbtest, Kälte-Wärme-Druck-Test, Dimethylglyoxim-Nickel-Test, Chloroform-Meth;17.66;759|760;0.25;ZUGEORDNET
+4102;F;05.13;Minimalinvasiver Hautfunktionstest I, Bestimmung der Alkali-Neutralisationszeit, Bestimmung der Alkali-Resistenz, Nitrazingelbtest, Kälte-Wärme-Druck-Test, Dimethylglyoxim-Nickel-Test, Chloroform-Meth;17.66;759;0.25;ZUGEORDNET
 4103;F;05.13;Minimalinvasiver Hautfunktionstest II, Evaporimetrie, Profilometrie, Chromamometrie, pH-Metrie, Elastizitätsmessung, Messung der Hydratisierung oder Messung des Fettgehaltes, je Test Die Leistung nach;20.35;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4104;F;05.13;Kryotherapie der Haut, je Sitzung;18.24;740|744|3811.H2|3838|750;0.99;ZUGEORDNET
 4105;F;05.13;Verschorfung mit heißer Luft oder heißen Dämpfen, je Sitzung;16.93;741;0.96;ZUGEORDNET
@@ -1008,10 +1008,10 @@
 4122;F;05.13;Quantitative Schweißmessung;20.35;752;0.37;ZUGEORDNET
 4123;F;05.13;UV-Erythemschwellenwertbestimmung, je Sitzung;11.24;761;0.98;ZUGEORDNET
 4124;F;05.13;Entleerung eines Lymphödems an Arm oder Bein oder Gesicht;20.83;762|2056|3313;0.84;ZUGEORDNET
-4125;F;05.13;Ätzung im Enddarmbereich, als selbständige Leistung, je Sitzung;11.83;768|699|698|533;0.94;ZUGEORDNET
+4125;F;05.13;Ätzung im Enddarmbereich, als selbständige Leistung, je Sitzung;11.83;768|699|698;0.94;ZUGEORDNET
 4126;F;05.13;Photodynamische Diagnostik von Hautläsionen;41.10;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4127;F;05.13;Photodynamische Lichtbestrahlung von Hautläsionen bei einem Bestrahlungsfeld bis zu 30 cm² Die Kosten für die photosensibilisierende Substanz sind gesondert berechnungsfähig.;62.45;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-4128;F;05.13;Zuschlag zu der Leistung nach Nummer 4127 für jedes weitere Bestrahlungsfeld bis zu 30 cm²;13.75;563|564;0.04;ZUGEORDNET
+4128;F;05.13;Zuschlag zu der Leistung nach Nummer 4127 für jedes weitere Bestrahlungsfeld bis zu 30 cm²;13.75;563;0.04;ZUGEORDNET
 4129;F;05.13;Ganzkörper-Phototherapie mit selektivem langwelligem UVA-I-Licht (Mindeststärke 12 kW), je Sitzung Seite 222;34.21;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4130;F;05.13;Phototherapie mit selektivem UV-Spektrum, je Sitzung;13.47;567;0.97;ZUGEORDNET
 4131;F;05.13;Photochemotherapie, je Sitzung;17.18;565;0.99;ZUGEORDNET
@@ -1033,10 +1033,10 @@
 4147;F;05.13;Zuschlag zu den Leistungen des Abschnitts F XIII, die mit einem nicht unterschreitbaren Gebührensatz von mehr als 25,00 EUR bis zu 37,00 EUR bewertet sind, für die Durchführung an einem Kind bis zum v;25.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4148;F;05.13;Zuschlag zu den Leistungen des Abschnitts F XIII, die mit einem nicht unterschreitbaren Gebührensatz von mehr als 37,00 EUR bewertet sind, für die Durchführung an einem Kind bis zum vollendeten 8. Leb;35.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4200;F;05.14;Abdruckherstellung an einer oberen Extremität, ggf. einschließlich Erstellen eines Konstruktionsplans Die Leistung nach Nummer 4200 ist zweimal berechnungsfähig, wenn zusätzlich ein Abdruck von der Sc;55.14;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-4201;F;05.14;Abdruckherstellung am Rumpf, ggf. einschließlich - Einbeziehung des Beckens - Erstellen eines Konstruktionsplans;55.14;3316|3317|3321;0.21;ZUGEORDNET
+4201;F;05.14;Abdruckherstellung am Rumpf, ggf. einschließlich - Einbeziehung des Beckens - Erstellen eines Konstruktionsplans;55.14;3316;0.21;ZUGEORDNET
 4202;F;05.14;Orthesenanpassung Rumpf, Schulter- oder Hüftbereich;38.80;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4203;F;05.14;Orthesenanpassung Ellenbogen, Kniegelenk, Hand- oder Fußbereich;31.41;2112;0.24;ZUGEORDNET
-4204;F;05.14;Abdruckherstellung an einer unteren Extremität, ggf. einschließlich Erstellen eines Konstruktionsplans Die Leistung nach Nummer 4204 ist zweimal berechnungsfähig, wenn zusätzlich ein Abdruck vom Becke;55.14;3315;0.17;ZUGEORDNET
+4204;F;05.14;Abdruckherstellung an einer unteren Extremität, ggf. einschließlich Erstellen eines Konstruktionsplans Die Leistung nach Nummer 4204 ist zweimal berechnungsfähig, wenn zusätzlich ein Abdruck vom Becke;55.14;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4205;F;05.14;Abdruckherstellung eines Fußes oder beider Füße, ggf. einschließlich Erstellen eines Konstruktionsplans Die Leistung nach Nummer 4205 ist neben der Leistung nach Nummer 4204 nicht berechnungsfähig.;23.48;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4206;F;05.14;Statische computergestützte Wirbelsäulenvermessung;78.77;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4207;F;05.14;Dynamische computergestützte Wirbelsäulenvermessung;113.35;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -1054,7 +1054,7 @@
 4219;F;05.14;Eingangs- oder Abschlussuntersuchung zur medizinischen Trainingstherapie von Wirbelsäule, Becken oder Extremitäten, einschließlich - Dokumentation - biomechanischer Funktionsanalysen bzw. funktionsbez;103.39;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4220;F;05.14;Medizinische Trainingstherapie von Wirbelsäule, Becken oder Extremitäten, mit Sequenztraining als progressiv-dynamisches Muskeltraining an speziellen Therapiemaschinen, einschließlich ärztlicher Super;45.81;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4221;F;05.14;Medizinische Trainingstherapie von Wirbelsäule, Becken oder Extremitäten, mit Sequenztraining als progressiv-dynamisches Muskeltraining an speziellen Therapiemaschinen, als Gruppenbehandlung mit bis z;25.12;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-4222;F;05.14;Radiale Stoßwellenbehandlung, ggf. einschließlich - Lokalanästhesie - Ultraschallkontrolle, je Sitzung Die Leistung nach Nummer 4222 ist bis zu fünfmal je Behandlungsfall berechnungsfähig.;89.73;548;0.18;ZUGEORDNET
+4222;F;05.14;Radiale Stoßwellenbehandlung, ggf. einschließlich - Lokalanästhesie - Ultraschallkontrolle, je Sitzung Die Leistung nach Nummer 4222 ist bis zu fünfmal je Behandlungsfall berechnungsfähig.;89.73;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4223;F;05.14;Fokussierte Stoßwellenbehandlung, ggf. einschließlich - Lokalanästhesie - Ultraschallkontrolle, je Sitzung Die Leistung nach Nummer 4223 ist bis zu fünfmal je Behandlungsfall berechnungsfähig.;193.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4224;F;05.14;Funktionelle Übungsbehandlung als Anleitung zum Eigentraining auch an medikomechanischen Apparaten, vom Arzt selbst ausgeführt, je Sitzung, Dauer mindestens 5 Minuten;11.77;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4225;F;05.14;Osteopathisch medizinische Behandlung im viszeralen Bereich, Dauer unter 10 Minuten Die Leistung nach Nummer 4225 ist entweder als alleinige Leistung oder als Abschlussleistung zur Leistung nach Numme;7.41;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -1115,7 +1115,7 @@
 4344;G;06.01;Quantitativer Riech- (z.B. zur Diagnostik bei Morbus Parkinson) und/oder Geschmackstest, ggf. einschließlich Schwellenwertbestimmung, je Sitzung Bei Nebeneinanderberechnung der Leistungen nach den Num;53.89;825;0.9;ZUGEORDNET
 4345;G;06.01;Klinische Untersuchung von kognitiv-mnestischen und neuropsychologischen Funktionen Die Leistung nach Nummer 4345 ist berechnungsfähig, wenn mindestens drei kognitive Domänen (komplexe Aufmerksamkeit,;57.45;830;0.7;ZUGEORDNET
 4346;G;06.01;Zuschlag für neurologische und/oder psychiatrische und/oder psychosomatische und/oder kinder- oder jugendpsychiatrische Untersuchungsleistung bei Patienten mit kognitiven Einschränkungen und/oder kran;30.32;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-4347;G;06.01;Planung, Koordination oder Organisation eines multimodalen Behandlungskonzepts mit komplementären Versorgungsstrukturen oder intensivierter medikamentöser oder somatischer Therapiemaßnahmen bei Patien;84.08;832;0.17;ZUGEORDNET
+4347;G;06.01;Planung, Koordination oder Organisation eines multimodalen Behandlungskonzepts mit komplementären Versorgungsstrukturen oder intensivierter medikamentöser oder somatischer Therapiemaßnahmen bei Patien;84.08;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4348;G;06.01;Aushäusig stattfindende Planung, Koordination und Organisation eines multimodalen Behandlungskonzepts für Patienten mit komplexen neurologischen, neuropsychologischen, psychischen oder psychosomatisch;113.39;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4349;G;06.01;Eigenständige Anleitung einer Bezugsperson in der krankheitsadäquaten Betreuung eines Patienten mit schweren Funktionsbehinderungen oder Kommunikationsstörungen aufgrund einer neurologischen, psychisc;59.90;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4350;G;06.01;Basales Neuromonitoring zur kontinuierlichen Behandlung und Überwachung auf der Stroke Unit, einschließlich - wiederholtem syndromspezifischen Scoring bzw. partieller neurologischer Untersuchung - Mes;142.35;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -1246,13 +1246,13 @@
 4716;H;07.02;Einlegen und/oder Wechsel eines Intrauterinpessars, ggf. einschließlich Dehnung des inneren Muttermundes (Isthmus);47.60;1091|1090;0.78;ZUGEORDNET
 4717;H;07.02;Entfernung eines Intrauterinpessars, ggf. einschließlich Dehnung des inneren Muttermundes (Isthmus);24.49;1092|1041;0.75;ZUGEORDNET
 4718;H;07.02;Zyklus-Monitoring zur Abklärung, einschließlich - Follikulometrie - Kontrolle des Endometrium(aufbau)s - Ovulationsmonitoring mittels Ultraschall, je Sitzung Die Leistung nach Nummer 4718 ist neben de;52.22;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-4719;H;07.02;Diagnostische Hysteroskopie, einschließlich Dehnung des inneren Muttermundes (Isthmus), ggf. einschließlich Inspektion der Tubenabgänge;118.62;1110|1111|1112;0.46;ZUGEORDNET
+4719;H;07.02;Diagnostische Hysteroskopie, einschließlich Dehnung des inneren Muttermundes (Isthmus), ggf. einschließlich Inspektion der Tubenabgänge;118.62;1110|1111;0.46;ZUGEORDNET
 4720;H;07.02;Amnioskopie;28.47;1010|1014;0.99;ZUGEORDNET
 4721;H;07.02;Diagnostische Amniozentese, einschließlich Fruchtwasserentnahme unter Ultraschallsicht;68.09;1011;0.92;ZUGEORDNET
 4722;H;07.02;Chorionzottenbiopsie, unter Ultraschallsicht;90.33;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4723;H;07.02;Nabelschnurpunktion (Chordozentese), unter Ultraschallsicht, ggf. einschließlich Injektion eines Arzneimittels;90.33;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4724;H;07.02;Diagnostische Embryofetoskopie, unter Ultraschallsicht;121.08;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-4725;H;07.02;Intraamniale Injektion zur Beendigung der Schwangerschaft, einschließlich Applikation des wehenfördernden Medikamentes und Ultraschallkontrolle;128.26;1052|1022;0.2;ZUGEORDNET
+4725;H;07.02;Intraamniale Injektion zur Beendigung der Schwangerschaft, einschließlich Applikation des wehenfördernden Medikamentes und Ultraschallkontrolle;128.26;1052;0.2;ZUGEORDNET
 4726;H;07.02;Therapeutische Amnionpunktion, ggf. einschließlich Auffüllung;120.92;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4727;H;07.02;Intrauterine Therapie des Fetus durch Nabelschnurtransfusion, einschließlich Ultraschallkontrolle, ggf. einschließlich - Nabelschnurpunktion - Injektion von Arzneimitteln - Transfusion von Erythrozyte;184.59;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4728;H;07.02;Intrauterine Therapie des Fetus durch Auffüllung oder Austausch von Fruchtwasser, einschließlich Ultraschallkontrolle, ggf. einschließlich Injektion von Arzneimitteln;184.59;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -1274,7 +1274,7 @@
 4744;H;07.02;Zuschlag zu der Leistung nach Nummer 4739 oder 4740 für innere oder kombinierte Wendung;66.14;1029|1787;0.33;ZUGEORDNET
 4745;H;07.02;Zuschlag zu der Leistung nach Nummer 4739 oder 4740 für die komplette manuelle Extraktion;66.14;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4746;H;07.02;Nicht vollendete vaginale Entbindung;96.59;1027|1025|1030|1031|1137|1085;0.52;ZUGEORDNET
-4747;H;07.02;Schnittentbindung (Sectio caesarea), ggf. einschließlich - manueller Plazentalösung - Kürettage;273.07;1032|2800;0.27;ZUGEORDNET
+4747;H;07.02;Schnittentbindung (Sectio caesarea), ggf. einschließlich - manueller Plazentalösung - Kürettage;273.07;1032;0.27;ZUGEORDNET
 4748;H;07.02;Erneute Schnittentbindung (Re-Sectio caesarea), ggf. einschließlich - manueller Plazentalösung - Kürettage;319.70;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4749;H;07.02;Zuschlag zu der Leistung nach Nummer 4747 oder 4748 für Uterusexstirpation;404.21;1035|1036;0.18;ZUGEORDNET
 4750;H;07.02;Manuelle Plazentalösung oder Entfernung von Plazentaresten, ggf. einschließlich Kürettage;143.02;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -1371,7 +1371,7 @@
 4862;I;08.00;Analyse der Lipidsekretion der Meibomdrüsen Die medizinische Notwendigkeit für die Durchführung der Leistung nach Nummer 4862 ist in der Rechnung anzugeben.;6.88;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4863;I;08.00;Thermodynamische Therapie der Meibomdrüsen-Dysfunktion Die medizinische Notwendigkeit für die Durchführung der Leistung nach Nummer 4863 ist in der Rechnung anzugeben.;16.21;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4864;I;08.00;Temporärer oder dauerhafter Tränenwegsverschluss durch Implantat und/oder Entfernung und/oder Wechsel eines temporären Verschlusses der ableitenden Tränenwege und/oder Entfernung einer Tränenwegsintub;33.34;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-4865;I;08.00;Injektionsbehandlung des Blepharospasmus und/oder des spastischen Entropiums, z.B. mit Botulinum-Toxin, je Auge;36.74;780;0.15;ZUGEORDNET
+4865;I;08.00;Injektionsbehandlung des Blepharospasmus und/oder des spastischen Entropiums, z.B. mit Botulinum-Toxin, je Auge;36.74;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4866;I;08.00;Postoperative Betreuung, Führung und Schulung eines Patienten nach Implantation einer intraokularen Sonderlinse mit Zusatzfunktion Die Leistung nach Nummer 4866 ist nach der Implantation einer intraok;43.28;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4867;I;08.00;Postoperative Messung der Achslage einer torischen intraokularen Sonderlinse Die Leistung nach Nummer 4867 ist neben dem Zuschlag nach Nummer 10370 nicht berechnungsfähig.;35.16;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4868;I;08.00;Wellenfront-Analyse des gesamten Abbildungsapparates des Auges zur Ermittlung der Abbildungsfehler höherer Ordnung;71.41;5335;0.04;ZUGEORDNET
@@ -1467,7 +1467,7 @@
 4986;J;09.00;Zuschlag zu der Leistung nach Nummer 4980 für die Untersuchung während und nach der Aufnahme von Nahrung oder Flüssigkeit in unterschiedlicher Menge, Farbe und Konsistenz zur eingehenden Untersuchung ;52.65;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4987;J;09.00;Elektroglottographische Untersuchung und/oder Kehlkopf-Impedanzmessung (laryngeale Impedanzmessung im Kontaktflächen-Zeitdiagramm, Untersuchung mit Bestimmung der Schwingungsperioden, -phasen und -amp;68.28;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4988;J;09.00;Zuschlag zu der Leistung nach Nummer 4987 für die Bestimmung der Larynxelevation während der Phonation;16.68;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-4989;J;09.00;Stimmtherapie bei Kehlkopflosen (Speiseröhren-Ersatzstimme, Stimmprothese oder elektronische Ersatzstimme), je Sitzung;31.31;1558|1527;0.68;ZUGEORDNET
+4989;J;09.00;Stimmtherapie bei Kehlkopflosen (Speiseröhren-Ersatzstimme, Stimmprothese oder elektronische Ersatzstimme), je Sitzung;31.31;1558;0.68;ZUGEORDNET
 4990;J;09.00;Stimm-, Sprech-, Sprach- und/oder Schluckübungsbehandlung, Einzelbehandlung, ggf. einschließlich Atemtherapie und physikalischer Maßnahmen (außer Reizstrombehandlung), Dauer mindestens 30 Minuten;45.19;1559|1560|551;0.56;ZUGEORDNET
 4991;J;09.00;Stimm-, Sprech-, Sprach- und/oder Schluckübungsbehandlung, Gruppenbehandlung mit einer Teilnehmerzahl von höchstens fünf Personen, Dauer mindestens 30 Minuten, ggf. einschließlich Atemtherapie und phy;15.06;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 4992;J;09.00;Sialendoskopie von Parotis oder Submandibularis-Gang, ggf. einschließlich - Sondierung - Bougierung - Injektionen in das Gangsystem und Entfernung von Steinen mittels Zange - Oberflächen- und/oder Inf;399.29;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -1523,7 +1523,7 @@
 5123;K;10.00;Zuschlag zu den Leistungen des Kapitels K, die mit einem nicht unterschreitbaren Gebührensatz von mehr als 25,00 EUR bis zu 40,00 EUR bewertet sind, für die Durchführung an einem Kind bis zum vollende;25.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 5124;K;10.00;Zuschlag zu den Leistungen des Kapitels K, die mit einem nicht unterschreitbaren Gebührensatz von mehr als 40,00 EUR bewertet sind, für die Durchführung an einem Kind bis zum vollendeten 8. Lebensjahr;35.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 5200;L;;Zuschlag bei ambulanter Durchführung von operativen Leistungen des Kapitels L, die mit einem nicht unterschreitbaren Gebührensatz von mehr als 30,00 EUR bis zu 55,00 EUR bewertet sind;25.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-5201;L;;Zuschlag bei ambulanter Durchführung von operativen Leistungen des Kapitels L, die mit einem nicht unterschreitbaren Gebührensatz von mehr als 55 EUR bis zu 301,00 EUR bewertet sind;72.02;442|448;0.21;ZUGEORDNET
+5201;L;;Zuschlag bei ambulanter Durchführung von operativen Leistungen des Kapitels L, die mit einem nicht unterschreitbaren Gebührensatz von mehr als 55 EUR bis zu 301,00 EUR bewertet sind;72.02;442;0.21;ZUGEORDNET
 5202;L;;Zuschlag bei ambulanter Durchführung von operativen Leistungen des Kapitels L, die mit einem nicht unterschreitbaren Gebührensatz von mehr als 301,00 EUR und bis zu 523,00 EUR bewertet sind;138.70;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 5203;L;;Zuschlag bei ambulanter Durchführung von operativen Leistungen des Kapitels L, die mit einem nicht unterschreitbaren Gebührensatz von mehr als 523,00 EUR und bis zu 824,00 EUR bewertet sind;191.75;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 5204;L;;Zuschlag bei ambulanter Durchführung von operativen Leistungen des Kapitels L, die mit einem nicht unterschreitbaren Gebührensatz von mehr als 824,00 EUR und bis zu 1261,00 EUR bewertet sind;243.59;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -1555,7 +1555,7 @@
 5618;L;11.01;Zuschlag zu der Leistung nach Nummer 5617 für Fremdkörperexzisionen aus Gesicht, Hals (ohne Nacken), Hand oder Fußsohle;18.93;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 5619;L;11.01;Zuschlag zu der Leistung nach Nummer 5617 für Fremdkörperexzisionen aus Cutis und Subkutis, mehr als 1 cm Tiefe ab Oberfläche;18.93;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 5700;L;11.01;Blasenabtragung: Gesicht, Hals (ohne Nacken), Hand, Genitale, Fuß, bis zu 25 cm², ggf. einschließlich - Auftragen von Externa (z.B. Salben) - Auflegen von Wundabdeckungen (z.B. auch Folien, Membranen,;35.22;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-5701;L;11.01;Zuschlag zu der Leistung nach Nummer 5700 für jede weiteren 25 cm² Die Fläche über 25 cm² und die Lokalisation sind in der Rechnung anzugeben.;18.93;5732|5735;0.16;ZUGEORDNET
+5701;L;11.01;Zuschlag zu der Leistung nach Nummer 5700 für jede weiteren 25 cm² Die Fläche über 25 cm² und die Lokalisation sind in der Rechnung anzugeben.;18.93;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 5702;L;11.01;Blasenabtragung: alle übrige Regionen, bis zu 100 cm², ggf. einschließlich - Auftragen von Externa (z.B. Salben) - Auflegen von Wundabdeckungen (z.B. auch Folien, Membranen, Matrizes und mikroporöse W;35.22;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 5703;L;11.01;Zuschlag zu der Leistung nach Nummer 5702 für jede weiteren 100 cm² Die Fläche über 100 cm² und die Lokalisation sind in der Rechnung anzugeben.;18.93;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 5800;L;11.01;Tangentiale Exzision bei Brandwunden: Gesicht, Hals (ohne Nacken), Hand, Genitale, bis zu 25 cm², ggf. einschließlich - Exzision in mehreren Schichten - Entfernen von nekrotischem Gewebe - Auftragen v;91.72;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -1725,7 +1725,7 @@
 7100;L;11.01;Trepanation eines Finger- oder Zehennagels aus einer eigenständigen Indikation heraus, ggf. einschließlich Gaze-/Salbenverband;19.14;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7101;L;11.01;Extraktion oder Teilextraktion eines Finger- oder Zehennagels aus einer eigenständigen Indikation heraus, ggf. einschließlich Gaze-/Salbenverband;17.03;2033;0.25;ZUGEORDNET
 7102;L;11.01;Keilexzision Nagelwall, eine Nagelseite, mit totaler Exzision des entzündeten Nagelbettes und Entfernung des entsprechenden Anteils der Nagelwurzel, ggf. einschließlich - Defektdeckung - Gaze-/Salbenv;25.03;2035;0.32;ZUGEORDNET
-7103;L;11.01;Keilexzision Nagelwall, beide Nagelseiten eines Fingers oder einer Zehe, mit totaler Exzision des entzündeten Nagelbettes und Entfernung der entsprechenden Anteile der Nagelwurzel, ggf. einschließlich;32.09;2008;0.16;ZUGEORDNET
+7103;L;11.01;Keilexzision Nagelwall, beide Nagelseiten eines Fingers oder einer Zehe, mit totaler Exzision des entzündeten Nagelbettes und Entfernung der entsprechenden Anteile der Nagelwurzel, ggf. einschließlich;32.09;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7104;L;11.01;Inzision und/oder Wundversorgung eines Panaritiums, ggf. einschließlich Gaze-/Salbenverband;60.92;2031|2030;0.35;ZUGEORDNET
 7105;L;11.01;Partielle Exzision der Nagelmatrix eines Finger- oder Zehennagels aus einer eigenständigen Indikation heraus, einschließlich Nagelextraktion und Exzision der Nagelwurzel, ggf. einschließlich Gaze-/Sal;55.63;2034;0.38;ZUGEORDNET
 7106;L;11.01;Exzision der gesamten Nagelmatrix eines Finger- oder Zehennagels aus einer eigenständigen Indikation heraus, einschließlich Nagelextraktion und Exzision der Nagelwurzel, ggf. einschließlich Gaze-/Salb;79.17;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -1743,7 +1743,7 @@
 7211;L;11.01;Zuschlag zu der Leistung nach Nummer 7210 für vollständige Korrektur eines weiteren Strahls bei Kamptodaktylie;284.02;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7212;L;11.01;Korrektur bei Klinodaktylie mit aberrierenden Wachstumsfugen, einschließlich Weichteilrelease sowie Darstellung und Verlagerung der Nerven und Gefäße, als selbständige Leistung, ggf. einschließlich - ;447.67;1834;0.24;ZUGEORDNET
 7213;L;11.01;Korrektur-Osteotomie bei Kirner-Deformität und/oder Epiphyseodese, ggf. einschließlich - Osteosynthese - Röntgenkontrolle - Blutleere - Bleihandlagerung - mikrochirurgischer Technik - Schienenverband ;384.56;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-7214;L;11.01;Korrektur bei Windmühlendeformität mit Beseitigung von Kontrakturen, ggf. einschließlich - regionales und freies Hauttransplantat (einschließlich Hebung) - Beuge- und Strecksehnenkorrektur sowie Sehne;889.48;2276|2080;0.28;ZUGEORDNET
+7214;L;11.01;Korrektur bei Windmühlendeformität mit Beseitigung von Kontrakturen, ggf. einschließlich - regionales und freies Hauttransplantat (einschließlich Hebung) - Beuge- und Strecksehnenkorrektur sowie Sehne;889.48;2276;0.28;ZUGEORDNET
 7215;L;11.01;Korrektur einer partiellen kutanen Syndaktylie, einschließlich lokaler Hautlappenplastik und/oder freies Hauttransplantat (einschließlich Hebung), ggf. einschließlich - Blutleere - Bleihandlagerung - ;342.48;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7216;L;11.01;Korrektur einer vollständigen kutanen Syndaktylie, einschließlich lokaler Hautlappenplastik und/oder freies Hauttransplantat (einschließlich Hebung), ggf. einschließlich - Freilegung und Verlagerung v;742.21;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7217;L;11.01;Korrektur bei vollständiger kutaner und ossärer Syndaktylie, einschließlich Osteotomien sowie lokaler Hautlappenplastik und/oder Hauttransplantaten (einschließlich Hebung), ggf. einschließlich - Freil;826.36;2043|2044;0.26;ZUGEORDNET
@@ -1831,7 +1831,7 @@
 7457;L;11.01;Tubusimplantation im Rahmen der IORT (Intraoperative Strahlentherapie);165.26;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7458;L;11.01;Clipmarkierung im Rahmen mammachirurgischer Eingriffe;34.60;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7500;L;11.02;Geschlossene Reposition einer einfachen Fraktur oder Epiphysenlösung von Mittelhand- oder Mittelfußknochen einer Seite;48.90;2172;0.49;ZUGEORDNET
-7501;L;11.02;Geschlossene Reposition einer einfachen Fraktur oder Epiphysenlösung eines Grund-, Mittel- oder Endgliedknochens eines Fingers oder einer Zehe;46.53;2338;0.17;ZUGEORDNET
+7501;L;11.02;Geschlossene Reposition einer einfachen Fraktur oder Epiphysenlösung eines Grund-, Mittel- oder Endgliedknochens eines Fingers oder einer Zehe;46.53;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7502;L;11.02;Zuschlag zu der Leistung nach Nummer 7500 oder 7501 für die geschlossene Reposition einer periprothetischen Fraktur;33.11;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7503;L;11.02;Geschlossene Reposition einer einfachen Fraktur oder Epiphysenlösung eines Schlüsselbeins;84.43;2223|2324|2325;0.32;ZUGEORDNET
 7504;L;11.02;Geschlossene Reposition einer einfachen Fraktur oder Epiphysenlösung einer Rippe;34.40;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -1840,7 +1840,7 @@
 7507;L;11.02;Zuschlag zu der Leistung nach Nummer 7500, 7501, 7503, 7504 oder 7505 für die geschlossene Reposition einer Fraktur mit Gelenkbeteiligung;39.73;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7508;L;11.02;Geschlossene Reposition einer einfachen Fraktur oder Epiphysenlösung eines Brustbeins oder eines Schulterblattes;34.40;2326;0.42;ZUGEORDNET
 7509;L;11.02;Geschlossene Reposition einer einfachen Fraktur oder Epiphysenlösung eines Oberarmknochens;148.69;2327;0.37;ZUGEORDNET
-7510;L;11.02;Geschlossene Reposition einer einfachen Fraktur oder Epiphysenlösung von einem oder beiden Unterarmknochen einer Seite;126.53;2328|2071;0.32;ZUGEORDNET
+7510;L;11.02;Geschlossene Reposition einer einfachen Fraktur oder Epiphysenlösung von einem oder beiden Unterarmknochen einer Seite;126.53;2328;0.32;ZUGEORDNET
 7511;L;11.02;Geschlossene Reposition einer einfachen Fraktur oder Epiphysenlösung von Handwurzel- oder Fußwurzelknochen einer Seite;61.67;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7512;L;11.02;Geschlossene Reposition einer einfachen Fraktur oder Epiphysenlösung eines Beckenknochens;191.33;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7513;L;11.02;Geschlossene Reposition einer einfachen Fraktur oder Epiphysenlösung eines Oberschenkelknochens;166.40;2330|3312;0.38;ZUGEORDNET
@@ -1869,10 +1869,10 @@
 7536;L;11.02;Zuschlag zu der Leistung nach Nummer 7519, 7522, 7523, 7528, 7529, 7534 oder 7535 für die offene Reposition einer Mehrfragmentfraktur;153.03;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7537;L;11.02;Zuschlag zu der Leistung nach Nummer 7519, 7522, 7523, 7528, 7529, 7534 oder 7535 für die offene Reposition einer Fraktur mit Gelenkbeteiligung;196.75;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7538;L;11.02;Zuschlag zu der Leistung nach Nummer 7519, 7522, 7523, 7528, 7529, 7534 oder 7535 für die offene Reposition einer periprothetischen Fraktur;196.75;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-7539;L;11.02;Geschlossene Mobilisation eines kleinen Gelenks in Narkose und/oder Regionalanästhesie, als selbständige Leistung Die Leistung nach Nummer 7539 ist für präoperative Bewegungsprüfung oder Lagerung nich;50.00;450|453;0.13;ZUGEORDNET
+7539;L;11.02;Geschlossene Mobilisation eines kleinen Gelenks in Narkose und/oder Regionalanästhesie, als selbständige Leistung Die Leistung nach Nummer 7539 ist für präoperative Bewegungsprüfung oder Lagerung nich;50.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7540;L;11.02;Geschlossene Mobilisation eines großen Gelenks in Narkose und/oder Regionalanästhesie, als selbständige Leistung Die Leistung nach Nummer 7540 ist für präoperative Bewegungsprüfung oder Lagerung nicht;70.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7541;L;11.02;Geschlossene Reposition der Luxation eines Acromioclavicular- oder Sternoclaviculargelenks oder eines distalen oder proximalen Tibiofibulargelenks oder eines distalen oder proximalen Radioulnargelenks;33.33;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-7542;L;11.02;Geschlossene Reposition der Luxation eines Schultergelenks;70.00;2217|2218|2219|2220|3314;0.77;ZUGEORDNET
+7542;L;11.02;Geschlossene Reposition der Luxation eines Schultergelenks;70.00;2217|2218|2219|2220;0.77;ZUGEORDNET
 7543;L;11.02;Geschlossene Reposition der Luxation eines Ellbogengelenks;85.00;2207|2208|2209;0.27;ZUGEORDNET
 7544;L;11.02;Geschlossene Reposition der Luxation von Handwurzel- oder Fußwurzelgelenken einer Seite;95.00;2331;0.32;ZUGEORDNET
 7545;L;11.02;Geschlossene Reposition der Luxation eines Handgelenks oder eines oberen oder unteren Sprunggelenks;95.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -1991,7 +1991,7 @@
 7658;L;11.02;Arthrotomie eines großen Gelenks, offen chirurgisch über einen eigenständigen Zugang, ggf. einschließlich - Exploration des Gelenks - Einlegen und/oder Entfernen eines oder mehrerer Medikamententräger;484.93;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7659;L;11.02;Refixation eines osteochondralen Fragmentes in einem kleinen Gelenk, ggf. einschließlich - Knochenbohrung und/oder -Anfrischen - Ausräumung eines Hämatoms;241.66;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7660;L;11.02;Refixation eines osteochondralen Fragmentes in einem großen Gelenk, ggf. einschließlich - Knochenbohrung und/oder -Anfrischen - Ausräumung eines Hämatoms;344.22;2976;0.45;ZUGEORDNET
-7661;L;11.02;Zuschlag zu Leistungen der Fraktur- oder Gelenkversorgung des Abschnitts L II für die Osteotomie eines nicht betroffenen Knochens (z.B. Malleolus, Olecranon oder Trochanter major);179.87;2275;0.03;ZUGEORDNET
+7661;L;11.02;Zuschlag zu Leistungen der Fraktur- oder Gelenkversorgung des Abschnitts L II für die Osteotomie eines nicht betroffenen Knochens (z.B. Malleolus, Olecranon oder Trochanter major);179.87;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7662;L;11.02;Entfernung von bis zu drei unter der Faszie liegenden Fremdkörpern, offen chirurgisch, ggf. einschließlich Einlegen eines oder mehrerer Medikamententräger;187.03;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7663;L;11.02;Zuschlag zu der Leistung nach Nummer 7662 für die Entfernung von mehr als drei Fremdkörpern;96.44;3238|2010|3156;0.07;ZUGEORDNET
 7664;L;11.02;Resektion von Knochengewebe eines kleinen Knochens, auch Sequesterotomie, ggf. einschließlich - Einlage eines oder mehrerer Medikamententräger - Maßnahmen an Muskel(n) und/oder Sehne(n) und/oder Faszi;267.70;2263;0.23;ZUGEORDNET
@@ -2043,7 +2043,7 @@
 7710;L;11.02;Spaltung oder Durchtrennung einer oder mehrerer Sehnenscheiden im Bereich der Daumenstrecker am Handgelenk (Morbus de Quervain), ggf. einschließlich - Teilresektion(en) - Probeexzision(en) - Lösen von;271.81;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7711;L;11.02;Spaltung oder Durchtrennung eines oder mehrerer Ringbänder an einem Finger oder einer Zehe über einen eigenständigen Zugang, ggf. einschließlich - Teilresektion(en) - Probeexzision(en) - Lösen von Ver;263.93;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7712;L;11.02;Spaltung oder Durchtrennung eines Retinakulums der Patella;343.09;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-7713;L;11.02;Zuschlag zu der Leistung nach Nummer 7712 für die Abtragung von Osteophyten, Exophyten und/oder Exostosen an einer oder mehreren Lokalisationen, ggf. einschließlich Denervation(en);151.35;2295;0.04;ZUGEORDNET
+7713;L;11.02;Zuschlag zu der Leistung nach Nummer 7712 für die Abtragung von Osteophyten, Exophyten und/oder Exostosen an einer oder mehreren Lokalisationen, ggf. einschließlich Denervation(en);151.35;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7714;L;11.02;Zuschlag zu der Leistung nach Nummer 7712 für die Teilexstirpation der Patella, ggf. einschließlich Denervation(en);174.63;2344;0.09;ZUGEORDNET
 7715;L;11.02;Vollständige Entfernung einer Sehne oder einer Faszie oder eines Muskels oder einer Sehnenscheide, ggf. einschließlich - Lösen von Verwachsungen - teilweise oder komplette Tendosynovialektomie Die Lei;387.93;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7716;L;11.02;Offen chirurgischer Eingriff an einer Sehne und/oder einem Muskel und/oder einer Faszie und/oder einer Sehnenscheide über einen gemeinsamen Zugang proximal des Handgelenks oder des oberen Sprunggelenk;380.64;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -2061,7 +2061,7 @@
 7728;L;11.02;Lösen von Verwachsungen um eine Sehne, als selbständige Leistung, ggf. einschließlich - teilweise oder komplette Tendosynovialektomie - teilweise oder komplette Entfernung einer Sehnenscheide - Glätte;305.66;2076;0.44;ZUGEORDNET
 7729;L;11.02;Herstellung eines Sehnengleitlagers, ggf. einschließlich - Entnahme einer Sehne oder Faszie - Ausräumung von verändertem Gewebe - teilweise oder komplette Tendosynovialektomie - teilweise oder komplet;285.67;2082;0.22;ZUGEORDNET
 7730;L;11.02;Eröffnung einer Sehnenscheide und Anlegen einer Spülvorrichtung, ggf. einschließlich - Ausräumung von verändertem Gewebe - teilweise oder komplette Tendosynovialektomie - teilweise oder komplette Entf;245.68;1543;0.3;ZUGEORDNET
-7731;L;11.02;Spülung einer Sehnenscheide ohne weitere operative Maßnahmen;112.46;2090|2084|2091|1290|2284|1051|2195;0.6;ZUGEORDNET
+7731;L;11.02;Spülung einer Sehnenscheide ohne weitere operative Maßnahmen;112.46;2090|2084|2091|1290|2284;0.6;ZUGEORDNET
 7732;L;11.02;Knöcherne Sehnenansatzversetzung, ggf. einschließlich - Knochenbohrung - Abtragung von Osteophyten, Exophyten und/oder Exostosen an einer oder mehreren Lokalisationen - Entfernung von Schleimbeutel(n);393.41;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7733;L;11.02;Komplette Versetzung der Tuberositas tibiae (z.B. nach Roux-Hauser oder Blauth), ggf. einschließlich - Schaffung eines Knochenbettes - Knochenbohrung - Abtragung von Osteophyten, Exophyten und/oder Ex;583.43;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7734;L;11.02;Eingriff im Bereich der Patellarsehne und der Tuberositas tibiae bei Patellainstabilität (z.B. nach Goldtwaith), ggf. einschließlich - Schaffung eines Knochenbettes - Knochenbohrung - Abtragung von Os;409.01;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -2107,7 +2107,7 @@
 7774;L;11.02;Plastischer Ersatz eines oder mehrerer Bänder am Sprunggelenk medial oder lateral mit allogenem oder alloplastischem Material, ggf. einschließlich - Knochenbohrung und/oder Anfrischen von Knochen - kn;578.77;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7775;L;11.02;Fesselung der Peronealsehnen, ggf. einschließlich - Knochenbohrung und/oder Anfrischen von Knochen - knöcherner Verankerung mit autogenem oder allogenem Material - Abtragung von Osteophyten, Exophyten;564.97;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7776;L;11.02;Teilweise oder totale offene Fasziektomie an der Hohlhand bei Morbus Dupuytren, ggf. einschließlich - Neurolyse(n) - Arteriolyse(n) - einer oder mehrerer lokaler Hautverschiebeplastik(en) - Lösen von ;400.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-7777;L;11.02;Fasziektomie an einem Finger bei Morbus Dupuytren als selbständige Leistung, offen chirurgisch, ggf. einschließlich - Neurolyse(n) - Arthrolyse(n) - Arteriolyse(n) - einer oder mehrerer lokaler Hautve;600.00;2089;0.16;ZUGEORDNET
+7777;L;11.02;Fasziektomie an einem Finger bei Morbus Dupuytren als selbständige Leistung, offen chirurgisch, ggf. einschließlich - Neurolyse(n) - Arthrolyse(n) - Arteriolyse(n) - einer oder mehrerer lokaler Hautve;600.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7778;L;11.02;Perkutane Nadelfasziotomie bei Morbus Dupuytren oder Ledderhose, ggf. einschließlich gewaltsamer Mobilisierung eines oder mehrerer Faszienstränge;181.13;2088;0.19;ZUGEORDNET
 7779;L;11.02;Teilweise oder offen chirurgische Fasziektomie bei Morbus Ledderhose, ggf. einschließlich - Neurolyse(n) - Arteriolyse(n) - einer oder mehrerer lokaler Hautverschiebeplastik(en) - Lösen von Verwachsun;253.34;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 7780;L;11.02;Dekompression(en) bei einem Karpaltunnelsyndrom, offen chirurgisch, ggf. einschließlich - Durchtrennung eines Bandes - Teilresektion eines Bandes - Tendosynovialektomie - Dekompression eines oder mehr;321.47;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -2254,7 +2254,7 @@
 8059;L;11.04;Zuschlag zu der Leistung nach Nummer 8032, 8033, 8039, 8040, 8041, 8042, 8043, 8044, 8045, 8046, 8047, 8048, 8049, 8050, 8051, 8052, 8053 oder 8054 für die Entfernung mehrerer zementierter Prothesenan;389.64;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8060;L;11.04;Zuschlag zu der Leistung nach Nummer 8038, 8039, 8040, 8042, 8045, 8047, 8050, 8052, 8053 oder 8054 für eine Tuberositas tibiae- Osteotomie bei Entfernung und erneutem Einbau eines Oberflächenersatzes;421.44;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8061;L;11.04;Endoprothetischer Teilersatz des Schultergelenks, ggf. einschließlich - Drainage(n) - Synovialektomie (soweit nicht die Voraussetzung für die Berechnung der Zuschlagsleistung nach Nummer 8066 erfüllt ;855.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-8062;L;11.04;Endoprothetischer Totalersatz des Schultergelenks durch eine anatomische Prothese, ggf. einschließlich - Drainage(n) - Synovialektomie (soweit nicht die Voraussetzung für die Berechnung der Zuschlagsl;1146.66;2562;0.17;ZUGEORDNET
+8062;L;11.04;Endoprothetischer Totalersatz des Schultergelenks durch eine anatomische Prothese, ggf. einschließlich - Drainage(n) - Synovialektomie (soweit nicht die Voraussetzung für die Berechnung der Zuschlagsl;1146.66;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8063;L;11.04;Endoprothetischer Totalersatz des Schultergelenks durch eine inverse Prothese, ggf. einschließlich - Drainage(n) - Synovialektomie (soweit nicht die Voraussetzung für die Berechnung der Zuschlagsleist;1259.81;2153|2154;0.42;ZUGEORDNET
 8064;L;11.04;Endoprothetischer Teilersatz des Schultergelenks bei Verwendung einer Tumor- oder Sonderprothese, ggf. einschließlich - Drainage(n) - Synovialektomie (soweit nicht die Voraussetzung für die Berechnung;1328.34;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8065;L;11.04;Endoprothetischer Totalersatz des Schultergelenks bei Verwendung einer Tumor- oder Sonderprothese, ggf. einschließlich - Drainage(n) - Synovialektomie (soweit nicht die Voraussetzung für die Berechnun;1451.71;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -2385,7 +2385,7 @@
 8313;L;11.05;Transposition eines Finger- oder Zehennerves, einschließlich Durchtrennung und Naht des Nervens, ggf. einschließlich - mikrochirurgische Technik - Neurolysen - Stimulationen - Exzision(en) von Narben,;386.33;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8314;L;11.05;Transposition eines Nervens, außer Finger- oder Zehennerv, einschließlich Durchtrennung und Naht des Nervens, ggf. einschließlich - mikrochirurgische Technik - Neurolysen - Stimulationen - Exzision(en;490.31;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8315;L;11.05;Exzision von Nervengewebe von Gewebe eines peripheren Nervens (auch Neurom) und ggf. Narbengewebe, ggf. einschließlich - Exzision einer Narbe/eines Ganglions - Stimulation(en);335.76;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-8316;L;11.05;Zuschlag zu der Leistung nach Nummer 8315 für die zusätzliche Naht oder Versenkung im Muskel und/oder Knochen;116.52;1305;0.03;ZUGEORDNET
+8316;L;11.05;Zuschlag zu der Leistung nach Nummer 8315 für die zusätzliche Naht oder Versenkung im Muskel und/oder Knochen;116.52;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8317;L;11.05;Freilegung und Entnahme eines autologen peripheren Nerven, z.B. des N. suralis, zwecks Transplantation, einschließlich Aufbereitung, ggf. einschließlich Stimulation(en), je Extremität und Seite;212.97;2582;0.75;ZUGEORDNET
 8318;L;11.05;Mikrochirurgische Nervenersatzplastik eines peripheren Nervens mittels autologer Transplantation, als selbständige Leistung, ggf. einschließlich - Neurolysen - Stimulationen - Exzision(en) von Narben,;842.83;2585;0.28;ZUGEORDNET
 8319;L;11.05;Operation eines Tumors eines peripheren Nervens, ggf. einschließlich - Nervennaht - mikrochirurgische Technik - Stimulationen - Exzision(en) von Narben- und anderen den Nerv einengenden anatomischen S;897.38;2594;0.34;ZUGEORDNET
@@ -2411,7 +2411,7 @@
 8339;L;11.05;Implantation, Revision, Wechsel oder Explantation eines Systems zur längerfristigen lumbalen intrathekalen Arzneimitteltherapie als Port oder mit externer oder implantierbarer Pumpe, jeweils als selbs;451.41;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8340;L;11.05;Implantation, Revision, Wechsel oder Explantation eines Systems zur längerfristigen intrakraniell-intrathekalen Arzneimitteltherapie als Port oder mit externer oder implantierbarer Pumpe, jeweils als ;819.18;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8341;L;11.05;Operation einer Kraniostenose, ggf. einschließlich plastischer Rekonstruktionen;1405.50;2519|2572;0.55;ZUGEORDNET
-8342;L;11.05;Rekonstruktion einer gedeckten Impressionsfraktur des Hirnschädels oder Exzision oder Destruktion von erkranktem Gewebe eines Schädelknochens;956.97;2500|2525;0.69;ZUGEORDNET
+8342;L;11.05;Rekonstruktion einer gedeckten Impressionsfraktur des Hirnschädels oder Exzision oder Destruktion von erkranktem Gewebe eines Schädelknochens;956.97;2500;0.69;ZUGEORDNET
 8343;L;11.05;Operation einer offenen Impressions- oder Splitterfraktur des Hirnschädels;1099.35;2501;0.81;ZUGEORDNET
 8344;L;11.05;Operation eines intrakraniellen epiduralen Prozesses (z.B. Hämatom, Empyem);1117.85;2502;0.53;ZUGEORDNET
 8345;L;11.05;Operation einer gedeckten Schädel-Hirn-Verletzung mit akutem subduralen Hämatom, ggf. einschließlich - Operation der Hirnverletzung - Operation von intrazerebralen Hämatomen auf einer Seite;1355.15;2510|2503;0.66;ZUGEORDNET
@@ -2513,7 +2513,7 @@
 8551;L;11.06;Behandlung eines Wirbelkörpers bzw. einer Wirbeldeformität durch intravertebrale Auffüllung von dorsal/lateral, ein- oder beidseits, durch Vertebroplastie oder Kyphoplastie, ggf. einschließlich Reposi;655.64;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8552;L;11.06;Zuschlag zu der Leistung nach Nummer 8551 für jeden weiteren Wirbelkörper;184.13;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8553;L;11.06;Halswirbelbruchbehandlung durch Zugverband mit Klammer, z.B. Extension nach Crutchfield oder Extension im Halo;134.05;2323|2183|2184;0.9;ZUGEORDNET
-8554;L;11.06;Geschlossene Reposition von luxierten und/oder gebrochenen Wirbelkörpern, -gelenken und/oder -bögen, einschließlich Anlage eines Zugverbands oder einer Extension;114.80;2332|2322|2320|2329|2347;0.3;ZUGEORDNET
+8554;L;11.06;Geschlossene Reposition von luxierten und/oder gebrochenen Wirbelkörpern, -gelenken und/oder -bögen, einschließlich Anlage eines Zugverbands oder einer Extension;114.80;2332|2322|2320|2329;0.3;ZUGEORDNET
 8555;L;11.06;Implantatentfernung(en) (z.B. Schrauben, Schrauben-Stab-Systeme, Platten und/oder Abstützvorrichtungen wie Cages, Bandscheibenprothesen und Wirbelkörperersatz, Zerklage(n), interspinöser Spacer, Haken;816.06;2289;0.22;ZUGEORDNET
 8556;L;11.06;Zuschlag zu der Leistung nach Nummer 8555 für transthorakalen oder retroperitonealen Zugang;234.32;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8557;L;11.06;Zuschlag zu der Leistung nach Nummer 8555 bei komplexer Metallentfernung (knöcherner Überbauung des Implantates und/oder mehr als 8 Schrauben und/oder Entfernung größer drei Segmente und/oder destruie;439.94;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -2539,7 +2539,7 @@
 8577;L;11.06;Komplexe Rekonstruktionen der Wirbelsäule beim Kind und Jugendlichen (bis zum vollendeten 20. Lebensjahr) durch ventrale Instrumentation mit mitwachsenden Systemen, bis zu 8 Segmente, ggf. einschließl;1745.31;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8578;L;11.06;Zuschlag zu der Leistung nach Nummer 8576 oder 8577 ab dem 9. Segment;586.59;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8579;L;11.06;Zuschlag zu der Leistung nach Nummer 8573, 8574 oder 8576 und/oder 8577 für eine Kostothorakoplastik, einschließlich Rippenbuckelresektion;219.97;2288;0.05;ZUGEORDNET
-8580;L;11.06;Nicht-operative Verlängerung oder Verkürzung eines mitwachsenden Implantates an der Wirbelsäule;149.89;1306;0.18;ZUGEORDNET
+8580;L;11.06;Nicht-operative Verlängerung oder Verkürzung eines mitwachsenden Implantates an der Wirbelsäule;149.89;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8581;L;11.06;Epiphyseodese an der Wirbelsäule beim Kind oder Jugendlichen, an einem Wirbelkörper;495.31;2286|3305;0.28;ZUGEORDNET
 8582;L;11.06;Zuschlag zu der Leistung nach Nummer 8581 für jeden weiteren Wirbelkörper;78.91;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8583;L;11.06;Offen chirurgische transpedikuläre Probeexzision;276.37;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -2578,7 +2578,7 @@
 8720;L;11.07;Zuschlag zu der Leistung nach Nummer 8719 für die Osteotomie eines Kieferanteils, ggf. einschließlich - Verlagerung - Fixation, je Osteotomie;84.92;2250;0.04;ZUGEORDNET
 8721;L;11.07;Zuschlag zu der Leistung nach Nummer 8719 für die Lagerbildung in gleicher Sitzung;111.89;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8722;L;11.07;Lagerbildung zur Aufnahme eines Transplantates als alleinige Leistung;161.56;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-8723;L;11.07;Primärer Verschluss des weichen Gaumens mit Muskelplastik;342.15;1349|1044|2006;0.24;ZUGEORDNET
+8723;L;11.07;Primärer Verschluss des weichen Gaumens mit Muskelplastik;342.15;1349|1044;0.24;ZUGEORDNET
 8724;L;11.07;Sekundärer Verschluss des weichen Gaumens mit Muskelplastik;342.15;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8725;L;11.07;Verschluss des harten Gaumens oder von Defekten im Bereich von hartem Gaumen, Nasenboden oder Vestibulum, je Defekt;329.40;2625|2627;0.62;ZUGEORDNET
 8726;L;11.07;Velopharyngoplastik, zur Sprechverbesserung;298.95;2626;0.88;ZUGEORDNET
@@ -2649,7 +2649,7 @@
 8791;L;11.07;Zuschlag zu der Leistung nach Nummer 8779 oder 8790 für den kraniofazialen Zugang;294.59;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8792;L;11.07;Zuschlag zu der Leistung nach Nummer 8790 für die operative Reposition und Fixation einer Stirnhöhlenhinterwandfraktur durch Osteosynthese, je Seite;211.05;2690|2691|2692|2338a|2688;0.14;ZUGEORDNET
 8793;L;11.07;Versorgung einer isolierten Jochbogenfraktur durch Hakenzugreposition, ggf. einschließlich speziellem Verband Das Anlegen des speziellen Verbands (z.B. Pelotte) ist nach Nummer 8711 berechnungsfähig. ;107.12;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-8794;L;11.07;Versorgung einer isolierten Jochbogenfraktur durch operative osteosynthetische Versorgung;279.08;2073;0.18;ZUGEORDNET
+8794;L;11.07;Versorgung einer isolierten Jochbogenfraktur durch operative osteosynthetische Versorgung;279.08;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8795;L;11.07;Operative Entfernung von Osteosynthesematerial aus einem Kiefer- oder Gesichtsknochen, je zuvor osteosynthetisch versorgter Frakturspalte;214.57;2694|2321;0.84;ZUGEORDNET
 8796;L;11.07;Transorale En-bloc-Resektion eines Tumors im Bereich der Zunge, des Mundbodens oder des Unterkiefers, auch mittellinienüberschreitend, ggf. einschließlich - multipler Randschnitte - multipler Neurolys;785.77;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 8797;L;11.07;Zuschlag zu der Leistung nach Nummer 8796 für einen extraoralen Zugang;181.78;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -2819,7 +2819,7 @@
 9080;L;11.09;Zuschlag zu der Leistung nach Nummer 9065 oder 9079 für den Zugang über laterale Rhinotomie oder midface-degloving-approach oder einer medialen Maxillektomie, ggf. einschließlich Entfernung von Knoche;173.72;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9081;L;11.09;Plastischer Verschluss einer Kieferhöhlenfistel, ggf. einschließlich - Abschwellen der Nase - Absaugen der Nase - Oberflächen- und/oder Infiltrationsanästhesie - Fensterung Kieferhöhle und/oder Sinusk;370.98;1466;0.28;ZUGEORDNET
 9082;L;11.09;Teilweise Eröffnung und/oder Ausräumung der vorderen und/oder hinteren Siebbeinzellen ohne Darstellung der Schädelbasis von der Nase aus, ggf. einschließlich - Abschwellen der Nase - Absaugen der Nase;195.39;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-9083;L;11.09;Zuschlag zu der Leistung nach Nummer 9082 für die komplette Ausräumung der Siebbeinzellen einer Seite von der Nase aus mit Darstellung der Schädelbasis;159.89;1469|1470|2408|2760;0.21;ZUGEORDNET
+9083;L;11.09;Zuschlag zu der Leistung nach Nummer 9082 für die komplette Ausräumung der Siebbeinzellen einer Seite von der Nase aus mit Darstellung der Schädelbasis;159.89;1469|1470|2760;0.21;ZUGEORDNET
 9084;L;11.09;Operative Eröffnung und/oder Ausräumung einer Keilbeinhöhle von der Nase aus, ggf. einschließlich - Abschwellen der Nase - Absaugen der Nase - Oberflächen- und/oder Infiltrationsanästhesie - Knochenen;210.44;1469;0.53;ZUGEORDNET
 9085;L;11.09;Operative Eröffnung und/oder Ausräumung der Stirnhöhle einer Seite von der Nase aus, ggf. einschließlich - Sondierung/Bougierung der Stirnhöhle - Einbringung von Medikamenten - Abschwellen der Nase - ;299.70;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9086;L;11.09;Zuschlag zu der Leistung nach Nummer 9085 für komplettes Aufbohren des Stirnhöhlenzuganges;239.84;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -2929,7 +2929,7 @@
 9310;L;11.10;Minimalinvasive osteoplastische Operation einer Brustwanddeformität (Pectus carinatum) nach Nuss, ggf. einschließlich Thoraxdrainage(n);580.50;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9311;L;11.10;Offen chirurgische osteoplastische Operation einer Brustwanddeformität (Pectus excavatum), ggf. einschließlich Thoraxdrainage(n);1051.92;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9312;L;11.10;Minimalinvasive osteoplastische Operation einer Brustwanddeformität (Pectus excavatum) nach Nuss, ggf. einschließlich Thoraxdrainage(n);697.83;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-9313;L;11.10;Resektion eines schichtübergreifenden Prozesses der Brustwand, einschließlich Resektion einer Rippe;655.60;2950|2956|2957|2266|3148;0.67;ZUGEORDNET
+9313;L;11.10;Resektion eines schichtübergreifenden Prozesses der Brustwand, einschließlich Resektion einer Rippe;655.60;2950|2956|2957|2266;0.67;ZUGEORDNET
 9314;L;11.10;Zuschlag zu der Leistung nach Nummer 9313 für Resektion von zwei bis fünf Rippen oder Sternumteilresektion;253.99;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9315;L;11.10;Zuschlag zu der Leistung nach Nummer 9313 für Resektion von mehr als fünf Rippen oder Sternumkomplettresektion;380.99;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9316;L;11.10;Zuschlag zu der Leistung nach Nummer 9313 für Defektdeckung mit alloplastischem Material;190.49;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -3204,7 +3204,7 @@
 9731;L;11.12;Resektion einer Halsrippe und/oder der ersten Rippe bei Thoracic-outlet-Syndrom, einschließlich Resektion aller anormalen fibromuskulären Bänder, Neurolyse(n);895.80;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9732;L;11.12;Zuschlag zu der Leistung nach Nummer 9731 für arterielle Thrombektomie;194.31;2887;0.23;ZUGEORDNET
 9733;L;11.12;Operation einer anderen abnormen Gefäßmissbildung im Thorax durch Rekonstruktion;887.41;2825|2067;0.81;ZUGEORDNET
-9734;L;11.12;Sperroperation bei portalem Hochdruck;693.10;2900|2901|2902|1350;0.78;ZUGEORDNET
+9734;L;11.12;Sperroperation bei portalem Hochdruck;693.10;2900|2901|2902;0.78;ZUGEORDNET
 9735;L;11.12;Operation bei portalem Hochdruck durch Shunt-Anlage (z.B. splenorenaler, portokavaler oder mesorenaler Shunt);838.83;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9736;L;11.12;Zuschlag zu der Leistung nach Nummer 9735 für Arterialisation des Pfortadersystems;291.46;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9737;L;11.12;Rekonstruktive Operation an der A. carotis interna und/oder der Karotisgabel, ggf. einschließlich - End-zu-Endanastomose(n) (z.B. Eversions-TEA) - Patchplastik und/oder rekonstruktive Operation an der;1149.20;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -3289,14 +3289,14 @@
 9816;L;11.12;Anlage eines arteriovenösen Shunts zur Hämodialyse mit alloplastischer Gefäßprothese, ggf. einschließlich Phlebographie;504.30;2895;0.7;ZUGEORDNET
 9817;L;11.12;Unterbindung eines Hämodialyseshuntes oder einer operativ angelegten AV-Fistel, als selbständige Leistung;280.85;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9818;L;11.12;Sonstige Ausschaltung eines Hämodialyseshuntes (z.B. Explantation);323.33;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-9819;L;11.12;Revision eines Hämodialyseshuntes, ggf. einschließlich Phlebographie;421.85;3192;0.16;ZUGEORDNET
+9819;L;11.12;Revision eines Hämodialyseshuntes, ggf. einschließlich Phlebographie;421.85;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9820;L;11.12;Zuschlag zu der Leistung nach Nummer 9815, 9816 oder 9819 für angioplastische Maßnahmen mit/ohne Stentimplantation;128.92;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9821;L;11.12;Zuschlag zu der Leistung nach Nummer 9815 oder 9819 für freies autologes Transplantat;106.21;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9822;L;11.12;Entfernung eines kleinen Gefäßtumors ohne Eröffnung der Körperhöhlen (z.B. kavernöses Hämangiom, Rankenhämangiom, maligne Hämangiome);224.51;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9823;L;11.12;Entfernung eines großen Gefäßtumors ohne Eröffnung der Körperhöhlen (z.B. kavernöses Hämangiom, Rankenhämangiom, maligne Hämangiome);297.37;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9824;L;11.12;Endovaskuläre Therapie eines kleinen Gefäßtumors;224.51;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9825;L;11.12;Endovaskuläre Therapie eines großen Gefäßtumors;297.37;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-9826;L;11.12;Intraoperative Lysebehandlung als Einzelbehandlung von Arterien;183.05;5351|2234|5352;0.29;ZUGEORDNET
+9826;L;11.12;Intraoperative Lysebehandlung als Einzelbehandlung von Arterien;183.05;5351|5352;0.29;ZUGEORDNET
 9827;L;11.12;Zuschlag zu den Leistungen des Abschnitts L XII für Angioskopie;105.56;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9828;L;11.12;Zuschlag zu den operativen Leistungen des Abschnitts L XII, die mit einem nicht unterschreitbaren Gebührensatz von mehr als 55 EUR bis zu 540 EUR bewertet sind, für einen Rezidiv- oder Revisionseingri;43.76;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9829;L;11.12;Zuschlag zu den operativen Leistungen des Abschnitts L XII, die mit einem nicht unterschreitbaren Gebührensatz von mehr als 540 EUR bis zu 1001,13 EUR bewertet sind, für einen Rezidiv- oder Revisionse;109.03;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -3315,7 +3315,7 @@
 9911;L;11.13;Robotisch assistierte laparoskopische Sakrokolpopexie bzw. Promontofixation bei Deszensus des Scheidenstumpfes oder Uterovaginaldeszensus, ggf. einschließlich - Präparation des Promontoriums - Eröffnu;830.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9912;L;11.13;Zerviko- oder Kolposakropexie mittels Netzeinlage;676.95;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9913;L;11.13;Vaginale Kolpopexie, einseitig paravaginal und/oder an den Beckenligamenten;346.34;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-9914;L;11.13;Levatorplastik, ein- oder beidseitig;506.73;1766|1149|1436|1313;0.33;ZUGEORDNET
+9914;L;11.13;Levatorplastik, ein- oder beidseitig;506.73;1766|1149|1436;0.33;ZUGEORDNET
 9915;L;11.13;Vaginale Kolpopexie am Uterus-Aufhängeapparat nach Hysterektomie, ein- oder beidseitig;346.34;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9916;L;11.13;Kolpopexie mit Faszienzügelplastik (z.B. nach Williams und Richardson);462.41;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9917;L;11.13;Keilexzision an einem Ovar oder Exzision einer Ovar-, Paraovarialzyste oder Hydatide, offen oder laparoskopisch;366.46;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -3350,11 +3350,11 @@
 9946;L;11.13;Exzision, Entnahme und/oder Destruktion von erkranktem Gewebe an Portio, Vagina oder Vulva und Behandlung, z.B. mittels Lasertechnik, Kryo- oder Elektrokoagulation;105.41;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9947;L;11.13;Durchtrennung oder Sprengung eines stenosierenden Narbenstranges der Scheide, Abtragung des Hymens oder eines Scheidenseptums;105.41;1098;0.94;ZUGEORDNET
 9948;L;11.13;Hintere Kolpozöliotomie zur Durchführung einer OP an den Adnexen oder zur Eröffnung eines Douglas-Abszesses;99.74;1136;0.64;ZUGEORDNET
-9949;L;11.13;Totale Kolpektomie;568.48;3147|3234;0.33;ZUGEORDNET
+9949;L;11.13;Totale Kolpektomie;568.48;3147;0.33;ZUGEORDNET
 9950;L;11.13;Subtotale Kolpektomie;462.41;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9951;L;11.13;Vordere oder hintere Kolporrhaphie;346.34;1357;0.23;ZUGEORDNET
 9952;L;11.13;Trachelektomie, ggf. einschließlich Resektion der Parametrien und Präparation der Gefäße;457.07;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-9953;L;11.13;Fisteloperation an den Geschlechtsteilen, ggf. einschließlich der Harnblase und/oder Operation einer Darmscheiden- oder Harnröhrenfistel;676.95;1163|2754;0.64;ZUGEORDNET
+9953;L;11.13;Fisteloperation an den Geschlechtsteilen, ggf. einschließlich der Harnblase und/oder Operation einer Darmscheiden- oder Harnröhrenfistel;676.95;1163;0.64;ZUGEORDNET
 9954;L;11.13;Operative Korrektur eines teilweisen Verschlusses der Vagina, ggf. einschließlich - Verwendung von autogenem Material - Einbringung vaginaler Unterstützungssysteme;462.41;1123;0.34;ZUGEORDNET
 9955;L;11.13;Plastische Operation einer Vaginalaplasie, ggf. einschließlich - Verwendung von autogenem Material - Einbringung vaginaler Unterstützungssysteme;780.44;1141|3091;0.34;ZUGEORDNET
 9956;L;11.13;Zuschlag zu der Leistung nach Nummer 9954 oder 9955 für den Einsatz von Dünn- oder Dickdarm, einschließlich Entnahme;262.61;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -3366,20 +3366,20 @@
 9962;L;11.13;Radikale Vulvektomie, ggf. einschließlich plastischer Rekonstruktion der Vulva und des Perineums;669.20;1165;0.26;ZUGEORDNET
 9963;L;11.13;Plastische Rekonstruktion der Vulva oder des Perineums;357.79;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9964;L;11.13;Zuschlag zu der Leistung nach Nummer 9963 für die Durchführung mittels Fernlappenplastik;514.19;2050|2395;0.13;ZUGEORDNET
-9965;L;11.13;Operative Beseitigung einer oder mehrerer Uterusmissbildung(en), einschließlich - Sondierung - Dilatation - Einmalkatheterisierung;685.99;1160|2041|321;0.76;ZUGEORDNET
+9965;L;11.13;Operative Beseitigung einer oder mehrerer Uterusmissbildung(en), einschließlich - Sondierung - Dilatation - Einmalkatheterisierung;685.99;1160|2041;0.76;ZUGEORDNET
 9966;L;11.13;Laparoskopie und/oder Pelviskopie im Rahmen der IVF oder zur Abklärung pathologischer Befunde im Becken, z.B. an Tube, Ovar, Uterus mit Bandapparat, Douglas'schem Raum mit Anlegen eines Pneumoperitone;467.91;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9967;L;11.13;Totale oder suprazervikale Hysterektomie, abdominal, vaginal oder laparoskopisch;578.52;1166|701;0.26;ZUGEORDNET
 9968;L;11.13;Robotisch assistierte totale oder suprazervikale Hysterektomie, ggf. einschließlich - Mobilisation des Uterus - Präparation und Darstellung der Ureteren im Zielgebiet - Durchtrennung und Versorgung de;750.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9969;L;11.13;Zuschlag zu der Leistung nach Nummer 9920, 9967 oder 9968 für die Bildung einer oder mehrerer Netzplombe(n);199.04;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9970;L;11.13;Zuschlag zu der Leistung nach Nummer 9967 oder 9968 für Adnexentfernung;72.77;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-9971;L;11.13;Zervixstumpfexstirpation;467.91;3199|1135;0.24;ZUGEORDNET
+9971;L;11.13;Zervixstumpfexstirpation;467.91;3199;0.24;ZUGEORDNET
 9972;L;11.13;Radikale Hysterektomie unter Mitnahme der Parametrien und mit iliakaler Lymphknotenexstirpation, ggf. einschließlich Entfernung der Adnexe;1127.20;2716;0.24;ZUGEORDNET
 9973;L;11.13;Zuschlag zu der Leistung nach Nummer 9913 oder 9972 für die zusätzliche Resektion der Scheidenmanschette;90.97;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9974;L;11.13;Zuschlag zu der Leistung nach Nummer 9920, 9967, 9968 oder 9972 für die Omentektomie;109.16;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9975;L;11.13;Zuschlag zu der Leistung nach Nummer 9949, 9950, 9967, 9968 oder 9972 für subtotale oder totale Kolpokleisis;503.63;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9976;L;11.13;Inguinale Lymphknotenentfernung, ggf. einschließlich Gefäßfreilegung, je Seite;467.91;1762|2715;0.81;ZUGEORDNET
 9977;L;11.13;Neurolyse als selbständige Leistung aufgrund eigenständiger Indikation (Verwachsungen, Vernarbungen, und/oder Tumorummauerungen) im Rahmen anderer gynäkologischer Eingriffe;183.35;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-9978;L;11.13;Peritonektomie im kleinen Becken Die Leistung nach Nummer 9978 ist neben der Leistung nach Nummer 10617 nicht berechnungsfähig.;451.73;2258;0.18;ZUGEORDNET
+9978;L;11.13;Peritonektomie im kleinen Becken Die Leistung nach Nummer 9978 ist neben der Leistung nach Nummer 10617 nicht berechnungsfähig.;451.73;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9979;L;11.13;Sentinellymphknotenentfernung und/oder Lymphknotensampling, ggf. einschließlich Gefäßfreilegung, einseitig Die Leistung nach Nummer 9979 ist neben der Leistung nach Nummer 7442, 9976, 9980, 9981, 9982;451.73;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 9980;L;11.13;Pelvine Lymphadenektomie, ggf. einschließlich Gefäßfreilegung, beidseitig;669.20;1783;0.4;ZUGEORDNET
 9981;L;11.13;Pelvine extended-field Lymphadenektomie, ggf. einschließlich Gefäßfreilegung, beidseitig;890.97;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -3433,7 +3433,7 @@
 10128;L;11.14;Zuschlag zu der Leistung nach Nummer 10125 oder 10126 für die endoskopische antegrade oder retrograde transrenale Harnleiterschlitzung (antegrade oder retrograde Endopyelotomie);61.04;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10129;L;11.14;Entfernung einer oder mehrerer Geschwülste an der Harnröhrenmündung;70.07;1714|3224|1159;0.95;ZUGEORDNET
 10130;L;11.14;Entfernung eines Harnröhrenkarunkels und/oder eines Harnröhrenvorfalls, einschließlich Schleimhautrekonstruktion;56.61;1724|1712|1715|1713;0.48;ZUGEORDNET
-10131;L;11.14;Meatusplastik, einschließlich Inzision, Schleimhautrekonstruktion;111.98;1737;0.16;ZUGEORDNET
+10131;L;11.14;Meatusplastik, einschließlich Inzision, Schleimhautrekonstruktion;111.98;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10132;L;11.14;Inzision der Harnröhre zur Beseitigung einer Striktur, ohne Sicht (z.B. Urethrotomia interna nach Otis), ggf. einschließlich Instillation von Arzneimitteln;37.81;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10133;L;11.14;Inzision der Harnröhre zur Beseitigung einer Striktur, unter Sicht (z.B. Urethrotomia interna nach Sachse), ggf. einschließlich Instillation von Arzneimitteln, je Sitzung;70.07;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10134;L;11.14;Zuschlag zu der Leistung nach Nummer 10113, 10118, 10125, 10126 oder 10133 für den endoskopischen Einsatz eines Lasers;136.83;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -3446,7 +3446,7 @@
 10141;L;11.14;Offene Inkontinenzoperation, ggf. einschließlich vorderer und/oder hinterer Scheidenplastik;625.13;1127|1126|1125|1128|1780;0.78;ZUGEORDNET
 10142;L;11.14;Zuschlag zu der Leistung nach Nummer 10141 für Sakropexie;210.99;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10143;L;11.14;Offen-operative Entfernung eines/von Nieren(ausguss)steins(en), einschließlich Anlegen einer Nierenfistel, Pyeloskopie und intraoperative Durchleuchtung;779.00;1852|1839;0.26;ZUGEORDNET
-10144;L;11.14;Perkutane Rekonstruktion der Niere mit Erweiterung der Nierenkelchhälse, Anlage einer Nierenfistel oder Pyelostomie(n);450.45;1831;0.18;ZUGEORDNET
+10144;L;11.14;Perkutane Rekonstruktion der Niere mit Erweiterung der Nierenkelchhälse, Anlage einer Nierenfistel oder Pyelostomie(n);450.45;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10145;L;11.14;Entfernung einer oder mehrerer Geschwülste, narbiger Konvolute und/oder einer Striktur aus der Harnröhre, einschließlich - Mobilisation der Harnröhre - Rekonstruktion der Harnröhre und/oder Bildung ei;620.27;1724;0.46;ZUGEORDNET
 10146;L;11.14;Entfernung eines Divertikels aus der Harnröhre mit Rekonstruktion der Harnröhre ohne plastische Defektdeckung, ggf. einschließlich - Rekonstruktion der Vaginalwand bei der Frau - Anlage einer Harnblas;497.67;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10147;L;11.14;Verschluss einer Harnröhrenfistel beim Mann, ggf. einschließlich - Rekonstruktion der Harnröhre - ohne plastische Defektdeckung - Anlage einer Harnblasenfistel Die Leistung nach Nummer 10147 ist neben;638.33;1722|1721;0.58;ZUGEORDNET
@@ -3570,7 +3570,7 @@
 10265;L;11.14;Operative Versorgung einer Penisfraktur;312.40;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10266;L;11.14;Zuschlag zu der Leistung nach Nummer 10265 für die Übernähung der Urethra;81.38;1798;0.09;ZUGEORDNET
 10267;L;11.14;Operative Implantation einer Penisprothese;497.67;1752|2420;0.64;ZUGEORDNET
-10268;L;11.14;Operative Entfernung einer Penisprothese;271.71;1753|2979|2440|3173|1145|1441|765|2410;0.96;ZUGEORDNET
+10268;L;11.14;Operative Entfernung einer Penisprothese;271.71;1753|2979|2440|3173|1145|1441|765;0.96;ZUGEORDNET
 10269;L;11.14;Operative Shunt-Anlage zur Behebung eines Priapismus;120.71;1749|1750;0.45;ZUGEORDNET
 10270;L;11.14;Replantation des Penis, einschließlich - Naht der Corpora cavernosa - arteriellem und venösem Anschluss (direkt oder durch Interponat) - Nervennaht (direkt oder durch Interponat) - Naht und Schienung ;1056.66;1751;0.26;ZUGEORDNET
 10271;L;11.14;Geschlechtsumwandlung Mann zu Frau, mittels Penektomie mit Schwellkörperplastik, Harnröhrentransposition und Skrotallappenplastik;1296.55;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -3690,7 +3690,7 @@
 10511;L;11.16;Operation einer parastomalen Hernie mit alloplastischem Material, laparoskopisch, ggf. einschließlich - Bruchsackdarstellung - Faszienverschiebeplastik - Reposition von Netz- und/oder Darmanteilen bei;1184.47;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10512;L;11.16;Zuschlag zu der Leistung nach Nummer 10501 bis 10511 für Komponentenseparation;395.60;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10513;L;11.16;Operation eines medialen und/oder lateralen Leistenbruches und/oder Schenkelbruches durch Faszien- und Muskelverschiebeplastik, ggf. einschließlich - Bruchsackdarstellung und Bruchsackresektion - Repo;464.48;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-10514;L;11.16;Operation eines medialen und/oder lateralen Leistenbruches und/oder Schenkelbruches mit alloplastischem Material, offen chirurgisch, ggf. einschließlich - Bruchsackdarstellung und Bruchsackresektion -;481.78;3285|3286|3282;0.43;ZUGEORDNET
+10514;L;11.16;Operation eines medialen und/oder lateralen Leistenbruches und/oder Schenkelbruches mit alloplastischem Material, offen chirurgisch, ggf. einschließlich - Bruchsackdarstellung und Bruchsackresektion -;481.78;3285|3286;0.43;ZUGEORDNET
 10515;L;11.16;Operation eines medialen und/oder lateralen Leistenbruches und/oder Schenkelbruches mit alloplastischem Material, laparoskopisch, ggf. einschließlich - Bruchsackdarstellung und Bruchsackresektion - Re;555.10;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10516;L;11.16;Operation eines medialen und/oder lateralen Leistenbruches und/oder Schenkelbruches mit alloplastischem Material, laparoskopisch, ggf. einschließlich - Bruchsackdarstellung und Bruchsackresektion - Re;800.94;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10517;L;11.16;Zuschlag zu der Leistung nach Nummer 10500, 10501, 10502, 10503, 10505, 10504, 10506, 10507, 10513, 10514, 10515 oder 10516 für die Entfernung eines Lipoms;21.76;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -3705,7 +3705,7 @@
 10526;L;11.16;Operation einer Zwerchfellhernie, offen chirurgisch, ohne antirefluxive Maßnahme an der Speiseröhre, ggf. einschließlich - Zwerchfellresektion, auch minimalinvasiv - Zwerchfellrekonstruktion durch Nah;799.52;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10527;L;11.16;Operation einer Zwerchfellhernie, laparoskopisch, ohne antirefluxive Maßnahme an der Speiseröhre, ggf. einschließlich - Zwerchfellresektion, ggf. mit Rekonstruktion - Zwerchfellrekonstruktion durch Na;854.79;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10528;L;11.16;Zuschlag zu der Leistung nach Nummer 10526 oder 10527 für Fundophrenicopexie oder Gastroventropexie;131.87;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-10529;L;11.16;Operation einer Zwerchfellrelaxation und/oder Transposition des Zwerchfells und/oder Implantation eines Zwerchfellschrittmachers, auch minimalinvasiv;817.54;3281|1321;0.84;ZUGEORDNET
+10529;L;11.16;Operation einer Zwerchfellrelaxation und/oder Transposition des Zwerchfells und/oder Implantation eines Zwerchfellschrittmachers, auch minimalinvasiv;817.54;3281;0.84;ZUGEORDNET
 10530;L;11.16;Zuschlag zu der Leistung nach Nummer 10526, 10527 oder 10529 für den plastischen Verschluss der Zwerchfellhernie mit allogenem oder alloplastischem Material;65.93;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10531;L;11.16;Zuschlag zu der Leistung nach Nummer 10526, 10527 oder 10529 für den plastischen Verschluss einer Zwerchfellhernie mit Entnahme und Verwendung von autologem Material;219.78;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10532;L;11.16;Operation einer Skrotalhernie durch Faszien- und Muskelverschiebeplastik, ggf. einschließlich - Entfernung eines Lipoms - Bruchsackdarstellung und Bruchsackresektion - Reposition von Netz- und/oder Da;607.25;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -3721,7 +3721,7 @@
 10600;L;11.17;Diagnostische Laparoskopie, Pelviskopie oder Retroperitoneoskopie, ggf. einschließlich Probeexzisionen und/oder Probepunktionen mit Anlegen eines Pneumoperitoneums;224.85;1155|1156|700;0.5;ZUGEORDNET
 10601;L;11.17;Appendektomie, ggf. einschließlich - Adhäsiolyse und Mobilisieren der Appendix und/oder des Coecums - Gewebeentnahme(n) durch Aspiration - Probeexzision(en) und/oder Probepunktion(en) (auch vom Retrop;357.08;3200;0.48;ZUGEORDNET
 10602;L;11.17;Zuschlag zu der Leistung nach Nummer 10601 bei lokaler Peritonitis;117.86;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-10603;L;11.17;Zuschlag zu der Leistung nach Nummer 10601 für die Eröffnung eines oder mehrerer Abszesse;68.29;2430|1459|1826|2429|3137|1511|3136|2431|2432|2750|3002|1061|2066;0.12;ZUGEORDNET
+10603;L;11.17;Zuschlag zu der Leistung nach Nummer 10601 für die Eröffnung eines oder mehrerer Abszesse;68.29;2430|1459|1826|2429|3137|1511|3136|2431|2432|2750|3002|2066;0.12;ZUGEORDNET
 10604;L;11.17;Laparotomie zu diagnostischen Zwecken (ohne Inzision des Retroperitoneums), ggf. einschließlich - Gewebeentnahme(n) durch Aspiration - Probeexzision(en) und/oder Probepunktion(en);217.79;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10605;L;11.17;Eröffnung des Retroperitonealraumes von der Bauchhöhle aus zu diagnostischen Zwecken, ggf. einschließlich - Inspektion und Austasten des Retroperitonealraumes - Identifizierung/Schonung der Ureteren -;256.89;2604|3120;0.29;ZUGEORDNET
 10606;L;11.17;Zuschlag zu der Leistung nach Nummer 10600, 10604 oder 10605 für Eröffnung von intraabdominellen Abszessen;51.20;3121;0.05;ZUGEORDNET
@@ -3854,7 +3854,7 @@
 10733;L;11.17;Zuschlag zu der Leistung nach Nummer 10726 oder 10728 für das Splitten einer postmortal gespendeten Leber in eine anatomisch rechte und linke Leber;490.84;3185;0.06;ZUGEORDNET
 10734;L;11.17;Zuschlag zu der Leistung nach Nummer 10726 oder 10728 für das links-lateral und rechtserweiterte Splitten einer postmortal gespendeten Leber;163.61;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10735;L;11.17;Zuschlag zu der Leistung nach Nummer 10726 oder 10728 für Re-Implantation (zu jedem Zeitpunkt);425.39;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-10736;L;11.17;Implantation, Wechsel und Entfernung eines Port- und/oder Katheterverweilsystems in Leberarterie und/oder Pfortader (z.B. zur Chemotherapie und/oder Embolisation) oder perkutane/offene Pankreas-Inselt;534.25;3815.H2|3842;0.37;ZUGEORDNET
+10736;L;11.17;Implantation, Wechsel und Entfernung eines Port- und/oder Katheterverweilsystems in Leberarterie und/oder Pfortader (z.B. zur Chemotherapie und/oder Embolisation) oder perkutane/offene Pankreas-Inselt;534.25;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10737;L;11.17;Einfache Leberresektion (z.B. periphere Subsegment-Resektion oder periphere Enukleation), ggf. einschließlich - Pringle- oder ähnlichem Manöver - Blutstillung auch mittels Hämostyptika, Vlieseinlage, ;534.25;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10738;L;11.17;"Limitierte Leberresektion (z.B. anatomische/periphere 1-Segment-Resektion, links-laterale Resektion; limitierte Segm. I-Resektion; Resektion „Gallenblasenbett“ (Segm. IVB/V) bei Gallenblasentumor), gg";678.69;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10739;L;11.17;„Anatomische“, große Leberresektion (z.B. Hemihepatektomie rechts (Segm. V-VIII), Hemihepatektomie links (Segm. II-IV), Segment IVA+B- Resektion, „transverse“ Leberresektion (Segm. IVB, V, VI), 2. Ope;1383.92;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -3876,7 +3876,7 @@
 10755;L;11.17;Zuschlag zu der Leistung nach Nummer 10724 oder 10753 für bilio-digestive Anastomose (direkt, ohne Y-Roux-Schlinge);763.54;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10756;L;11.17;Zuschlag zu der Leistung nach Nummer 10753 für Gallengangsrekonstruktion (direkt);216.65;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10757;L;11.17;Cholecystotomie und/oder Cholezystostomie, ggf. einschließlich - Ausräumung und Drainage von Abszessen, Hämatomen und/oder Steinen - Blutstillung auch mittels Hämostyptika, Vlieseinlage, Fibrinkleber ;389.82;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-10758;L;11.17;Zuschlag zu der Leistung nach Nummer 10757 für Cholezystostomie mittels Jejunum-Interponat, einschließlich Cholezysto-jejunaler Anastomose, Stoma-Anlage an der Bauchwand sowie direkter Rekonstruktion ;433.31;3168;0.03;ZUGEORDNET
+10758;L;11.17;Zuschlag zu der Leistung nach Nummer 10757 für Cholezystostomie mittels Jejunum-Interponat, einschließlich Cholezysto-jejunaler Anastomose, Stoma-Anlage an der Bauchwand sowie direkter Rekonstruktion ;433.31;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10759;L;11.17;Cholezystektomie, als selbständige Leistung, ggf. einschließlich - Entfernen bzw. Versorgen des Ductus cysticus - Freilegen und Versorgen der Blutgefäße im Operationsbereich - Lösen von Verwachsungen ;529.30;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10760;L;11.17;Operation am extrahepatischen Gallengang, z.B. Resektion und/oder Rekonstruktion (ohne biliodigestive Anastomose), als selbständige Leistung, ggf. einschließlich - Kontrastmittelapplikationen - Einbri;967.56;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10761;L;11.17;Operation am extrahepatischen Gallengang mit biliodigestiver Anastomose direkt zum Dünndarm (z.B. Hochzug einer Jejunumschlinge) ohne Inter- bzw. Transposition eines Darmabschnitts, ggf. einschließlic;1256.43;3188;0.47;ZUGEORDNET
@@ -3885,7 +3885,7 @@
 10764;L;11.17;Zuschlag zu der Leistung nach Nummer 10726, 10728, 10737, 10738, 10739, 10740 oder 10741 oder 10761 für komplexe Gallengangsrekonstruktion (bei Notwendigkeit der Anastomosierung von mehr als einem Gal;216.65;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10765;L;11.17;Zuschlag zu der Leistung nach Nummer 10737, 10738, 10739, 10740, 10741 oder 10761 für limitierte Lymphadenektomie Lig. hepatoduodenale (Kategorie II);318.87;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10766;L;11.17;Zuschlag zu der Leistung nach Nummer 10737, 10738, 10739, 10740, 10741 oder 10761 für systematische Lymphadenektomie Lig. hepatoduodenale, A. hepatica communis, Truncus coeliacus und hinterer Pankreas;637.74;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-10767;L;11.17;Zuschlag zu der Leistung nach Nummer 10737, 10738, 10739, 10740, 10741 oder 10761 für erweiterte Lymphadenektomie, einschließlich parakaval, paraaortal, kleine Magenkurvatur, ggf. einschließlich vorde;797.17;3280;0.03;ZUGEORDNET
+10767;L;11.17;Zuschlag zu der Leistung nach Nummer 10737, 10738, 10739, 10740, 10741 oder 10761 für erweiterte Lymphadenektomie, einschließlich parakaval, paraaortal, kleine Magenkurvatur, ggf. einschließlich vorde;797.17;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10768;L;11.17;Zuschlag zu der Leistung nach Nummer 10759, 10760 oder 10761 für intraoperative Cholangioskopie;84.52;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10769;L;11.17;Zuschlag zu der Leistung nach Nummer 10761 für Hepatikusgabelresektion, so dass mindestens 2 zu anastomosierende Gallengänge resultieren;433.31;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 10770;L;11.17;Operative Beseitigung von Atresien und/oder Stenosen mit Rekonstruktion der Gallengänge bei einem Patienten bis zum vollendeten 6. Lebensjahr (z.B. Hepatoportoenterostomie), ggf. einschließlich - Dars;1555.68;3189;0.55;ZUGEORDNET
@@ -4017,7 +4017,7 @@
 11014;M;12.01;"Pankreas-Amylase Einzelparameter; Vollblut (ggf. antikoaguliert); klinisch-chemische Schnelltestformate (vorgefertigter Reagenzträger [Trockenchemie] oder vorgefertigte Reagenzzubereitung [Nasschemie]";6.27;3736;0.8;ZUGEORDNET
 11015;M;12.01;"Thromboplastinzeit, Kapillarblut (Kapillar-Quick) Einzelparameter; Koagulometer oder vorgefertigter Reagenzträger; Auswertung: apparativ-quantitativ. Die Leistung nach Nummer 11015 ist neben den Leist";6.46;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11016;M;12.01;"Troponin (T oder I) Einzelparameter; Vollblut (ggf. antikoaguliert); immunologische Schnelltestformate (z.B. Immunchromatographie, Partikelagglutination); Auswertung: apparativ-quantitativ oder visuel";12.21;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-11017;M;12.01;"Vaginalsekret klinisch-chemische Schnelltestformate (vorgefertigter Reagenzträger [Vaginal pH-Teststreifen]); Auswertung: simultan-visuell-semiquantitativ oder simultan-apparativ-semiquantitativ";1.81;3511|378;0.52;ZUGEORDNET
+11017;M;12.01;"Vaginalsekret klinisch-chemische Schnelltestformate (vorgefertigter Reagenzträger [Vaginal pH-Teststreifen]); Auswertung: simultan-visuell-semiquantitativ oder simultan-apparativ-semiquantitativ";1.81;3511;0.52;ZUGEORDNET
 11018;M;12.01;"Tumorantigen Abklärung Harnblasentumor; Urin, immunologische Schnelltestformate; Auswertung: z.B. visuell-qualitativ, apparativ-qualitativ. Die Leistung nach Nummer 11018 ist aus demselben Material ei";20.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11019;M;12.01;ACT-Messung (Activated Clotting Time) als patientennahe Gerinnungsdiagnostik (POC);12.07;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11025;M;12.01;"Blutbild, insgesamt Parameterprofil (mindestens Hämoglobin, Leukozyten und Thrombozyten); Vollblut (antikoaguliert); Hämatologie-Analyzer; Auswertung: simultan- apparativ-quantitativ. Die Leistung nac";3.69;3996|3550;0.56;ZUGEORDNET
@@ -4031,7 +4031,7 @@
 11037;M;12.01;"Urinsediment Urin, einschließlich Zentrifugation; Sediment-Gesichtsfeld-Methode: z.B. Hellfeldmikroskopie, Phasenkontrastmikroskopie; Auswertung: semiquantitativ. Die Leistung nach Nummer 11037 ist ne";2.27;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11038;M;12.01;"Urogenitalsekret oder -abstrich Ggf. einschließlich Probenaufbereitung und/oder Färbung (z.B. Methylenblau, Gram); z.B. Hellfeldmikroskopie, Phasenkontrastmikroskopie; Auswertung: qualitativ. Die Leis";2.92;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11040;M;12.01;"Clostridium difficile (Stuhl, ungeformt, flüssig-breiig) Glutamat-Dehydrogenase-(GDH-)Nachweis, ggf. einschließlich Toxin A-, Toxin B-Nachweis, ggf. einschließlich Stuhl-Aufbereitung; immunologische S";17.46;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-11041;M;12.01;"A-Streptokokken (Nasen-/Rachenraum-Abstrich) Antigennachweis (z.B. C-Substanz); einschließlich Probenaufbereitung (z.B. Extraktion); immunologische Schnelltestformate (z.B. Immunchromatographie, optis";6.75;4279|4430|4435|4456;0.42;ZUGEORDNET
+11041;M;12.01;"A-Streptokokken (Nasen-/Rachenraum-Abstrich) Antigennachweis (z.B. C-Substanz); einschließlich Probenaufbereitung (z.B. Extraktion); immunologische Schnelltestformate (z.B. Immunchromatographie, optis";6.75;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11042;M;12.01;"Infektiöse Mononukleose Nachweis heterophiler Antikörper; Serum; immunologische Schnelltestformate (z.B. Immunchromatographie, Monospot-Test); Auswertung: visuell- qualitativ.";5.04;3525|3895;0.74;ZUGEORDNET
 11043;M;12.01;"Influenza-A- und/oder Influenza-B-Virus (Nasen-/Rachenraum-Abstrich) Antigennachweis; einschließlich Probenaufbereitung (z.B. Extraktion); immunologische Schnelltestformate (z.B. Immunchromatographie,";13.45;4325|4352|4368|4324|4351|4367|4369;0.77;ZUGEORDNET
 11044;M;12.01;"Legionella (Urin) Antigennachweis (z.B. Lipopolysaccharid); Urin; immunologische Schnelltestformate (z.B. Lateral-Flow-Assay); Auswertung: visuell-qualitativ. Die Leistung nach Nummer 11044 ist neben ";13.57;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -4089,7 +4089,7 @@
 11112;M;12.02;"Kreatinin-Clearance Abklärung Nierenexkretionsleistung; Serum oder Plasma, Urin (Urin-Zeit-Volumen); einmal Kreatinin (Blut), einmal Kreatinin (Urin); Auswertung: apparativ-quantitativ, Clearance-Bere";1.57;3615|3520|3585.H1|3780;0.92;ZUGEORDNET
 11118;M;12.03;Höchstwert für die mit H2 gekennzeichneten Leistungen Gebührennummern 11121, 11123, 11125, 11127, 11129, 11131, 11132, 11135, 11137, 11139, 11141, 11143, 11145, 11147, 11149, 11151, 11153, 11155, 1115;90.78;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11119;M;12.03;Höchstwert für die mit H3 gekennzeichneten Leistungen Gebührennummern 12961, 12962, 12963, 12964, 12965, 12967, 12969, 12973, 12977, 12979, 12980 oder 12981.;94.82;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-11120;M;12.03;Höchstwert für die mit H4 gekennzeichneten Leistungen Gebührennummern 11998, 11999, 12030, 12031 oder 12713.;29.11;3541.H|3630.H|3633.H|3631.H|4005|4007|394|396|398|718|5369;0.8;ZUGEORDNET
+11120;M;12.03;Höchstwert für die mit H4 gekennzeichneten Leistungen Gebührennummern 11998, 11999, 12030, 12031 oder 12713.;29.11;3541.H|3630.H|3633.H|3631.H|4005|4007;0.8;ZUGEORDNET
 11121;M;12.03;"Basalmembran, IFT qualitativ Autoantikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: qualitativ.";21.85;3805.H2|3832;0.85;ZUGEORDNET
 11122;M;12.03;"Basalmembran, IFT quantitativ Autoantikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: quantitativ (Titer).";36.80;3805.H2|3832;0.85;ZUGEORDNET
 11123;M;12.03;"Basalmembran/Haut, IFT qualitativ Autoantikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: qualitativ.";25.63;3805.H2|3832;0.83;ZUGEORDNET
@@ -4198,12 +4198,12 @@
 11232;M;12.03;"Anti cN-1A (Mup44) IgG Autoantikörpernachweis; Serum, Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ-testspezifisch.";19.94;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11233;M;12.03;"Sonstige, Signal-(Tracer-)verstärkter Immunoassay (IA) Autoantikörpernachweis; Serum, Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ-testspezifisch.";27.78;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11234;M;12.03;"Gliadin (IgA, IgG), je Immunglobulin Antikörpernachweis (z.B. gegen GAF-3X); Serum oder Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ- testspezifisch (relative ode";20.09;3897|3896;0.75;ZUGEORDNET
-11241;M;12.03;"Antigen-Pool, insgesamt Autoantikörpernachweis; Serum oder Plasma; Gemisch aus mindestens zwei Zielantigenen, Signal-(Tracer-)verstärkter Immuinoassay; Auswertung: apparativ semiquantitativ-testspezif";26.45;4713;0.46;ZUGEORDNET
+11241;M;12.03;"Antigen-Pool, insgesamt Autoantikörpernachweis; Serum oder Plasma; Gemisch aus mindestens zwei Zielantigenen, Signal-(Tracer-)verstärkter Immuinoassay; Auswertung: apparativ semiquantitativ-testspezif";26.45;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11242;M;12.03;"Autoantikörper-Profil Serum oder Plasma; mindestens zwei Zielantigene oder Substrate; Simultanauswertung; Signa-(Tracer-)verstärkter Immunoassay oder Immunoblot oder Immunfluoreszenzmikroskopie; Auswe";42.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11243;M;12.03;"Autoantikörper-Westernblot, insgesamt Autoantikörpernachweis; Serum oder Plasma; Gel-Elektrophorese (definierter Antigenextrakt), Antigentransfer (z.B. Elektroblotting), Immunkomplex- Bildung, Visuali";66.50;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11261;M;12.03;"Allergen-Mikroarray Molekulare Komponentendiagnostik (z.B. spezifische IgEs); Serum oder Plasma, Sekret (z.B. Atemwegssekret); mindestens 80 immobilisierte Allergenkomponenten; Mikroarray (Chiptechnol";190.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11262;M;12.03;"Allergen-Screening, insgesamt Serum oder Plasma, Vollblut, Sekret (z.B. Atemwegssekret); Allergen-Panel (mindestens zehn monospezifische Inhalations- oder Nahrungsmittel- Allergene; mindestens zwanzig";17.98;3894|3893|3892;0.75;ZUGEORDNET
-11263;M;12.03;"Einzelallergen Einzelallergen (z.B. monospezifischer Extrakt, rekombinante[s] Allergen/Allergenfamilien); Serum oder Plasma, Sekrete (z.B. Atemwegssekret); Signal-(Tracer-)verstärkter Immunoassay; Aus";11.92;3891|3890;0.74;ZUGEORDNET
+11263;M;12.03;"Einzelallergen Einzelallergen (z.B. monospezifischer Extrakt, rekombinante[s] Allergen/Allergenfamilien); Serum oder Plasma, Sekrete (z.B. Atemwegssekret); Signal-(Tracer-)verstärkter Immunoassay; Aus";11.92;3891;0.74;ZUGEORDNET
 11264;M;12.03;"Maus-Immunglobulin-Antikörper (HAMA) Serum oder Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ testspezifisch (relative oder internationale Einheiten/ml).";21.22;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11265;M;12.03;"Antikörper gegen rekombinante Arzneimittel, IA Antikörpernachweis (z.B. gegen Adalimumab, Infliximab); Serum oder Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ- quantitativ-te";30.02;3898;0.7;ZUGEORDNET
 11282;M;12.03;"Brucella, AT quantitativ Antikörpernachweis; Serum oder Plasma; Agglutinationstest (z.B. Serum-Langsam-Agglutination [z.B. Röhrchenagglutination, Mikrotiterverfahren], Rose-Bengal-Test); Auswertung: v";19.73;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -4236,7 +4236,7 @@
 11316;M;12.03;"Legionella, IFT qualitativ Antikörpernachweis, Spezies-spezifisch; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: qualitativ.";14.36;4522|4563;0.75;ZUGEORDNET
 11317;M;12.03;"Legionella, IFT quantitativ Antikörpernachweis, Spezies-spezifisch; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: quantitativ (Titer). Die untersuchte(n) Spezies ist/sind in der Rechnung";24.62;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11318;M;12.03;"Rickettsia, IFT qualitativ Antikörpernachweis, z.B. familienspezifisch, gruppenspezifisch; Serum oder Plasma; (Mikro)Immunfluoreszenzmikroskopie; Auswertung: qualitativ. Bei Gruppen-spezifischem Antik";21.99;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-11319;M;12.03;"Rickettsia, IFT quantitativ Antikörpernachweis, z.B. familienspezifisch, gruppenspezifisch; Serum oder Plasma; (Mikro)Immunfluoreszenzmikroskopie; Auswertung: quantitativ. Bei Gruppen-spezifischem Ant";38.48;4243|4258|4269|4227;0.6;ZUGEORDNET
+11319;M;12.03;"Rickettsia, IFT quantitativ Antikörpernachweis, z.B. familienspezifisch, gruppenspezifisch; Serum oder Plasma; (Mikro)Immunfluoreszenzmikroskopie; Auswertung: quantitativ. Bei Gruppen-spezifischem Ant";38.48;4243|4258|4269;0.6;ZUGEORDNET
 11320;M;12.03;"Treponema pallidum (FTA-ABS-Test), IFT qualitativ Antikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: qualitativ.";26.72;4259|4270|4260|4271|4283|4273;0.98;ZUGEORDNET
 11321;M;12.03;"Treponema pallidum (FTA-ABS-Test), IFT quantitativ Antikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: quantitativ (Titer).";24.44;4259|4270|4260|4271|4273|4283;0.98;ZUGEORDNET
 11322;M;12.03;"Treponema pallidum (19 S IgM), IFT quantitativ Antikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie (fraktionierter IgM-Antikörper-Test); Auswertung: quantitativ (Titer).";27.41;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -4274,7 +4274,7 @@
 11387;M;12.03;"Staphylolysin Antikörpernachweis; Serum oder Plasma; z.B. Agglutinationstest (Antigen-beschichtete Partikel [z.B. Polystyrol-Latex]), Hämolyse-Hemmungstest; Auswertung: visuell-quantitativ.";10.08;4230|4246|4580|4598;0.77;ZUGEORDNET
 11388;M;12.03;"Streptokinase Antikörpernachweis; Serum oder Plasma; Agglutinationstest (Antigen-beschichtete Partikel [z.B. Polystyrol-Latex]); Auswertung: visuell-quantitativ- testspezifisch (relative oder internat";14.15;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11389;M;12.03;"Streptokokken-Desoxyribonuklease B (Streptodornase B, DNase B) Antikörpernachweis; Serum oder Plasma; z.B. Immunnephelometrie, Immunturbidimetrie; Auswertung: apparativ-quantitativ testspezifisch (rel";14.27;4295|4296|4178;0.89;ZUGEORDNET
-11390;M;12.03;"Streptolysin-O Antikörpernachweis; Serum oder Plasma; z.B. Immunnephelometrie, Immunturbidimetrie, Hämolysehemmungsreaktion; Auswertung: z.B. apparativ- quantitativ-testspezifisch (relative oder inter";9.60;4294|4231|4247|3523;0.77;ZUGEORDNET
+11390;M;12.03;"Streptolysin-O Antikörpernachweis; Serum oder Plasma; z.B. Immunnephelometrie, Immunturbidimetrie, Hämolysehemmungsreaktion; Auswertung: z.B. apparativ- quantitativ-testspezifisch (relative oder inter";9.60;4294|4231|4247;0.77;ZUGEORDNET
 11401;M;12.03;"Echinococcus, AT qualitativ Antikörpernachweis, Genus-spezifisch, Spezies-spezifisch (z.B. E. granulosus, E. multilocularis); Serum oder Plasma; Agglutinationstest (z.B. indirekte Hämagglutination); A";19.14;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11402;M;12.03;"Echinococcus, AT quantitativ Antikörpernachweis, Genus-spezifisch, Spezies-spezifisch (z.B. E. granulosus, E. multilocularis); Serum oder Plasma; Agglutinationstest (z.B. indirekte Hämagglutination); ";33.68;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11403;M;12.03;"Entamoeba histolytica, AT qualitativ Antikörpernachweis; Serum oder Plasma; Agglutinationstest (z.B. indirekte Hämagglutination); Auswertung: visuell-qualitativ.";19.14;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -4288,7 +4288,7 @@
 11419;M;12.03;"Babesia/Theileria, IFT quantitativ Antikörpernachweis, Spezies-spezifisch (z.B. B. divergens, T. microti); Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: quantitativ (Titer). Die untersuc";33.68;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11420;M;12.03;"Echinococcus, IFT qualitativ Antikörpernachweis, Genus-spezifisch, Spezies-spezifisch (z.B. E. granulosus, E. multilocularis); Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: qualitativ. D";27.50;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11421;M;12.03;"Echinococcus, IFT quantitativ Antikörpernachweis, Genus-spezifisch, Spezies-spezifisch (z.B. E. granulosus, E. multilocularis); Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: quantitativ ";48.38;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-11422;M;12.03;"Entamoeba histolytica, IFT qualitativ Antikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: qualitativ.";27.50;4440|4448|4457|4465|4740|4747|4760;0.95;ZUGEORDNET
+11422;M;12.03;"Entamoeba histolytica, IFT qualitativ Antikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: qualitativ.";27.50;4440|4448|4457|4465;0.95;ZUGEORDNET
 11423;M;12.03;"Entamoeba histolytica, IFT quantitativ Antikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: quantitativ (Titer).";48.38;4440|4448|4457|4465;0.94;ZUGEORDNET
 11424;M;12.03;"Fasciola, IFT qualitativ Antikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: qualitativ.";19.14;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11425;M;12.03;"Fasciola, IFT quantitativ Antikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: quantitativ(Titer).";33.68;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -4340,7 +4340,7 @@
 11508;M;12.03;"Rötelnvirus, AT quantitativ Antikörpernachweis; Serum oder Plasma; z.B. Hämagglutinationshemmtest (HHT), Hämolysis-in-Gel-Test (HiG); Auswertung: visuell-quantitativ (Titer).";28.94;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11509;M;12.03;"West-Nil-Virus, AT quantitativ Antikörpernachweis; Serum oder Plasma; Hämagglutinationshemmtest (HHT); Auswertung: visuell-quantitativ (Titer).";32.12;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11516;M;12.03;Alphavirus, sonstige Spezies, IFT qualitativ Antikörpernachweis, Spezies-spezifisch (z.B. Barmah-Forest-Virus, O'Nyong-nyong-Virus, östliches, westliches Pferdeenzephalitis-Virus, Mayoro- Virus, Ross-;35.73;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-11517;M;12.03;Alphavirus, sonstige Spezies, IFT quantitativ Antikörpernachweis, Spezies-spezifisch (z.B. Barmah-Forest-Virus, O'Nyong-nyong-Virus, östliches, westliches Pferdeenzephalitis-Virus, Mayoro- Virus, Ross;62.84;4333|4361;0.47;ZUGEORDNET
+11517;M;12.03;Alphavirus, sonstige Spezies, IFT quantitativ Antikörpernachweis, Spezies-spezifisch (z.B. Barmah-Forest-Virus, O'Nyong-nyong-Virus, östliches, westliches Pferdeenzephalitis-Virus, Mayoro- Virus, Ross;62.84;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11518;M;12.03;"Arenavirus, sonstige Spezies, IFT qualitativ Antikörpernachweis, Spezies-spezifisch (z.B. Junin-Virus, Lassa-Virus); z.B. Serum oder Plasma, Liquor; Immunfluoreszenzmikroskopie; Auswertung: qualitativ";35.73;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11519;M;12.03;"Arenavirus, sonstige Spezies, IFT quantitativ Antikörpernachweis, Spezies-spezifisch (z.B. Junin-Virus, Lassa-Virus); z.B. Serum oder Plasma, Liquor; Immunfluoreszenzmikroskopie; Auswertung: quantitat";62.84;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11520;M;12.03;"Chikungunya-Virus, IFT qualitativ Antikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: qualitativ.";35.73;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -4364,7 +4364,7 @@
 11538;M;12.03;"Herpes-simplex-Virus, IFT qualitativ Antikörpernachweis, Spezies-spezifisch (HSV-1, HSV-2); Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: qualitativ.";23.69;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11539;M;12.03;"Herpes-simplex-Virus, IFT quantitativ Antikörpernachweis, Spezies-spezifisch (HSV-1, HSV-2); Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: quantitativ (Titer).";34.48;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11540;M;12.03;"Humanes Herpesvirus 6 (HHV-6), IFT qualitativ Antikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: qualitativ.";23.81;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-11541;M;12.03;"Humanes Herpesvirus 6 (HHV-6), IFT quantitativ Antikörpernachweis; Antikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: quantitativ (Titer).";41.67;4010|3993;0.51;ZUGEORDNET
+11541;M;12.03;"Humanes Herpesvirus 6 (HHV-6), IFT quantitativ Antikörpernachweis; Antikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: quantitativ (Titer).";41.67;4010;0.51;ZUGEORDNET
 11542;M;12.03;"Humanes Herpesvirus 8 (HHV-8), IFT qualitativ Antikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: qualitativ.";23.81;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11543;M;12.03;"Humanes Herpesvirus 8 (HHV-8), IFT quantitativ Antikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: quantitativ (Titer).";41.67;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11544;M;12.03;"Lymphozytäres-Choriomeningitis-Virus (LCMV), IFT qualitativ Antikörpernachweis; Serum oder Plasma; Immunfluoreszenzmikroskopie; Auswertung: qualitativ.";23.81;4353|4370;0.96;ZUGEORDNET
@@ -4434,7 +4434,7 @@
 11644;M;12.03;"Antikörper-Immunfluoreszenz-Mosaik I, insgesamt Antiköpernachweis; Serum oder Plasma; mindestens zwei Substrate (z.B. Herpes-simplex-Virus 1, Herpes simplex-Virus 2 [infizierte Zellen]), Immunfluoresz";36.87;4384|4394|4320|4321|4347|4348|4318|4319|4345|4346|4633;0.91;ZUGEORDNET
 11645;M;12.03;"Antikörper-Immunfluoreszenz-Mosaik II, insgesamt Antiköpernachweis; Serum oder Plasma; mindestens vier Substrate (z.B. Parainfluenzavirus 1, 2, 3, 4 [infizierte Zellen]), Immunfluoreszenzmikroskopie; ";62.83;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11661;M;12.03;"Aminoglykoside(-Antibiotika), je Medikament, IA z.B. Amikacin, Gentamicin, Netilmicin, Tobramycin; Serum oder Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ. Das/Di";19.25;4171|4166|4150|4180;0.7;ZUGEORDNET
-11662;M;12.03;"Antiarrhythmika, je Medikament, IA z.B. Chinidin, Flecainid, Lidocain, Propafenon; Serum oder Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ. Das/Die untersuchte(n)";18.60;4165|4157|4167|4201|4176;0.68;ZUGEORDNET
+11662;M;12.03;"Antiarrhythmika, je Medikament, IA z.B. Chinidin, Flecainid, Lidocain, Propafenon; Serum oder Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ. Das/Die untersuchte(n)";18.60;4165|4157|4167|4201;0.68;ZUGEORDNET
 11663;M;12.03;"Antibiotika, je Medikament, IA z.B. Vancomycin; Serum oder Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ. Das/Die untersuchte(n) Antibiotikum(a) ist/sind in der Re";22.60;4203|4612|4613|4614;0.85;ZUGEORDNET
 11664;M;12.03;"Antiepileptika, je Medikament, IA z.B. Carbamazepin, Ethosuximid, Phenobarbital, Phenytoin, Primidon, Valproinsäure; Serum oder Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-q";11.29;4200|4173|4156|4164|4174|4181|4206|4175;0.84;ZUGEORDNET
 11665;M;12.03;"Herzglykoside, je Medikament, IA z.B. Digitoxin, Digoxin; Serum oder Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ. Das/Die untersuchte(n) Herzglykosid(e) ist/sind";17.81;4161|4162;0.71;ZUGEORDNET
@@ -4442,7 +4442,7 @@
 11667;M;12.03;"Methotrexat, IA Serum oder Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ.";28.06;4169;0.9;ZUGEORDNET
 11668;M;12.03;"Theophyllin, IA Serum oder Plasma; z.B. Signal-(Tracer-)verstärkter Immunoassay, Immunturbidimetrie; Auswertung: apparativ-quantitativ.";15.32;4179;0.86;ZUGEORDNET
 11675;M;12.03;"Anthelminthika, je Untersuchung (Chromatogramm), HPLC z.B. Albendazol; Serum oder Plasma; Hochdruckflüssigkeitschromatographie (HPLC); Auswertung: apparativ-quantitativ. Das/Die untersuchte(n) Wurmmit";23.97;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-11676;M;12.03;"Antiarrhythmika, je Untersuchung (Chromatogramm), HPLC z.B. Amiodaron, Disopyramid, Flecainid, Lidocain, Procainamid, Propafenon; Serum oder Plasma; Hochdruckflüssigkeitschromatographie (HPLC); Auswer";22.30;4163|4199|4170;0.66;ZUGEORDNET
+11676;M;12.03;"Antiarrhythmika, je Untersuchung (Chromatogramm), HPLC z.B. Amiodaron, Disopyramid, Flecainid, Lidocain, Procainamid, Propafenon; Serum oder Plasma; Hochdruckflüssigkeitschromatographie (HPLC); Auswer";22.30;4163|4199;0.66;ZUGEORDNET
 11677;M;12.03;"Antibiotika, je Untersuchung (Chromatogramm), HPLC z.B. Amoxicillin, Aztreonam, Doxycyclin, Isoniazid, Mefloquin, Rifampicin, Tetracyclin; Serum oder Plasma; Hochdruckflüssigkeitschromatographie (HPLC";23.97;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11678;M;12.03;"Anticholinergika, je Untersuchung (Chromatogramm), HPLC z.B. Biperiden; Serum oder Plasma; Hochdruckflüssigkeitschromatographie (HPLC); Auswertung: apparativ-quantitativ. Das/Die untersuchten Antichol";23.97;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11679;M;12.03;"Antidepressiva, je Untersuchung (Chromatogramm), HPLC z.B. Amitriptylin, Citalopram, Desipramin, Doxepin, Imipramin, Mirtazapin, Nortriptylin, Paroxetin, Venlafaxin; Serum oder Plasma; Hochdruckflüssi";24.99;4160|4187;0.66;ZUGEORDNET
@@ -4479,7 +4479,7 @@
 11731;M;12.03;"Exogene Gifte, je HPLC-Untersuchung (Chromatogramm) Bestätigungsanalyse/Ergänzungsanalyse; Serum oder Plasma, Urin, Mageninhalt (z.B. Erbrochenes, Abgesaugtes), Speichel; Hochdruckflüssigkeitschromato";38.32;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11732;M;12.03;"Exogene Gifte, je LC-MS-Untersuchung (Spektrum) General-unknown-Screening oder Bestätigungsanalyse/Ergänzungsanalyse; Serum oder Plasma, Urin, Mageninhalt (z.B. Erbrochenes, Abgesaugtes), Speichel; (H";72.03;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11733;M;12.03;"Methanol, gaschromatographisch Vollblut, Urin; Headspace-Gaschromatographie; Auswertung: apparativ-quantitativ.";63.32;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-11734;M;12.03;"Salicylsäure Serum oder Plasma, Urin; Photometrie (Analyt-Farbkomplex [Trinder-Reaktion]); Auswertung: apparativ-quantitativ.";19.69;4177;0.38;ZUGEORDNET
+11734;M;12.03;"Salicylsäure Serum oder Plasma, Urin; Photometrie (Analyt-Farbkomplex [Trinder-Reaktion]); Auswertung: apparativ-quantitativ.";19.69;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11741;M;12.03;"Albumin (Mikroalbuminurie) Urin; vorgefertigter Reagenzträger, ggf. einschließlich Kratininfeld; Auswertung: z.B. visuell-semiquantitativ, apparativ-quantitativ. Die Leistung nach Nummer 11741 ist neb";2.31;3736|3735;0.82;ZUGEORDNET
 11742;M;12.03;"Albumin (Stuhl), quantitativ Abklärung chronisch entzündlicher Darmerkrankungen (Colitis ulcerosa, Morbus Crohn); z.B. Signal-(Tracer-)verstärkter Immunoassay, radiale Immundiffusion, Immunnephelometr";15.35;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11743;M;12.03;"Calprotectin (Stuhl), quantitativ Abklärung chronisch entzündlicher Darmerkrankungen (Colitis ulcerosa, Morbus Crohn); Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ. Die L";29.03;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -4602,7 +4602,7 @@
 11904;M;12.03;"Fibrinmonomer (lösliches Fibrin), Konzentration Citratplasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ. Die Leistung nach Nummer 11904 ist neben den Leistungen nach d";21.93;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11905;M;12.03;"Fibrinogen, Aktivität Citratplasma; z.B. Koagulometrie (mechanisch und/oder optisch) und/oder Photometrie (Turbidimetrie); Auswertung: apparativ-quantitativ. Die Leistung nach Nummer 11905 ist neben d";4.60;3933;0.76;ZUGEORDNET
 11906;M;12.03;"Fibrinogen, Konzentration Abklärung Dysfibrinogenämie; Citratplasma; z.B. Immunnephelometrie, Immunturbidimetrie, radiale Immundiffusi; Auswertung: apparativ-quantitativ (z.B. Radius, Extinktion).";9.35;3934;0.78;ZUGEORDNET
-11907;M;12.03;"Gerinnungsfaktor (II, V, VII, X), je Faktor, Konzentration Citratplasma oder Serum; z.B. Laurell-Elektrophorese, Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ (z.B. Peakhö";47.82;3939|3767;0.69;ZUGEORDNET
+11907;M;12.03;"Gerinnungsfaktor (II, V, VII, X), je Faktor, Konzentration Citratplasma oder Serum; z.B. Laurell-Elektrophorese, Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ (z.B. Peakhö";47.82;3939;0.69;ZUGEORDNET
 11908;M;12.03;"Gerinnungsfaktor (VIII:Ag, IX, XI, XII, Präkallikrein [PK], Hochmolekulares Kininogen [HK]), je Faktor, Konzentration Citratplasma; z.B. Laurell-Elektrophorese, Signal-(Tracer-)verstärkter Immunoassay";45.48;3941|3940;0.81;ZUGEORDNET
 11909;M;12.03;"Gerinnungsfaktor II, Aktivität Citratplasma; z.B. Koagulometrie (mechanisch und/oder optisch) und/oder Photometrie (z.B. Turbidimetrie, chromogenes Substrat); Auswertung: apparativ-quantitativ.";29.35;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11910;M;12.03;"Gerinnungsfaktor IX, Aktivität Citratplasma; z.B. Koagulometrie (mechanisch und/oder optisch) und/oder Photometrie (z.B. Turbidimetrie, chromogenes Substrat); Auswertung: apparativ-quantitativ.";28.50;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -4634,7 +4634,7 @@
 11936;M;12.03;"Plasmininhibitor (Alpha-2-Antiplasmin), Konzentration Citratplasma; z.B. Latexpartikel-verstärkte Immunnephelometrie, Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ. Die Le";30.06;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11937;M;12.03;"Plasminogen, Aktivität Citratplasma; Photometrie (chromogenes Substrat); Auswertung: apparativ-quantitativ.";22.33;3948;0.83;ZUGEORDNET
 11938;M;12.03;"Plasminogen, Konzentration Citratplasma oder Serum; z.B. Signal-(Tracer-)verstärkter Immunoassay, Laurell-Elektrophorese, radiale Immundiffusion; Auswertung: apparativ- quantitativ (z.B. Extinktion, P";30.89;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-11939;M;12.03;"Plasminogenaktivator (t-PA), Aktivität Citratplasma; z.B. Photometrie (chromogenes Substrat); Auswertung: apparativ-quantitativ.";22.37;3944|4057;0.8;ZUGEORDNET
+11939;M;12.03;"Plasminogenaktivator (t-PA), Aktivität Citratplasma; z.B. Photometrie (chromogenes Substrat); Auswertung: apparativ-quantitativ.";22.37;3944;0.8;ZUGEORDNET
 11940;M;12.03;"Plasminogenaktivator (t-PA), Konzentration Citratplasma; z.B. Signal-(Tracer-)verstärkter Immunoassay, Laurell-Elektrophorese; Auswertung: apparativ-quantitativ (z.B. Extinktion, Peakhöhe).";28.50;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11941;M;12.03;"Plasminogenaktivatorinhibitor (PAI-1), Aktivität Citratplasma; Photometrie (chromogenes Substrat); Auswertung: apparativ-quantitativ.";28.84;3949;0.94;ZUGEORDNET
 11942;M;12.03;"Plasminogenaktivatorinhibitor (PAI-1), Konzentration Citratplasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ.";35.11;3949;0.95;ZUGEORDNET
@@ -4654,7 +4654,7 @@
 11956;M;12.03;"Von-Willebrand-Faktor-Antigen (vWF:Ag) Citratplasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ (z.B. IU/ml, % der Norm).";39.23;3963;0.83;ZUGEORDNET
 11957;M;12.03;"Von-Willebrand-Faktor-Kollagen-Bindungsaktivität (vWF:CB) Citratplasma; Signal-(Tracer-)verstärkter Immunoassay (z.B. Mikrotiterplatten-ELISA); Auswertung: apparativ-quantitativ (z.B. IU/ml, % der Nor";38.73;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11958;M;12.03;"Von-Willebrand-Faktor-Multimere Typisierung von Willebrand-Erkrankung; Citratplasma; SDS-Agarosegel-Elektrophorese, ggf. einschließlich Antigentransfer (z.B. Elektroblotting), Antigen-(Multimere-)Dete";91.50;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-11959;M;12.03;"Von-Willebrand-Faktor-spaltende Protease (ADAMTS-13), Aktivität Abklärung thrombotische Mikroangiopathie; Citratplasma, Serum; Substrat (z.B. vWF-Wildtyp, vWF-Fragmente); Verdünnungsreihe, Inkubation;";38.73;607;0.17;ZUGEORDNET
+11959;M;12.03;"Von-Willebrand-Faktor-spaltende Protease (ADAMTS-13), Aktivität Abklärung thrombotische Mikroangiopathie; Citratplasma, Serum; Substrat (z.B. vWF-Wildtyp, vWF-Fragmente); Verdünnungsreihe, Inkubation;";38.73;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11960;M;12.03;"Von-Willebrand-Faktor-spaltende Protease (ADAMTS-13), Antigen Abklärung thrombotische Mikroangiopathie; Citratplasma, Serum; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-testspezifis";39.23;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11961;M;12.03;"Von-Willebrand-Faktor-spaltende Protease (ADAMTS-13), Antikörper Abklärung thrombotische Mikroangiopathie; Citratplasma, Serum; Antikörpernachweis; z.B. funktioneller Test (z.B. modifizierter Bethesda";53.02;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 11962;M;12.03;"Komplementfaktor C5 Serum oder Plasma; z.B. radiale Immundiffusion, Immunnephelometrie, Immunturbidimetrie; Auswertung: apparativ-quantitativ.";19.84;3969|3971|3968|3970;0.87;ZUGEORDNET
@@ -4721,7 +4721,7 @@
 12068;M;12.03;"Steroidprofil, je Chromatogramm Abklärung gestörte Geschlechtsentwicklung; Serum oder Plasma, Urin; Gaschromatographie (GC); Auswertung: z.B. apparativ-qualitativ, apparativ- quantitativ.";63.32;4076;0.77;ZUGEORDNET
 12075;M;12.03;"Hormonspektrum I, je Untersuchung (Spektrum) Serum oder Plasma, Urin; einzelne Messgröße oder Profil; (Hochdruck-)Flüssigkeitschromatographie-Massenspektrometrie (z.B. [HP]LC-MS, [HP]LC-MS/MS, HPLC-MS";72.03;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12076;M;12.03;"Hormonspektrum II, je Untersuchung (Spektrum) Serum oder Plasma, Urin; einzelne Messgröße oder Profil; Gaschromatographie-Massenspektrometrie (GC-MS); Auswertung: z.B. apparativ- qualitativ, apparativ";63.32;3521;0.57;ZUGEORDNET
-12077;M;12.03;"Steroidhormonrezeptor Gewebe, einschließlich Probenaufbereitung (Zellüberstand), ggf. einschließlich Dichtegradientenultrazentrifugation; chemischer Rezeptornachweis (z.B. radioaktiv markierter Tracer";82.96;4088|4089;0.71;ZUGEORDNET
+12077;M;12.03;"Steroidhormonrezeptor Gewebe, einschließlich Probenaufbereitung (Zellüberstand), ggf. einschließlich Dichtegradientenultrazentrifugation; chemischer Rezeptornachweis (z.B. radioaktiv markierter Tracer";82.96;4088;0.71;ZUGEORDNET
 12085;M;12.03;"Apolipoprotein A1 (Apo-AI) Serum oder Plasma; z.B. Immunnephelometrie, Immunturbidimetrie; Auswertung: apparativ-quantitativ.";11.59;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12086;M;12.03;"Apolipoprotein A2 (Apo-AII) Serum oder Plasma; z.B. Immunnephelometrie, Immunturbidimetrie; Auswertung: apparativ-quantitativ.";9.50;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12087;M;12.03;"Apolipoprotein B (Apo-B) Serum oder Plasma; z.B. Immunnephelometrie, Immunturbidimetrie; Auswertung: apparativ-quantitativ.";11.71;3725;0.75;ZUGEORDNET
@@ -4734,7 +4734,7 @@
 12094;M;12.03;"Lipidelektrophorese, qualitativ Serum; Elektrophorese (z.B. Agarosegel, Zelluloseazetatfolie), Färbung (z.B. Sudan-Schwarz); Auswertung: visuell-deskriptiv. Die Leistung nach Nummer 12094 ist neben de";8.21;3728;0.82;ZUGEORDNET
 12095;M;12.03;"Lipidelektrophorese, quantitativ Serum; Agarosegel-Elektrophorese, Detektion (z.B. Polyanionenpräzipitation, enzymatische Farbreaktion); Auswertung: quantitativ (Densitometrie). Die Leistung nach Numm";14.83;3729;0.84;ZUGEORDNET
 12096;M;12.03;"Lipoprotein(a) Serum oder Plasma; z.B. Signal-(Tracer-)verstärkter Immunoassay, Immunnephelometrie, Immunturbidimetrie, radiale Immundiffusion; Auswertung: apparativ-quantitativ (z.B. Extinktion, Radi";12.68;3730;0.71;ZUGEORDNET
-12097;M;12.03;"Lipoproteine-Fraktionierung, insgesamt Serum; Dichtegradienten-Ultrazentrifugation sequenziell; Fraktionierung präparativ. Die Leistung nach Nummer 12097 ist nur berechnungsfähig bei bereits gesichert";25.83;3727|4100;0.77;ZUGEORDNET
+12097;M;12.03;"Lipoproteine-Fraktionierung, insgesamt Serum; Dichtegradienten-Ultrazentrifugation sequenziell; Fraktionierung präparativ. Die Leistung nach Nummer 12097 ist nur berechnungsfähig bei bereits gesichert";25.83;3727;0.77;ZUGEORDNET
 12098;M;12.03;"Malondialdehyd (MDA) Plasma; Hochdruckflüssigkeitschromatographie (HPLC); Auswertung: apparativ-quantitativ.";30.83;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12111;M;12.03;"Blutausstrich (Differenzialblutbild) Vollblut (antikoaguliert); panoptische Färbung (z.B. Pappenheim), Hellfeldmikroskopie; Auswertung: z.B. Leukozytenverteilung quantitativ, Erythrozytenmorphologie d";3.84;3502|3680;0.68;ZUGEORDNET
 12112;M;12.03;"Blutausstrich oder Knochenmarkausstrich, Eisenfärbung oder Vitalfärbung, je Probenmaterial und Färbung Vollblut (antikoaguliert), Knochenmarkaspirat; Färbung (z.B. Berliner-Blau-Reaktion, Brillantkres";13.24;3683|3682;0.79;ZUGEORDNET
@@ -4822,7 +4822,7 @@
 12319;M;12.03;Sequenzierung, Resistenz-assoziierte Mutationen, je therapierelevante Genregion Suche nach Resistenz-assoziierten Mutationen, Sequenzierung, automatisiert (z.B. Kettenabbruchverfahren, Pyrosequenzieru;65.02;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12320;M;12.03;Hochdurchsatz-Sequenzierung, Resistenz-assoziierte Mutationen, Therapiemonitoring (z.B. HIV, HCV, CMV), Coverage >100×, je therapierelevante Genregion Indikationsbeschränkung: HIV: Therapiebeginn/-ums;230.00;4322|4323|4349|4350|4395;0.55;ZUGEORDNET
 12321;M;12.03;Hochdurchsatz-Sequenzierung, Metagenomik (DNA/cfDNA oder RNA), je 20 Mio. Reads/ONT-Äquivalent;600.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-12322;M;12.03;Hochdurchsatz-Sequenzierung, Auswertung pathogenspezifischer Reads mittels bioinformatischer Pipelines Indikationsbeschränkung: einmal je Resistenzuntersuchung [z.B. HIV, HCV, CMV] oder je Untersuchun;230.00;4540;0.47;ZUGEORDNET
+12322;M;12.03;Hochdurchsatz-Sequenzierung, Auswertung pathogenspezifischer Reads mittels bioinformatischer Pipelines Indikationsbeschränkung: einmal je Resistenzuntersuchung [z.B. HIV, HCV, CMV] oder je Untersuchun;230.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12340;M;12.03;"Chlamydia trachomatis Erregernachweis; z.B. Abstrich (z.B. Harnröhre, Zervix), Urin, einschließlich Nukleinsäure-Isolierung; Amplifikation, Detektion und Auswertung: testspezifisch. Das untersuchte Pr";41.77;4253|4265|4277;0.85;ZUGEORDNET
 12341;M;12.03;"Cytomegalovirus (CMV), qualitativ Erregernachweis; z.B. Vollblut (antikoaguliert, möglichst EDTA), Liquor, Urin, Muttermilch, Fruchtwasser, einschließlich Nukleinsäure-Isolierung; Amplifikation, Detek";49.75;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12342;M;12.03;"Cytomegalovirus (CMV), quantitativ Erregernachweis; z.B. Vollblut (antikoaguliert, möglichst EDTA), Liquor, Urin, Muttermilch, Fruchtwasser, einschließlich Nukleinsäure-Isolierung; Amplifikation, Dete";57.55;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -4861,10 +4861,10 @@
 12404;M;12.03;"Bacterium-Anzucht, anaerob oder mikroaerophil, je Nährmedium (Potenziell) infiziertes Probenmaterial; Anaerobier-Nährmedium (z.B. Schaedler-Agar mit Schafblut, Schaedler-KV-Agar, Thioglycolatbouillon)";6.42;4567|4533;0.69;ZUGEORDNET
 12405;M;12.03;"Bacterium-Anzucht, Blutkultursystem manuell, je Flasche (Potenziell) infiziertes Probenmaterial; Flüssignährmedium in Flaschen (z.B. aerob, anaerob); Auswertung: visuell-manuell. Die Leistung nach Num";6.42;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12406;M;12.03;"Chlamydia-Anzucht, je Ansatz (Potenziell) infiziertes Probenmaterial; Zellkultur (z.B. BGM-Zellen), Bebrütung (z.B. über 48−72 Std. bei ~37°C und 5% CO2), Immunfluoreszenzmikroskopie; Auswertung: qual";37.14;4541;0.57;ZUGEORDNET
-12407;M;12.03;"Mycobacterium-Anzucht, je Probenmaterial und Nährmedium (Potenziell) infiziertes Probenmaterial, ggf. einschließlich Probenaufbereitung; Festmedien (z.B. Löwenstein-Jensen-Medium), Flüssigmedien (z.B.";40.94;4585;0.46;ZUGEORDNET
+12407;M;12.03;"Mycobacterium-Anzucht, je Probenmaterial und Nährmedium (Potenziell) infiziertes Probenmaterial, ggf. einschließlich Probenaufbereitung; Festmedien (z.B. Löwenstein-Jensen-Medium), Flüssigmedien (z.B.";40.94;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12416;M;12.03;"Bacterium-Identifizierung I, je aerobe Reinkultur Reinkultur; Identifizierungssystem (z.B. Streifenformat, Mikrotiterplattenformat): bis zu 19 Reaktionskammern (sog. Bunte Reihe), Bebrütung; Auswertun";11.12;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12417;M;12.03;"Bacterium-Identifizierung I, je Reinkultur Reinkultur; Kombinations-Nährmedium (z.B. Kligler-Agar, Triple-Sugar-Iron-Agar), Bebrütung; Auswertung: visuell-qualitativ. Das/Die untersuchte(n) Bacterium/";8.05;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-12418;M;12.03;"Bacterium-Identifizierung I, je Reinkultur und Test Reinkultur; spezielles kulturelles und/oder biochemisches Einzelverfahren (z.B. Harnstoffspaltung, DNase-Test, Nitratreduktion, Esculinspaltung, Koa";4.90;4029.H4|3758;0.42;ZUGEORDNET
+12418;M;12.03;"Bacterium-Identifizierung I, je Reinkultur und Test Reinkultur; spezielles kulturelles und/oder biochemisches Einzelverfahren (z.B. Harnstoffspaltung, DNase-Test, Nitratreduktion, Esculinspaltung, Koa";4.90;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12419;M;12.03;"Bacterium-Identifizierung II, je aerobe Reinkultur Reinkultur; Identifizierungssystem (z.B. Streifenformat, Mikrotiterplattenformat): mindestens 20 Reaktionskammern (sog. Bunte Reihe), Bebrütung; Ausw";15.48;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12420;M;12.03;"Bacterium-Identifizierung II, je Reinkultur Isoliertes Ganzzell-(Bakterien-)Hydrolysat; Chromatographie (z.B. DC); Auswertung: visuell-qualitativ. Das/Die untersuchte(n) Bacterium/Bacteria ist/sind in";22.70;4547|4546;0.54;ZUGEORDNET
 12421;M;12.03;"Bacterium-Identifizierung II, je Reinkultur und Test Reinkultur; orientierendes kulturelles und/oder biochemisches Einzelverfahren (z.B. Katalase-Reaktion, Oxidase-Reaktion, Gallelöslichkeit, Clumping";4.57;4545;0.55;ZUGEORDNET
@@ -4872,11 +4872,11 @@
 12423;M;12.03;"Bacterium-Identifizierung, je anaerobe/mikroaerophile Reinkultur Reinkultur; Identifizierungssystem (z.B. Streifenformat, Mikrotiterplattenformat): mindestens 18 Reaktionskammern (sog. Bunte Reihe), B";15.27;4548|4549|4550;0.65;ZUGEORDNET
 12424;M;12.03;"Bacterium-Identifizierung, je Reinkultur und Antigen Reinkultur; Taxon-spezifisches Antiserum, Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-testspezifisch (relative Einheiten). Das/D";12.92;4521|4562|4591;0.78;ZUGEORDNET
 12425;M;12.03;"Bacterium-Identifizierung, je Reinkultur und Antiserum Reinkultur; Taxon-spezifisches Antiserum, Immunfluoreszenzmikroskopie; Auswertung: qualitativ. Das/Die untersuchte(n) Bacterium/Bacteria ist/sind";18.42;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-12426;M;12.03;"Bacterium-Nachweis und/oder -Identifizierung, je Ansatz (Potenziell) infiziertes Probenmaterial oder Reinkultur; Durchflusszytometrie; Auswertung: apparativ-systemspezifisch (Auswertesoftware). Das/Di";16.26;4655;0.45;ZUGEORDNET
+12426;M;12.03;"Bacterium-Nachweis und/oder -Identifizierung, je Ansatz (Potenziell) infiziertes Probenmaterial oder Reinkultur; Durchflusszytometrie; Auswertung: apparativ-systemspezifisch (Auswertesoftware). Das/Di";16.26;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12427;M;12.03;"Beta-hämolysierende Streptokokken, Antigen-AT, je Antiserum Antigen-Differenzierung (Serotypisierung); Reinkultur; Agglutinationstest (Antikörper-beschichtete Partikel [z.B. Polystyrol-Latex]); Auswer";7.37;4561|4572|4520|4500;0.85;ZUGEORDNET
 12428;M;12.03;"Campylobacter spp., Antigen-AT, je Reinkultur Antigen-Nachweis; Reinkultur, ggf. einschließlich Probenaufbereitung (z.B. Erhitzen, Extraktion); Agglutinationstest (Antikörper-beschichtete Partikel [z.";13.52;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12429;M;12.03;"Darmpathogene Escherichia coli, Antigen-AT, je Antiserum Antigen-Differenzierung (Serotypisierung); Reinkultur; Agglutinationstest (Antikörper-beschichtete Partikel [z.B. Polystyrol-Latex]); Auswertun";6.79;4573;0.73;ZUGEORDNET
-12430;M;12.03;"Gram-Färbung, je Reinkultur Reinkultur-Ausstrich; Färbung, Hellfeldmikroskopie; Auswertung: qualitativ. Das/Die untersuchte(n) Bacterium/Bacteria ist/sind in der Rechnung anzugeben.";4.50;4511|4553;0.48;ZUGEORDNET
+12430;M;12.03;"Gram-Färbung, je Reinkultur Reinkultur-Ausstrich; Färbung, Hellfeldmikroskopie; Auswertung: qualitativ. Das/Die untersuchte(n) Bacterium/Bacteria ist/sind in der Rechnung anzugeben.";4.50;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12431;M;12.03;"Haemophilus influenzae, Antigen-AT, je Antiserum Antigen-Differenzierung (Serotypisierung); Reinkultur; Agglutinationstest (Antikörper-beschichtete Partikel [z.B. Polystyrol-Latex]); Auswertung: visue";10.83;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12432;M;12.03;"Legionella, Antigen-AT, je Antiserum Antigen-Differenzierung (Serotypisierung); Reinkultur; Agglutinationstest (Antikörper-beschichtete Partikel [z.B. Polystyrol-Latex]); Auswertung: visuell- qualitat";9.68;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12433;M;12.03;"Listeria, Antigen-AT, je Reinkultur Antigen-Nachweis; Reinkultur; Agglutinationstest (Antikörper-beschichtete Partikel [z.B. Polystyrol-Latex]); Auswertung: visuell-qualitativ.";9.28;4281|4226|4242;0.65;ZUGEORDNET
@@ -4893,7 +4893,7 @@
 12458;M;12.03;"Clostridium difficile, Toxin-Immunoassay Toxinnachweis (z.B. Toxin A und/oder B); Stuhl (ungeformt, flüssig-breiig); Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ- testspezifisch (rel";29.04;4590|4596;0.65;ZUGEORDNET
 12459;M;12.03;"Darmpathogene Escherichia coli, Toxin-Immunoassay, je Toxin Toxinnachweis (z.B. Shigatoxin, Enterotoxin); Kultur (Stuhl); Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-testspezifisch ";19.08;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12460;M;12.03;"Staphylococcus aureus, Toxin-Immunoassay, je Toxin Toxin-(Superantigen-)Nachweis (z.B. SE-Superantigen, SEI-Superantigen, Toxic-Shock-Syndrome-Toxin-1-Superantigen); z.B. Kulturüberstand, Lebensmittel";33.41;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-12461;M;12.03;"Vibrio cholerae, Toxin-Immunoassay Toxinnachweis (Choleratoxin); Kultur (Stuhl); Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-testspezifisch (relative Einheiten). Die Leistung nach N";33.98;4593;0.44;ZUGEORDNET
+12461;M;12.03;"Vibrio cholerae, Toxin-Immunoassay Toxinnachweis (Choleratoxin); Kultur (Stuhl); Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-testspezifisch (relative Einheiten). Die Leistung nach N";33.98;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12471;M;12.03;"Hemmstofftest z.B. Urin, Liquor, Blutkultur; beimpfter (z.B. mit Bacillus subtilis) Schwärmagar, Bebrütung; Auswertung: visuell (Hemmhof ja/nein).";4.34;4607;0.56;ZUGEORDNET
 12472;M;12.03;"Keimzahl, Eintauchobjektträger, je Urin Urin; handelsüblicher Nährbo(ö)den-beschichteter Eintauchobjektträger, Bebrütung; Auswertung: visuell-semiquantitativ (z.B. Bakterienzahl/ml, Abgleich mit Refer";3.29;4605;0.74;ZUGEORDNET
 12473;M;12.03;"Keimzahl, Oberflächenkulturverfahren Z.B. Bronchiallavage, Urin; Oberflächenkultur, Bebrütung; Auswertung: visuell-semiquantitativ (Anzahl Kolonien, Umrechnung in KBE/ml). Die Leistung nach Nummer 124";5.05;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -4908,7 +4908,7 @@
 12503;M;12.03;"Filarioidea (Filarien), Färbung Nativmaterial; aufwendige Färbung (z.B. Hämatoxylin), Hellfeldmikroskopie; Auswertung: qualitativ. Das untersuchte Nativmaterial ist in der Rechnung anzugeben.";22.96;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12504;M;12.03;"Coccidia, Autofluoreszenz Nativmaterial; Fluoreszenzmikroskopie; Auswertung: qualitativ (z.B. Cryptosporidium parvum, Cyclospora cayetanensis, (Cysto)Isospora belli, Sarcocystis spp.). Das untersuchte";20.44;4185;0.66;ZUGEORDNET
 12505;M;12.03;"Coccidia, Färbung Nativmaterial; aufwendige Färbung (z.B. Kinyoun-Färbung), Hellfeldmikroskopie; Auswertung: qualitativ (z.B. Cryptosporidium parvum, Cyclospora cayetanensis, (Cysto)Isospora belli, Sa";20.44;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-12506;M;12.03;"Giardia lamblia Nativmaterial; ggf. einschließlich einfacher Färbung (z.B. Lugol, Methylenblau), Lichtmikroskopie (z.B. Hellfeld, Dunkelfeld, Phasenkontrast); Auswertung: qualitativ. Das untersuchte N";11.08;4741|4748|4761;0.45;ZUGEORDNET
+12506;M;12.03;"Giardia lamblia Nativmaterial; ggf. einschließlich einfacher Färbung (z.B. Lugol, Methylenblau), Lichtmikroskopie (z.B. Hellfeld, Dunkelfeld, Phasenkontrast); Auswertung: qualitativ. Das untersuchte N";11.08;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12507;M;12.03;"Leishmania, Färbung Nativmaterial; aufwendige Färbung (z.B. Giemsa), Hellfeldmikroskopie; Auswertung: qualitativ. Das untersuchte Nativmaterial ist in der Rechnung anzugeben.";19.09;4441|4449|4458|4466|4510|4753;0.69;ZUGEORDNET
 12508;M;12.03;"Microsporidia, Färbung Nativmaterial; aufwendige Färbung (z.B. Chromotropfärbung, Calcofluor), z.B. Hellfeldmikroskopie, Fluoreszenzmikroskopie; Auswertung: qualitativ. Das untersuchte Nativmaterial i";20.32;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12509;M;12.03;"Parasit, IA, je Antigen Antigennachweis; Nativmaterial; Taxon-spezifisches Antiserum, Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-testspezifisch (relative Einheiten). Der/Die Parasi";17.77;4759|4768;0.57;ZUGEORDNET
@@ -4918,7 +4918,7 @@
 12513;M;12.03;"Sarcoptes scabiei (Krätzmilbe) Nativmaterial; Lichtmikroskopie (z.B. Hellfeld, Dunkelfeld, Phasenkontrast); Auswertung: qualitativ. Das untersuchte Nativmaterial ist in der Rechnung anzugeben.";9.51;4742;0.95;ZUGEORDNET
 12514;M;12.03;"Trichomonas Nativmaterial; ggf. einschließlich Färbung (z.B. Giemsa), Lichtmikroskopie (z.B. Hellfeld, Dunkelfeld, Phasenkontrast); Auswertung: qualitativ. Das untersuchte Nativmaterial ist in der Rec";7.69;4743|4749|4762|4765;0.7;ZUGEORDNET
 12515;M;12.03;"Würmer und deren Bestandteile, Wurmeier Nativmaterial; ggf. einschließlich einfacher Färbung (z.B. Lugol, Methylenblau), Lichtmikroskopie (z.B. Hellfeld, Dunkelfeld, Phasenkontrast); Auswertung: quali";9.50;4744|4750;0.92;ZUGEORDNET
-12521;M;12.03;"Parasit, aufwendige Anreicherung, je Untersuchung Nativmaterial; aufwendige Anreicherung (z.B. SAF-Konzentrationsverfahren, MIF-Konzentrationsverfahren, Mirazidienschlüpfverfahren, Larvenanreicherung ";17.71;4756|4757|4665;0.72;ZUGEORDNET
+12521;M;12.03;"Parasit, aufwendige Anreicherung, je Untersuchung Nativmaterial; aufwendige Anreicherung (z.B. SAF-Konzentrationsverfahren, MIF-Konzentrationsverfahren, Mirazidienschlüpfverfahren, Larvenanreicherung ";17.71;4756|4757;0.72;ZUGEORDNET
 12522;M;12.03;"Parasit, einfache Anreicherung, je Untersuchung Nativmaterial; einfache Anreicherung (z.B. Filtration, Sedimentation, Flotation); ggf. einschließlich einfacher Färbung (z.B. Lugol, Methylenblau), Lich";14.39;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12523;M;12.03;"Parasit, quantitativer Nachweis, insgesamt je Probenmaterial z.B. 10 ml Urin, 3 g Stuhl; Spezialverfahren (z.B. Filtration und/oder Flotation); z.B. Objektträger, McMaster-Zählkammer, Hellfeldmikrosko";19.90;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12524;M;12.03;"Parasit-Färbung, aufwendig, nach Anreicherung, je Parasit Angereicherter Parasit; aufwendige Färbung (z.B. Giemsa, Grocott, Karbolfuchsin, Ziehl-Neelsen, Calcofluor); z.B. Hellfeldmikroskopie, Fluores";24.36;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -4958,7 +4958,7 @@
 12602;M;12.03;"Rotavirus, Antigen-AT Antigennachweis; Nativmaterial (z.B. Stuhl); Agglutinationstest (Antikörper-beschichtete Partikel [z.B. Polystyrol-Latex]); Auswertung: visuell-qualitativ. Das untersuchte Nativm";11.08;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12603;M;12.03;"Rotavirus, Antigen-IA Antigennachweis; Nativmaterial; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-testspezifisch (relative Einheiten). Das untersuchte Nativmaterial ist in der Rechn";21.90;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12604;M;12.03;"Virus-Nachweis, Antigen-IFT, je Antiserum Nativmaterial (z.B. zellhaltiges Abstrichmaterial); Taxon-spezifisches Antiserum, Immunfluoreszenzmikroskopie; Auswertung: qualitativ. Das untersuchte Nativma";20.60;4518|4636;0.53;ZUGEORDNET
-12605;M;12.03;"Virus-Nachweis, EM Nativmaterial (z: B. Stuhl, Liquor, Sekret); Elektronenmikroskopie, ggf. einschließlich Immuntechniken (IEM); Auswertung: qualitativ. Das untersuchte Nativmaterial und das/die unter";144.28;4637|4671|3650|4630|4646|4678|4640|4675|4374|4373;0.67;ZUGEORDNET
+12605;M;12.03;"Virus-Nachweis, EM Nativmaterial (z: B. Stuhl, Liquor, Sekret); Elektronenmikroskopie, ggf. einschließlich Immuntechniken (IEM); Auswertung: qualitativ. Das untersuchte Nativmaterial und das/die unter";144.28;4637|4671|3650;0.67;ZUGEORDNET
 12611;M;12.03;"Virus-Anzucht, je Zellkultur/Zelllinie Nachweis Taxon-spezifischer zytopathischer Effekte; Nativmaterial (z.B. Bläschensekret, Abstrichmaterial); Taxon-geeignete Zellart (z.B. unterschiedliche primäre";22.59;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12612;M;12.03;"Virus-Zentrifugationskultur (Shell-Vial-Assay), Erstansatz, insgesamt Antigennachweis, Antigenidentifizierung; Nativmaterial; „Auf-Zentrifugation“ (z.B. 45 Minuten bei 700 x g), Deckglas-Zellkulturen,";58.45;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12613;M;12.03;"Virus-Zentrifugationskultur (Shell-Vial-Assay), je weiteres Taxon-spezifisches Antiserum Antigennachweis, Antigenidentifizierung; weitere Taxon-spezifische Antiseren, z.B. Immunfluoreszenzmikroskopie,";22.68;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -4969,13 +4969,13 @@
 12625;M;12.03;"Virus-Identifizierung, Neutralisationstest, je Zellkultur und Antiserum (Potenziell) infizierte Zellkultur; Neutralisationstest; Hellfeldmikroskopie, ggf. einschließlich Phasenkontrastmikroskopie; Aus";45.18;4667;0.72;ZUGEORDNET
 12631;M;12.03;"Bacterium-Anzucht, Blutkultursystem automatisiert, je Flasche (Potenziell) infiziertes Probenmaterial; Flüssignährmedium in Flaschen (z.B. aerob, anaerob); Gerätebeschickung (standardisiert); apparati";14.27;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12632;M;12.03;"Bacterium-Empfindlichkeitstestung, automatisiert, je Reinkultur und Antibiogramm Reinkultur (Inokulum); Gerätebeschickung (standardisiert), apparative, zeitlich eng getaktete Wachstumsmessung (z.B. Su";22.81;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-12633;M;12.03;"Bacterium-Nachweis/-Identifizierung, automatisiert, je Untersuchung Nachweis (z.B. Blutkultur) und/oder Identifizierung (z.B. Reinkultur); Gerätebeschickung (standardisiert), apparative, zeitlich eng ";15.52;4543;0.44;ZUGEORDNET
+12633;M;12.03;"Bacterium-Nachweis/-Identifizierung, automatisiert, je Untersuchung Nachweis (z.B. Blutkultur) und/oder Identifizierung (z.B. Reinkultur); Gerätebeschickung (standardisiert), apparative, zeitlich eng ";15.52;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12634;M;12.03;"Mycobacterium-Empfindlichkeitstestung, automatisiert, je Tuberkulostatikum und Konzentration Reinkultur (Inokulum); Flüssigmedien mit Tuberkulostatikum angereichert; Gerätebeschickung (standardisiert)";15.76;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12635;M;12.03;"Mycobacterium-Nachweis, automatisiert, je Nachweis (Potenziell) infiziertes Probenmaterial, ggf. einschließlich Probenaufbereitung; Gerätebeschickung, apparative, zeitlich eng getaktete Wachstumsmessu";34.12;4584;0.6;ZUGEORDNET
 12636;M;12.03;"Pilz-Empfindlichkeitstestung, automatisiert, je Reinkultur und Antibiogramm Reinkultur (Inokulum); Gerätebeschickung (standardisiert), apparative, zeitlich eng getaktete Wachstumsmessung (z.B. Substra";14.85;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-12637;M;12.03;"Pilz-Nachweis/Identifizierung, automatisiert, je Untersuchung Nachweis (z.B. Blutkultur) und/oder Identifizierung (z.B. Reinkultur); Gerätebeschickung (standardisiert), apparative, zeitlich eng getakt";21.34;4710|4711|4542;0.58;ZUGEORDNET
+12637;M;12.03;"Pilz-Nachweis/Identifizierung, automatisiert, je Untersuchung Nachweis (z.B. Blutkultur) und/oder Identifizierung (z.B. Reinkultur); Gerätebeschickung (standardisiert), apparative, zeitlich eng getakt";21.34;4710|4711;0.58;ZUGEORDNET
 12651;M;12.03;"Albumin Serum oder Plasma; Urin (z.B. Nachweis Mikroalbuminurie), Liquor; z.B. Immunnephelometrie, Immunturbidimetrie, radiale Immundiffusion); Auswertung: apparativ-quantitativ (z.B. Extinktion, Radi";6.73;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-12652;M;12.03;"Alpha-1-Antitrypsin (Alpha-1-Proteinaseinhibitor) Serum oder Plasma, Stuhl; z.B. Immunnephelometrie, Immunturbidimetrie, radiale Immundiffusion; Auswertung: apparativ-quantitativ (z.B. Extinktion, Rad";12.91;3739|3787;0.83;ZUGEORDNET
+12652;M;12.03;"Alpha-1-Antitrypsin (Alpha-1-Proteinaseinhibitor) Serum oder Plasma, Stuhl; z.B. Immunnephelometrie, Immunturbidimetrie, radiale Immundiffusion; Auswertung: apparativ-quantitativ (z.B. Extinktion, Rad";12.91;3739;0.83;ZUGEORDNET
 12653;M;12.03;"Alpha-1-Mikroglobulin Urin; z.B. Latexpartikel-verstärkte Immunnephelometrie, Latexpartikel-verstärkte Immunturbidimetrie; Auswertung: apparativ-quantitativ.";13.13;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12654;M;12.03;"Alpha-2-Makroglobulin Serum oder Plasma, Urin; z.B. Immunnephelometrie, Immunturbidimetrie, radiale Immundiffusion; Auswertung: apparativ-quantitativ (z.B. Extinktion, Radius).";12.44;3753;0.86;ZUGEORDNET
 12655;M;12.03;"Coeruloplasmin Serum oder Plasma, Ejakulat; z.B. Immunnephelometrie, Immunturbidimetrie, radiale Immundiffusion; Auswertung: apparativ-quantitativ (z.B. Extinktion, Radius).";12.62;3740;0.81;ZUGEORDNET
@@ -5004,7 +5004,7 @@
 12700;M;12.03;"Insulin-Like-Growth-Factor (IGF-I, Somatomedin C) Serum oder Plasma, ggf. einschließlich Probenaufbereitung; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ.";41.11;4060;0.76;ZUGEORDNET
 12701;M;12.03;"Insulin-Like-Growth-Factor-Binding-Protein-3 (IGFBP 3) Abklärung unklarer IGF-1-Befunde; Serum oder Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ.";41.11;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12702;M;12.03;"Mittregionales pro-atriales natriuretisches Peptid (MR-Pro-ANP) Abklärung Herzinsuffizienz; Serum oder Plasma; Signal-(Tracer)verstärkter Immunoassay; Auswertung apparativ-quantitativ). Die Leistung n";30.73;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-12703;M;12.03;"Neopterin, IA Serum oder Plasma, Urin, Liquor; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ. Die Leistung nach Nummer 12703 ist neben der Leistung nach Nummer 12762 nicht";20.30;3652;0.48;ZUGEORDNET
+12703;M;12.03;"Neopterin, IA Serum oder Plasma, Urin, Liquor; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ. Die Leistung nach Nummer 12703 ist neben der Leistung nach Nummer 12762 nicht";20.30;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12704;M;12.03;"Neutrophilen-Gelatinase-assoziiertes Lipocalin (NGAL) Abklärung akuter Nierenschaden (ANS); Serum oder Plasma, Urin; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ.";27.82;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12705;M;12.03;"Osteocalcin Serum oder Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ. Die Leistung nach Nummer 12705 ist neben der Leistung nach Nummer 12934 nicht berechnungsfähi";34.29;4054;0.84;ZUGEORDNET
 12706;M;12.03;"PAPP-A (Pregnancy-Associated-Plasma-Protein-A) Schwangeren-Screening auf Chromosomenanomalie (z.B. Trisomien); Serum oder Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantit";19.15;4870|4871;0.23;ZUGEORDNET
@@ -5066,7 +5066,7 @@
 12838;M;12.03;"Blei Vollblut (antikoaguliert), Urin (z.B. 24-Std.-Urin); z.B. elektrothermische (flammenlose) Atomabsorptionsspektrometrie; Auswertung: apparativ- quantitativ.";23.22;4192;0.7;ZUGEORDNET
 12839;M;12.03;"Cadmium Vollblut (antikoaguliert), Urin (z.B. 24-Std.-Urin); z.B. elektrothermische (flammenlose) Atomabsorptionsspektrometrie; Auswertung: apparativ- quantitativ.";23.22;4193;0.77;ZUGEORDNET
 12840;M;12.03;"Chrom Vollblut (antikoaguliert), Serum oder Plasma, Urin (z.B. 24-Std.-Urin); z.B. elektrothermische (flammenlose) Atomabsorptionsspektrometrie; Auswertung: apparativ-quantitativ.";23.22;4194;0.67;ZUGEORDNET
-12841;M;12.03;"Eisen, AAS z.B. Leberstanze; z.B. Flammen-Atomabsorptionsspektrometrie; Auswertung: apparativ-quantitativ. Die Leistung nach Nummer 12841 ist neben der Leistung nach Nummer 11062 nicht berechnungsfähi";23.22;4130|4096;0.52;ZUGEORDNET
+12841;M;12.03;"Eisen, AAS z.B. Leberstanze; z.B. Flammen-Atomabsorptionsspektrometrie; Auswertung: apparativ-quantitativ. Die Leistung nach Nummer 12841 ist neben der Leistung nach Nummer 11062 nicht berechnungsfähi";23.22;4130;0.52;ZUGEORDNET
 12842;M;12.03;"Gold Therapieüberwachung rheumatoide Arthritis; Blut (z.B. Serum); z.B. elektrothermische (flammenlose) Atomabsorptionsspektrometrie; Auswertung: apparativ-quantitativ.";23.22;4195;0.7;ZUGEORDNET
 12843;M;12.03;"Kobalt Abklärung berufliche Exposition (z.B. Glas-, Keramik-, Zementindustrie, Hartmetallherstellung); Vollblut (antikoaguliert), Serum oder Plasma, Urin (z.B. 24-Std.-Urin); z.B. elektrothermische (f";23.22;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12844;M;12.03;"Kupfer, AAS Abklärung M. Wilson; Serum oder Plasma, Urin (z.B. 24-Std.-Urin), Speichel, Leberstanze; z.B. Flammen-Atomabsorptionsspektrometrie; Auswertung: apparativ-quantitativ. Die Leistung nach Num";23.22;4132;0.6;ZUGEORDNET
@@ -5118,7 +5118,7 @@
 12932;M;12.03;"Hämbiosynthese-Enzyme, je Enzym z.B. Uroporphyrinogen-Decarboxylase, Porphobilinogen-Desaminase, Protoporphyrinogen-Oxidase, Ferrochelatase, Delta-Aminolävulinsäure- Dehydratase; z.B. Erythrozyten (Hä";28.55;3789;0.59;ZUGEORDNET
 12933;M;12.03;"Isoenzyme, Makroenzyme, je Enzym Serum, ggf. einschließlich Fällung; Elektrophorese (z.B. Agarosegel), Bandendetektion (z.B. enzymatische Reaktion mit nachfolgender Fluoreszenzdetektion); Auswertung: ";26.35;3785|3784;0.7;ZUGEORDNET
 12934;M;12.03;"Knochenspezifische alkalische Phosphatase (Knochen-AP) Serum oder Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ. Die Leistung nach Nummer 12934 ist neben der Leist";42.72;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-12935;M;12.03;"Kohlenhydrate-/Fettsäuren-Intermediärstoffwechsel-Enzyme, je Enzym Abklärung angeborene Stoffwechselanomalien (z.B. Alpha-Glukosidase, Beta-Galaktosidase, Biotinidase, Phosphomannomutase); z.B. Serum ";18.56;665|666;0.16;ZUGEORDNET
+12935;M;12.03;"Kohlenhydrate-/Fettsäuren-Intermediärstoffwechsel-Enzyme, je Enzym Abklärung angeborene Stoffwechselanomalien (z.B. Alpha-Glukosidase, Beta-Galaktosidase, Biotinidase, Phosphomannomutase); z.B. Serum ";18.56;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12936;M;12.03;"Laktat Vollblut (antikoaguliert), Plasma, Liquor; z.B. Photometrie (Reaktionsprodukt), Amperometrie; Auswertung: apparativ-quantitativ.";10.01;3781;0.73;ZUGEORDNET
 12937;M;12.03;"Lecithin/Sphingomyelin-Quotient (L/S-Quotient) Abschätzung Lungenreife; Fruchtwasser, einschließlich Zentrifugation; Dünnschichtchromatographie, einschließlich vorangehender Extraktion und Präzipitati";26.39;3782;0.94;ZUGEORDNET
 12938;M;12.03;"Lysozym z.B. Serum, Urin, Liquor, Stuhl; z.B. Turbidimetrie, Nephelometrie (funktionelle Tests); Geldiffusionsassay (Lysoplatten-Technik); Signal- (Tracer-)verstärkter Immunoassay; Auswertung: apparat";20.95;3793;0.72;ZUGEORDNET
@@ -5128,7 +5128,7 @@
 12942;M;12.03;"Pyruvat Vollblut (antikoaguliert), Plasma; z.B. Photometrie (Reaktionsprodukt), Amperometrie; Auswertung: apparativ-quantitativ.";11.24;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12943;M;12.03;"TRAP 5b (Tartrat-resistente Saure Phosphatase, Knochen-Isoenzym 5b) Serum oder Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ.";27.80;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12944;M;12.03;"Trypsin Neugeborenenscreening; Vollblut (Trockenblut); Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ.";29.47;3796;0.8;ZUGEORDNET
-12945;M;12.03;"Tryptase Serum oder Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ.";29.64;4186;0.39;ZUGEORDNET
+12945;M;12.03;"Tryptase Serum oder Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ.";29.64;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 12961;M;12.03;"CA 125 Serum oder Plasma; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ.";19.40;3900.H3;0.9;ZUGEORDNET
 12962;M;12.03;"CA 15-3 Serum oder Plasma, Liquor; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ.";13.94;3901.H3;0.89;ZUGEORDNET
 12963;M;12.03;"CA 19-9 Serum oder Plasma, Aszites; Signal-(Tracer-)verstärkter Immunoassay; Auswertung: apparativ-quantitativ.";16.12;3902.H3;0.88;ZUGEORDNET
@@ -5264,7 +5264,7 @@
 13257;O;14.01;Röntgenkontrastuntersuchung natürlicher, künstlicher oder krankhaft entstandener Gänge, Gangsysteme, Hohlräume oder Fisteln (z.B. Galaktographie, Kavernographie, Vesikulographie) Die Leistung nach Num;87.17;5260;0.39;ZUGEORDNET
 13258;O;14.01;Röntgenaufnahme der Mamma einer Seite, in einer Ebene;52.59;5265|5190;0.68;ZUGEORDNET
 13259;O;14.01;Röntgenaufnahme der Mamma einer Seite, in zwei Ebenen;64.71;5266|5100|5020|5030|5010|5105;0.76;ZUGEORDNET
-13260;O;14.01;Zuschlag zu der Leistung nach Nummer 13258 oder 13259 für die kontrastmittelgestützte Untersuchung;30.84;5298;0.16;ZUGEORDNET
+13260;O;14.01;Zuschlag zu der Leistung nach Nummer 13258 oder 13259 für die kontrastmittelgestützte Untersuchung;30.84;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13261;O;14.01;Zuschlag zu der Leistung nach Nummer 13258 oder 13259 für Vergrößerungsaufnahme oder Spotkompression;15.30;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13262;O;14.01;Digitale dreidimensionale Röntgenaufnahme der Mamma (Tomosynthese) einer Seite, ggf. einschließlich der Generierung von Summationsbildern, je Projektionsebene;97.93;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13263;O;14.01;Präparateradiographie, ggf. einschließlich Lamellenradiographie, ggf. in zwei Ebenen;24.24;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -5272,7 +5272,7 @@
 13265;O;14.01;Röntgenaufnahme der Mamma im Rahmen interventioneller Maßnahmen, einschließlich der jeweiligen Intervention (z.B. Biopsie oder Markierung der Mamma), je Zielläsion;278.78;5378;0.4;ZUGEORDNET
 13266;O;14.01;Zuschlag zu der Leistung nach Nummer 13265 für die Markierung mit Clips, je Markierung;35.49;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13267;O;14.01;Vakuumsaugbiopsie der Mamma, einschließlich - Patientenlagerung - Lokalanästhesie - Überprüfung der korrekten Entnahme durch Zielaufnahmen - blutungsstillende Kompression - Verschluss der Hautwunde, g;278.78;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-13268;O;14.01;Zuschlag zu der Leistung nach Nummer 13267 für weitere Zielläsionen, je weiterer Zielläsion;126.21;5302|5308|5310|5312|5318;0.03;ZUGEORDNET
+13268;O;14.01;Zuschlag zu der Leistung nach Nummer 13267 für weitere Zielläsionen, je weiterer Zielläsion;126.21;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13269;O;14.01;Myelographie;126.70;5280;0.99;ZUGEORDNET
 13270;O;14.01;Bronchographie;152.34;5285|3000|368|677|678;0.99;ZUGEORDNET
 13271;O;14.01;Röntgentomographien bis zu fünf Strahlenrichtungen oder Projektionen, je Strahlenrichtung oder Projektion;38.22;5290|1226|5835|5837;0.77;ZUGEORDNET
@@ -5288,7 +5288,7 @@
 13281;O;14.01;Serienangiographie im Bereich des Beckens und beider Beine, einschließlich Übersichtsangiographie, eine Serie;383.14;5306|5316;0.72;ZUGEORDNET
 13282;O;14.01;Zuschlag zu der Leistung nach Nummer 13281 für jede weitere Serie, je Serie Bei Berechnung des Zuschlags nach Nummer 13282 ist eine medizinische Begründung in der Rechnung anzugeben.;70.87;5301|5317|5307;0.05;ZUGEORDNET
 13283;O;14.01;Serienangiographie einer Extremität und ihrer Teile, einschließlich Übersichtsangiographie, eine Serie;383.14;5309|5311|5300|5315|5326;0.85;ZUGEORDNET
-13284;O;14.01;Zuschlag zu der Leistung nach Nummer 13283 für jede weitere Serie, je Serie Bei Berechnung des Zuschlags nach Nummer 13284 ist eine medizinische Begründung in der Rechnung anzugeben.;67.80;5304|5305;0.05;ZUGEORDNET
+13284;O;14.01;Zuschlag zu der Leistung nach Nummer 13283 für jede weitere Serie, je Serie Bei Berechnung des Zuschlags nach Nummer 13284 ist eine medizinische Begründung in der Rechnung anzugeben.;67.80;5304;0.05;ZUGEORDNET
 13285;O;14.01;Angiokardiographie einer Herzhälfte Die Leistung nach Nummer 13285 ist einmal je Sitzung berechnungsfähig. Die Leistung nach Nummer 13285 ist neben der Leistung nach Nummer 3001, 3007, 3008 oder 3020 ;89.39;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13286;O;14.01;Angiokardiographie beider Herzhälften Die Leistung nach Nummer 13286 ist einmal je Sitzung berechnungsfähig. Die Leistung nach Nummer 13286 ist neben der Leistung nach Nummer 3001, 3007, 3008 oder 302;154.16;356;0.06;ZUGEORDNET
 13287;O;14.01;Venographie im Bereich des Schädels, Brust- und/oder Bauchraums;255.94;5329;0.48;ZUGEORDNET
@@ -5371,7 +5371,7 @@
 13364;O;14.01;Magnetresonanztomographie des kompletten Brust- und Bauchraumes, ggf. einschließlich - des Halsbereichs - axillärer und inguinaler Lymphabflussgebiete Die Leistung nach Nummer 13364 ist neben der Leis;637.28;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13365;O;14.01;Magnetresonanztomographie eines oder mehrerer parenchymatösen Abdominalorgane;402.16;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13366;O;14.01;Magnetresonanztomographie des Abdomens und/oder fetale Magnetresonanztomographie;501.62;5372;0.27;ZUGEORDNET
-13367;O;14.01;Magnetresonanztomographie im Bereich des Thorax oder des Beckens;406.78;5715;0.18;ZUGEORDNET
+13367;O;14.01;Magnetresonanztomographie im Bereich des Thorax oder des Beckens;406.78;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13368;O;14.01;Magnetresonanztomographie von Gangsystemen, Fistel(n) und/oder Höhlen;324.75;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13369;O;14.01;Magnetresonanztomographie des Kolons, ggf. einschließlich Legen eines Ballonkatheters Bei Berechnung der Leistung nach Nummer 13369 ist eine medizinische Begründung in der Rechnung anzugeben.;528.50;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13370;O;14.01;Magnetresonanztomographie des Dünndarms, einschließlich Legen einer Duodenalsonde Bei Berechnung der Leistung nach Nummer 13370 ist eine medizinische Begründung in der Rechnung anzugeben.;528.50;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -5388,7 +5388,7 @@
 13381;O;14.01;Magnetresonanz-Angiographie (MRA) der gesamten Aorta;488.87;5375;0.27;ZUGEORDNET
 13382;O;14.01;Magnetresonanz-Angiographie (MRA) der Arterien und/oder Venen im Halsbereich oder oberen Thoraxbereich (z.B. supraaortale Äste mit Aortenbogen) oder Thorax-Abdomen-Bereich oder Abdomen-Beckenbereich;497.06;5720;0.21;ZUGEORDNET
 13383;O;14.01;Angiographie-Magnetresonanztomographie der Becken- und Beingefäße;537.76;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
-13384;O;14.01;Magnetresonanz-Angiographie einer Extremität und/oder deren Abschnitte (Ober- und Unterarm oder Ober- und Unterschenkel), ggf. einschließlich Hand oder Fuß;440.00;2101|3310;0.16;ZUGEORDNET
+13384;O;14.01;Magnetresonanz-Angiographie einer Extremität und/oder deren Abschnitte (Ober- und Unterarm oder Ober- und Unterschenkel), ggf. einschließlich Hand oder Fuß;440.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13385;O;14.01;Angiographie-Magnetresonanztomographie einer Hand oder eines Fußes;387.01;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13386;O;14.01;Magnetresonanztomographie des Herzens nativ einschließlich Funktionsanalyse, ggf. einschließlich EKG-Überwachung und/oder EKG-Triggerung;565.36;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13387;O;14.01;Magnetresonanztomographie des Herzens mit Kontrastmittel zur Myokardcharakterisierung und Vitalitätsanalyse, ggf. einschließlich EKG-Überwachung und/oder EKG-Triggerung;679.96;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
@@ -5424,12 +5424,12 @@
 13514;O;14.02;Ganzkörperszintigraphie des Skeletts, einschließlich Schädel und Körperstamm in zwei Sichten oder Projektionen, ggf. einschließlich der Extremitäten oder Teilen der Extremitäten Die Leistung nach Numm;237.98;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13515;O;14.02;Teilkörperskelettszintigraphie, ggf. einschließlich der kontralateralen Seite Die Leistung nach Nummer 13515 ist neben der Leistung nach Nummer 13514 nicht berechnungsfähig.;145.51;5426;0.69;ZUGEORDNET
 13516;O;14.02;Ganzkörperszintigraphie des Knochenmarks, Schädel und Körperstamm in zwei Projektionen, ggf. einschließlich der Extremitäten oder Teilen der Extremitäten;237.98;5428|5425|5431|5466;0.46;ZUGEORDNET
-13517;O;14.02;Verteilungsszintigraphie eines großen Gelenks, einschließlich intraartikulärer Injektion des Radiopharmazeutikums Die Punktion des Gelenks ist gesondert berechnungsfähig.;90.26;5603|5602;0.29;ZUGEORDNET
+13517;O;14.02;Verteilungsszintigraphie eines großen Gelenks, einschließlich intraartikulärer Injektion des Radiopharmazeutikums Die Punktion des Gelenks ist gesondert berechnungsfähig.;90.26;5603;0.29;ZUGEORDNET
 13518;O;14.02;Tumorszintigraphie mit radioaktiv markierten tumoraffinen Substanzen in einer und/oder mehreren Region(en) Die intravenöse Injektion der tumoraffinen Substanzen ist gesondert berechnungsfähig.;130.91;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13519;O;14.02;Ganzkörper-Tumorszintigraphie mit radioaktiv markierten, tumoraffinen Substanzen Die intravenöse Injektion der tumoraffinen Substanzen ist gesondert berechnungsfähig.;298.61;5605;0.41;ZUGEORDNET
 13520;O;14.02;Perfusionsszintigraphie der Nieren, einschließlich semiquantitativer oder quantitativer Auswertung;130.55;5441|5473;0.82;ZUGEORDNET
 13521;O;14.02;Nierenfunktionsszintigraphie mit Bestimmung der quantitativen Ganzkörper-Clearance und der Einzelnieren-Clearance, ggf. einschließlich Blutaktivitätsbestimmungen und Vergleich mit Standards;249.09;5440;0.43;ZUGEORDNET
-13522;O;14.02;Zuschlag zu der Leistung nach Nummer 13520 oder 13521 für ein zusätzliches Radionephrogramm als Einzel- oder Wiederholungsuntersuchung, ggf. einschließlich Medikamentengabe Die Indikation (z.B. Tiefen;81.05;5443;0.03;ZUGEORDNET
+13522;O;14.02;Zuschlag zu der Leistung nach Nummer 13520 oder 13521 für ein zusätzliches Radionephrogramm als Einzel- oder Wiederholungsuntersuchung, ggf. einschließlich Medikamentengabe Die Indikation (z.B. Tiefen;81.05;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13523;O;14.02;Statische Nierenszintigraphie;75.52;5442;0.98;ZUGEORDNET
 13524;O;14.02;Quantitative Clearanceuntersuchungen der Nieren an Sondenmessplätzen oder mittels mehrfacher Blutaktivitätsbestimmungen im Gammacounter, ggf. einschließlich - Registrierung mehrerer Kurven - Blutaktiv;69.33;5444;0.42;ZUGEORDNET
 13525;O;14.02;Szintigraphische Untersuchung von endokrin aktivem Gewebe mit Ausnahme der Schilddrüse Das untersuchte Gewebe ist in der Rechnung anzugeben. Die intravenöse Injektion der radioaktiven Substanz(en) ist;133.88;5450;0.37;ZUGEORDNET
@@ -5447,7 +5447,7 @@
 13537;O;14.02;Nachweis und/oder quantitative Bestimmung von Resorption, Exkretion oder Verlust von körpereigenen Stoffen durch Bilanzierung nach radioaktiver Markierung und/oder von radioaktiv markierten Analoga, i;58.15;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13538;O;14.02;Szintigraphische Untersuchung von Pleuraergüssen oder Peritonealergüssen mit selektiver Applikation eines Radiopharmakons in den Pleuralraum oder Peritonealraum, einschließlich intracavitärer Applikat;85.58;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13539;O;14.02;Szintigraphische Untersuchungen (z.B. von Hoden, Tränenkanälen, Augen, Tuben) oder Funktionsmessungen (z.B. Ejektionsfraktion mit Messsonde) ohne Gruppenzuordnung auch nach Einbringung eines Radiophar;65.52;5472|5604;0.42;ZUGEORDNET
-13540;O;14.02;Funktionsszintigraphie, einschließlich Sequenzszintigraphie und Erstellung von Zeit-Radioaktivitätskurven aus Regionen von Interesse (ROI) und quantifizierender Berechnung (z.B. von Transitzeiten, Imp;79.12;5481|5489;0.34;ZUGEORDNET
+13540;O;14.02;Funktionsszintigraphie, einschließlich Sequenzszintigraphie und Erstellung von Zeit-Radioaktivitätskurven aus Regionen von Interesse (ROI) und quantifizierender Berechnung (z.B. von Transitzeiten, Imp;79.12;5481;0.34;ZUGEORDNET
 13541;O;14.02;Nachweis inkorporierter unbekannter Radionuklide;86.86;5474|5420|5421|1550;0.91;ZUGEORDNET
 13542;O;14.02;Quantitative Bestimmung des Mineralgehalts im Skelett in einzelnen oder mehreren repräsentativen Extremitäten- oder Stammskelettabschnitten mittels Dual-Photonen-Absorptionstechnik Die Leistung nach N;60.00;5475;0.51;ZUGEORDNET
 13543;O;14.02;Quantitative Bestimmung von Impulsen/Impulsratendichte (Fläche, Pixel, Voxel) mittels Gammakamera mit Messwertverarbeitung, mindestens zwei Regionen von Interesse (ROI) Die Leistung nach Nummer 13543 ;47.87;5480;0.45;ZUGEORDNET
@@ -5517,7 +5517,7 @@
 13640;O;14.03;Zuschlag zu der Leistung nach Nummer 13614, 13615, 13616, 13617, 13634, 13635, 13636, 13637 oder 13638 bei bildgeführter Bestrahlung (IGRT), unabhängig von der Art des bildgebenden Verfahrens (einschl;80.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13641;O;14.03;Ganzkörperstrahlenbehandlung vor Knochenmark-/Stammzelltransplantation, je 1 Gy Die Leistung nach Nummer 13641 ist im Krankheitsfall bis zu zwölfmal berechnungsfähig.;176.19;5851;0.69;ZUGEORDNET
 13642;O;14.03;Strahlenbehandlung der gesamten Haut mit schnellen Elektronen, je 1 Gy Die Leistung nach Nummer 13642 ist im Krankheitsfall bis zu achtmal berechnungsfähig.;92.61;5806|5805;0.65;ZUGEORDNET
-13643;O;14.03;Lokoregionale Hyperthermie in Kombination mit einer Strahlen- und/oder Chemotherapie mit vorangehender Planung, einschließlich - kontinuierlicher Temperaturmessung und Dokumentation der gemessenen Par;414.78;5852|5854|5853;0.19;ZUGEORDNET
+13643;O;14.03;Lokoregionale Hyperthermie in Kombination mit einer Strahlen- und/oder Chemotherapie mit vorangehender Planung, einschließlich - kontinuierlicher Temperaturmessung und Dokumentation der gemessenen Par;414.78;5852|5854;0.19;ZUGEORDNET
 13644;O;14.03;Zuschlag zu den Leistungen des Abschnitts O III, die mit einem nicht unterschreitbaren Gebührensatz bis zu 237,00 EUR bewertet sind, für die Durchführung an einem Kind bis zum vollendeten 8. Lebensjah;20.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13645;O;14.03;Zuschlag zu den Leistungen des Abschnitts O III, die mit einem nicht unterschreitbaren Gebührensatz von mehr als 237,00 EUR bis zu 465,00 EUR bewertet sind, für die Durchführung an einem Kind bis zum ;35.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
 13646;O;14.03;Zuschlag zu den Leistungen des Abschnitts O III, die mit einem nicht unterschreitbaren Gebührensatz von mehr als 465,00 EUR bewertet sind, für die Durchführung an einem Kind bis zum vollendeten 8. Leb;50.00;;;KEINE_ALTE_ENTSPRECHUNG_GEFUNDEN
