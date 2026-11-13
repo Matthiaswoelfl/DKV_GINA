@@ -315,6 +315,53 @@ const path = require('path');
   await page.click('#tabs button[data-v=ab]');
   check('Zurück zu „AB-Steigerungsgründe“ nach Geschlecht: 5.580 Ziffern, Geschlecht-Filter ausgeblendet', await page.locator('#f-ge').isHidden() && (await txt('#status')).startsWith('5.580 von'), await txt('#status'));
 
+  // ---------- Reiter Alter ----------
+  await page.goto('file://' + html);
+  await page.reload();
+  await page.click('#tabs button[data-v=al]');
+  const chipsAl = (await page.locator('#chipsal .chip').allInnerTexts()).map(t => t.replace(/\s+/g, ' ')).join(' | ');
+  check('Reiter „Alter“: Chips Ablehnung 164 · Ausnahmeprüfung 104 · Hinweis (implizit) 46 · Altersabhängige Regel 10 · Kein Altersbezug',
+    /^A Ablehnung 164 \| E Ausnahmeprüfung 104 \| H Hinweis \(implizit\) 46 \| R Altersabhängige Regel 10 \| – Kein Altersbezug [\d.]+$/.test(chipsAl) && await page.locator('#f-ab').isHidden(), chipsAl);
+  await page.fill('#q', '36');
+  await page.keyboard.press('Enter');
+  d = (await txt('#drawer')).replace(/\s+/g, ' ');
+  check('Suche „36“: Kinderzuschlag, Ausnahmeprüfung, Alter ≤ 7, Ausnahme „und/oder Patient mit mangelnder Einsichts-/Mitwirkungsfähigkeit“, Narkoseregel, Direktlink #alter/36',
+    d.includes('Ausnahmeprüfung') && d.includes('Alter ≤ 7') && d.includes('mangelnder Einsichts-/Mitwirkungsfähigkeit') && d.includes('Narkose-/Sedierungsregel') && page.url().endsWith('#alter/36'), d.slice(0, 60) + ' … ' + page.url().split('#')[1]);
+  await shot('17_alter_36.png');
+  await page.keyboard.press('Escape');
+  await page.click('#reset');
+  await page.click('#chipsal .chip[data-k=A]');
+  await page.selectOption('#alpb', 'Alter ≤ 7');
+  const nAl = await txt('#status');
+  check('Filter Ablehnung + Altersgrenze „Alter ≤ 7“: mindestens 1 Treffer, weniger als 164', /^\d+ von 5\.580/.test(nAl) && parseInt(nAl) > 0 && parseInt(nAl) <= 164, nAl);
+  await shot('18_alter_gefiltert.png');
+  await page.click('#reset');
+  await page.goto('file://' + html + '#alter/1500');
+  await page.reload();
+  d = (await txt('#drawer')).replace(/\s+/g, ' ');
+  check('Direktlink #alter/1500: Ablehnung Alter ≤ 2, Bandfamilie Polysomnographie mit 1500, 1501, 1503', d.includes('Ablehnung') && d.includes('Alter ≤ 2') && d.includes('Polysomnographie') && d.includes('1501: Alter 3–11') && d.includes('1503: Alter ≥ 12'), d.slice(0, 70));
+  await page.goto('file://' + html + '#alter/912');
+  await page.reload();
+  d = (await txt('#drawer')).replace(/\s+/g, ' ');
+  check('Direktlink #alter/912: Altersabhängige Regel (Menge > 500 ml, Kinder > 10 ml/kg), keine Altersablehnung', d.includes('Altersabhängige Regel') && d.includes('10 ml pro Kilogramm') && !d.includes('Ablehnung'), d.slice(0, 70));
+  await page.goto('file://' + html + '#alter/17');
+  await page.reload();
+  d = (await txt('#drawer')).replace(/\s+/g, ' ');
+  check('Direktlink #alter/17: implizit, nur Hinweis, keine Ablehnung', d.includes('Hinweis (implizit)') && d.includes('Nur Hinweis, keine Ablehnung') && !d.includes('Ausnahmeprüfung'), d.slice(0, 70));
+  await page.keyboard.press('Escape');
+  await page.click('#alfr');
+  check('Schaltfläche „Offene Fragen“: 15 Punkte aus der Analyse (z. B. C05 Widerspruch 4409)', await page.locator('#drawer .fr').count() === 15 && (await txt('#drawer')).includes('Widerspruch 4409'), String(await page.locator('#drawer .fr').count()));
+  await page.keyboard.press('Escape');
+  await page.click('#reset');
+  await page.click('#chipsal .chip[data-k=E]');
+  const nE = await txt('#status');
+  const [dl6] = await Promise.all([page.waitForEvent('download'), page.click('#csv')]);
+  const csv6 = fs.readFileSync(await dl6.path(), 'utf8').replace(/^\ufeff/, '').split('\r\n');
+  check('Filter Ausnahmeprüfung (104) und CSV-Export mit Prüfbedingung, Reaktion und Ausnahme', nE.startsWith('104 von') && csv6.length === 105 && csv6[0].includes('"Prüfbedingung";"Reaktion";"Art"'), nE + ' · ' + csv6.length + ' CSV-Zeilen');
+  await page.click('#reset');
+  await page.click('#tabs button[data-v=ab]');
+  check('Zurück zu „AB-Steigerungsgründe“ nach Alter: 5.580 Ziffern, Alters-Filter ausgeblendet', await page.locator('#f-al').isHidden() && (await txt('#status')).startsWith('5.580 von'), await txt('#status'));
+
   // Laptop-Breite
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.goto('file://' + html + '#13399');

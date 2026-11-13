@@ -530,6 +530,92 @@ def lese_geschlecht(neu_gebuehr: dict, kap_k: dict) -> dict:
     return info
 
 
+# ---------------------------------------------------------------- Altersbezug
+ALTER_DIR = INPUT / "alter"
+SOLL_ALTER = {"haupt": 268, "ablehnung": 164, "ausnahme": 104, "implizit": 46, "kindbezug": 120, "regeln": 10, "baender": 11, "abgrenzung": 7, "challenge": 15}
+SOLL_ALTER_ART = {"Kinderzuschlag (kapitel-/abschnittsbezogen)": 99, "Hauptleistung mit Altersbezug": 88, "Zuschlag mit Altersbezug": 66,
+                  "Zuschlag mit Altersbezug (vererbt)": 15}
+
+
+def _z(v):
+    return int(v) if isinstance(v, (int, float)) or str(v).strip().isdigit() else None
+
+
+def _txt(v):
+    return "" if v is None else str(v).strip()
+
+
+def lese_alter(neu_gebuehr: dict, kap_k: dict) -> dict:
+    """Altersbezug (input/alter/*.xlsx): Hauptliste, implizite Bezüge, altersabhängige Regeln, Kindbezug der Hauptleistung,
+    Bandfamilien, Abgrenzung, Challenge. Bewertet wird nichts neu; die Blätter werden nur den Ziffern zugeordnet."""
+    info = {"datei": None}
+    dateien = sorted(ALTER_DIR.glob("*.xlsx"))
+    if not dateien:
+        return info
+    wb = openpyxl.load_workbook(dateien[0], data_only=True)
+
+    def blatt(name, ab=2):
+        return [r for r in wb[name].iter_rows(min_row=ab, values_only=True) if r[0] not in (None, "")]
+
+    je, unbekannt, abw_geb, abw_kap, abw_cond = {}, [], [], [], []
+
+    def pruefe(z, geb=None, kap=None):
+        if z not in neu_gebuehr:
+            unbekannt.append(z)
+            return
+        if geb is not None and int((dec(geb) * 100).to_integral_value(rounding=ROUND_HALF_UP)) != neu_gebuehr[z]:
+            abw_geb.append((z, geb, neu_gebuehr[z]))
+        if kap and kap_k and kap_k.get(z) != kap.split(" ")[0]:
+            abw_kap.append((z, kap, kap_k.get(z)))
+
+    haupt = blatt("Ziffern_Altersbezug")
+    for r in haupt:
+        z = int(r[0])
+        pruefe(z, r[4], r[1])
+        mn, mx = r[7], r[8]
+        erwartet = f"{mn} ≤ Alter ≤ {mx}" if isinstance(mn, int) and isinstance(mx, int) else f"Alter ≥ {mn}" if isinstance(mn, int) else f"Alter ≤ {mx}"
+        if erwartet != r[9]:
+            abw_cond.append((z, r[9], erwartet))
+        je.setdefault(z, {})["h"] = [_txt(r[5]), _txt(r[6]), mn if isinstance(mn, int) else None, mx if isinstance(mx, int) else None, _txt(r[9]),
+                                     _txt(r[10]), _txt(r[11]), _txt(r[12]), _txt(r[13]), r[14], _txt(r[15]), _txt(r[16]), _txt(r[17])]
+    implizit = blatt("Implizit_Alter")
+    for r in implizit:
+        z = int(r[0])
+        pruefe(z, r[4], r[1])
+        je.setdefault(z, {})["i"] = [_txt(r[6]), _txt(r[7]), _txt(r[8]), _txt(r[9]), _txt(r[10]), _txt(r[11]), r[12]]
+    kind = blatt("Kindbezug_Hauptleistung")
+    for r in kind:
+        z = int(r[0])
+        pruefe(z, r[4], r[1])
+        je.setdefault(z, {})["k"] = [_txt(r[5]), _txt(r[6]), _txt(r[7]), _txt(r[8])]
+    regeln = blatt("Altersabhaengige_Regeln")
+    for r in regeln:
+        z = int(r[0])
+        pruefe(z, None, r[1])
+        je.setdefault(z, {})["r"] = [_txt(r[3]), _txt(r[4]), _txt(r[5]), _txt(r[6])]
+    baender = []
+    for r in blatt("Bandfamilien"):
+        bs = [[int(m.group(1)), m.group(2).strip()] for m in re.finditer(r"(\d+):\s*(Alter[^,]*?)(?=,\s*\d+:|$)", _txt(r[1]))]
+        baender.append({"name": _txt(r[0]), "baender": bs, "ergebnis": _txt(r[2])})
+        for z, _ in bs:
+            pruefe(z)
+            je.setdefault(z, {}).setdefault("b", []).append(len(baender) - 1)
+    abgrenzung = []
+    for r in blatt("Abgrenzung"):
+        zs = [int(x) for x in re.findall(r"\b\d{3,5}\b", _txt(r[1]))] if not _txt(r[1]).startswith("z. B.") else []
+        abgrenzung.append({"thema": _txt(r[0]), "ziffern": _txt(r[1]), "behandlung": _txt(r[2])})
+        for z in zs:
+            if z in neu_gebuehr:
+                je.setdefault(z, {}).setdefault("a", []).append(len(abgrenzung) - 1)
+    challenge = [[_txt(c) for c in r[:6]] for r in blatt("Challenge")]
+    ue = {_txt(r[1]): _txt(r[2]) for r in wb["Übersicht"].iter_rows(min_row=1, max_row=9, values_only=True) if r[1] and r[2]}
+    ue_tab = {r[1]: r[2] for r in wb["Übersicht"].iter_rows(min_row=19, max_row=34, values_only=True) if r[1] and isinstance(r[2], (int, str)) and str(r[2]).isdigit()}
+    info.update(datei=dateien[0].name, je=je, haupt=haupt, implizit=implizit, kind=kind, regeln=regeln, baender=baender,
+                abgrenzung=abgrenzung, challenge=challenge, uebersicht=ue, ue_tab=ue_tab, unbekannt=unbekannt, abw_geb=abw_geb,
+                abw_kap=abw_kap, abw_cond=abw_cond)
+    return info
+
+
 # ---------------------------------------------------------------- Intervalle
 _TAG = r"Kalendertag|\bpro Tag\b|\bje Tag\b|\ban einem Tag\b|\btäglich\b|Behandlungstag|\bam selben Tag\b|\ban demselben Tag\b"
 _KHJ = r"Kalenderhalbjahr|\bHalbjahr"
@@ -755,7 +841,7 @@ def lese_pdf(daten):
 
 
 # ---------------------------------------------------------------- Tests
-def tests(daten, js=None, kap=None, gesetz=None, regeln=None, intervalle=None, mapping=None, geschlecht=None):
+def tests(daten, js=None, kap=None, gesetz=None, regeln=None, intervalle=None, mapping=None, geschlecht=None, alter=None):
     rows = {r["z"]: r for r in daten["rows"]}
     mus = daten["muster"]
     res = []
@@ -886,6 +972,32 @@ def tests(daten, js=None, kap=None, gesetz=None, regeln=None, intervalle=None, m
             t("Geschlecht – Beispiele: 111 W (Schwangerschaft), 114 W neu gefunden, 115 M, 926 Grenzfall (Brust), 17 bewusst nicht aufgenommen",
               jr[111][:2] == ["H", "W"] and jr[114][:2] == ["H", "W"] and jr[114][5] == "NEU" and jr[115][:2] == ["H", "M"] and jr[926][0] == "G" and jr[17][0] == "A",
               " · ".join(f"{z}: {jr[z][0]}{jr[z][1]}" for z in (111, 114, 115, 926, 17)))
+        if alter and alter["datei"]:
+            h = alter["haupt"]
+            ist = {"haupt": len(h), "ablehnung": sum(1 for r in h if r[10] == "Ablehnung"), "ausnahme": sum(1 for r in h if r[10] == "Ausnahmeprüfung"),
+                   "implizit": len(alter["implizit"]), "kindbezug": len(alter["kind"]), "regeln": len(alter["regeln"]), "baender": len(alter["baender"]),
+                   "abgrenzung": len(alter["abgrenzung"]), "challenge": len(alter["challenge"])}
+            t("Alter – 268 Ziffern (164 Ablehnung, 104 Ausnahmeprüfung), 46 implizit, 120 Kindbezug, 10 Regeln, 11 Bandfamilien, 7 Abgrenzungen, 15 Challenge-Punkte",
+              ist == SOLL_ALTER, " · ".join(f"{k} {v}" for k, v in ist.items()))
+            art = Counter(r[5] for r in h)
+            t("Alter – Arten wie in der Übersicht (99 Kinderzuschlag, 88 Hauptleistung, 66 Zuschlag, 15 Zuschlag vererbt) und Quelle 253 Vorgabe / 15 neu",
+              dict(art) == SOLL_ALTER_ART and Counter(r[15] for r in h) == {"Vorgabe": 253, "NEU": 15}, " · ".join(f"{v}" for v in art.values()))
+            ue_ist = Counter(r[9] for r in h)
+            diff = {k: (v, ue_ist.get(k)) for k, v in alter["ue_tab"].items() if k in ue_ist or k.startswith("Alter") or "≤" in k if ue_ist.get(k) != int(v)}
+            t("Alter – Verteilung nach Altersgrenze entspricht der Tabelle der Übersicht (z. B. Alter ≤ 7: 167)", not diff and ue_ist["Alter ≤ 7"] == 167,
+              "alle 16 Prüfbedingungen stimmen" if not diff else str(diff))
+            t("Alter – Prüfbedingung stimmt mit Mindest- und Höchstalter überein (bis zum vollendeten N. Lj. → Alter ≤ N−1)", not alter["abw_cond"], f"{len(alter['abw_cond'])} Abweichungen")
+            t("Alter – alle Ziffern existieren; Gebühr und Kapitel stimmen mit dem Gebührenverzeichnis überein",
+              not alter["unbekannt"] and not alter["abw_geb"] and not alter["abw_kap"],
+              f"{len(alter['unbekannt'])} unbekannt, {len(alter['abw_geb'])} Gebührenabweichungen, {len(alter['abw_kap'])} Kapitelabweichungen")
+            ja = {int(z): v for z, v in js["alter"]["je"].items()}
+            t("Alter – Beispiele: 36 Kinderzuschlag Alter ≤ 7 (Ausnahmeprüfung), 1500 Alter ≤ 2 (Ablehnung), 1325 vererbt (neu), 4409 Alter ≤ 20 mit Regel, 912 nur Regel",
+              ja[36]["h"][4] == "Alter ≤ 7" and ja[36]["h"][5] == "Ausnahmeprüfung" and ja[1500]["h"][4] == "Alter ≤ 2" and ja[1500]["h"][5] == "Ablehnung"
+              and ja[1325]["h"][10] == "NEU" and ja[4409]["h"][4] == "Alter ≤ 20" and "r" in ja[4409] and "h" not in ja[912] and "r" in ja[912],
+              f"36: {ja[36]['h'][4]} · 1500: {ja[1500]['h'][4]} · 1325: {ja[1325]['h'][10]} · 4409: {ja[4409]['h'][4]} · 912: Regel")
+            t("Alter – Bandfamilien lückenlos: 11 Familien, jede mit mindestens 2 Altersbändern, alle Ziffern mit Altersbezug in der Hauptliste",
+              all(len(b["baender"]) >= 2 for b in alter["baender"]) and all("h" in ja[z] for b in alter["baender"] for z, _ in b["baender"]),
+              " · ".join(f"{len(b['baender'])}" for b in alter["baender"]))
         t("Jede nicht steigerfähige Ziffer hat eine Leistungsbezeichnung", all(r[2] for r in js["rows"]),
           f"{sum(1 for r in js['rows'] if not r[2])} ohne Text")
     t("Keine doppelten Ziffern", len(rows) == len(daten["rows"]), f"{len(rows)} eindeutig")
@@ -931,7 +1043,7 @@ def lese_wortlaut() -> dict:
     return json.loads(p.read_text(encoding="utf-8"))["gruende"] if p.exists() else {}
 
 
-def baue_json(daten, pdf, gesetz, kap, regeln, intervalle, mapping, geschlecht):
+def baue_json(daten, pdf, gesetz, kap, regeln, intervalle, mapping, geschlecht, alter):
     matrix = {r["z"]: r for r in daten["rows"]}
     wortlaut = lese_wortlaut()
     zus = gesetz.get("zusatz", {})
@@ -990,11 +1102,13 @@ def baue_json(daten, pdf, gesetz, kap, regeln, intervalle, mapping, geschlecht):
         "regeln": regeln.get("regeln", []),
         "intervalle": [{k: v for k, v in d.items() if k != "beispiele"} | {"bsp": d["beispiele"]} for d in intervalle.get("defs", [])],
         "geschlecht": {str(z): v for z, v in geschlecht.get("je", {}).items()},
+        "alter": {"je": {str(z): v for z, v in alter.get("je", {}).items()}, "baender": alter.get("baender", []), "abgrenzung": alter.get("abgrenzung", []),
+                  "challenge": alter.get("challenge", []), "info": alter.get("uebersicht", {})},
         "mapping": {"alt": mapping.get("alt", []), "titel": mapping.get("titel", {}), "stand": mapping.get("pdf", {}).get("stand")},
     }
 
 
-def schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, mapping, geschlecht, res, ui, excel_name, daten_alle=()):
+def schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, mapping, geschlecht, alter, res, ui, excel_name, daten_alle=()):
     L = []
     ok = sum(1 for _, o, _ in res if o)
     L += ["# QS-Bericht – GOÄneu Steigerungsdashboard", "",
@@ -1004,6 +1118,7 @@ def schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, mapping, gesch
           f"- Kombinationsregeln (Nebeneinanderberechnung): {'`input/neben/` (regeln.json, ziffer_index.json, weitere_ausschluesse.csv)' if regeln['datei'] else '**lagen beim Build nicht vor**'}",
           f"- Mapping alte GOÄ → GOÄneu: {'`input/mapping/` und `input/goae_alt/`' if mapping['datei'] else '**lag beim Build nicht vor**'}",
           f"- Geschlechtsbezug: {'`input/geschlecht/`' if geschlecht['datei'] else '**lag beim Build nicht vor**'}",
+          f"- Altersbezug: {'`input/alter/`' if alter['datei'] else '**lag beim Build nicht vor**'}",
           f"- Gesetzesentwurf mit Allgemeinen Bestimmungen (PDF): {'`input/' + pdf['datei'] + '`' if pdf['datei'] else '**lag beim Build nicht vor**'}",
           f"- Abnahmetests Daten: **{ok} von {len(res)} bestanden**", "",
           "## 1. Abnahmetests (Daten)", "", "| Test | Ergebnis | Ist-Wert |", "|---|---|---|"]
@@ -1179,6 +1294,33 @@ def schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, mapping, gesch
             "solche Regeln mit ⚑ und zeigt die Bedingung an.",
             "**Nebeneinander – Sitzungsbezug (Kapitel A Nr. 8):** Ausschlüsse beziehen sich auf dieselbe Sitzung; steht als Hinweis "
             "über der Liste, wird aber nicht je Regel ausgewertet.",
+        ]
+
+    L += ["", "## 4g. Altersbezug und Altersprüfung", ""]
+    if not alter["datei"]:
+        L.append("Nicht vorhanden: `input/alter/` fehlt.")
+    else:
+        h = alter["haupt"]
+        L += [f"Der Reiter beruht ausschließlich auf der gelieferten Arbeitsmappe `input/alter/{alter['datei']}` (Blätter Ziffern_Altersbezug, "
+              "Implizit_Alter, Kindbezug_Hauptleistung, Altersabhaengige_Regeln, Bandfamilien, Abgrenzung, Challenge, Übersicht). Prüfbedingung, "
+              "Reaktion, Ausnahmen und Begründungen sind unverändert übernommen; das Dashboard bewertet nichts neu und ordnet die Blätter nur den Ziffern zu.", "",
+              "| Kennzahl | Wert |", "|---|---|",
+              f"| Ziffern mit Altersprüfung (Hauptliste) | {len(h)} |",
+              f"| … Reaktion Ablehnung (harte Altersgrenze) / Ausnahmeprüfung | {sum(1 for r in h if r[10] == 'Ablehnung')} / {sum(1 for r in h if r[10] == 'Ausnahmeprüfung')} |",
+              f"| … aus der Vorgabe / neu aufgenommen (vererbte Zuschläge) | {sum(1 for r in h if r[15] == 'Vorgabe')} / {sum(1 for r in h if r[15] == 'NEU')} |",
+              f"| Implizite Altersbezüge (nur Hinweis) | {len(alter['implizit'])} |",
+              f"| Altersabhängige Regeln (Menge, Häufigkeit, Indikation) | {len(alter['regeln'])} |",
+              f"| Hauptleistungen mit Kindbezug (Kinderzuschlag ausgeschlossen) | {len(alter['kind'])} |",
+              f"| Bandfamilien (lückenlose Altersbänder) | {len(alter['baender'])} |",
+              f"| Geprüft, kein Altersbezug (Abgrenzung) | {len(alter['abgrenzung'])} Themen |",
+              f"| Abweichungen Gebühr / Kapitel gegen das Gebührenverzeichnis | {len(alter['abw_geb'])} / {len(alter['abw_kap'])} |", ""]
+        offen += [
+            "**Alter – offene Fragen aus der Analyse (Blatt Challenge, 15 Punkte):** Das Dashboard zeigt sie unverändert über die Schaltfläche "
+            "„Offene Fragen“. Fachlich zu klären sind u. a. die Ausnahmelisten A und K (Diagnosen, noch TBD), die Grenzen für implizite Altersbezüge "
+            "(Neugeborenes, Kind, Jugendlicher), der Widerspruch bei 4409 (Legende bis 21. Lj., Bestimmung nennt Erwachsene), die Auslegung "
+            "„bis einschließlich 8. Lebensjahr“ bei 3019 und ob ein Narkose-/Sedierungskennzeichen auf der Rechnung vorliegt.",
+            "**Alter – Prüfgröße:** Alter in vollendeten Lebensjahren am Behandlungstag aus dem Geburtsdatum der Stammdaten. Neugeborene (0 Tage) lassen sich "
+            "davon nur mit taggenauem Geburtsdatum trennen. Das Dashboard rechnet nicht, es zeigt die Prüfbedingung („Alter ≤ 7“).",
         ]
 
     L += ["", "## 4f. Geschlechtsbezug", ""]
@@ -1358,8 +1500,10 @@ def main():
     mapping = lese_mapping({int(z): int(v["_g"] * 100) for z, v in kap["K"].items()} if kap["datei"] else {})
     geschlecht = lese_geschlecht({int(z): int(v["_g"] * 100) for z, v in kap["K"].items()} if kap["datei"] else {},
                                  {int(z): v["kapitel"] for z, v in kap["K"].items()} if kap["datei"] else {})
-    js_obj = baue_json(daten, pdf, gesetz, kap, regeln, intervalle, mapping, geschlecht)
-    res = tests(daten, js_obj, kap, gesetz, regeln, intervalle, mapping, geschlecht)
+    alter = lese_alter({int(z): int(v["_g"] * 100) for z, v in kap["K"].items()} if kap["datei"] else {},
+                       {int(z): v["kapitel"] for z, v in kap["K"].items()} if kap["datei"] else {})
+    js_obj = baue_json(daten, pdf, gesetz, kap, regeln, intervalle, mapping, geschlecht, alter)
+    res = tests(daten, js_obj, kap, gesetz, regeln, intervalle, mapping, geschlecht, alter)
 
     js = json.dumps(js_obj, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     html = TEMPLATE.read_text(encoding="utf-8").replace("/*__DATA__*/", js)
@@ -1376,7 +1520,7 @@ def main():
         ui = json.loads(UI_JSON.read_text(encoding="utf-8"))
         UI_JSON.unlink()
 
-    schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, mapping, geschlecht, res, ui, excels[0].name, [r[0] for r in js_obj["rows"]])
+    schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, mapping, geschlecht, alter, res, ui, excels[0].name, [r[0] for r in js_obj["rows"]])
     for name, ok, ist in res:
         print(("OK   " if ok else "FAIL ") + name + "  →  " + ist)
     for c in (ui or {}).get("checks", []):

@@ -6,8 +6,9 @@
 - Kombinationsregeln (Nebeneinanderberechnung): `input/neben/` (regeln.json, ziffer_index.json, weitere_ausschluesse.csv)
 - Mapping alte GOÄ → GOÄneu: `input/mapping/` und `input/goae_alt/`
 - Geschlechtsbezug: `input/geschlecht/`
+- Altersbezug: `input/alter/`
 - Gesetzesentwurf mit Allgemeinen Bestimmungen (PDF): **lag beim Build nicht vor**
-- Abnahmetests Daten: **46 von 46 bestanden**
+- Abnahmetests Daten: **53 von 53 bestanden**
 
 ## 1. Abnahmetests (Daten)
 
@@ -47,6 +48,13 @@
 | Geschlecht – alle Ziffern existieren, Gebühren und Kapitel stimmen mit dem Gebührenverzeichnis überein | ✅ bestanden | 0 unbekannt, 0 Gebührenabweichungen, 0 Kapitelabweichungen |
 | Geschlecht – JSON und Arbeitsmappe des Pakets stimmen Zeile für Zeile überein | ✅ bestanden | 0 Abweichungen |
 | Geschlecht – Beispiele: 111 W (Schwangerschaft), 114 W neu gefunden, 115 M, 926 Grenzfall (Brust), 17 bewusst nicht aufgenommen | ✅ bestanden | 111: HW · 114: HW · 115: HM · 926: GW · 17: A |
+| Alter – 268 Ziffern (164 Ablehnung, 104 Ausnahmeprüfung), 46 implizit, 120 Kindbezug, 10 Regeln, 11 Bandfamilien, 7 Abgrenzungen, 15 Challenge-Punkte | ✅ bestanden | haupt 268 · ablehnung 164 · ausnahme 104 · implizit 46 · kindbezug 120 · regeln 10 · baender 11 · abgrenzung 7 · challenge 15 |
+| Alter – Arten wie in der Übersicht (99 Kinderzuschlag, 88 Hauptleistung, 66 Zuschlag, 15 Zuschlag vererbt) und Quelle 253 Vorgabe / 15 neu | ✅ bestanden | 99 · 88 · 66 · 15 |
+| Alter – Verteilung nach Altersgrenze entspricht der Tabelle der Übersicht (z. B. Alter ≤ 7: 167) | ✅ bestanden | alle 16 Prüfbedingungen stimmen |
+| Alter – Prüfbedingung stimmt mit Mindest- und Höchstalter überein (bis zum vollendeten N. Lj. → Alter ≤ N−1) | ✅ bestanden | 0 Abweichungen |
+| Alter – alle Ziffern existieren; Gebühr und Kapitel stimmen mit dem Gebührenverzeichnis überein | ✅ bestanden | 0 unbekannt, 0 Gebührenabweichungen, 0 Kapitelabweichungen |
+| Alter – Beispiele: 36 Kinderzuschlag Alter ≤ 7 (Ausnahmeprüfung), 1500 Alter ≤ 2 (Ablehnung), 1325 vererbt (neu), 4409 Alter ≤ 20 mit Regel, 912 nur Regel | ✅ bestanden | 36: Alter ≤ 7 · 1500: Alter ≤ 2 · 1325: NEU · 4409: Alter ≤ 20 · 912: Regel |
+| Alter – Bandfamilien lückenlos: 11 Familien, jede mit mindestens 2 Altersbändern, alle Ziffern mit Altersbezug in der Hauptliste | ✅ bestanden | 3 · 3 · 2 · 3 · 3 · 3 · 3 · 3 · 3 · 3 · 2 |
 | Jede nicht steigerfähige Ziffer hat eine Leistungsbezeichnung | ✅ bestanden | 0 ohne Text |
 | Keine doppelten Ziffern | ✅ bestanden | 1999 eindeutig |
 | Steigerfähige Ziffern je Kapitel C=100 · D=2 · F=31 · L=1.705 · O=161 | ✅ bestanden | C=100 · D=2 · F=31 · L=1705 · O=161 |
@@ -125,11 +133,20 @@
 | Ziffer 1200 (sonographisch, ohne Eintrag): „Kein Geschlechtsbezug“ | ✅ bestanden |  |
 | Filter Männlich + Zuschlag und CSV-Export mit Einordnung, Bezugsart und Begründung | ✅ bestanden | 18 von 5.580 Ziffern · 19 CSV-Zeilen |
 | Zurück zu „AB-Steigerungsgründe“ nach Geschlecht: 5.580 Ziffern, Geschlecht-Filter ausgeblendet | ✅ bestanden | 5.580 von 5.580 Ziffern |
+| Reiter „Alter“: Chips Ablehnung 164 · Ausnahmeprüfung 104 · Hinweis (implizit) 46 · Altersabhängige Regel 10 · Kein Altersbezug | ✅ bestanden | A Ablehnung 164 | E Ausnahmeprüfung 104 | H Hinweis (implizit) 46 | R Altersabhängige Regel 10 | – Kein Altersbezug 5.260 |
+| Suche „36“: Kinderzuschlag, Ausnahmeprüfung, Alter ≤ 7, Ausnahme „und/oder Patient mit mangelnder Einsichts-/Mitwirkungsfähigkeit“, Narkoseregel, Direktlink #alter/36 | ✅ bestanden | Ziffer 36 Schließen Esc Kapitel B – Grundleistungen, Allgeme … alter/36 |
+| Filter Ablehnung + Altersgrenze „Alter ≤ 7“: mindestens 1 Treffer, weniger als 164 | ✅ bestanden | 74 von 5.580 Ziffern |
+| Direktlink #alter/1500: Ablehnung Alter ≤ 2, Bandfamilie Polysomnographie mit 1500, 1501, 1503 | ✅ bestanden | Ziffer 1500 Schließen Esc Kapitel C – Nichtgebietsbezogene Sonderleist |
+| Direktlink #alter/912: Altersabhängige Regel (Menge > 500 ml, Kinder > 10 ml/kg), keine Altersablehnung | ✅ bestanden | Ziffer 912 Schließen Esc Kapitel C – Nichtgebietsbezogene Sonderleistu |
+| Direktlink #alter/17: implizit, nur Hinweis, keine Ablehnung | ✅ bestanden | Ziffer 17 Schließen Esc Kapitel B – Grundleistungen, Allgemeinmedizin  |
+| Schaltfläche „Offene Fragen“: 15 Punkte aus der Analyse (z. B. C05 Widerspruch 4409) | ✅ bestanden | 15 |
+| Filter Ausnahmeprüfung (104) und CSV-Export mit Prüfbedingung, Reaktion und Ausnahme | ✅ bestanden | 104 von 5.580 Ziffern · 105 CSV-Zeilen |
+| Zurück zu „AB-Steigerungsgründe“ nach Alter: 5.580 Ziffern, Alters-Filter ausgeblendet | ✅ bestanden | 5.580 von 5.580 Ziffern |
 | Laptop 1280×720 mit offenem Detailbereich: kein horizontaler Überlauf | ✅ bestanden | kein Überlauf |
 | Offline: keine externen Anfragen | ✅ bestanden | keine |
 | Keine JavaScript-Fehler | ✅ bestanden | keine |
 
-Screenshots: `output/screenshots/01_startansicht.png`, `output/screenshots/02_gefilterte_ansicht.png`, `output/screenshots/06_tooltip_wortlaut.png`, `output/screenshots/05_nicht_steigerfaehig.png`, `output/screenshots/03_detailbereich.png`, `output/screenshots/07_neben_start.png`, `output/screenshots/08_neben_detail_1200.png`, `output/screenshots/09_neben_allgemeine_bestimmungen.png`, `output/screenshots/10_intervalle_start.png`, `output/screenshots/11_intervalle_detail.png`, `output/screenshots/12_mapping_start.png`, `output/screenshots/13_mapping_863.png`, `output/screenshots/14_mapping_neu_4500.png`, `output/screenshots/15_geschlecht_115.png`, `output/screenshots/16_geschlecht_gefiltert.png`, `output/screenshots/04_laptop_1280.png`
+Screenshots: `output/screenshots/01_startansicht.png`, `output/screenshots/02_gefilterte_ansicht.png`, `output/screenshots/06_tooltip_wortlaut.png`, `output/screenshots/05_nicht_steigerfaehig.png`, `output/screenshots/03_detailbereich.png`, `output/screenshots/07_neben_start.png`, `output/screenshots/08_neben_detail_1200.png`, `output/screenshots/09_neben_allgemeine_bestimmungen.png`, `output/screenshots/10_intervalle_start.png`, `output/screenshots/11_intervalle_detail.png`, `output/screenshots/12_mapping_start.png`, `output/screenshots/13_mapping_863.png`, `output/screenshots/14_mapping_neu_4500.png`, `output/screenshots/15_geschlecht_115.png`, `output/screenshots/16_geschlecht_gefiltert.png`, `output/screenshots/17_alter_36.png`, `output/screenshots/18_alter_gefiltert.png`, `output/screenshots/04_laptop_1280.png`
 
 ## 3. Verifikation des Excel-Aufbaus
 
@@ -255,6 +272,23 @@ Der Reiter beruht **ausschließlich** auf dem gelieferten Paket `input/neben/` (
 | Abweichungen zwischen eigener Zuordnung und `ziffer_index.json` | 0 |
 
 
+## 4g. Altersbezug und Altersprüfung
+
+Der Reiter beruht ausschließlich auf der gelieferten Arbeitsmappe `input/alter/GOAeneu_Altersbezug_Ziffern.xlsx` (Blätter Ziffern_Altersbezug, Implizit_Alter, Kindbezug_Hauptleistung, Altersabhaengige_Regeln, Bandfamilien, Abgrenzung, Challenge, Übersicht). Prüfbedingung, Reaktion, Ausnahmen und Begründungen sind unverändert übernommen; das Dashboard bewertet nichts neu und ordnet die Blätter nur den Ziffern zu.
+
+| Kennzahl | Wert |
+|---|---|
+| Ziffern mit Altersprüfung (Hauptliste) | 268 |
+| … Reaktion Ablehnung (harte Altersgrenze) / Ausnahmeprüfung | 164 / 104 |
+| … aus der Vorgabe / neu aufgenommen (vererbte Zuschläge) | 253 / 15 |
+| Implizite Altersbezüge (nur Hinweis) | 46 |
+| Altersabhängige Regeln (Menge, Häufigkeit, Indikation) | 10 |
+| Hauptleistungen mit Kindbezug (Kinderzuschlag ausgeschlossen) | 120 |
+| Bandfamilien (lückenlose Altersbänder) | 11 |
+| Geprüft, kein Altersbezug (Abgrenzung) | 7 Themen |
+| Abweichungen Gebühr / Kapitel gegen das Gebührenverzeichnis | 0 / 0 |
+
+
 ## 4f. Geschlechtsbezug
 
 Der Reiter beruht ausschließlich auf dem gelieferten Paket `input/geschlecht/` (`geschlechtsbezug.json`, `grenzfaelle.json`, `abgrenzung.csv`, Arbeitsmappe, Beschreibung in `README.md`). Bewertung, Konfidenz und Begründung sind unverändert übernommen; das Dashboard bewertet nichts neu. Titel und Gebühr zeigt das Dashboard aus dem Gebührenverzeichnis (das Paket kürzt Titel).
@@ -357,27 +391,29 @@ Nicht durchgeführt: kein PDF in `input/`. Die PDF-Auswertung im Build-Skript (S
 10. **Nebeneinander – Regeln ohne einzelne Ziffern:** Regeln aus Allgemeinen Bestimmungen, deren Subjekt ein ganzes Kapitel, ein Abschnitt oder Freitext ist (z. B. Inklusionslisten, Zuschläge zu Abschnitten mit Gebührengrenze), werden nicht in einzelne Ziffern aufgelöst. Sie erscheinen im Detailbereich unter „Allgemeine Bestimmungen des Kapitels“ und in der Gesamtliste „Regeln aus Allgemeinen Bestimmungen“.
 11. **Nebeneinander – Bedingungen** sind laut README im Wortlaut übernommen, nicht ausgewertet. Das Dashboard markiert solche Regeln mit ⚑ und zeigt die Bedingung an.
 12. **Nebeneinander – Sitzungsbezug (Kapitel A Nr. 8):** Ausschlüsse beziehen sich auf dieselbe Sitzung; steht als Hinweis über der Liste, wird aber nicht je Regel ausgewertet.
-13. **Geschlecht – weiche Prüfung:** Nach Kap. A, AB Nr. 4 zählt der individuelle medizinische Bedarf, nicht der Personenstandseintrag. Das Dashboard zeigt deshalb nur Hinweise und Aussteuerungsempfehlungen, nie eine Ablehnung.
-14. **Geschlecht – Konfidenz „mittel“:** 25 Ziffern sind laut Paket fachlich abgeleitet (Reproduktionsmedizin mit Paarbezug, Douglasraum 919, Rektozele 9905/9906). Bitte fachlich bestätigen.
-15. **Geschlecht – Grenzfälle:** 83 Ziffern (Brust 60, Beckenboden/Inkontinenz 7, Reproduktion 7, Transition 5, Organ 4) stehen nur als Hinweis. Eine eigene Aussteuerung ist dafür nicht vorgesehen; bei Transition nur Hinweis. Bitte bestätigen.
-16. **Geschlecht – Abschnittszuschläge** (9996–10000, 10275–10277, 4776–4778, 5122–5124) stehen laut Paket nicht in der Liste: Es gilt das Geschlecht der tatsächlich abgerechneten Hauptleistung. Das Dashboard weist darauf bei den Ziffern nicht eigens hin.
-17. **Mapping – Wahrscheinlichkeit ist eine Schätzung** (Textähnlichkeit, kalibriert an 104 Stichproben; laut README im Labor zuverlässiger, in der Chirurgie und bei Zuschlägen schwächer). Manuell geprüft sind nur die alten Abschnitte B und G. Auch „SICHER“ ist nicht fehlerfrei.
-18. **Mapping – Prozentbereiche in den Tags** sind die Statusgrenzen laut README (≥ 80 %, 50–79 %, 25–49 %, < 25 %). Bei manuell geprüften und gedeckelten Ziffern liegt die Wahrscheinlichkeit vereinzelt genau auf oder knapp über einer Grenze (z. B. „Keine Entsprechung“ bis 30 %); der Status stammt unverändert aus dem Paket.
-19. **Mapping – 1.760 statt 1.746 neue Ziffern mit Pendant:** Das Dashboard zeigt in der Richtung neu → alt auch die 5 Ziffern, die nur über die Nutzervorgabe zugeordnet sind (4515 bis 4519), und 9 Laborziffern, auf die nur alte Sammelpositionen zeigen (als „Sammelposition“ gekennzeichnet). Das Paket zählt beide Gruppen in der Rückrichtung nicht mit. Falls die Sammelpositionen dort nicht erscheinen sollen, bitte melden.
-20. **Mapping – 812/812a (Kurzzeittherapie):** Laut README ist 812 in der Kurz-GOÄ die „Psychiatrische Notfallbehandlung“ (→ 4422, 4423), 812a existiert dort nicht. Die Vorgabe „812/812a → 4500 bis 4519“ ist deshalb nicht übernommen. Bitte klären, welche alte Nummer gemeint ist.
-21. **Mapping – 870 und 871:** Die Systemische Therapie (4515 bzw. 4516 bis 4519) stammt aus der Nutzervorgabe und hat keine automatische Wahrscheinlichkeit; im Dashboard als „Nutzervorgabe“ gekennzeichnet.
-22. **Mapping – Nummernkollision:** Alte und neue GOÄ verwenden teils dieselbe Nummer für verschiedene Leistungen (alt 4500 = Labor, neu 4500 = Analytische Psychotherapie). Die Suche zeigt deshalb beide Richtungen und kennzeichnet sie.
-23. **Mapping – nicht enthalten:** die alten Zuschläge A bis K und die Allgemeinen Bestimmungen der alten GOÄ. Das PDF dient nur für Kapitelüberschriften und die Gegenprobe der Beträge.
-24. **Intervalle – Erkennung aus dem Wortlaut:** Die Zuordnung Ziffer → Intervall ist eine Textauswertung des Gebührenverzeichnisses, keine fachliche Prüfung. Bei „Sitzung“ zählt jede Nennung in der Abrechnungsbestimmung, auch wenn sie Teil einer Nicht-neben-Regel ist („in gleicher Sitzung …“).
-25. **Intervalle – Kalenderwoche und Mindestabstand zur Vorgängerziffer:** Die Vorgabe nennt „2702, 2704 bis 2718“ bzw. „2702 bis 2718“. Den Wortlaut („frühestens fünf Tage nach … einmal je Kalenderwoche“) haben nur 2702 und die geraden Ziffern 2704 bis 2718; die ungeraden 2705 bis 2717 sind die Vorgängerziffern („einmal zu Beginn der Behandlung“) und wurden nicht zugeordnet. Bitte bestätigen.
-26. **Intervalle – Hyperfraktionierung (Mindestabstand 6 Stunden):** im Gebührenverzeichnis nicht gefunden; vermutlich in den Allgemeinen Bestimmungen, die nicht vorliegen. Unter „Mindestabstand am selben Tag“ stehen daher nur 1022 und 1023.
-27. **Intervalle – Jahr (365 Tage) und Monat (30 Tage):** Im Gebührenverzeichnis gibt es dafür keinen Wortlaut; beide Intervalle haben 0 Ziffern. Ob sie in der neuen GOÄ entfallen, ist fachlich zu bewerten.
-28. **Intervalle – Behandlungsfall:** Ziffern mit „Behandlungsfall“ stehen sowohl unter dem bestehenden Intervall als auch unter „Behandlungsfall (geänderte Definition)“, weil die bestehende Prüfung auf die neue Definition umzustellen ist. Falls sie nur unter einem der beiden erscheinen sollen, bitte melden.
-29. **Intervalle – fallbezogene Definitionen (AB A Nr. 5 und Nr. 6)** und alle Intervall-Regeln aus Allgemeinen Bestimmungen sind nicht ausgewertet; die Beschreibungen stammen aus der Vorgabe.
-30. **Multiplikationsannahme:** Die Excel multipliziert mehrere Gründe; der Entwurf regelt die Kumulation laut Excel-Hinweis nicht ausdrücklich. Das Dashboard übernimmt die Annahme und weist sie in der Hinweisleiste und im Szenario aus. Fachliche Bestätigung steht aus.
-31. **Mehrfachauswahl der Grund-Chips:** umgesetzt als UND-Verknüpfung (Ziffer muss alle gewählten Gründe haben). Falls ODER gewünscht ist, bitte melden.
-32. **Schalter „Theoretische Kombinationen einbeziehen“:** umgesetzt so, dass max. Faktor, max. Gebührensatz, Faktorfilter und CSV dann den theoretischen Höchstwert verwenden. Bitte bestätigen.
-33. **Prüfmerkmale Bauchraum und CT/MRT** sind laut Excel per Stichwort vorbelegt („Indiz“). Das Dashboard übernimmt die Vorbelegung unverändert und zeigt sie im Detailbereich an; eine fachliche Prüfung der Vorbelegung ist nicht Teil dieses Builds.
+13. **Alter – offene Fragen aus der Analyse (Blatt Challenge, 15 Punkte):** Das Dashboard zeigt sie unverändert über die Schaltfläche „Offene Fragen“. Fachlich zu klären sind u. a. die Ausnahmelisten A und K (Diagnosen, noch TBD), die Grenzen für implizite Altersbezüge (Neugeborenes, Kind, Jugendlicher), der Widerspruch bei 4409 (Legende bis 21. Lj., Bestimmung nennt Erwachsene), die Auslegung „bis einschließlich 8. Lebensjahr“ bei 3019 und ob ein Narkose-/Sedierungskennzeichen auf der Rechnung vorliegt.
+14. **Alter – Prüfgröße:** Alter in vollendeten Lebensjahren am Behandlungstag aus dem Geburtsdatum der Stammdaten. Neugeborene (0 Tage) lassen sich davon nur mit taggenauem Geburtsdatum trennen. Das Dashboard rechnet nicht, es zeigt die Prüfbedingung („Alter ≤ 7“).
+15. **Geschlecht – weiche Prüfung:** Nach Kap. A, AB Nr. 4 zählt der individuelle medizinische Bedarf, nicht der Personenstandseintrag. Das Dashboard zeigt deshalb nur Hinweise und Aussteuerungsempfehlungen, nie eine Ablehnung.
+16. **Geschlecht – Konfidenz „mittel“:** 25 Ziffern sind laut Paket fachlich abgeleitet (Reproduktionsmedizin mit Paarbezug, Douglasraum 919, Rektozele 9905/9906). Bitte fachlich bestätigen.
+17. **Geschlecht – Grenzfälle:** 83 Ziffern (Brust 60, Beckenboden/Inkontinenz 7, Reproduktion 7, Transition 5, Organ 4) stehen nur als Hinweis. Eine eigene Aussteuerung ist dafür nicht vorgesehen; bei Transition nur Hinweis. Bitte bestätigen.
+18. **Geschlecht – Abschnittszuschläge** (9996–10000, 10275–10277, 4776–4778, 5122–5124) stehen laut Paket nicht in der Liste: Es gilt das Geschlecht der tatsächlich abgerechneten Hauptleistung. Das Dashboard weist darauf bei den Ziffern nicht eigens hin.
+19. **Mapping – Wahrscheinlichkeit ist eine Schätzung** (Textähnlichkeit, kalibriert an 104 Stichproben; laut README im Labor zuverlässiger, in der Chirurgie und bei Zuschlägen schwächer). Manuell geprüft sind nur die alten Abschnitte B und G. Auch „SICHER“ ist nicht fehlerfrei.
+20. **Mapping – Prozentbereiche in den Tags** sind die Statusgrenzen laut README (≥ 80 %, 50–79 %, 25–49 %, < 25 %). Bei manuell geprüften und gedeckelten Ziffern liegt die Wahrscheinlichkeit vereinzelt genau auf oder knapp über einer Grenze (z. B. „Keine Entsprechung“ bis 30 %); der Status stammt unverändert aus dem Paket.
+21. **Mapping – 1.760 statt 1.746 neue Ziffern mit Pendant:** Das Dashboard zeigt in der Richtung neu → alt auch die 5 Ziffern, die nur über die Nutzervorgabe zugeordnet sind (4515 bis 4519), und 9 Laborziffern, auf die nur alte Sammelpositionen zeigen (als „Sammelposition“ gekennzeichnet). Das Paket zählt beide Gruppen in der Rückrichtung nicht mit. Falls die Sammelpositionen dort nicht erscheinen sollen, bitte melden.
+22. **Mapping – 812/812a (Kurzzeittherapie):** Laut README ist 812 in der Kurz-GOÄ die „Psychiatrische Notfallbehandlung“ (→ 4422, 4423), 812a existiert dort nicht. Die Vorgabe „812/812a → 4500 bis 4519“ ist deshalb nicht übernommen. Bitte klären, welche alte Nummer gemeint ist.
+23. **Mapping – 870 und 871:** Die Systemische Therapie (4515 bzw. 4516 bis 4519) stammt aus der Nutzervorgabe und hat keine automatische Wahrscheinlichkeit; im Dashboard als „Nutzervorgabe“ gekennzeichnet.
+24. **Mapping – Nummernkollision:** Alte und neue GOÄ verwenden teils dieselbe Nummer für verschiedene Leistungen (alt 4500 = Labor, neu 4500 = Analytische Psychotherapie). Die Suche zeigt deshalb beide Richtungen und kennzeichnet sie.
+25. **Mapping – nicht enthalten:** die alten Zuschläge A bis K und die Allgemeinen Bestimmungen der alten GOÄ. Das PDF dient nur für Kapitelüberschriften und die Gegenprobe der Beträge.
+26. **Intervalle – Erkennung aus dem Wortlaut:** Die Zuordnung Ziffer → Intervall ist eine Textauswertung des Gebührenverzeichnisses, keine fachliche Prüfung. Bei „Sitzung“ zählt jede Nennung in der Abrechnungsbestimmung, auch wenn sie Teil einer Nicht-neben-Regel ist („in gleicher Sitzung …“).
+27. **Intervalle – Kalenderwoche und Mindestabstand zur Vorgängerziffer:** Die Vorgabe nennt „2702, 2704 bis 2718“ bzw. „2702 bis 2718“. Den Wortlaut („frühestens fünf Tage nach … einmal je Kalenderwoche“) haben nur 2702 und die geraden Ziffern 2704 bis 2718; die ungeraden 2705 bis 2717 sind die Vorgängerziffern („einmal zu Beginn der Behandlung“) und wurden nicht zugeordnet. Bitte bestätigen.
+28. **Intervalle – Hyperfraktionierung (Mindestabstand 6 Stunden):** im Gebührenverzeichnis nicht gefunden; vermutlich in den Allgemeinen Bestimmungen, die nicht vorliegen. Unter „Mindestabstand am selben Tag“ stehen daher nur 1022 und 1023.
+29. **Intervalle – Jahr (365 Tage) und Monat (30 Tage):** Im Gebührenverzeichnis gibt es dafür keinen Wortlaut; beide Intervalle haben 0 Ziffern. Ob sie in der neuen GOÄ entfallen, ist fachlich zu bewerten.
+30. **Intervalle – Behandlungsfall:** Ziffern mit „Behandlungsfall“ stehen sowohl unter dem bestehenden Intervall als auch unter „Behandlungsfall (geänderte Definition)“, weil die bestehende Prüfung auf die neue Definition umzustellen ist. Falls sie nur unter einem der beiden erscheinen sollen, bitte melden.
+31. **Intervalle – fallbezogene Definitionen (AB A Nr. 5 und Nr. 6)** und alle Intervall-Regeln aus Allgemeinen Bestimmungen sind nicht ausgewertet; die Beschreibungen stammen aus der Vorgabe.
+32. **Multiplikationsannahme:** Die Excel multipliziert mehrere Gründe; der Entwurf regelt die Kumulation laut Excel-Hinweis nicht ausdrücklich. Das Dashboard übernimmt die Annahme und weist sie in der Hinweisleiste und im Szenario aus. Fachliche Bestätigung steht aus.
+33. **Mehrfachauswahl der Grund-Chips:** umgesetzt als UND-Verknüpfung (Ziffer muss alle gewählten Gründe haben). Falls ODER gewünscht ist, bitte melden.
+34. **Schalter „Theoretische Kombinationen einbeziehen“:** umgesetzt so, dass max. Faktor, max. Gebührensatz, Faktorfilter und CSV dann den theoretischen Höchstwert verwenden. Bitte bestätigen.
+35. **Prüfmerkmale Bauchraum und CT/MRT** sind laut Excel per Stichwort vorbelegt („Indiz“). Das Dashboard übernimmt die Vorbelegung unverändert und zeigt sie im Detailbereich an; eine fachliche Prüfung der Vorbelegung ist nicht Teil dieses Builds.
 
 ## 6. Reproduktion
 
