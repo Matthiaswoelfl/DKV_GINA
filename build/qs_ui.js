@@ -239,6 +239,7 @@ const path = require('path');
   d = (await txt('#drawer')).replace(/\s+/g, ' ');
   check('Suche „863“: alte 863 → neue 4500, Wahrscheinlichkeit 82 %, Status Sicher, Begründung, Direktlink #mapping/alt/863',
     d.includes('Alte GOÄ · Ziffer 863') && d.includes('82 %') && d.includes('Sicher') && d.includes('Begründung:') && d.includes('Neu 4500') && d.includes('145,00 €') && page.url().endsWith('#mapping/alt/863'), d.slice(0, 80) + ' … ' + page.url().split('#')[1]);
+  check('Mapping alt → neu: keine 1,0-fach-Beträge mehr (Liste, Spaltenkopf, Detailbereich)', !(await page.locator('main').innerText()).includes('1,0-fach') && !d.includes('1,0-fach') && !d.includes('40,22'), 'kein „1,0-fach“, kein 40,22 €');
   await shot('13_mapping_863.png');
   await page.keyboard.press('Escape');
   await page.fill('#q', '4500');

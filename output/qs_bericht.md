@@ -103,6 +103,7 @@
 | Reiter „Ziffern-Mapping“: 2.831 alte Ziffern, Chips mit Prozentbereich – Sicher ≥ 80 % 522 · Plausibel 50–79 % 816 · Unsicher 25–49 % 765 · Keine Entsprechung < 25 % 667 · Sammelposition 61 | ✅ bestanden | S Sicher ≥ 80 % 522 | P Plausibel 50–79 % 816 | U Unsicher 25–49 % 765 | K Keine Entsprechung < 25 % 667 | X Sammelposition 61 · 2.831 von 2.831 alten Ziffern |
 | Navigation zeigt die Kapitel der alten GOÄ (B bis P) mit Titel aus dem PDF | ✅ bestanden | 15 Kapitel; G Neurologie, Psychiatrie und Psychotherapie 44 | M Laboratoriumsuntersuchungen 921 |
 | Suche „863“: alte 863 → neue 4500, Wahrscheinlichkeit 82 %, Status Sicher, Begründung, Direktlink #mapping/alt/863 | ✅ bestanden | Alte GOÄ · Ziffer 863 Schließen Esc Heutige GOÄ (Stand August 2013) · Kapitel G  … mapping/alt/863 |
+| Mapping alt → neu: keine 1,0-fach-Beträge mehr (Liste, Spaltenkopf, Detailbereich) | ✅ bestanden | kein „1,0-fach“, kein 40,22 € |
 | Suche „4500“ (Richtung alt → neu): findet die alte 863 über die neue 4500 und die alte 4500 (Labor); Hinweis auf Nummernkollision | ✅ bestanden | 808,863,4500 |
 | Richtung neu → alt, Suche „4500“: neue 4500 ← alte 863 mit Wahrscheinlichkeit und Begründung, Direktlink #mapping/neu/4500 | ✅ bestanden | GOÄneu · Ziffer 4500 Schließen Esc Kapitel G – Neurologische, psychiat … mapping/neu/4500 |
 | Klick auf „Alt 863“ wechselt die Richtung und öffnet die alte Ziffer | ✅ bestanden | Alte GOÄ · Ziffer 863 |

@@ -39,6 +39,9 @@ main.alt #hf,main.alt #hm,main:not(.alt) #hp{display:none}
 .compact .badge .lg{display:none}.compact .badge .sh{display:inline}
 main.alt.compact .badge i{display:inline}
 main.alt .grid{grid-template-columns:64px minmax(0,1.3fr) 92px 200px minmax(0,1fr) 0}
+main.mpa .grid{grid-template-columns:64px minmax(0,1.3fr) 200px minmax(0,1.2fr) 0}
+main.mpa.compact .grid{grid-template-columns:50px minmax(0,1.1fr) 98px minmax(0,1.2fr) 0}
+main.mpa #colhead [data-s=g]{display:none}
 main.alt.compact .grid{grid-template-columns:50px minmax(0,1.1fr) 76px 98px minmax(0,1fr) 0}
 .cMS{--c:#1d6b2e;--cb:#dff3e3}.cMP{--c:#0f4f9e;--cb:#e0ecfb}.cMU{--c:#8a5300;--cb:#fbefd2}.cMK{--c:#a3231b;--cb:#fbe6e3}.cMX{--c:#5c3399;--cb:#ede4f8}
 .chip .pr{font-weight:650;font-variant-numeric:tabular-nums}
@@ -409,13 +412,13 @@ function openMp(z, keepFocus){
     `<div class="crumb">${alt ? 'Heutige GOÄ' + (D.mapping.stand ? ' (Stand ' + esc(D.mapping.stand) + ')' : '') + ' · ' : ''}Kapitel ${a.kap}${kap.titel ? ' – ' + esc(kap.titel) : ''}${alt ? '' : ' · ' + esc(a.name)}</div><p class="leistung">${esc(r.t)}</p>`;
   if (alt) {
     if (r.anm) h += `<p class="zusatz"><b>Anmerkung in der alten GOÄ:</b> ${esc(r.anm)}</p>`;
-    h += `<div class="kpis two"><div class="kpi"><span>Punkte</span><b>${r.pk === null ? '–' : r.pk.toLocaleString('de-DE')}</b></div><div class="kpi"><span>Gebühr 1,0-fach (alt)</span><b>${r.g === null ? '–' : euro(r.g)}</b></div></div>` +
+    h += `${r.pk === null ? '' : `<div class="kpis two"><div class="kpi"><span>Punkte (alte GOÄ)</span><b>${r.pk.toLocaleString('de-DE')}</b></div></div>`}` +
       mpBox(r.mst, r.p, r.vh, r.ql, r.bg) +
       `<h3>Neue Ziffer${r.neu.length === 1 ? '' : 'n'} in der GOÄneu (${r.neu.length})</h3>` +
       (r.neu.length ? r.neu.map(([n, pp, fk]) => { const x = BYZ.get(n), xa = D.abschnitte[x.a];
         return `<div class="regel ${MST[r.mst].cls}"><button class="zl" data-mz="neu:${n}" title="Neue Ziffer ${n} öffnen"><b>Neu ${n}</b> <span>${esc(x.t)}</span></button>` +
           `<div class="anz">Kapitel ${xa.kap} · ${esc(xa.name)}</div>` +
-          `<div class="anz">Gebühr neu: <b>${euro(x.g)}</b>${fk ? ' · entspricht dem ' + fk + '-fachen des alten 1,0-fach-Satzes' : ''}</div>` +
+          `<div class="anz">Gebühr neu: <b>${euro(x.g)}</b></div>` +
           `<div class="anz">Wahrscheinlichkeit für diese Ziffer: <b>${pp === null ? 'keine (Nutzervorgabe)' : pct(pp)}</b></div></div>`; }).join('')
         : `<div class="nosteig"><b><span class="ltr cN">–</span> Keine neue Ziffer zugeordnet</b>Für diese alte Ziffer wurde keine Entsprechung erkannt.</div>`) +
       (r.kd.length ? `<h3>Weitere Kandidaten (nicht zugeordnet)</h3>` + r.kd.map(([n, sc]) => `<div class="gen"><button class="zl" data-mz="neu:${n}"><b>Neu ${n}</b> <span>${esc(BYZ.get(n).t)}</span></button><div class="anz">Textähnlichkeit ${String(sc).replace('.', ',')}</div></div>`).join('') : '');
@@ -423,7 +426,7 @@ function openMp(z, keepFocus){
     h += `<div class="kpis two"><div class="kpi"><span>Gebühr (neu)</span><b>${euro(r.g)}</b></div></div>` +
       `<h3>Pendant in der alten GOÄ (${r.alt.length})</h3>` +
       (r.alt.length ? r.alt.map(([x, pp]) => `<div class="regel ${MST[x.mst].cls}"><button class="zl" data-mz="alt:${esc(x.z)}" title="Alte Ziffer ${esc(x.z)} öffnen"><b>Alt ${esc(x.z)}</b> <span>${esc(x.t)}</span></button>` +
-          `<div class="anz">Alte GOÄ, Kapitel ${ALT.abs[x.a].kap} · ${x.pk === null ? '' : x.pk.toLocaleString('de-DE') + ' Punkte · '}1,0-fach ${x.g === null ? '–' : euro(x.g)}</div>` +
+          `<div class="anz">Alte GOÄ, Kapitel ${ALT.abs[x.a].kap} · ${x.pk === null ? '' : x.pk.toLocaleString('de-DE') + ' Punkte'}</div>` +
           mpBox(x.mst, pp === null ? x.p : pp, x.vh, x.ql, x.bg) + (x.neu.length > 1 ? `<div class="anz">Die alte Ziffer ${esc(x.z)} ist insgesamt ${x.neu.length} neuen Ziffern zugeordnet: ${x.neu.map(y => y[0]).join(', ')}.</div>` : '') + `</div>`).join('')
         : `<div class="nosteig"><b><span class="ltr cN">–</span> Ohne alte Ziffer</b>Dieser neuen Ziffer ist keine Ziffer der heutigen GOÄ zugeordnet – sie ist neu oder neu zugeschnitten.</div>`);
   }
@@ -434,7 +437,8 @@ function openMp(z, keepFocus){
   if (!keepFocus) dr.focus({preventScroll:true});
 }
 function setDir(d){
-  st.mpdir = d; st.kap = st.abs = null; st.collapsed = st.q ? new Set() : allCollapsed(); st.sel = null; st.active = -1; $('#app').classList.remove('drawer-open');
+  st.mpdir = d; $('main').classList.toggle('mpa', d === 'alt');
+  if (st.sort === 'g' && d === 'alt') { st.sort = 'z'; st.dir = 1; } st.kap = st.abs = null; st.collapsed = st.q ? new Set() : allCollapsed(); st.sel = null; st.active = -1; $('#app').classList.remove('drawer-open');
   renderNav(); renderMpSel(); apply(); list.scrollTop = 0;
 }
 
@@ -526,6 +530,7 @@ function applyNb(nav, keepActive){
 }
 function build(keepActive){
   if (st.view !== 'ab' ? (st.sort==='f' || st.sort==='m') : st.sort==='p') { st.sort = 'z'; st.dir = 1; }
+  if (st.view === 'mp' && st.mpdir === 'alt' && st.sort === 'g') { st.sort = 'z'; st.dir = 1; }
   const key = {z:r=>r.zn, t:r=>r.lt, g:r=>r.g, f:r=>fsort(maxF(r)), m:r=>maxC(r), p:r=>st.view === 'mp' ? (r.p === null ? -1 : r.p) : st.view === 'iv' ? ivIds(r).length : nbCount(r)}[st.sort];
   const groups = new Map();
   result.forEach(r => { if (!groups.has(r.a)) groups.set(r.a, []); groups.get(r.a).push(r); });
@@ -544,7 +549,7 @@ function build(keepActive){
 function heads(){
   const c = $('main').classList.contains('compact');
   const mpa = st.view === 'mp' && st.mpdir === 'alt';
-  const lab = {z: st.view === 'mp' ? (mpa ? 'Alt' : 'Neu') : 'Ziffer', t: mpa ? 'Leistung (alte GOÄ)' : 'Leistung', g: mpa ? '1,0-fach' : 'Gebühr', p: st.view === 'mp' ? (mpa ? 'Neue Ziffer(n)' : 'Alte Ziffer(n)') : st.view === 'iv' ? 'Intervall · Häufigkeit' : 'Genannte Ziffern',
+  const lab = {z: st.view === 'mp' ? (mpa ? 'Alt' : 'Neu') : 'Ziffer', t: mpa ? 'Leistung (alte GOÄ)' : 'Leistung', g: 'Gebühr', p: st.view === 'mp' ? (mpa ? 'Neue Ziffer(n)' : 'Alte Ziffer(n)') : st.view === 'iv' ? 'Intervall · Häufigkeit' : 'Genannte Ziffern',
     f: c ? (st.theo ? 'Theor. ×' : 'Max. ×') : (st.theo ? 'Max. Faktor (theor.)' : 'Max. Faktor'),
     m: c ? (st.theo ? 'Theor. Satz' : 'Max. Satz') : (st.theo ? 'Max. Satz (theor.)' : 'Max. Gebührensatz')};
   $('#hg').textContent = st.view === 'mp' ? 'Zuordnung' : st.view === 'iv' ? 'Status' : st.view === 'nb' ? 'Regel' : c ? 'Gründe' : 'Steigerungsgründe';
@@ -585,7 +590,7 @@ function render(){
       const m = it.m, dif = m && m.maxT !== m.maxP;
       if (st.view === 'mp') { const q = st.q.trim().toLowerCase();
         h += `<div class="row grid${it.mst === 'NEU' || it.mst === 'KEINE_ENTSPRECHUNG_ERKENNBAR' ? ' ohne' : ''}${i===st.active?' active':''}${it.z===st.sel?' sel':''}" style="top:${tops[i]}px" data-i="${i}" role="option" aria-selected="${it.z===st.sel}" id="r${esc(it.z)}">` +
-          `<span class="z">${hit(it.z, /^\d/.test(q) && String(it.zs) === q)}</span><span class="t" title="${esc(it.t)}">${esc(it.t)}</span><span class="num">${it.g === null ? '–' : euro(it.g)}</span>` +
+          `<span class="z">${hit(it.z, /^\d/.test(q) && String(it.zs) === q)}</span><span class="t" title="${esc(it.t)}">${esc(it.t)}</span>${st.mpdir === 'alt' ? '' : `<span class="num">${euro(it.g)}</span>`}` +
           `<span class="badges">${badgeMp(it.mst, it.p)}</span><span class="pv">${previewMp(it)}</span></div>`;
         continue; }
       if (st.view === 'iv') { const pv = previewIv(it);
@@ -821,7 +826,7 @@ function setView(v, keepHash){
   $('#f-mp').hidden = v !== 'mp';
   document.querySelectorAll('#tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.v === v));
   $('#f-ab').hidden = v !== 'ab'; $('#f-nb').hidden = v !== 'nb'; $('#f-iv').hidden = v !== 'iv'; $('#ivinfo').hidden = v !== 'iv' && v !== 'mp';
-  $('main').classList.toggle('alt', v !== 'ab');
+  $('main').classList.toggle('alt', v !== 'ab'); $('main').classList.toggle('mpa', v === 'mp' && st.mpdir === 'alt');
   document.title = v === 'mp' ? 'GOÄneu – Ziffern-Mapping' : v === 'nb' ? 'GOÄneu – Nebeneinanderberechnung' : v === 'iv' ? 'GOÄneu – Intervalle' : 'GOÄneu – Steigerungsmatrix';
   renderHinweis(); apply(true);
   if (st.sel !== null && st.sel !== -1) open(st.sel, true);
@@ -851,11 +856,11 @@ $('#csv').addEventListener('click', () => {
   const q = s => '"' + String(s).replace(/"/g,'""') + '"', dez = c => euro(c).replace(/[. €]/g,'');
   if (st.view === 'mp') {
     const alt = st.mpdir === 'alt', pz = p => p === null ? '' : String(p).replace('.', ',');
-    const lines = [(alt ? ['Alte Ziffer','Kapitel alt','Leistung alt','Punkte','1,0-fach alt (€)','Neue Ziffern','Verhältnis','Wahrscheinlichkeit','Status','Quelle','Begründung']
+    const lines = [(alt ? ['Alte Ziffer','Kapitel alt','Leistung alt','Punkte','Neue Ziffern','Verhältnis','Wahrscheinlichkeit','Status','Quelle','Begründung']
                         : ['Neue Ziffer','Kapitel','Abschnitt','Leistung','Gebühr (€)','Alte Ziffern','Beste Wahrscheinlichkeit','Status']).map(q).join(';')];
     const seen = new Map(); result.forEach(r => { if (!seen.has(r.a)) seen.set(r.a, []); seen.get(r.a).push(r); });
     for (const rs of seen.values()) for (const r of rs) { const a = U().abs[r.a];
-      lines.push((alt ? [q(r.z), q(a.kap), q(r.t), r.pk === null ? '' : r.pk, r.g === null ? '' : dez(r.g), q(r.neu.map(x => x[0]).join(', ')), q(r.vh), pz(r.p), q(MST[r.mst].name), q(r.ql), q(r.bg)]
+      lines.push((alt ? [q(r.z), q(a.kap), q(r.t), r.pk === null ? '' : r.pk, q(r.neu.map(x => x[0]).join(', ')), q(r.vh), pz(r.p), q(MST[r.mst].name), q(r.ql), q(r.bg)]
                       : [r.z, q(a.kap), q(a.name), q(r.t), dez(r.g), q(r.alt.map(x => x[0].z).join(', ')), pz(r.p), q(MST[r.mst].name)]).join(';')); }
     const blob = new Blob(['\ufeff' + lines.join('\r\n')], {type:'text/csv;charset=utf-8'});
     const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = alt ? 'GOAe_Mapping_alt_zu_neu_Export.csv' : 'GOAe_Mapping_neu_zu_alt_Export.csv';
