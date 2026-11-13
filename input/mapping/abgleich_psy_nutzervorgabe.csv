@@ -1,0 +1,8 @@
+﻿alt_ziffer;leistung_alt;nutzer_vorgabe_neu;automatisch_neu;uebereinstimmung;nur_nutzer;nur_automatisch;wahrscheinlichkeit_auto
+863;Analytische Psychotherapie, Einzelbehandlung, mindestens 50 Minuten;4500;4500;1/1;;;0.82
+864;Analytische Psychotherapie, Gruppenbehandlung, mindestens 100 Minuten, je Teilnehmer;4501|4502|4503|4504;4502|4501|4504|4503;4/4;;;0.82
+861;Tiefenpsychologisch fundierte Psychotherapie, Einzelbehandlung, mindestens 50 Minuten;4505;4505;1/1;;;0.85
+862;Tiefenpsychologisch fundierte Psychotherapie, Gruppenbehandlung, mindestens 100 Minuten, je Teilnehmer;4506|4507|4508|4509;4507|4506|4508|4509;4/4;;;0.87
+870;Verhaltenstherapie, Einzelbehandlung, mindestens 50 Minuten;4510|4515;4510;1/2;4515;;0.73
+871;Verhaltenstherapie, Gruppenbehandlung, mindestens 50 Minuten, je Teilnehmer;4511|4512|4513|4514|4516|4517|4518|4519;4512|4511|4514|4513;4/8;4516|4517|4518|4519;;0.8
+812, 812a;Kurzzeittherapie (alle Verfahren, Einzel + Gruppe) – laut Nutzer;4500|4501|…|4519 (alle 20);"812 = Psychiatrische Notfallbehandlung → 4422|4423; 812a nicht im Dokument";NICHT_PRUEFBAR;;;–

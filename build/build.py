@@ -373,6 +373,93 @@ def lese_regeln(ziffern: set) -> dict:
     return info
 
 
+# ---------------------------------------------------------------- Mapping alte GOÄ -> GOÄneu
+MAP_DIR = INPUT / "mapping"
+SOLL_MAP_STATUS = {"SICHER": 522, "PLAUSIBEL": 884, "UNSICHER": 829, "KEINE_ENTSPRECHUNG_ERKENNBAR": 535, "SAMMELPOSITION": 61}
+MAP_STATUS_TEXT = {
+    "SICHER": "Wahrscheinlichkeit ab 80 %: Zuordnung kann übernommen werden (nicht fehlerfrei).",
+    "PLAUSIBEL": "Wahrscheinlichkeit 50 bis 79 %: fachlich gegenprüfen.",
+    "UNSICHER": "Wahrscheinlichkeit 25 bis 49 %: nur ein Vorschlag.",
+    "KEINE_ENTSPRECHUNG_ERKENNBAR": "Wahrscheinlichkeit unter 25 %: vermutlich entfallen, neu zugeschnitten oder in einer anderen Ziffer aufgegangen.",
+    "SAMMELPOSITION": "Sammelposition (z. B. „Ähnliche Untersuchungen“): keine 1:1-Zuordnung möglich.",
+}
+
+
+def lese_mapping(neu_gebuehr: dict) -> dict:
+    """Mapping-Paket (input/mapping) lesen. Wahrscheinlichkeit, Status und Bemerkung werden unverändert übernommen;
+    maßgeblich ist `neu_ziffern_final` (Nutzervorgabe vor automatischem Vorschlag)."""
+    info = {"datei": None}
+    fj, fc = MAP_DIR / "mapping_alt_zu_neu.json", MAP_DIR / "mapping_alt_zu_neu.csv"
+    if not fj.exists() or not fc.exists():
+        return info
+    import csv
+    roh = json.loads(fj.read_text(encoding="utf-8"))
+    zeilen = {r["alt_ziffer"]: r for r in csv.DictReader(fc.open(encoding="utf-8-sig"), delimiter=";")}
+    alt, unbekannt, ohne_csv = [], [], []
+    for a in roh:
+        z = a["alt_ziffer"]
+        c = zeilen.get(z)
+        if c is None:
+            ohne_csv.append(z)
+            c = {"neu_ziffern_final": "|".join(x["neu"] for x in a["neu"] if x["neu"]), "nutzer_vorgabe_neu": "", "alt_anmerkung": ""}
+        p_je = {x["neu"]: x["p"] for x in a["neu"] if x["neu"]}
+        final = [x for x in c["neu_ziffern_final"].split("|") if x]
+        vorgabe = bool(c["nutzer_vorgabe_neu"])
+        alt_eur = dec(a["alt_euro_1fach"]) if a["alt_euro_1fach"] is not None else None
+        neu = []
+        for x in final:
+            n = int(x)
+            if n not in neu_gebuehr:
+                unbekannt.append((z, n))
+                continue
+            faktor = None
+            if alt_eur:
+                faktor = format((Decimal(neu_gebuehr[n]) / 100 / alt_eur).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP), "f").replace(".", ",")
+            neu.append([n, p_je.get(x), faktor])
+        status, p = a["status"], a["wahrscheinlichkeit"]
+        # Begründung: Bemerkung des Pakets, sonst aus dessen Feldern zusammengesetzt (keine eigene Bewertung)
+        teile = []
+        if vorgabe:
+            auto = [x["neu"] for x in a["neu"] if x["neu"]]
+            zusatz = [x for x in final if x not in auto]
+            teile.append("Zuordnung laut Nutzervorgabe (PSY-Tabelle)" + (f"; automatisch nicht erkannt: {', '.join(zusatz)}" if zusatz else "; deckt sich mit dem automatischen Vorschlag") + ".")
+        if a["bemerkung"]:
+            teile.append(a["bemerkung"].rstrip(".") + ".")
+        if a["quelle"] == "manuell geprüft":
+            teile.append("Manuell geprüft; die Wahrscheinlichkeit ist eine fachliche Einschätzung.")
+        else:
+            teile.append(f"Automatisch über Textähnlichkeit zwischen alter Kurzbezeichnung und neuer Legende zugeordnet (Score {str(a['score_top1']).replace('.', ',')}), gewichtet mit Fachgebiet und Gebührenplausibilität.")
+        teile.append(MAP_STATUS_TEXT.get(status, ""))
+        alt.append([z, a["alt_abschnitt"], a["alt_leistung"], a["alt_punkte"],
+                    None if alt_eur is None else int((alt_eur * 100).to_integral_value(rounding=ROUND_HALF_UP)),
+                    status, p, a["verhaeltnis"], "Nutzervorgabe" if vorgabe else a["quelle"], " ".join(t for t in teile if t),
+                    neu, [[int(k["neu"]), k["score"]] for k in a["weitere_kandidaten"] if k["neu"] and int(k["neu"]) in neu_gebuehr and k["neu"] not in final],
+                    c["alt_anmerkung"]])
+    # Kapitelüberschriften und Stichprobe aus der alten GOÄ (PDF)
+    titel, pdf_info = {}, {"datei": None}
+    pdfs = sorted((INPUT / "goae_alt").glob("*.pdf"))
+    if pdfs:
+        text = subprocess.run(["pdftotext", "-layout", str(pdfs[0]), "-"], check=True, capture_output=True, text=True).stdout
+        zl = text.splitlines()
+        for i, line in enumerate(zl):
+            m = re.match(r"^\s+([A-P])\.\s+(\S.*?)\s*(\.{4,}\s*\d+)?\s*$", line)
+            if m and m.group(1) not in titel:
+                t = m.group(2).strip()
+                if not m.group(3) and i + 1 < len(zl):
+                    t += " " + re.sub(r"\.{4,}\s*\d+\s*$", "", zl[i + 1]).strip()
+                titel[m.group(1)] = t
+        flach = re.sub(r"\s+", " ", text)
+        mit_eur = [a for a in alt if a[4] is not None]
+        ok = sum(1 for a in mit_eur if re.search(r"(?<![\d,])" + re.escape(fmt_euro(a[4])[:-2]) + r"(?![\d])", flach)
+                 and re.search(r"(?<![\d.])" + re.escape(a[0].split(".")[0]) + r"(?![\d])", flach))
+        m = re.search(r"Stand:\s*([A-ZÄÖÜa-zäöü]+ \d{4})", text)
+        pdf_info = {"datei": pdfs[0].name, "stand": m.group(1) if m else None, "geprueft": len(mit_eur), "gefunden": ok, "seiten": text.count("\f")}
+    neu_zugeordnet = {n for a in alt for n, _, _ in a[10]}
+    info.update(datei=fj.name, alt=alt, titel=titel, pdf=pdf_info, unbekannt=unbekannt, ohne_csv=ohne_csv,
+                status=Counter(a[5] for a in alt), n_neu=len(neu_zugeordnet), vorgaben=[a[0] for a in alt if a[8] == "Nutzervorgabe"])
+    return info
+
+
 # ---------------------------------------------------------------- Intervalle
 _TAG = r"Kalendertag|\bpro Tag\b|\bje Tag\b|\ban einem Tag\b|\btäglich\b|Behandlungstag|\bam selben Tag\b|\ban demselben Tag\b"
 _KHJ = r"Kalenderhalbjahr|\bHalbjahr"
@@ -598,7 +685,7 @@ def lese_pdf(daten):
 
 
 # ---------------------------------------------------------------- Tests
-def tests(daten, js=None, kap=None, gesetz=None, regeln=None, intervalle=None):
+def tests(daten, js=None, kap=None, gesetz=None, regeln=None, intervalle=None, mapping=None):
     rows = {r["z"]: r for r in daten["rows"]}
     mus = daten["muster"]
     res = []
@@ -679,6 +766,30 @@ def tests(daten, js=None, kap=None, gesetz=None, regeln=None, intervalle=None):
             t("Intervalle – Beispielziffern der Vorgabe gefunden (7 ungerade Ziffern 2705–2717 je zweimal ohne passenden Wortlaut)",
               len(intervalle["bsp_fehlt"]) == 14 and all(2705 <= z <= 2717 and z % 2 for _, z in intervalle["bsp_fehlt"]),
               f"{bsp - len(intervalle['bsp_fehlt'])} von {bsp} gefunden")
+        if mapping and mapping["datei"]:
+            MA = {a[0]: a for a in mapping["alt"]}
+
+            def neu(z):
+                return [n for n, _, _ in MA[z][10]]
+
+            t("Mapping – 2.831 alte Ziffern, Status wie in der README (522 / 884 / 829 / 535 / 61)",
+              len(MA) == len(mapping["alt"]) == 2831 and dict(mapping["status"]) == SOLL_MAP_STATUS,
+              f"{len(MA)} Ziffern; " + " · ".join(f"{k} {mapping['status'][k]}" for k in SOLL_MAP_STATUS))
+            t("Mapping – alt 863 → neu 4500, Wahrscheinlichkeit 0,82, SICHER", neu("863") == [4500] and MA["863"][6] == 0.82 and MA["863"][5] == "SICHER",
+              f"{neu('863')} · {MA['863'][6]} · {MA['863'][5]}")
+            t("Mapping – alt 861 → 4505; alt 862 → 4506–4509; alt 864 → 4501–4504",
+              neu("861") == [4505] and neu("862") == [4506, 4507, 4508, 4509] and neu("864") == [4501, 4502, 4503, 4504], f"{neu('861')} · {neu('862')} · {neu('864')}")
+            t("Mapping – Nutzervorgabe geht vor: alt 870 → 4510, 4515; alt 871 → 4511–4514, 4516–4519",
+              neu("870") == [4510, 4515] and neu("871") == [4511, 4512, 4513, 4514, 4516, 4517, 4518, 4519] and MA["870"][8] == "Nutzervorgabe", f"{neu('870')} · {neu('871')}")
+            t("Mapping – Rückrichtung: neu 4500 ← alt 863 (und 808); alt 4500 ist eine andere Leistung (Nummernkollision)",
+              "863" in [a[0] for a in mapping["alt"] if 4500 in neu(a[0])] and "4500" in MA and neu("4500") != [4500],
+              f"neu 4500 ← {[a[0] for a in mapping['alt'] if 4500 in neu(a[0])]}; alt 4500 = {MA['4500'][2][:40]}")
+            t("Mapping – alle zugeordneten neuen Ziffern existieren; jede alte Ziffer hat eine Begründung",
+              not mapping["unbekannt"] and all(a[9] for a in mapping["alt"]), f"{len(mapping['unbekannt'])} unbekannt")
+            if mapping["pdf"]["datei"]:
+                q = mapping["pdf"]["gefunden"] / max(1, mapping["pdf"]["geprueft"])
+                t("Mapping – alte Ziffern mit Betrag in der alten GOÄ (PDF) wiedergefunden (mindestens 98 %)", q >= 0.98,
+                  f"{mapping['pdf']['gefunden']} von {mapping['pdf']['geprueft']} ({q:.1%})")
         t("Jede nicht steigerfähige Ziffer hat eine Leistungsbezeichnung", all(r[2] for r in js["rows"]),
           f"{sum(1 for r in js['rows'] if not r[2])} ohne Text")
     t("Keine doppelten Ziffern", len(rows) == len(daten["rows"]), f"{len(rows)} eindeutig")
@@ -724,7 +835,7 @@ def lese_wortlaut() -> dict:
     return json.loads(p.read_text(encoding="utf-8"))["gruende"] if p.exists() else {}
 
 
-def baue_json(daten, pdf, gesetz, kap, regeln, intervalle):
+def baue_json(daten, pdf, gesetz, kap, regeln, intervalle, mapping):
     matrix = {r["z"]: r for r in daten["rows"]}
     wortlaut = lese_wortlaut()
     zus = gesetz.get("zusatz", {})
@@ -782,10 +893,11 @@ def baue_json(daten, pdf, gesetz, kap, regeln, intervalle):
         "gruende": gruende, "kapitel": kapitel, "abschnitte": abs_liste, "muster": muster, "rows": rows,
         "regeln": regeln.get("regeln", []),
         "intervalle": [{k: v for k, v in d.items() if k != "beispiele"} | {"bsp": d["beispiele"]} for d in intervalle.get("defs", [])],
+        "mapping": {"alt": mapping.get("alt", []), "titel": mapping.get("titel", {}), "stand": mapping.get("pdf", {}).get("stand")},
     }
 
 
-def schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, res, ui, excel_name, daten_alle=()):
+def schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, mapping, res, ui, excel_name, daten_alle=()):
     L = []
     ok = sum(1 for _, o, _ in res if o)
     L += ["# QS-Bericht – GOÄneu Steigerungsdashboard", "",
@@ -793,6 +905,7 @@ def schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, res, ui, excel
           f"- Gebührenverzeichnis des Entwurfs (Excel): {'`input/gesetz/' + gesetz['datei'] + '`' if gesetz['datei'] else '**lag beim Build nicht vor**'}",
           f"- Zuordnung Ziffer → Kapitel/Abschnitt (JSON): {'`input/kapitel/' + kap['datei'] + '`' if kap['datei'] else '**lag beim Build nicht vor**'}",
           f"- Kombinationsregeln (Nebeneinanderberechnung): {'`input/neben/` (regeln.json, ziffer_index.json, weitere_ausschluesse.csv)' if regeln['datei'] else '**lagen beim Build nicht vor**'}",
+          f"- Mapping alte GOÄ → GOÄneu: {'`input/mapping/` und `input/goae_alt/`' if mapping['datei'] else '**lag beim Build nicht vor**'}",
           f"- Gesetzesentwurf mit Allgemeinen Bestimmungen (PDF): {'`input/' + pdf['datei'] + '`' if pdf['datei'] else '**lag beim Build nicht vor**'}",
           f"- Abnahmetests Daten: **{ok} von {len(res)} bestanden**", "",
           "## 1. Abnahmetests (Daten)", "", "| Test | Ergebnis | Ist-Wert |", "|---|---|---|"]
@@ -970,6 +1083,45 @@ def schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, res, ui, excel
             "über der Liste, wird aber nicht je Regel ausgewertet.",
         ]
 
+    L += ["", "## 4e. Mapping alte GOÄ → GOÄneu", ""]
+    if not mapping["datei"]:
+        L.append("Nicht vorhanden: `input/mapping/` fehlt.")
+    else:
+        MA = mapping["alt"]
+        L += ["Der Reiter beruht auf dem gelieferten Paket `input/mapping/` (`mapping_alt_zu_neu.json` und `.csv`, Beschreibung in "
+              "`README.md`). Wahrscheinlichkeit, Status, Verhältnis und Bemerkung sind unverändert übernommen. Maßgeblich ist die "
+              "Spalte `neu_ziffern_final` (Nutzervorgabe vor automatischem Vorschlag). Die Rückrichtung neu → alt wird daraus "
+              "abgeleitet. Die Begründung im Dashboard ist die Bemerkung des Pakets, ergänzt um Quelle, Score und die Bedeutung des "
+              "Status laut README; eine eigene fachliche Bewertung enthält sie nicht.", "",
+              "| Kennzahl | Wert |", "|---|---|",
+              f"| Alte Ziffern | {len(MA)} |"]
+        L += [f"| … Status {k} | {mapping['status'][k]} |" for k in SOLL_MAP_STATUS]
+        L += [f"| … davon mit Nutzervorgabe | {len(mapping['vorgaben'])} ({', '.join(mapping['vorgaben'])}) |",
+              f"| … ohne zugeordnete neue Ziffer | {sum(1 for a in MA if not a[10])} |",
+              f"| Neue Ziffern mit mindestens einer alten Ziffer | {mapping['n_neu']} von {len(daten_alle)} |",
+              f"| Zugeordnete neue Ziffern, die es nicht gibt | {len(mapping['unbekannt'])} |",
+              f"| Alte Ziffern ohne Betrag (1,0-fach) | {sum(1 for a in MA if a[4] is None)} |"]
+        if mapping["pdf"]["datei"]:
+            L += [f"| Alte GOÄ (PDF `input/goae_alt/{mapping['pdf']['datei']}`, Stand {mapping['pdf']['stand'] or 'unbekannt'}) | "
+                  f"{mapping['pdf']['seiten']} Seiten; Kapitelüberschriften übernommen: {len(mapping['titel'])} |",
+                  f"| Alte Ziffern mit Betrag, deren Nummer und 1,0-fach-Betrag im PDF-Text vorkommen | "
+                  f"{mapping['pdf']['gefunden']} von {mapping['pdf']['geprueft']} |"]
+        L.append("")
+        offen += [
+            "**Mapping – Wahrscheinlichkeit ist eine Schätzung** (Textähnlichkeit, kalibriert an 104 Stichproben; laut README im "
+            "Labor zuverlässiger, in der Chirurgie und bei Zuschlägen schwächer). Manuell geprüft sind nur die alten Abschnitte B "
+            "und G. Auch „SICHER“ ist nicht fehlerfrei.",
+            "**Mapping – 812/812a (Kurzzeittherapie):** Laut README ist 812 in der Kurz-GOÄ die „Psychiatrische Notfallbehandlung“ "
+            "(→ 4422, 4423), 812a existiert dort nicht. Die Vorgabe „812/812a → 4500 bis 4519“ ist deshalb nicht übernommen. "
+            "Bitte klären, welche alte Nummer gemeint ist.",
+            "**Mapping – 870 und 871:** Die Systemische Therapie (4515 bzw. 4516 bis 4519) stammt aus der Nutzervorgabe und hat "
+            "keine automatische Wahrscheinlichkeit; im Dashboard als „Nutzervorgabe“ gekennzeichnet.",
+            "**Mapping – Nummernkollision:** Alte und neue GOÄ verwenden teils dieselbe Nummer für verschiedene Leistungen "
+            "(alt 4500 = Labor, neu 4500 = Analytische Psychotherapie). Die Suche zeigt deshalb beide Richtungen und kennzeichnet sie.",
+            "**Mapping – nicht enthalten:** die alten Zuschläge A bis K und die Allgemeinen Bestimmungen der alten GOÄ. Das PDF "
+            "dient nur für Kapitelüberschriften und die Gegenprobe der Beträge.",
+        ]
+
     L += ["", "## 4d. Intervalle", ""]
     if not intervalle["datei"]:
         L.append("Nicht vorhanden: `input/intervalle.json` oder Gebührenverzeichnis fehlt.")
@@ -1069,8 +1221,9 @@ def main():
     kap = lese_kapitel(daten, gesetz)
     regeln = lese_regeln({int(z) for z in kap["K"]} if kap["datei"] else {r["z"] for r in daten["rows"]})
     intervalle = lese_intervalle(gesetz.get("roh", {}))
-    js_obj = baue_json(daten, pdf, gesetz, kap, regeln, intervalle)
-    res = tests(daten, js_obj, kap, gesetz, regeln, intervalle)
+    mapping = lese_mapping({int(z): int(v["_g"] * 100) for z, v in kap["K"].items()} if kap["datei"] else {})
+    js_obj = baue_json(daten, pdf, gesetz, kap, regeln, intervalle, mapping)
+    res = tests(daten, js_obj, kap, gesetz, regeln, intervalle, mapping)
 
     js = json.dumps(js_obj, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
     html = TEMPLATE.read_text(encoding="utf-8").replace("/*__DATA__*/", js)
@@ -1087,7 +1240,7 @@ def main():
         ui = json.loads(UI_JSON.read_text(encoding="utf-8"))
         UI_JSON.unlink()
 
-    schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, res, ui, excels[0].name, [r[0] for r in js_obj["rows"]])
+    schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, mapping, res, ui, excels[0].name, [r[0] for r in js_obj["rows"]])
     for name, ok, ist in res:
         print(("OK   " if ok else "FAIL ") + name + "  →  " + ist)
     for c in (ui or {}).get("checks", []):

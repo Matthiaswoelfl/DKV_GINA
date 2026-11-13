@@ -40,6 +40,21 @@ main.alt #hf,main.alt #hm,main:not(.alt) #hp{display:none}
 main.alt.compact .badge i{display:inline}
 main.alt .grid{grid-template-columns:64px minmax(0,1.3fr) 92px 200px minmax(0,1fr) 0}
 main.alt.compact .grid{grid-template-columns:50px minmax(0,1.1fr) 76px 98px minmax(0,1fr) 0}
+.cMS{--c:#1d6b2e;--cb:#dff3e3}.cMP{--c:#0f4f9e;--cb:#e0ecfb}.cMU{--c:#8a5300;--cb:#fbefd2}.cMK{--c:#a3231b;--cb:#fbe6e3}.cMX{--c:#5c3399;--cb:#ede4f8}
+.seg{display:inline-flex;border:1px solid #8c98a8;border-radius:6px;overflow:hidden}
+.seg button{border:0;background:#fff;padding:5px 12px;font-size:13px}
+.seg button + button{border-left:1px solid #8c98a8}
+.seg button[aria-pressed=true]{background:var(--accent);color:#fff;font-weight:650}
+.mpbox{border:1px solid var(--line);border-left:4px solid var(--c);border-radius:6px;padding:10px 12px;margin-top:12px}
+.mpbox .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.mpbox .pz{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;color:var(--c)}
+.mpbox .bar{height:6px;background:var(--line-soft);border-radius:3px;margin:8px 0;overflow:hidden}
+.mpbox .bar i{display:block;height:100%;background:var(--c)}
+.mpbox p{margin:6px 0 0;font-size:13px}
+.mpbox .meta{font-size:12.5px;color:var(--ink-soft)}
+.regel .zl{border-top:0;font-size:14px;padding:0 0 3px}
+.regel .zl b{min-width:0;margin-right:6px}
+mark{background:#ffe9a8;color:inherit;padding:0 2px;border-radius:2px}
 .cIB{--c:#3d4a5c;--cb:#e9edf2}.cIN{--c:#0b6b3a;--cb:#dff3e6}
 #ivinfo{background:#fff;border-bottom:1px solid var(--line);padding:10px 14px;font-size:13px;color:var(--ink-soft)}
 #ivinfo b{color:var(--ink);font-size:14px;display:block;margin-bottom:2px}
@@ -184,6 +199,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:3px;paddi
     <button role="tab" data-v="ab" aria-selected="true">AB-Steigerungsgründe</button>
     <button role="tab" data-v="nb" aria-selected="false">Nebeneinanderberechnung</button>
     <button role="tab" data-v="iv" aria-selected="false">Intervalle</button>
+    <button role="tab" data-v="mp" aria-selected="false">Ziffern-Mapping alt ↔ neu</button>
   </div><span id="sub"></span></header>
 <div id="hinweis" role="note"></div>
 <div id="app">
@@ -210,6 +226,13 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:3px;paddi
       <label>Quelle <select id="ivq" aria-label="Fundstelle des Wortlauts">
         <option value="">alle</option><option value="A">Abrechnungsbestimmung</option><option value="LZ">Legende oder Zusatz</option></select></label>
       </span>
+      <span class="fset" id="f-mp" hidden>
+      <div class="seg" id="mpdir" role="group" aria-label="Richtung">
+        <button data-d="alt" aria-pressed="true">Alte GOÄ → neue Ziffer</button><button data-d="neu" aria-pressed="false">Neue GOÄ → alte Ziffer</button></div>
+      <div class="chips" id="chipsmp" role="group" aria-label="Status der Zuordnung"></div>
+      <label>Verhältnis <select id="mpvh" aria-label="Filter nach Verhältnis"></select></label>
+      <label>Quelle <select id="mpql" aria-label="Filter nach Quelle der Zuordnung"></select></label>
+      </span>
       <button class="btn" id="reset">Filter zurücksetzen</button>
       <button class="btn" id="csv">CSV exportieren</button>
       <span id="status" role="status" aria-live="polite"></span>
@@ -233,9 +256,31 @@ const euro = c => { const s = String(c).padStart(3,'0'); return s.slice(0,-2).re
 const fnum = f => parseFloat(f.replace(',','.'));   // nur zum Sortieren/Filtern, nie zum Rechnen
 const GR = Object.fromEntries(D.gruende.map(g => [g.k, g]));
 const KEYS = D.gruende.map(g => g.k);
-const R = D.rows.map(r => { const m = r[6] < 0 ? null : D.muster[r[6]]; return {z:r[0], a:r[1], t:r[2], g:r[3], bauch:r[4], ct:r[5], m, c:r[7], zus:r[8], seite:r[9], n: m ? Object.keys(m.gruende).length : 0, lt:r[2].toLowerCase(), zs:String(r[0]), rg:r[10]||[], we:r[11]||[], iv:r[12]||[], pN:[], pU:[], qN:[], qU:[], gen:[], oN:false, oU:false, fl:false, hE:false, hB:false, hAB:false}; });
+const R = D.rows.map((r, idx) => { const m = r[6] < 0 ? null : D.muster[r[6]]; return {i:idx, zn:r[0], alt:[], pz:new Set(), vhs:new Set(), qls:new Set(), mst:'NEU', p:null, z:r[0], a:r[1], t:r[2], g:r[3], bauch:r[4], ct:r[5], m, c:r[7], zus:r[8], seite:r[9], n: m ? Object.keys(m.gruende).length : 0, lt:r[2].toLowerCase(), zs:String(r[0]), rg:r[10]||[], we:r[11]||[], iv:r[12]||[], pN:[], pU:[], qN:[], qU:[], gen:[], oN:false, oU:false, fl:false, hE:false, hB:false, hAB:false}; });
 const BYZ = new Map(R.map(r => [r.z, r]));
 const ROWH = 38, HEADH = 36;
+/* ---------- Mapping alte GOÄ ↔ GOÄneu ---------- */
+const MST = {SICHER:{name:'Sicher', ltr:'S', cls:'cMS'}, PLAUSIBEL:{name:'Plausibel', ltr:'P', cls:'cMP'}, UNSICHER:{name:'Unsicher', ltr:'U', cls:'cMU'},
+  KEINE_ENTSPRECHUNG_ERKENNBAR:{name:'Keine Entsprechung', ltr:'K', cls:'cMK'}, SAMMELPOSITION:{name:'Sammelposition', ltr:'X', cls:'cMX'}, NEU:{name:'Ohne alte Ziffer', ltr:'–', cls:'cN'}};
+const pct = p => p === null || p === undefined ? '' : Math.round(p * 100) + ' %';
+const ALT = {rows:[], abs:[], kap:[], by:new Map()};
+(function(){
+  const ai = new Map();
+  D.mapping.alt.forEach((a, i) => {
+    if (!ai.has(a[1])) { ai.set(a[1], ALT.abs.length); const t = D.mapping.titel[a[1]] || ''; ALT.abs.push({kap:a[1], name:t || 'Kapitel ' + a[1], n:0}); ALT.kap.push({k:a[1], titel:t, n:0}); }
+    const ix = ai.get(a[1]); ALT.abs[ix].n++; ALT.kap[ix].n++;
+    const r = {i, z:a[0], zs:a[0].toLowerCase(), zn:parseFloat(a[0]), a:ix, t:a[2], lt:a[2].toLowerCase(), pk:a[3], g:a[4], mst:a[5], p:a[6], vh:a[7], ql:a[8], bg:a[9], neu:a[10], kd:a[11], anm:a[12],
+      pz:new Set(a[10].map(x => String(x[0]))), vhs:new Set([a[7]]), qls:new Set([a[8]])};
+    ALT.rows.push(r); ALT.by.set(r.z, r);
+    for (const [n, pp] of a[10]) { const nr = BYZ.get(n); if (!nr) continue; const pe = pp === null ? a[6] : pp;
+      nr.alt.push([r, pp]); nr.pz.add(r.zs); nr.vhs.add(a[7]); nr.qls.add(a[8]);
+      if (nr.p === null || pe > nr.p) { nr.p = pe; nr.mst = a[5]; } }
+  });
+})();
+R.forEach(r => r.alt.sort((x, y) => (y[1] === null ? y[0].p : y[1]) - (x[1] === null ? x[0].p : x[1])));   // bestes Pendant zuerst
+const NEU = {rows:R, abs:D.abschnitte, kap:D.kapitel, by:BYZ};
+const U = () => st.view === 'mp' && st.mpdir === 'alt' ? ALT : NEU;
+const allCollapsed = () => new Set(U().abs.map((_,i) => i));
 /* Nebeneinanderberechnung – ausschließlich aus dem Regelpaket (D.regeln).
    Eigene Regeln einer Ziffer: p* = genannte Ziel-Ziffern; q* = Ziffern, deren Regeln diese Ziffer nennen (Gegenrichtung, Ableitung). */
 const RL = D.regeln;
@@ -258,7 +303,7 @@ const nbCount = r => new Set([...nbP(r,'N'), ...nbP(r,'U')]).size;
 const nbBucket = n => n === 0 ? '0' : n === 1 ? '1' : n <= 5 ? '2-5' : n <= 20 ? '6-20' : '21+';
 const ART = {e: r => (r.oN || r.oU) && !r.fl, b: r => r.fl, ab: r => r.hAB, E: r => r.hE, B: r => r.hB, w: r => r.we.length > 0};
 
-const st = {view:'ab', ivsel:'', ivq:'', ivst:new Set(), ivohne:false, nb:new Set(), nbohne:false, nbanz:'', nbart:'', nbrev:false, kap:null, abs:null, q:'', gr:new Set(), ohne:false, anz:'', fmax:'', theo:false, sort:'z', dir:1, collapsed:new Set(D.abschnitte.map((_,i) => i)), sel:null, active:-1};
+const st = {view:'ab', mpdir:'alt', mpst:new Set(), mpvh:'', mpql:'', ivsel:'', ivq:'', ivst:new Set(), ivohne:false, nb:new Set(), nbohne:false, nbanz:'', nbart:'', nbrev:false, kap:null, abs:null, q:'', gr:new Set(), ohne:false, anz:'', fmax:'', theo:false, sort:'z', dir:1, collapsed:new Set(D.abschnitte.map((_,i) => i)), sel:null, active:-1};
 let items = [], tops = [], total = 0, result = [];
 
 const KEIN = '1,0';   // Ziffer steht nicht in der Steigerungsmatrix: keine AB-Steigerung, Faktor 1,0
@@ -324,12 +369,86 @@ function detailIv(r){
   return h + `<div class="link">Direktlink: <a href="#intervalle/${r.z}">#intervalle/${r.z}</a></div>`;
 }
 
+function applyMp(nav, keepActive){
+  const alt = st.mpdir === 'alt';
+  const base = U().rows.filter(r => nav(r) && (st.mpvh === '' || r.vhs.has(st.mpvh)) && (st.mpql === '' || r.qls.has(st.mpql)));
+  const c = {}; base.forEach(r => { c[r.mst] = (c[r.mst] || 0) + 1; });
+  $('#chipsmp').innerHTML = Object.keys(MST).filter(k => alt ? k !== 'NEU' : k !== 'SAMMELPOSITION' || c[k]).map(k =>
+    `<button class="chip ${MST[k].cls}" data-k="${k}" aria-pressed="${st.mpst.has(k)}"><span class="ltr">${MST[k].ltr}</span>${MST[k].name}<span class="cnt">${(c[k] || 0).toLocaleString('de-DE')}</span></button>`).join('');
+  result = base.filter(r => !st.mpst.size || st.mpst.has(r.mst));
+  const q = st.q.trim(), info = $('#ivinfo');
+  const a = /^\d+$/.test(q) ? ALT.by.get(q) : null, n = /^\d+$/.test(q) ? BYZ.get(+q) : null;
+  if (a && n) info.innerHTML = `<b>Achtung: Die Nummer ${esc(q)} gibt es in beiden Verzeichnissen</b>Alte GOÄ ${esc(q)} = ${esc(a.t)}. Neue GOÄ ${esc(q)} = ${esc(n.t)}. Die Liste zeigt ${alt ? 'die alte Ziffer ' + esc(q) + ' und alle alten Ziffern, die auf die neue ' + esc(q) + ' zeigen' : 'die neue Ziffer ' + esc(q) + ' und alle neuen Ziffern, auf die die alte ' + esc(q) + ' zeigt'}; der Treffer ist gelb markiert.`;
+  else info.innerHTML = `<b>Ziffern-Mapping alte GOÄ ↔ GOÄneu</b>${alt ? 'Je Ziffer der heutigen GOÄ die vorgeschlagene(n) neue(n) Ziffer(n)' : 'Je Ziffer der neuen GOÄ das Pendant in der heutigen GOÄ'} mit Wahrscheinlichkeit und kurzer Begründung. Die Suche findet eine Nummer in beiden Verzeichnissen: „863“ zeigt die neue 4500, „4500“ zeigt auch die alte 863. Über „Richtung“ wechselst du zwischen der Liste der alten und der neuen Ziffern.`;
+  build(keepActive);
+}
+function renderMpSel(){
+  const vh = new Map(), ql = new Map();
+  ALT.rows.forEach(r => { vh.set(r.vh, (vh.get(r.vh) || 0) + 1); ql.set(r.ql, (ql.get(r.ql) || 0) + 1); });
+  const opt = (m, cur) => '<option value="">alle</option>' + [...m].sort((a,b) => b[1]-a[1]).map(([k,n]) => `<option value="${esc(k)}"${k===cur?' selected':''}>${esc(k)} (${n.toLocaleString('de-DE')})</option>`).join('');
+  $('#mpvh').innerHTML = opt(vh, st.mpvh); $('#mpql').innerHTML = opt(ql, st.mpql);
+  document.querySelectorAll('#mpdir button').forEach(b => b.setAttribute('aria-pressed', b.dataset.d === st.mpdir));
+}
+const hit = (txt, on) => on ? `<mark>${esc(txt)}</mark>` : esc(txt);
+function previewMp(r){
+  const q = st.q.trim().toLowerCase();
+  if (st.mpdir === 'alt') return r.neu.length ? '→ neu ' + r.neu.map(x => hit(x[0], String(x[0]) === q)).join(', ') + ' · ' + esc(BYZ.get(r.neu[0][0]).t) : 'keine neue Ziffer zugeordnet';
+  return r.alt.length ? '← alt ' + r.alt.map(x => hit(x[0].z, x[0].zs === q)).join(', ') + ' · ' + esc(r.alt[0][0].t) : 'kein Pendant in der alten GOÄ';
+}
+function badgeMp(k, p){ return `<span class="badge ${MST[k].cls}"><span class="lg">${MST[k].name}</span><span class="sh">${MST[k].ltr}</span>${p !== null && p !== undefined && k !== 'NEU' ? `<i>${pct(p)}</i>` : ''}</span>`; }
+function mpBox(k, p, vh, ql, bg){
+  return `<div class="mpbox ${MST[k].cls}"><div class="top">${badgeMp(k, null)}<span class="pz">${pct(p)}</span><span class="meta">Wahrscheinlichkeit · Verhältnis ${esc(vh)} · Quelle: ${esc(ql)}</span></div>` +
+    `<div class="bar"><i style="width:${Math.round((p || 0) * 100)}%"></i></div><p><b>Begründung:</b> ${esc(bg)}</p></div>`;
+}
+function openMp(z, keepFocus){
+  const alt = st.mpdir === 'alt', r = U().by.get(z); if (!r) return;
+  st.sel = z;
+  const a = U().abs[r.a], kap = U().kap.find(k => k.k === a.kap);
+  let h = `<h2><span>${alt ? 'Alte GOÄ' : 'GOÄneu'} · Ziffer ${esc(r.z)}</span><button class="btn close" id="close" aria-label="Detailbereich schließen">Schließen <kbd>Esc</kbd></button></h2>` +
+    `<div class="crumb">${alt ? 'Heutige GOÄ' + (D.mapping.stand ? ' (Stand ' + esc(D.mapping.stand) + ')' : '') + ' · ' : ''}Kapitel ${a.kap}${kap.titel ? ' – ' + esc(kap.titel) : ''}${alt ? '' : ' · ' + esc(a.name)}</div><p class="leistung">${esc(r.t)}</p>`;
+  if (alt) {
+    if (r.anm) h += `<p class="zusatz"><b>Anmerkung in der alten GOÄ:</b> ${esc(r.anm)}</p>`;
+    h += `<div class="kpis two"><div class="kpi"><span>Punkte</span><b>${r.pk === null ? '–' : r.pk.toLocaleString('de-DE')}</b></div><div class="kpi"><span>Gebühr 1,0-fach (alt)</span><b>${r.g === null ? '–' : euro(r.g)}</b></div></div>` +
+      mpBox(r.mst, r.p, r.vh, r.ql, r.bg) +
+      `<h3>Neue Ziffer${r.neu.length === 1 ? '' : 'n'} in der GOÄneu (${r.neu.length})</h3>` +
+      (r.neu.length ? r.neu.map(([n, pp, fk]) => { const x = BYZ.get(n), xa = D.abschnitte[x.a];
+        return `<div class="regel ${MST[r.mst].cls}"><button class="zl" data-mz="neu:${n}" title="Neue Ziffer ${n} öffnen"><b>Neu ${n}</b> <span>${esc(x.t)}</span></button>` +
+          `<div class="anz">Kapitel ${xa.kap} · ${esc(xa.name)}</div>` +
+          `<div class="anz">Gebühr neu: <b>${euro(x.g)}</b>${fk ? ' · entspricht dem ' + fk + '-fachen des alten 1,0-fach-Satzes' : ''}</div>` +
+          `<div class="anz">Wahrscheinlichkeit für diese Ziffer: <b>${pp === null ? 'keine (Nutzervorgabe)' : pct(pp)}</b></div></div>`; }).join('')
+        : `<div class="nosteig"><b><span class="ltr cN">–</span> Keine neue Ziffer zugeordnet</b>Für diese alte Ziffer wurde keine Entsprechung erkannt.</div>`) +
+      (r.kd.length ? `<h3>Weitere Kandidaten (nicht zugeordnet)</h3>` + r.kd.map(([n, sc]) => `<div class="gen"><button class="zl" data-mz="neu:${n}"><b>Neu ${n}</b> <span>${esc(BYZ.get(n).t)}</span></button><div class="anz">Textähnlichkeit ${String(sc).replace('.', ',')}</div></div>`).join('') : '');
+  } else {
+    h += `<div class="kpis two"><div class="kpi"><span>Gebühr (neu)</span><b>${euro(r.g)}</b></div></div>` +
+      `<h3>Pendant in der alten GOÄ (${r.alt.length})</h3>` +
+      (r.alt.length ? r.alt.map(([x, pp]) => `<div class="regel ${MST[x.mst].cls}"><button class="zl" data-mz="alt:${esc(x.z)}" title="Alte Ziffer ${esc(x.z)} öffnen"><b>Alt ${esc(x.z)}</b> <span>${esc(x.t)}</span></button>` +
+          `<div class="anz">Alte GOÄ, Kapitel ${ALT.abs[x.a].kap} · ${x.pk === null ? '' : x.pk.toLocaleString('de-DE') + ' Punkte · '}1,0-fach ${x.g === null ? '–' : euro(x.g)}</div>` +
+          mpBox(x.mst, pp === null ? x.p : pp, x.vh, x.ql, x.bg) + (x.neu.length > 1 ? `<div class="anz">Die alte Ziffer ${esc(x.z)} ist insgesamt ${x.neu.length} neuen Ziffern zugeordnet: ${x.neu.map(y => y[0]).join(', ')}.</div>` : '') + `</div>`).join('')
+        : `<div class="nosteig"><b><span class="ltr cN">–</span> Ohne alte Ziffer</b>Dieser neuen Ziffer ist keine Ziffer der heutigen GOÄ zugeordnet – sie ist neu oder neu zugeschnitten.</div>`);
+  }
+  h += `<div class="link">Direktlink: <a href="${hashFor(z)}">${hashFor(z)}</a></div>`;
+  const dr = $('#drawer'); dr.innerHTML = h; dr.scrollTop = 0; $('#app').classList.add('drawer-open');
+  if (location.hash !== hashFor(z)) history.replaceState(null, '', hashFor(z));
+  $('#close').onclick = closeDrawer; render();
+  if (!keepFocus) dr.focus({preventScroll:true});
+}
+function setDir(d){
+  st.mpdir = d; st.kap = st.abs = null; st.collapsed = st.q ? new Set() : allCollapsed(); st.sel = null; st.active = -1; $('#app').classList.remove('drawer-open');
+  renderNav(); renderMpSel(); apply(); list.scrollTop = 0;
+}
+
 /* ---------- Hinweisleiste ---------- */
 function renderHinweis(){
   const stand = D.pdf.stand || D.gesetz.stand;
   const entwurf = `<span><b>Entwurf:</b> Gesetzesentwurf, nicht in Kraft${stand ? ' · ' + esc(stand) : ' · Stand nicht hinterlegt'}.</span>`;
   $('#sub').textContent = st.view === 'nb' ? '„Nicht neben“- und „Nur neben“-Regeln je Ziffer' : st.view === 'iv' ? 'Zeitliche Abrechnungsgrenzen je Ziffer, bestehend und neu' : 'AB-Steigerungsgründe, Faktoren und maximaler Gebührensatz je Ziffer';
-  $('#hinweis').innerHTML = entwurf + (st.view === 'iv'
+  $('#q').placeholder = st.view === 'mp' ? 'Alte oder neue Ziffer oder Leistung suchen, z. B. 863 oder 4500 …  ( / )' : 'Ziffer oder Leistung suchen …  ( / )';
+  if (st.view === 'mp') $('#sub').textContent = 'Heutige GOÄ → neue Ziffer und umgekehrt, mit Wahrscheinlichkeit';
+  $('#hinweis').innerHTML = entwurf + (st.view === 'mp'
+    ? `<span><b>Quelle:</b> Mapping-Paket alte Kurz-GOÄ${D.mapping.stand ? ' (Stand ' + esc(D.mapping.stand) + ')' : ''} → Entwurf. Die Wahrscheinlichkeit ist eine Schätzung, kein Messwert; manuell geprüft sind nur die alten Abschnitte B und G.</span>` +
+      `<span><b>Nummernkollision:</b> Alte und neue GOÄ nutzen teils dieselbe Nummer für verschiedene Leistungen (alt 4500 = Labor, neu 4500 = Psychotherapie).</span>` +
+      `<span><b>Nicht enthalten:</b> die alten Zuschläge A bis K und die Allgemeinen Bestimmungen der alten GOÄ.</span>`
+    : st.view === 'iv'
     ? `<span><b>Quelle:</b> Wortlaut des Gebührenverzeichnisses (Abrechnungsbestimmung, Legende, Zusatz); die Zuordnung zu den Intervallen ist eine automatische Textauswertung – maßgeblich ist der zitierte Satz.</span>` +
       `<span><b>Nicht enthalten:</b> Intervall-Regeln aus den Allgemeinen Bestimmungen, z. B. die Definitionen von Behandlungsfall und Krankheitsfall (AB A Nr. 5 und 6).</span>`
     : st.view === 'nb'
@@ -342,16 +461,16 @@ function renderHinweis(){
 
 /* ---------- Navigation ---------- */
 function renderNav(){
-  let h = `<button data-kap="" aria-current="${st.kap===null}">Alle Kapitel<span class="n">${R.length.toLocaleString('de-DE')}</span></button>`;
-  D.kapitel.forEach(k => {
+  let h = `<button data-kap="" aria-current="${st.kap===null}">Alle Kapitel${U() === ALT ? ' (alte GOÄ)' : ''}<span class="n">${U().rows.length.toLocaleString('de-DE')}</span></button>`;
+  U().kap.forEach(k => {
     h += `<button class="kap" data-kap="${k.k}" aria-current="${st.kap===k.k && st.abs===null}" aria-expanded="${st.kap===k.k}" title="${esc(k.titel||'')}"><span class="kb">${k.k}</span><span class="kt">${esc(k.titel || 'Kapitel ' + k.k)}</span><span class="n">${k.n.toLocaleString('de-DE')}</span></button>`;
-    if (st.kap===k.k) D.abschnitte.forEach((a,i) => { if (a.kap===k.k) h += `<button class="abs" data-abs="${i}" aria-current="${st.abs===i}">${esc(a.name)}<span class="n">${a.n.toLocaleString('de-DE')}</span></button>`; });
+    if (st.kap===k.k && U() !== ALT) U().abs.forEach((a,i) => { if (a.kap===k.k) h += `<button class="abs" data-abs="${i}" aria-current="${st.abs===i}">${esc(a.name)}<span class="n">${a.n.toLocaleString('de-DE')}</span></button>`; });
   });
   $('#nav').innerHTML = h;
 }
 $('#nav').addEventListener('click', e => {
   const b = e.target.closest('button'); if (!b) return;
-  if (b.dataset.abs !== undefined) { st.abs = +b.dataset.abs; st.kap = D.abschnitte[st.abs].kap; st.collapsed.delete(st.abs); }
+  if (b.dataset.abs !== undefined) { st.abs = +b.dataset.abs; st.kap = U().abs[st.abs].kap; st.collapsed.delete(st.abs); }
   else { st.kap = b.dataset.kap || null; st.abs = null; }
   renderNav(); apply(); $('#list').scrollTop = 0;
 });
@@ -370,6 +489,7 @@ function renderFmax(){
     `<option value="${n}">${n===0 ? '0 – nicht steigerfähig' : n===1 ? '1 Grund' : n+' Gründe'} (${c.toLocaleString('de-DE')})</option>`).join('');
 })();
 function matchQ(r, toks){
+  if (st.view === 'mp') { for (const t of toks) { if (/^\d/.test(t)) { if (!String(r.zs).startsWith(t) && !r.pz.has(t)) return false; } else if (!r.lt.includes(t)) return false; } return true; }
   for (const t of toks) {
     if (/^\d+$/.test(t)) { if (!r.zs.startsWith(t)) return false; }
     else if (!r.lt.includes(t)) return false;
@@ -378,9 +498,10 @@ function matchQ(r, toks){
 }
 function apply(keepActive){
   const toks = st.q.toLowerCase().split(/\s+/).filter(Boolean);
-  const nav = r => (st.abs===null || r.a===st.abs) && (st.kap===null || D.abschnitte[r.a].kap===st.kap) && matchQ(r, toks);
+  const nav = r => (st.abs===null || r.a===st.abs) && (st.kap===null || U().abs[r.a].kap===st.kap) && matchQ(r, toks);
   if (st.view === 'nb') { applyNb(nav, keepActive); return; }
   if (st.view === 'iv') { applyIv(nav, keepActive); return; }
+  if (st.view === 'mp') { applyMp(nav, keepActive); return; }
   const base = R.filter(r => nav(r) && (!st.fmax || maxF(r)===st.fmax) && (st.anz==='' || r.n===+st.anz));
   const cnt = Object.fromEntries(KEYS.map(k => [k,0]));
   let nOhne = 0;
@@ -404,27 +525,28 @@ function applyNb(nav, keepActive){
 }
 function build(keepActive){
   if (st.view !== 'ab' ? (st.sort==='f' || st.sort==='m') : st.sort==='p') { st.sort = 'z'; st.dir = 1; }
-  const key = {z:r=>r.z, t:r=>r.lt, g:r=>r.g, f:r=>fsort(maxF(r)), m:r=>maxC(r), p:r=>st.view === 'iv' ? ivIds(r).length : nbCount(r)}[st.sort];
+  const key = {z:r=>r.zn, t:r=>r.lt, g:r=>r.g, f:r=>fsort(maxF(r)), m:r=>maxC(r), p:r=>st.view === 'mp' ? (r.p === null ? -1 : r.p) : st.view === 'iv' ? ivIds(r).length : nbCount(r)}[st.sort];
   const groups = new Map();
   result.forEach(r => { if (!groups.has(r.a)) groups.set(r.a, []); groups.get(r.a).push(r); });
   items = []; tops = []; total = 0;
   for (const [a, rs] of groups) {
-    rs.sort((x,y) => { const kx = key(x), ky = key(y); return (kx<ky?-1:kx>ky?1:x.z-y.z) * st.dir; });
+    rs.sort((x,y) => { const kx = key(x), ky = key(y); return (kx<ky?-1:kx>ky?1:x.i-y.i) * st.dir; });
     items.push({h:a, n:rs.length}); tops.push(total); total += HEADH;
     if (!st.collapsed.has(a)) for (const r of rs) { items.push(r); tops.push(total); total += ROWH; }
   }
   $('#spacer').style.height = total + 'px';
   if (!keepActive) st.active = -1;
   const sum = result.length;
-  $('#status').textContent = `${sum.toLocaleString('de-DE')} von ${R.length.toLocaleString('de-DE')} Ziffern`;
+  $('#status').textContent = `${sum.toLocaleString('de-DE')} von ${U().rows.length.toLocaleString('de-DE')} ${U() === ALT ? 'alten Ziffern' : 'Ziffern'}`;
   heads(); render();
 }
 function heads(){
   const c = $('main').classList.contains('compact');
-  const lab = {z:'Ziffer', t:'Leistung', g:'Gebühr', p: st.view === 'iv' ? 'Intervall · Häufigkeit' : 'Genannte Ziffern',
+  const mpa = st.view === 'mp' && st.mpdir === 'alt';
+  const lab = {z: st.view === 'mp' ? (mpa ? 'Alt' : 'Neu') : 'Ziffer', t: mpa ? 'Leistung (alte GOÄ)' : 'Leistung', g: mpa ? '1,0-fach' : 'Gebühr', p: st.view === 'mp' ? (mpa ? 'Neue Ziffer(n)' : 'Alte Ziffer(n)') : st.view === 'iv' ? 'Intervall · Häufigkeit' : 'Genannte Ziffern',
     f: c ? (st.theo ? 'Theor. ×' : 'Max. ×') : (st.theo ? 'Max. Faktor (theor.)' : 'Max. Faktor'),
     m: c ? (st.theo ? 'Theor. Satz' : 'Max. Satz') : (st.theo ? 'Max. Satz (theor.)' : 'Max. Gebührensatz')};
-  $('#hg').textContent = st.view === 'iv' ? 'Status' : st.view === 'nb' ? 'Regel' : c ? 'Gründe' : 'Steigerungsgründe';
+  $('#hg').textContent = st.view === 'mp' ? 'Zuordnung' : st.view === 'iv' ? 'Status' : st.view === 'nb' ? 'Regel' : c ? 'Gründe' : 'Steigerungsgründe';
   document.querySelectorAll('#colhead button').forEach(b => {
     const on = b.dataset.s===st.sort;
     if (on) b.setAttribute('aria-sort', st.dir>0?'ascending':'descending'); else b.removeAttribute('aria-sort');
@@ -456,10 +578,15 @@ function render(){
   for (; i < items.length && tops[i] < y1 + 240; i++) {
     const it = items[i];
     if (it.h !== undefined) {
-      const a = D.abschnitte[it.h];
-      h += `<button class="ghead" style="top:${tops[i]}px" data-h="${it.h}" aria-expanded="${!st.collapsed.has(it.h)}" tabindex="-1"><span class="car">▾</span>Kapitel ${a.kap} · ${esc(a.name)} <span class="n">${it.n.toLocaleString('de-DE')} ${it.n===1?'Ziffer':'Ziffern'}</span></button>`;
+      const a = U().abs[it.h];
+      h += `<button class="ghead" style="top:${tops[i]}px" data-h="${it.h}" aria-expanded="${!st.collapsed.has(it.h)}" tabindex="-1"><span class="car">▾</span>${U() === ALT ? 'Alte GOÄ · ' : ''}Kapitel ${a.kap} · ${esc(a.name)} <span class="n">${it.n.toLocaleString('de-DE')} ${it.n===1?'Ziffer':'Ziffern'}</span></button>`;
     } else {
       const m = it.m, dif = m && m.maxT !== m.maxP;
+      if (st.view === 'mp') { const q = st.q.trim().toLowerCase();
+        h += `<div class="row grid${it.mst === 'NEU' || it.mst === 'KEINE_ENTSPRECHUNG_ERKENNBAR' ? ' ohne' : ''}${i===st.active?' active':''}${it.z===st.sel?' sel':''}" style="top:${tops[i]}px" data-i="${i}" role="option" aria-selected="${it.z===st.sel}" id="r${esc(it.z)}">` +
+          `<span class="z">${hit(it.z, /^\d/.test(q) && String(it.zs) === q)}</span><span class="t" title="${esc(it.t)}">${esc(it.t)}</span><span class="num">${it.g === null ? '–' : euro(it.g)}</span>` +
+          `<span class="badges">${badgeMp(it.mst, it.p)}</span><span class="pv">${previewMp(it)}</span></div>`;
+        continue; }
       if (st.view === 'iv') { const pv = previewIv(it);
         h += `<div class="row grid${pv ? '' : ' ohne'}${i===st.active?' active':''}${it.z===st.sel?' sel':''}" style="top:${tops[i]}px" data-i="${i}" role="option" aria-selected="${it.z===st.sel}" id="r${it.z}">` +
           `<span class="z">${it.z}</span><span class="t" title="${esc(it.t)}">${esc(it.t)}</span><span class="num">${euro(it.g)}</span>` +
@@ -501,7 +628,7 @@ function move(d){
   do { i += d; } while (i >= 0 && i < items.length && items[i].h !== undefined);
   if (i < 0 || i >= items.length) return;
   st.active = i; scrollToIdx(i); render();
-  if (st.sel !== null && st.sel > 0) open(items[i].z, true);
+  if (st.sel !== null && st.sel !== -1) open(items[i].z, true);
 }
 list.addEventListener('keydown', e => {
   if (e.key==='ArrowDown') { move(1); e.preventDefault(); }
@@ -516,6 +643,7 @@ list.addEventListener('keydown', e => {
 /* ---------- Detailbereich ---------- */
 const kombi = s => esc(s);
 function open(z, keepFocus){
+  if (st.view === 'mp') return openMp(z, keepFocus);
   const r = BYZ.get(z); if (!r) return;
   st.sel = z;
   const m = r.m, a = D.abschnitte[r.a], dif = m && m.maxT !== m.maxP, kap = D.kapitel.find(k => k.k===a.kap);
@@ -586,8 +714,8 @@ function open(z, keepFocus){
   render();
   if (!keepFocus) dr.focus({preventScroll:true});
 }
-const VH = {ab:'', nb:'neben', iv:'intervalle'};
-const hashFor = z => st.view === 'ab' ? '#' + z : '#' + VH[st.view] + '/' + z;
+const VH = {ab:'', nb:'neben', iv:'intervalle', mp:'mapping'};
+const hashFor = z => st.view === 'ab' ? '#' + z : st.view === 'mp' ? '#mapping/' + st.mpdir + '/' + z : '#' + VH[st.view] + '/' + z;
 const zbtn = z => { const x = BYZ.get(z); return `<button class="zl" data-z="${z}" title="${esc(x.t)}"><b>${z}</b> <span>${esc(x.t)}</span></button>`; };
 const zliste = (zs, n = 8) => zs.slice(0, n).map(zbtn).join('') + (zs.length > n ? `<details class="mehr"><summary>alle ${zs.length} Ziffern anzeigen</summary>${zs.slice(n).map(zbtn).join('')}</details>` : '');
 function quelle(x){
@@ -634,7 +762,8 @@ function openAB(){
   for (const e of order) { const g = rs.filter(x => x.e === e); if (g.length) h += `<h3>${esc(e)} (${g.length})</h3>` + g.map(x => regelKarte(x, null, 'kurz')).join(''); }
   st.sel = -1; const dr = $('#drawer'); dr.innerHTML = h; dr.scrollTop = 0; $('#app').classList.add('drawer-open'); $('#close').onclick = closeDrawer; render(); dr.focus({preventScroll:true});
 }
-$('#drawer').addEventListener('click', e => { const b = e.target.closest('.zl'); if (b) goto(+b.dataset.z); });
+$('#drawer').addEventListener('click', e => { const b = e.target.closest('.zl'); if (!b) return;
+  if (b.dataset.mz) { const [d, z] = b.dataset.mz.split(':'); if (d !== st.mpdir) setDir(d); goto(d === 'neu' ? +z : z); } else goto(+b.dataset.z); });
 function closeDrawer(){
   st.sel = null; $('#app').classList.remove('drawer-open'); history.replaceState(null, '', st.view !== 'ab' ? '#' + VH[st.view] : location.pathname + location.search);
   render(); list.focus();
@@ -642,24 +771,26 @@ function closeDrawer(){
 function clearFilters(){
   st.kap = st.abs = null; st.q = ''; $('#q').value = ''; st.gr.clear(); st.ohne = false; st.anz = ''; $('#anz').value = ''; st.fmax = '';
   st.nb.clear(); st.nbohne = false; st.nbanz = ''; st.nbart = ''; $('#nbanz').value = ''; $('#nbart').value = '';
+  st.mpst.clear(); st.mpvh = ''; st.mpql = ''; $('#mpvh').value = ''; $('#mpql').value = '';
   st.ivsel = ''; st.ivq = ''; st.ivst.clear(); st.ivohne = false; $('#ivsel').value = ''; $('#ivq').value = '';
 }
 function goto(z){
-  if (!BYZ.has(z)) return false;
-  if (st.collapsed.delete(BYZ.get(z).a)) apply();
-  let i = items.indexOf(BYZ.get(z));
-  if (i < 0) { clearFilters(); renderNav(); renderFmax(); apply(); i = items.indexOf(BYZ.get(z)); }
+  const by = U().by;
+  if (!by.has(z)) return false;
+  if (st.collapsed.delete(by.get(z).a)) apply();
+  let i = items.indexOf(by.get(z));
+  if (i < 0) { clearFilters(); renderNav(); renderFmax(); apply(); i = items.indexOf(by.get(z)); }
   st.active = i; list.scrollTop = Math.max(0, tops[i] - HEADH - ROWH); open(z, true);
   return true;
 }
 
 /* ---------- Bedienelemente ---------- */
 let qt = 0;
-const syncQ = () => { const v = $('#q').value.trim(); if (v !== st.q) { st.q = v; st.collapsed = v ? new Set() : new Set(D.abschnitte.map((_,i) => i)); apply(); list.scrollTop = 0; } };
+const syncQ = () => { const v = $('#q').value.trim(); if (v !== st.q) { st.q = v; st.collapsed = v ? new Set() : allCollapsed(); apply(); list.scrollTop = 0; } };
 $('#q').addEventListener('input', () => { clearTimeout(qt); qt = setTimeout(syncQ, 80); });
 $('#q').addEventListener('search', syncQ);
 $('#q').addEventListener('keydown', e => {
-  if (e.key==='Enter') { clearTimeout(qt); if (e.target.value.trim() !== st.q) { st.q = e.target.value.trim(); st.collapsed = st.q ? new Set() : new Set(D.abschnitte.map((_,i) => i)); } apply();
+  if (e.key==='Enter') { clearTimeout(qt); if (e.target.value.trim() !== st.q) { st.q = e.target.value.trim(); st.collapsed = st.q ? new Set() : allCollapsed(); } apply();
     const exact = /^\d+$/.test(st.q) && result.find(r => r.zs===st.q);
     const first = exact || items.find(it => it.h === undefined);
     if (first) { st.active = items.indexOf(first); scrollToIdx(st.active); open(first.z, true); } }
@@ -683,25 +814,32 @@ $('#nbart').addEventListener('change', e => { st.nbart = e.target.value; apply()
 $('#nbrev').addEventListener('change', e => { st.nbrev = e.target.checked; st.nbanz = ''; renderNbSel(); apply(); });
 function setView(v, keepHash){
   if (st.view === v) return;
+  const uAlt = U();
   st.view = v;
+  if (U() !== uAlt) { st.kap = st.abs = null; st.sel = null; st.active = -1; $('#app').classList.remove('drawer-open'); st.collapsed = st.q ? new Set() : allCollapsed(); renderNav(); }
+  $('#f-mp').hidden = v !== 'mp';
   document.querySelectorAll('#tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.v === v));
-  $('#f-ab').hidden = v !== 'ab'; $('#f-nb').hidden = v !== 'nb'; $('#f-iv').hidden = v !== 'iv'; $('#ivinfo').hidden = v !== 'iv';
+  $('#f-ab').hidden = v !== 'ab'; $('#f-nb').hidden = v !== 'nb'; $('#f-iv').hidden = v !== 'iv'; $('#ivinfo').hidden = v !== 'iv' && v !== 'mp';
   $('main').classList.toggle('alt', v !== 'ab');
-  document.title = v === 'nb' ? 'GOÄneu – Nebeneinanderberechnung' : v === 'iv' ? 'GOÄneu – Intervalle' : 'GOÄneu – Steigerungsmatrix';
+  document.title = v === 'mp' ? 'GOÄneu – Ziffern-Mapping' : v === 'nb' ? 'GOÄneu – Nebeneinanderberechnung' : v === 'iv' ? 'GOÄneu – Intervalle' : 'GOÄneu – Steigerungsmatrix';
   renderHinweis(); apply(true);
-  if (st.sel !== null && st.sel > 0) open(st.sel, true);
+  if (st.sel !== null && st.sel !== -1) open(st.sel, true);
   else if (st.sel === -1) closeDrawer();
   else if (!keepHash) history.replaceState(null, '', v !== 'ab' ? '#' + VH[v] : location.pathname + location.search);
 }
+$('#mpdir').addEventListener('click', e => { const b = e.target.closest('button'); if (b && b.dataset.d !== st.mpdir) setDir(b.dataset.d); });
+$('#chipsmp').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; const k = b.dataset.k; st.mpst.has(k) ? st.mpst.delete(k) : st.mpst.add(k); if (st.mpst.size) st.collapsed.clear(); apply(); list.scrollTop = 0; const n = $(`#chipsmp .chip[data-k=${k}]`); if (n) n.focus(); });
+$('#mpvh').addEventListener('change', e => { st.mpvh = e.target.value; apply(); list.scrollTop = 0; });
+$('#mpql').addEventListener('change', e => { st.mpql = e.target.value; apply(); list.scrollTop = 0; });
 $('#chipsiv').addEventListener('click', e => { const b = e.target.closest('.chip'); if (!b) return; const k = b.dataset.k; if (k==='ohne') { st.ivohne = !st.ivohne; st.ivst.clear(); } else { st.ivohne = false; st.ivst.has(k) ? st.ivst.delete(k) : st.ivst.add(k); } apply(); list.scrollTop = 0; $(`#chipsiv .chip[data-k=${k}]`).focus(); });
-$('#ivsel').addEventListener('change', e => { st.ivsel = e.target.value; if (st.ivsel !== '') { st.ivohne = false; st.collapsed.clear(); } else st.collapsed = new Set(D.abschnitte.map((_,i) => i)); apply(); list.scrollTop = 0; });
+$('#ivsel').addEventListener('change', e => { st.ivsel = e.target.value; if (st.ivsel !== '') { st.ivohne = false; st.collapsed.clear(); } else st.collapsed = allCollapsed(); apply(); list.scrollTop = 0; });
 $('#ivq').addEventListener('change', e => { st.ivq = e.target.value; renderIvSel(); apply(); list.scrollTop = 0; });
 $('#tabs').addEventListener('click', e => { const b = e.target.closest('button'); if (b) setView(b.dataset.v); });
-$('#tabs').addEventListener('keydown', e => { if (e.key==='ArrowRight' || e.key==='ArrowLeft') { const vs = ['ab','nb','iv'], v = vs[(vs.indexOf(st.view) + (e.key==='ArrowRight' ? 1 : 2)) % 3]; setView(v); $(`#tabs button[data-v=${v}]`).focus(); } });
+$('#tabs').addEventListener('keydown', e => { if (e.key==='ArrowRight' || e.key==='ArrowLeft') { const vs = ['ab','nb','iv','mp'], v = vs[(vs.indexOf(st.view) + (e.key==='ArrowRight' ? 1 : 3)) % 4]; setView(v); $(`#tabs button[data-v=${v}]`).focus(); } });
 $('#anz').addEventListener('change', e => { st.anz = e.target.value; apply(); list.scrollTop = 0; });
 $('#fmax').addEventListener('change', e => { st.fmax = e.target.value; apply(); list.scrollTop = 0; });
 $('#theo').addEventListener('change', e => { st.theo = e.target.checked; renderFmax(); apply(); });
-$('#reset').addEventListener('click', () => { clearFilters(); st.collapsed = new Set(D.abschnitte.map((_,i) => i)); st.sort = 'z'; st.dir = 1; renderNav(); renderFmax(); apply(); list.scrollTop = 0; });
+$('#reset').addEventListener('click', () => { clearFilters(); st.collapsed = allCollapsed(); st.sort = 'z'; st.dir = 1; renderNav(); renderFmax(); apply(); list.scrollTop = 0; });
 $('#colhead').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (st.sort===b.dataset.s) st.dir = -st.dir; else { st.sort = b.dataset.s; st.dir = 'fmp'.includes(b.dataset.s) ? -1 : 1; } apply(); });
 document.addEventListener('keydown', e => {
   const inField = /INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName);
@@ -710,6 +848,19 @@ document.addEventListener('keydown', e => {
 });
 $('#csv').addEventListener('click', () => {
   const q = s => '"' + String(s).replace(/"/g,'""') + '"', dez = c => euro(c).replace(/[. €]/g,'');
+  if (st.view === 'mp') {
+    const alt = st.mpdir === 'alt', pz = p => p === null ? '' : String(p).replace('.', ',');
+    const lines = [(alt ? ['Alte Ziffer','Kapitel alt','Leistung alt','Punkte','1,0-fach alt (€)','Neue Ziffern','Verhältnis','Wahrscheinlichkeit','Status','Quelle','Begründung']
+                        : ['Neue Ziffer','Kapitel','Abschnitt','Leistung','Gebühr (€)','Alte Ziffern','Beste Wahrscheinlichkeit','Status']).map(q).join(';')];
+    const seen = new Map(); result.forEach(r => { if (!seen.has(r.a)) seen.set(r.a, []); seen.get(r.a).push(r); });
+    for (const rs of seen.values()) for (const r of rs) { const a = U().abs[r.a];
+      lines.push((alt ? [q(r.z), q(a.kap), q(r.t), r.pk === null ? '' : r.pk, r.g === null ? '' : dez(r.g), q(r.neu.map(x => x[0]).join(', ')), q(r.vh), pz(r.p), q(MST[r.mst].name), q(r.ql), q(r.bg)]
+                      : [r.z, q(a.kap), q(a.name), q(r.t), dez(r.g), q(r.alt.map(x => x[0].z).join(', ')), pz(r.p), q(MST[r.mst].name)]).join(';')); }
+    const blob = new Blob(['\ufeff' + lines.join('\r\n')], {type:'text/csv;charset=utf-8'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = alt ? 'GOAe_Mapping_alt_zu_neu_Export.csv' : 'GOAe_Mapping_neu_zu_alt_Export.csv';
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    return;
+  }
   if (st.view === 'iv') {
     const lines = [['Ziffer','Kapitel','Abschnitt','Leistung','Gebühr (€)','Intervalle bestehend','Intervalle neu','Häufigkeit laut Wortlaut','Wortlaut'].map(q).join(';')];
     const seen = new Map(); result.forEach(r => { if (!seen.has(r.a)) seen.set(r.a, []); seen.get(r.a).push(r); });
@@ -764,13 +915,15 @@ document.addEventListener('scroll', hideTip, true);
 document.addEventListener('keydown', e => { if (e.key==='Escape') hideTip(); }, true);
 
 function fromHash(){
+  const t = location.hash.slice(1).split('/');
+  if (t[0] === 'mapping') { setView('mp', true); const d = t[1] === 'neu' ? 'neu' : 'alt'; if (d !== st.mpdir) setDir(d); if (t[2]) goto(d === 'neu' ? +t[2] : decodeURIComponent(t[2])); return; }
   const m = /^#(neben|intervalle)?\/?(\d+)?$/.exec(location.hash); if (!m) return;
   setView(m[1] === 'neben' ? 'nb' : m[1] === 'intervalle' ? 'iv' : 'ab', true);
   if (m[2]) goto(+m[2]);
 }
 window.addEventListener('hashchange', fromHash);
 
-renderHinweis(); renderNav(); renderFmax(); renderNbSel(); renderIvSel(); apply(); fromHash();
+renderHinweis(); renderNav(); renderFmax(); renderNbSel(); renderIvSel(); renderMpSel(); apply(); fromHash();
 </script>
 </body>
 </html>

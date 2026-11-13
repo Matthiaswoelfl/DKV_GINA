@@ -224,6 +224,53 @@ const path = require('path');
   await page.click('#tabs button[data-v=ab]');
   check('Zurück zu „AB-Steigerungsgründe“ nach Intervalle: 5.580 Ziffern, Intervall-Filter ausgeblendet', await page.locator('#f-iv').isHidden() && await page.locator('#ivinfo').isHidden() && (await txt('#status')).startsWith('5.580 von'), await txt('#status'));
 
+  // ---------- Reiter Ziffern-Mapping ----------
+  await page.goto('file://' + html);
+  await page.reload();
+  await page.click('#tabs button[data-v=mp]');
+  const chipsMp = (await page.locator('#chipsmp .chip').allInnerTexts()).map(t => t.replace(/\s+/g, ' ')).join(' | ');
+  check('Reiter „Ziffern-Mapping“: 2.831 alte Ziffern, Chips Sicher 522 · Plausibel 884 · Unsicher 829 · Keine Entsprechung 535 · Sammelposition 61',
+    chipsMp === 'S Sicher 522 | P Plausibel 884 | U Unsicher 829 | K Keine Entsprechung 535 | X Sammelposition 61' && (await txt('#status')).startsWith('2.831 von 2.831 alten'), chipsMp + ' · ' + await txt('#status'));
+  const navMp = (await page.locator('#nav button.kap').allInnerTexts()).map(t => t.replace(/\s+/g, ' '));
+  check('Navigation zeigt die Kapitel der alten GOÄ (B bis P) mit Titel aus dem PDF', navMp.length === 15 && navMp.includes('G Neurologie, Psychiatrie und Psychotherapie 44') && navMp.includes('M Laboratoriumsuntersuchungen 921'), navMp.length + ' Kapitel; ' + navMp.filter(t => /^[GM] /.test(t)).join(' | '));
+  await shot('12_mapping_start.png');
+  await page.fill('#q', '863');
+  await page.keyboard.press('Enter');
+  d = (await txt('#drawer')).replace(/\s+/g, ' ');
+  check('Suche „863“: alte 863 → neue 4500, Wahrscheinlichkeit 82 %, Status Sicher, Begründung, Direktlink #mapping/alt/863',
+    d.includes('Alte GOÄ · Ziffer 863') && d.includes('82 %') && d.includes('Sicher') && d.includes('Begründung:') && d.includes('Neu 4500') && d.includes('145,00 €') && page.url().endsWith('#mapping/alt/863'), d.slice(0, 80) + ' … ' + page.url().split('#')[1]);
+  await shot('13_mapping_863.png');
+  await page.keyboard.press('Escape');
+  await page.fill('#q', '4500');
+  await page.waitForTimeout(250);
+  const z4500 = (await page.locator('.row .z').allInnerTexts()).join(',');
+  check('Suche „4500“ (Richtung alt → neu): findet die alte 863 über die neue 4500 und die alte 4500 (Labor); Hinweis auf Nummernkollision',
+    z4500.split(',').includes('863') && z4500.split(',').includes('4500') && (await txt('#ivinfo')).includes('gibt es in beiden Verzeichnissen') && await page.locator('.row mark').count() >= 2, z4500);
+  await page.click('#mpdir button[data-d=neu]');
+  await page.keyboard.press('/');
+  await page.keyboard.press('Enter');
+  d = (await txt('#drawer')).replace(/\s+/g, ' ');
+  check('Richtung neu → alt, Suche „4500“: neue 4500 ← alte 863 mit Wahrscheinlichkeit und Begründung, Direktlink #mapping/neu/4500',
+    d.includes('GOÄneu · Ziffer 4500') && d.includes('Alt 863') && d.includes('82 %') && d.includes('Begründung:') && page.url().endsWith('#mapping/neu/4500') && (await txt('#status')).includes('von 5.580 Ziffern'), d.slice(0, 70) + ' … ' + page.url().split('#')[1]);
+  await shot('14_mapping_neu_4500.png');
+  await page.locator('#drawer .zl[data-mz="alt:863"]').click();
+  check('Klick auf „Alt 863“ wechselt die Richtung und öffnet die alte Ziffer', (await txt('#drawer h2')).includes('Alte GOÄ · Ziffer 863') && await page.locator('#mpdir button[data-d=alt][aria-pressed=true]').count() === 1, (await txt('#drawer h2')).split('\n')[0]);
+  await page.goto('file://' + html + '#mapping/alt/870');
+  await page.reload();
+  d = (await txt('#drawer')).replace(/\s+/g, ' ');
+  check('Direktlink #mapping/alt/870: Nutzervorgabe 4510 und 4515, 4515 ohne automatische Wahrscheinlichkeit', d.includes('Neu 4510') && d.includes('Neu 4515') && d.includes('keine (Nutzervorgabe)') && d.includes('Quelle: Nutzervorgabe'), d.slice(0, 80));
+  await page.keyboard.press('Escape');
+  await page.click('#reset');
+  await page.click('#chipsmp .chip[data-k=SICHER]');
+  await page.selectOption('#mpql', 'manuell geprüft');
+  const nMan = await txt('#status');
+  const [dl4] = await Promise.all([page.waitForEvent('download'), page.click('#csv')]);
+  const csv4 = fs.readFileSync(await dl4.path(), 'utf8').replace(/^\ufeff/, '').split('\r\n');
+  check('Filter Sicher + Quelle „manuell geprüft“ und CSV-Export mit Wahrscheinlichkeit und Begründung', /^\d+ von 2\.831/.test(nMan) && csv4.length === parseInt(nMan) + 1 && csv4[0].includes('"Wahrscheinlichkeit";"Status";"Quelle";"Begründung"'), nMan + ' · ' + csv4.length + ' CSV-Zeilen');
+  await page.click('#reset');
+  await page.click('#tabs button[data-v=ab]');
+  check('Zurück zu „AB-Steigerungsgründe“ nach Mapping: wieder neue Ziffern (5.580), Navigation mit 17 Kapiteln', (await txt('#status')).startsWith('5.580 von 5.580 Ziffern') && await page.locator('#nav button.kap').count() === 17 && await page.locator('#f-mp').isHidden(), await txt('#status'));
+
   // Laptop-Breite
   await page.setViewportSize({ width: 1280, height: 720 });
   await page.goto('file://' + html + '#13399');
