@@ -7,6 +7,7 @@ import type {
   TransactionFilter,
   TransactionInput,
 } from '../../shared/schemas';
+import type { CategoryTotal, MonthPoint, PayeeTotal, Summary } from '../../shared/stats';
 
 export class ApiError extends Error {}
 
@@ -62,5 +63,14 @@ export const api = {
       body: JSON.stringify({ categoryId }),
     }),
   deleteTransaction: (id: number) => call<undefined>(`/api/transactions/${id}`, { method: 'DELETE' }),
+  summary: (from: string, to: string) => call<Summary>(`/api/stats/summary?from=${from}&to=${to}`),
+  byCategory: (from: string, to: string) => call<CategoryTotal[]>(`/api/stats/by-category?from=${from}&to=${to}`),
+  topPayees: (from: string, to: string, limit = 10) =>
+    call<PayeeTotal[]>(`/api/stats/top-payees?from=${from}&to=${to}&limit=${limit}`),
+  monthly: (end: string, months = 12) => call<MonthPoint[]>(`/api/stats/monthly?end=${end}&months=${months}`),
+  categoryTrend: (categoryId: number, end: string, months = 12) =>
+    call<Array<{ month: string; totalCents: number }>>(
+      `/api/stats/category-trend?categoryId=${categoryId}&end=${end}&months=${months}`,
+    ),
   payees: (q: string) => call<string[]>(`/api/transactions/payees/suggest?q=${encodeURIComponent(q)}`),
 };

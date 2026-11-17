@@ -23,3 +23,24 @@ body {
     @apply mb-1 block text-xs font-medium text-slate-500 dark:text-slate-400;
   }
 }
+
+/* Diagramm-Farben (Palette "Referenz", Hell/Dunkel) */
+:root {
+  --c-income: #2a78d6;
+  --c-expense: #eb6834;
+  --c-balance: #0b0b0b;
+  --c-grid: rgb(100 116 139 / 0.25);
+  --c-axis: #64748b;
+  --c-surface: #ffffff;
+  --c-uncategorized: #b8b7b2;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --c-income: #3987e5;
+    --c-expense: #d95926;
+    --c-balance: #f0efec;
+    --c-axis: #94a3b8;
+    --c-surface: #1e293b;
+    --c-uncategorized: #6b6a66;
+  }
+}

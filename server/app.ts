@@ -6,6 +6,7 @@ import type { Db } from './db';
 import { transactionsRouter } from './routes/transactions';
 import { categoriesRouter } from './routes/categories';
 import { rulesRouter } from './routes/rules';
+import { statsRouter } from './routes/stats';
 
 export function createApp(db: Db, opts: { staticDir?: string } = {}): express.Express {
   const app = express();
@@ -15,6 +16,7 @@ export function createApp(db: Db, opts: { staticDir?: string } = {}): express.Ex
   app.use('/api/transactions', transactionsRouter(db));
   app.use('/api/categories', categoriesRouter(db));
   app.use('/api/rules', rulesRouter(db));
+  app.use('/api/stats', statsRouter(db));
   app.use('/api', (_req, res) => {
     res.status(404).json({ error: 'Nicht gefunden' });
   });

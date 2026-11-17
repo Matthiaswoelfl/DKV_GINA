@@ -57,19 +57,19 @@ const MIGRATIONS: Migration[] = [
 ];
 
 const DEFAULT_CATEGORIES: Array<[string, 'income' | 'expense', string, number]> = [
-  ['Wohnen', 'expense', '#6366f1', 0],
-  ['Lebensmittel', 'expense', '#22c55e', 0],
-  ['Mobilität', 'expense', '#0ea5e9', 0],
-  ['Versicherungen', 'expense', '#8b5cf6', 0],
-  ['Abos', 'expense', '#ec4899', 0],
-  ['Freizeit', 'expense', '#f59e0b', 0],
-  ['Restaurants', 'expense', '#ef4444', 0],
-  ['Gesundheit', 'expense', '#14b8a6', 0],
-  ['Sparen', 'expense', '#84cc16', 1],
-  ['Sonstiges', 'expense', '#94a3b8', 0],
-  ['Gehalt', 'income', '#16a34a', 0],
-  ['Nebeneinkünfte', 'income', '#0d9488', 0],
-  ['Sonstiges', 'income', '#64748b', 0],
+  ['Wohnen', 'expense', '#2a78d6', 0],
+  ['Lebensmittel', 'expense', '#1baf7a', 0],
+  ['Mobilität', 'expense', '#eb6834', 0],
+  ['Versicherungen', 'expense', '#6250d6', 0],
+  ['Abos', 'expense', '#e87ba4', 0],
+  ['Freizeit', 'expense', '#eda100', 0],
+  ['Restaurants', 'expense', '#e34948', 0],
+  ['Gesundheit', 'expense', '#008300', 0],
+  ['Sparen', 'expense', '#9aa83c', 1],
+  ['Sonstiges', 'expense', '#8b8a85', 0],
+  ['Gehalt', 'income', '#2a78d6', 0],
+  ['Nebeneinkünfte', 'income', '#1baf7a', 0],
+  ['Sonstiges', 'income', '#8b8a85', 0],
 ];
 
 export function migrate(db: Db): void {

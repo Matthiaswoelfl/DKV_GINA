@@ -23,3 +23,15 @@ export const todayIso = (): string => toIso(new Date());
 export function centsToInput(cents: number): string {
   return (cents / 100).toFixed(2).replace('.', ',');
 }
+
+const euroShort = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
+
+/** Für Achsenbeschriftungen: 123456 -> "1.235 €" */
+export function formatEuroShort(cents: number): string {
+  return euroShort.format(cents / 100).replace(/\u00a0/g, ' ');
+}
+
+/** 0.456 -> "45,6 %" */
+export function formatPercent(ratio: number, digits = 1): string {
+  return `${(ratio * 100).toLocaleString('de-DE', { minimumFractionDigits: digits, maximumFractionDigits: digits })} %`;
+}

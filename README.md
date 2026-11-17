@@ -34,6 +34,14 @@ Solange der Export (Phase 4) fehlt: Server stoppen und `data/finanzen.db` kopier
 
 - Phase 1: Transaktionen anlegen, bearbeiten, löschen; Liste mit Suche, Filtern, Sortierung und Inline-Kategorie.
 - Phase 2: Kategorien verwalten (Farbe, „ist Sparen“, archivieren, löschen mit Umbuchung), Regeln („Empfänger enthält REWE → Lebensmittel“), Auto-Kategorisierung neuer Buchungen, Regelangebot nach manueller Kategorisierung, Übersicht „Unkategorisiert“.
+- Phase 3: Dashboard mit Zeitraum-Auswahl (Monat, Quartal, Jahr, benutzerdefiniert, Vor/Zurück), KPI-Kacheln mit Vergleich zum Vorzeitraum, Ausgaben nach Kategorie (Donut, Klick filtert die Buchungsliste), 12-Monats-Verlauf mit Saldo-Linie, Kategorie-Trend, Top-Empfänger. Jedes Diagramm hat Tooltips mit exakten Beträgen, die Verläufe zusätzlich eine Tabellenansicht.
+
+### Kennzahlen
+
+- **Ausgaben:** alle Ausgaben außer Kategorien mit Flag „ist Sparen“.
+- **Gespart:** Ausgaben in Sparen-Kategorien.
+- **Saldo:** Einnahmen − Ausgaben − Gespartes.
+- **Sparquote:** (Einnahmen − Ausgaben) / Einnahmen, ohne Einnahmen nicht definiert („–“).
 
 ### Regel-Vorrang
 

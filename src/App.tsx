@@ -1,6 +1,7 @@
 import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { api } from './api/client';
+import Dashboard from './pages/Dashboard';
 import Transactions from './pages/Transactions';
 import Categories from './pages/Categories';
 import Rules from './pages/Rules';
@@ -18,6 +19,9 @@ export default function App() {
       <header className="mb-6 flex items-center justify-between">
         <h1 className="text-xl font-semibold">Finanz-Dashboard</h1>
         <nav className="flex gap-1">
+          <NavLink to="/" end className={link}>
+            Dashboard
+          </NavLink>
           <NavLink to="/transaktionen" end className={link}>
             Transaktionen
           </NavLink>
@@ -35,10 +39,11 @@ export default function App() {
         </nav>
       </header>
       <Routes>
+        <Route path="/" element={<Dashboard />} />
         <Route path="/transaktionen" element={<Transactions />} />
         <Route path="/kategorien" element={<Categories />} />
         <Route path="/regeln" element={<Rules />} />
-        <Route path="*" element={<Navigate to="/transaktionen" replace />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>
   );
