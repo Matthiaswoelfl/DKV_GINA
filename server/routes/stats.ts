@@ -3,6 +3,8 @@ import { z } from 'zod';
 import type { Db } from '../db';
 import { isoDate } from '../../shared/schemas';
 import { lastDayOfMonth, monthsEndingAt } from '../../shared/period';
+import { budgetProgress } from '../domain/budget';
+import { detectRecurring } from '../domain/recurring';
 import {
   categoryTrend,
   expensesByCategory,
@@ -52,6 +54,26 @@ export function statsRouter(db: Db): Router {
     const { from, to } = range.parse(req.query);
     const limit = z.coerce.number().int().min(1).max(50).default(10).parse(req.query.limit);
     res.json(topPayees(load(from, to), categories(), limit));
+  });
+
+  r.get('/budget-progress', (req, res) => {
+    const { from, to } = range.parse(req.query);
+    const scale = z.coerce.number().min(0.01).max(1000).default(1).parse(req.query.scale);
+    const budgets = db.prepare('SELECT category_id AS categoryId, monthly_cents AS monthlyCents FROM budgets').all() as Array<{
+      categoryId: number;
+      monthlyCents: number;
+    }>;
+    res.json(budgetProgress(budgets, expensesByCategory(load(from, to), categories()), scale));
+  });
+
+  r.get('/recurring', (req, res) => {
+    const today = isoDate.default(new Date().toLocaleDateString('sv-SE')).parse(req.query.today);
+    const all = db
+      .prepare(
+        "SELECT date, amount_cents AS amountCents, type, category_id AS categoryId, payee FROM transactions WHERE type = 'expense'",
+      )
+      .all() as AggTx[];
+    res.json(detectRecurring(all, categories(), today));
   });
 
   r.get('/monthly', (req, res) => {

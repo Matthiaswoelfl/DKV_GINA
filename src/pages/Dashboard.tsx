@@ -1,10 +1,13 @@
 import { useMemo, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
 import { api, ApiError, type TxQuery } from '../api/client';
 import { periodContaining, previousPeriod, type Period } from '../../shared/period';
 import ChartCard, { EmptyChart } from '../components/ChartCard';
 import CategoryDonut, { toSlices, UNCATEGORIZED_KEY } from '../components/CategoryDonut';
 import CategoryTrendChart, { TrendTable } from '../components/CategoryTrendChart';
+import BudgetBar from '../components/BudgetBar';
+import RecurringList from '../components/RecurringList';
 import KpiCards from '../components/KpiCards';
 import MonthlyChart, { MonthlyTable } from '../components/MonthlyChart';
 import PeriodPicker from '../components/PeriodPicker';
@@ -28,6 +31,13 @@ export default function Dashboard() {
   // Verlauf: bis zum Monat des Zeitraum-Endes, höchstens bis zum aktuellen Monat.
   const endMonth = period.to.slice(0, 7) < todayIso().slice(0, 7) ? period.to.slice(0, 7) : todayIso().slice(0, 7);
   const monthly = useQuery({ queryKey: ['stats', 'monthly', endMonth], queryFn: () => api.monthly(endMonth, 12) });
+
+  // Monatsbudgets auf den Zeitraum hochrechnen (Quartal = 3, Jahr = 12, sonst anteilig nach Tagen).
+  const budgetScale =
+    period.kind === 'month' ? 1 : period.kind === 'quarter' ? 3 : period.kind === 'year' ? 12 : Math.max(0.01, (Date.parse(period.to) - Date.parse(period.from)) / 86_400_000 / 30.4375 + 1 / 30.4375);
+  const budgetScaleRounded = Math.round(budgetScale * 1000) / 1000;
+  const budgets = useQuery({ queryKey: ['stats', 'budget-progress', period.from, period.to, budgetScaleRounded], queryFn: () => api.budgetProgress(period.from, period.to, budgetScaleRounded) });
+  const recurring = useQuery({ queryKey: ['stats', 'recurring', todayIso()], queryFn: () => api.recurring(todayIso()) });
 
   const cats = categories.data ?? [];
   const slices = toSlices(byCategory.data ?? [], cats);
@@ -75,6 +85,34 @@ export default function Dashboard() {
       {empty && <p className="text-sm text-slate-500">Keine Buchungen in diesem Zeitraum. Unter „Transaktionen“ kannst du welche erfassen.</p>}
 
       <ChartCard
+        title="Budgets"
+        subtitle={period.kind === 'month' ? 'Verbrauch im gewählten Monat' : 'Monatsbudgets hochgerechnet auf den Zeitraum'}
+        actions={<Link className="text-sm text-indigo-600 hover:underline" to="/budgets">Budgets verwalten</Link>}
+        chart={
+          budgets.isError ? (
+            <EmptyChart>Budgets konnten nicht geladen werden.</EmptyChart>
+          ) : (budgets.data ?? []).length === 0 ? (
+            <EmptyChart>Noch keine Budgets. Lege unter „Budgets“ Monatsbeträge pro Kategorie fest.</EmptyChart>
+          ) : (
+            <ul className="grid gap-x-8 gap-y-3 md:grid-cols-2">
+              {(budgets.data ?? []).map((p) => {
+                const c = cats.find((x) => x.id === p.categoryId);
+                return (
+                  <li key={p.categoryId}>
+                    <p className="mb-1 flex items-center gap-2 text-sm">
+                      <span className="inline-block h-3 w-3 rounded-sm" style={{ backgroundColor: c?.color }} aria-hidden />
+                      {c?.name}
+                    </p>
+                    <BudgetBar label={c?.name ?? ''} spentCents={p.spentCents} budgetCents={p.budgetCents} status={p.status} />
+                  </li>
+                );
+              })}
+            </ul>
+          )
+        }
+      />
+
+      <ChartCard
         title="Ausgaben nach Kategorie"
         subtitle="Klick auf eine Kategorie filtert die Buchungen darunter (ohne Sparen)"
         chart={<CategoryDonut data={byCategory.data ?? []} categories={cats} selected={selected} onSelect={setSelected} />}
@@ -119,6 +157,12 @@ export default function Dashboard() {
         subtitle="Letzte 12 Monate"
         chart={monthly.data ? <MonthlyChart data={monthly.data} /> : <EmptyChart>Lade …</EmptyChart>}
         table={monthly.data ? <MonthlyTable data={monthly.data} /> : undefined}
+      />
+
+      <ChartCard
+        title="Wiederkehrende Zahlungen"
+        subtitle="Automatisch aus deinen Buchungen erkannt (Abos, Verträge)"
+        chart={recurring.data ? <RecurringList data={recurring.data} categories={cats} /> : <EmptyChart>{recurring.isError ? 'Konnte nicht geladen werden.' : 'Lade …'}</EmptyChart>}
       />
 
       <div className="grid gap-5 lg:grid-cols-2">

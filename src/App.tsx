@@ -5,6 +5,8 @@ import Dashboard from './pages/Dashboard';
 import Transactions from './pages/Transactions';
 import Categories from './pages/Categories';
 import Rules from './pages/Rules';
+import Budgets from './pages/Budgets';
+import Data from './pages/Data';
 
 const link = ({ isActive }: { isActive: boolean }) =>
   `rounded-md px-3 py-1.5 text-sm font-medium ${
@@ -31,6 +33,12 @@ export default function App() {
           <NavLink to="/regeln" className={link}>
             Regeln
           </NavLink>
+          <NavLink to="/budgets" className={link}>
+            Budgets
+          </NavLink>
+          <NavLink to="/daten" className={link}>
+            Daten
+          </NavLink>
           {open > 0 && (
             <NavLink to="/transaktionen?kategorie=none" className="rounded-md bg-amber-100 px-3 py-1.5 text-sm font-medium text-amber-900 hover:bg-amber-200">
               Unkategorisiert ({open})
@@ -43,6 +51,8 @@ export default function App() {
         <Route path="/transaktionen" element={<Transactions />} />
         <Route path="/kategorien" element={<Categories />} />
         <Route path="/regeln" element={<Rules />} />
+        <Route path="/budgets" element={<Budgets />} />
+        <Route path="/daten" element={<Data />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </div>

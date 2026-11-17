@@ -7,7 +7,7 @@ import type {
   TransactionFilter,
   TransactionInput,
 } from '../../shared/schemas';
-import type { CategoryTotal, MonthPoint, PayeeTotal, Summary } from '../../shared/stats';
+import type { BudgetProgress, CategoryTotal, MonthPoint, PayeeTotal, RecurringResult, Summary } from '../../shared/stats';
 
 export class ApiError extends Error {}
 
@@ -71,6 +71,21 @@ export const api = {
   categoryTrend: (categoryId: number, end: string, months = 12) =>
     call<Array<{ month: string; totalCents: number }>>(
       `/api/stats/category-trend?categoryId=${categoryId}&end=${end}&months=${months}`,
+    ),
+  budgets: () => call<Array<{ categoryId: number; monthlyCents: number }>>('/api/budgets'),
+  setBudget: (categoryId: number, monthlyCents: number) =>
+    call<{ categoryId: number; monthlyCents: number }>(`/api/budgets/${categoryId}`, {
+      method: 'PUT',
+      body: JSON.stringify({ monthlyCents }),
+    }),
+  deleteBudget: (categoryId: number) => call<undefined>(`/api/budgets/${categoryId}`, { method: 'DELETE' }),
+  budgetProgress: (from: string, to: string, scale = 1) =>
+    call<BudgetProgress[]>(`/api/stats/budget-progress?from=${from}&to=${to}&scale=${scale}`),
+  recurring: (today: string) => call<RecurringResult>(`/api/stats/recurring?today=${today}`),
+  importBackup: (json: unknown, dryRun: boolean) =>
+    call<{ categories: number; transactions: number; rules: number; budgets: number; exportedAt: string; safetyBackup?: string | null }>(
+      `/api/import/json${dryRun ? '?dryRun=1' : ''}`,
+      { method: 'POST', body: JSON.stringify(json) },
     ),
   payees: (q: string) => call<string[]>(`/api/transactions/payees/suggest?q=${encodeURIComponent(q)}`),
 };

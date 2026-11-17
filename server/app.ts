@@ -7,16 +7,21 @@ import { transactionsRouter } from './routes/transactions';
 import { categoriesRouter } from './routes/categories';
 import { rulesRouter } from './routes/rules';
 import { statsRouter } from './routes/stats';
+import { budgetsRouter } from './routes/budgets';
+import { backupRouter } from './routes/backup';
 
-export function createApp(db: Db, opts: { staticDir?: string } = {}): express.Express {
+export function createApp(db: Db, opts: { staticDir?: string; backupDir?: string } = {}): express.Express {
   const app = express();
   app.disable('x-powered-by');
+  // Der Import hat ein eigenes, größeres Limit und muss vor dem globalen Parser laufen.
+  app.use('/api', backupRouter(db, { backupDir: opts.backupDir }));
   app.use(express.json({ limit: '10mb' }));
 
   app.use('/api/transactions', transactionsRouter(db));
   app.use('/api/categories', categoriesRouter(db));
   app.use('/api/rules', rulesRouter(db));
   app.use('/api/stats', statsRouter(db));
+  app.use('/api/budgets', budgetsRouter(db));
   app.use('/api', (_req, res) => {
     res.status(404).json({ error: 'Nicht gefunden' });
   });
