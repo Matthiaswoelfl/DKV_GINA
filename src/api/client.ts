@@ -28,6 +28,17 @@ async function call<T>(url: string, init?: RequestInit): Promise<T> {
   return res.status === 204 ? (undefined as T) : ((await res.json()) as T);
 }
 
+async function callText(url: string): Promise<string> {
+  let res: Response;
+  try {
+    res = await fetch(url);
+  } catch {
+    throw new ApiError('Server nicht erreichbar. Läuft „npm run dev“?');
+  }
+  if (!res.ok) throw new ApiError(`Fehler ${res.status}`);
+  return res.text();
+}
+
 export type TxQuery = Partial<Omit<TransactionFilter, 'sort' | 'dir'>> &
   Pick<TransactionFilter, 'sort' | 'dir'>;
 
@@ -88,5 +99,10 @@ export const api = {
       `/api/import/json${dryRun ? '?dryRun=1' : ''}`,
       { method: 'POST', body: JSON.stringify(json) },
     ),
+  exportJson: () => callText('/api/export/json'),
+  exportCsv: () => callText('/api/export/csv'),
+  loadDemo: (): Promise<void> => Promise.reject(new ApiError('Beispieldaten gibt es hier über „npm run seed“.')),
+  /** Nur in der Einzeldatei-Version relevant: Browser-Speicher nicht beschreibbar. */
+  storageProblem: () => false,
   payees: (q: string) => call<string[]>(`/api/transactions/payees/suggest?q=${encodeURIComponent(q)}`),
 };

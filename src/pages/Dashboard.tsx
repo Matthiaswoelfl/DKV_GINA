@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import { api, ApiError, type TxQuery } from '../api/client';
 import { periodContaining, previousPeriod, type Period } from '../../shared/period';
@@ -13,6 +13,7 @@ import MonthlyChart, { MonthlyTable } from '../components/MonthlyChart';
 import PeriodPicker from '../components/PeriodPicker';
 import TopPayees from '../components/TopPayees';
 import { formatDate, formatEuro, todayIso } from '../lib/format';
+import { STANDALONE } from '../lib/env';
 
 const MAX_ROWS = 100;
 
@@ -22,6 +23,8 @@ export default function Dashboard() {
   const [trendCategory, setTrendCategory] = useState<string>('');
   const prev = useMemo(() => previousPeriod(period), [period]);
 
+  const qc = useQueryClient();
+  const demo = useMutation({ mutationFn: api.loadDemo, onSuccess: () => qc.invalidateQueries() });
   const total = useQuery({ queryKey: ['transactions', 'count'], queryFn: api.transactionCount });
   const categories = useQuery({ queryKey: ['categories'], queryFn: api.categories });
   const summary = useQuery({ queryKey: ['stats', 'summary', period.from, period.to], queryFn: () => api.summary(period.from, period.to) });
@@ -82,7 +85,9 @@ export default function Dashboard() {
         <div className="mt-5 flex flex-wrap justify-center gap-2">
           <Link className="btn-primary" to="/transaktionen">Erste Buchung erfassen</Link>
           <Link className="btn-secondary" to="/daten">Backup wiederherstellen</Link>
+          {STANDALONE && <button className="btn-secondary" onClick={() => demo.mutate()} disabled={demo.isPending}>Beispieldaten ausprobieren</button>}
         </div>
+        {demo.isError && <p role="alert" className="mt-3 text-sm text-red-600">{demo.error instanceof ApiError ? demo.error.message : 'Konnte nicht geladen werden.'}</p>}
       </div>
     );
   }

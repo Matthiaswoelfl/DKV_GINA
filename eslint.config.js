@@ -12,6 +12,10 @@ export default tseslint.config(
     rules: { ...reactHooks.configs.recommended.rules },
   },
   {
+    files: ['scripts/**/*.mjs'],
+    languageOptions: { globals: { console: 'readonly' } },
+  },
+  {
     rules: {
       '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-non-null-assertion': 'error',

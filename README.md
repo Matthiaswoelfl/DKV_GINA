@@ -2,6 +2,20 @@
 
 Lokale Web-App für Einnahmen und Ausgaben. Alle Daten liegen in `data/finanzen.db` (SQLite) auf deinem Rechner, es gibt keine Cloud, kein Login und keine externen Aufrufe. Der Server lauscht nur auf `127.0.0.1`.
 
+## Zwei Wege, die App zu nutzen
+
+| | **Einzeldatei** (`standalone/finanz-dashboard.html`) | **Node-Version** (`npm start`) |
+|---|---|---|
+| Installation | keine, Doppelklick öffnet sie im Browser | Node.js ≥ 20 und `npm install` |
+| Daten liegen in | Speicher deines Browsers (localStorage) | Datei `data/finanzen.db` |
+| Sicherung | JSON-Backup aus der App, regelmäßig herunterladen | Backup aus der App oder Datei kopieren |
+| Risiko | Löschst du den Website-Speicher oder nutzt ein anderes Browser-Profil, sind die Daten dort weg | gering, die Datenbank ist eine normale Datei |
+| Mehrere Geräte | jedes Gerät hat eigene Daten, Austausch über JSON-Backup | ein Rechner |
+
+Beide Versionen haben denselben Funktionsumfang und dasselbe Backup-Format. Ein Backup aus der einen lässt sich in der anderen wiederherstellen. Die Einzeldatei baust du mit `npm run build:standalone` neu.
+
+Für dauerhafte Nutzung mit wichtigen Daten empfehle ich die Node-Version. Die Einzeldatei ist ideal zum schnellen Ausprobieren oder wenn du nichts installieren willst. Öffne sie immer aus demselben Ordner und mit demselben Browser, und lege nach jeder Eingabesitzung ein Backup an.
+
 ## Installation
 
 Voraussetzung: Node.js ≥ 20.
