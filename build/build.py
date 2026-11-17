@@ -1296,6 +1296,21 @@ def schreibe_bericht(daten, pdf, gesetz, kap, regeln, intervalle, mapping, gesch
             "über der Liste, wird aber nicht je Regel ausgewertet.",
         ]
 
+    L += ["", "## 4h. Assistent (Chat)", "",
+          "Der Reiter „Assistent“ ist ein Chatfenster, das **ausschließlich aus den im Dashboard eingebetteten Daten** antwortet (alle Reiter). "
+          "Er arbeitet offline im Browser mit festen Regeln und Textsuche; es ist **kein Sprachmodell** angebunden. Jede Antwort wird aus Datenfeldern "
+          "und Wortlauten zusammengesetzt und nennt die Quelle (Link auf den Reiter und die Ziffer). Verstanden werden Fragen zu: Steigerung und "
+          "Gebührensatz (auch mit Gründen wie BMI oder Gerinnungsstörung), Nicht neben / Nur neben (auch für zwei Ziffern), Intervalle und "
+          "Häufigkeit, Geschlechts- und Altersprüfung (auch mit konkretem Alter), Mapping alt ↔ neu, Textsuche und Zählfragen. Alles andere "
+          "beantwortet er mit „Dazu enthält das Dashboard keine Information“. Die Qualitätssicherung (Abschnitt 2) prüft 20 Beispielfragen "
+          "gegen die erwarteten Werte, auch Fragen außerhalb des Dashboards und Zahlen ohne Bezug zu Ziffern.", ""]
+    offen += [
+        "**Assistent – kein Sprachmodell:** Eine statische, offline lauffähige HTML-Datei kann kein Sprachmodell enthalten. Der Assistent versteht daher "
+        "nur Fragen, die zu seinen Mustern passen; freie Formulierungen außerhalb davon führen zu „keine Information“. Eine Anbindung an ein Sprachmodell "
+        "(Antwort nur aus abgerufenen Dashboard-Daten) bräuchte einen Server oder Zugangsdaten und eine Freigabe durch Datenschutz/IT. Soll das geprüft werden?",
+        "**Assistent – Abwesenheit einer Regel:** „Keine Regel hinterlegt“ heißt nicht, dass nichts gilt. Der Assistent sagt das ausdrücklich, weil Allgemeine "
+        "Bestimmungen, Bedingungen und die Ausnahmelisten teils nicht im Dashboard stehen.",
+    ]
     L += ["", "## 4g. Altersbezug und Altersprüfung", ""]
     if not alter["datei"]:
         L.append("Nicht vorhanden: `input/alter/` fehlt.")

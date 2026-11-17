@@ -51,6 +51,33 @@ main.alt.compact .grid{grid-template-columns:50px minmax(0,1.1fr) 76px 98px minm
 .gebox .top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .gebox .big{font-size:20px;font-weight:700;color:var(--c)}
 .gebox dl{margin:8px 0 0;font-size:13px}.gebox dt{font-size:11.5px;color:var(--ink-soft);font-weight:650;margin-top:7px}.gebox dd{margin:1px 0 0}
+.chtab{margin-left:auto}
+body.chatview nav,body.chatview main,body.chatview aside{display:none}
+body.chatview #app{grid-template-columns:1fr!important}
+#chat{display:flex;flex-direction:column;min-height:0;background:var(--bg)}
+#chat[hidden]{display:none}
+#chhead{display:flex;align-items:center;gap:12px;padding:8px 16px;background:var(--panel);border-bottom:1px solid var(--line)}
+#chhead span{color:var(--ink-soft);font-size:12.5px;flex:1}
+#chlog{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:12px;max-width:980px;width:100%;margin:0 auto}
+.cm{display:flex}.cm.u{justify-content:flex-end}
+.cm .cb{max-width:88%;padding:10px 14px;border-radius:12px;font-size:14px;line-height:1.5}
+.cm.u .cb{background:var(--accent);color:#fff;border-bottom-right-radius:3px;white-space:pre-wrap}
+.cm.a .cb{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--accent);border-bottom-left-radius:3px}
+.cm.a h4{margin:10px 0 4px;font-size:14px}.cm.a h4:first-child{margin-top:0}
+.cm.a p{margin:4px 0}.cm.a ul{margin:4px 0;padding-left:20px}.cm.a li{margin-bottom:4px}
+.cm.a blockquote{margin:4px 0 6px;padding:4px 10px;border-left:3px solid var(--line);color:var(--ink-soft);font-size:13px}
+.cm.a blockquote span{display:block;font-size:11.5px;margin-top:2px}
+.cm.a hr{border:0;border-top:1px solid var(--line);margin:12px 0}
+.cm .srcp{font-size:12px;color:var(--ink-soft)}
+.cm .fine{font-size:11.5px;color:var(--ink-soft);margin-top:8px}
+a.zref{font-weight:650;color:var(--accent);text-decoration:none;border-bottom:1px dotted var(--accent)}
+a.srcl{font-size:12px;background:var(--accent-bg);color:var(--accent);padding:0 6px;border-radius:4px;text-decoration:none;white-space:nowrap}
+.sugg{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.sugg button,.chact{border:1px solid var(--accent);background:#fff;color:var(--accent);border-radius:999px;padding:4px 10px;font-size:13px}
+.sugg button:hover,.chact:hover{background:var(--accent-bg)}
+#chform{display:flex;gap:8px;padding:10px 16px 14px;max-width:980px;width:100%;margin:0 auto;align-items:flex-end}
+#chin{flex:1;resize:none;padding:9px 12px;border:1px solid #8c98a8;border-radius:8px;font:inherit;max-height:140px;background:#fff}
+#chform .send{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:650;padding:9px 18px}
 .cAA{--c:#a3231b;--cb:#fbe6e3}.cAE{--c:#8a5300;--cb:#fbefd2}.cAI{--c:#0f4f9e;--cb:#e0ecfb}.cAR{--c:#5c3399;--cb:#ede4f8}
 .cond{font-weight:650;font-variant-numeric:tabular-nums}
 .band{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0}
@@ -220,6 +247,7 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:3px;paddi
     <button role="tab" data-v="mp" aria-selected="false">Mapping alt ↔ neu</button>
     <button role="tab" data-v="ge" aria-selected="false">Geschlecht</button>
     <button role="tab" data-v="al" aria-selected="false">Alter</button>
+    <button role="tab" data-v="ch" aria-selected="false" class="chtab">Assistent</button>
   </div><span id="sub"></span></header>
 <div id="hinweis" role="note"></div>
 <div id="app">
@@ -280,6 +308,11 @@ kbd{border:1px solid var(--line);border-bottom-width:2px;border-radius:3px;paddi
     <div id="list" tabindex="0" role="listbox" aria-label="Ergebnisliste. Pfeiltasten wählen, Eingabetaste öffnet Details."><div id="spacer"></div></div>
   </main>
   <aside id="drawer" aria-label="Details zur Ziffer" tabindex="-1"></aside>
+  <section id="chat" aria-label="Assistent" hidden>
+    <div id="chhead"><b>Assistent</b><span>Antwortet ausschließlich aus den Daten dieses Dashboards · feste Regeln und Textsuche, kein Sprachmodell</span><button class="btn" id="chclear" type="button">Verlauf löschen</button></div>
+    <div id="chlog" role="log" aria-live="polite" aria-label="Unterhaltung"></div>
+    <form id="chform" autocomplete="off"><textarea id="chin" rows="1" aria-label="Frage eingeben" placeholder="Frage zum gebührenrechtlichen Teil stellen, z. B. „Darf Ziffer 1200 neben 1225 abgerechnet werden?“ …"></textarea><button class="btn send" type="submit">Senden</button></form>
+  </section>
 </div>
 <script id="data" type="application/json">/*__DATA__*/</script>
 <script>
@@ -594,10 +627,14 @@ function renderHinweis(){
   const entwurf = `<span><b>Entwurf:</b> Gesetzesentwurf, nicht in Kraft${stand ? ' · ' + esc(stand) : ' · Stand nicht hinterlegt'}.</span>`;
   $('#sub').textContent = st.view === 'nb' ? '„Nicht neben“- und „Nur neben“-Regeln je Ziffer' : st.view === 'iv' ? 'Zeitliche Abrechnungsgrenzen je Ziffer, bestehend und neu' : 'AB-Steigerungsgründe, Faktoren und maximaler Gebührensatz je Ziffer';
   $('#q').placeholder = st.view === 'mp' ? 'Alte oder neue Ziffer oder Leistung suchen, z. B. 863 oder 4500 …  ( / )' : 'Ziffer oder Leistung suchen …  ( / )';
+  if (st.view === 'ch') $('#sub').textContent = 'Fragen zum gebührenrechtlichen Teil, beantwortet aus den Daten dieses Dashboards';
   if (st.view === 'al') $('#sub').textContent = 'Altersgrenzen, Ausnahmen und implizite Altersbezüge je Ziffer';
   if (st.view === 'ge') $('#sub').textContent = 'Ziffern mit geschlechtsspezifischem Leistungsinhalt und weiche Plausibilitätsprüfung';
   if (st.view === 'mp') $('#sub').textContent = 'Heutige GOÄ → neue Ziffer und umgekehrt, mit Wahrscheinlichkeit';
-  $('#hinweis').innerHTML = entwurf + (st.view === 'al'
+  $('#hinweis').innerHTML = entwurf + (st.view === 'ch'
+    ? `<span><b>Assistent:</b> Antworten stammen ausschließlich aus den Daten dieses Dashboards (alle Reiter) und nennen die Quelle. Es sind feste Regeln und Textsuche, kein Sprachmodell: Der Assistent erfindet nichts, versteht aber nur Fragen zu diesen Themen.</span>` +
+      `<span><b>Hinweis:</b> Fehlt eine Regel im Dashboard, heißt das nicht, dass sie nicht existiert – Allgemeine Bestimmungen, Bedingungen und Ausnahmelisten sind teils nicht enthalten.</span>`
+    : st.view === 'al'
     ? `<span><b>Prüfgröße:</b> Alter der VP in vollendeten Lebensjahren am Behandlungstag. „Bis zum vollendeten N. Lebensjahr“ = Alter ≤ N−1, „ab dem N. Lebensjahr“ = Alter ≥ N−1.</span>` +
       `<span><b>Reaktion:</b> Ablehnung = harte Altersgrenze im Wortlaut; Ausnahmeprüfung = Kinderzuschläge und Zuschläge mit „und/oder“-Ausnahme; implizite Altersbezüge (ohne Jahresangabe) nur als Hinweis.</span>` +
       `<span><b>Offen:</b> Ausnahmelisten A und K (Diagnosen) sind noch nicht festgelegt.</span>`
@@ -658,6 +695,7 @@ function matchQ(r, toks){
   return true;
 }
 function apply(keepActive){
+  if (st.view === 'ch') return;
   const toks = st.q.toLowerCase().split(/\s+/).filter(Boolean);
   const nav = r => (st.abs===null || r.a===st.abs) && (st.kap===null || U().abs[r.a].kap===st.kap) && matchQ(r, toks);
   if (st.view === 'nb') { applyNb(nav, keepActive); return; }
@@ -888,7 +926,7 @@ function open(z, keepFocus){
   render();
   if (!keepFocus) dr.focus({preventScroll:true});
 }
-const VH = {ab:'', nb:'neben', iv:'intervalle', mp:'mapping', ge:'geschlecht', al:'alter'};
+const VH = {ab:'', nb:'neben', iv:'intervalle', mp:'mapping', ge:'geschlecht', al:'alter', ch:'assistent'};
 const hashFor = z => st.view === 'ab' ? '#' + z : st.view === 'mp' ? '#mapping/' + st.mpdir + '/' + z : '#' + VH[st.view] + '/' + z;
 const zbtn = z => { const x = BYZ.get(z); return `<button class="zl" data-z="${z}" title="${esc(x.t)}"><b>${z}</b> <span>${esc(x.t)}</span></button>`; };
 const zliste = (zs, n = 8) => zs.slice(0, n).map(zbtn).join('') + (zs.length > n ? `<details class="mehr"><summary>alle ${zs.length} Ziffern anzeigen</summary>${zs.slice(n).map(zbtn).join('')}</details>` : '');
@@ -994,11 +1032,13 @@ function setView(v, keepHash){
   st.view = v;
   if (U() !== uAlt) { st.kap = st.abs = null; st.sel = null; st.active = -1; $('#app').classList.remove('drawer-open'); st.collapsed = st.q ? new Set() : allCollapsed(); renderNav(); }
   $('#f-mp').hidden = v !== 'mp'; $('#f-ge').hidden = v !== 'ge'; $('#f-al').hidden = v !== 'al';
+  $('#chat').hidden = v !== 'ch'; document.body.classList.toggle('chatview', v === 'ch');
   document.querySelectorAll('#tabs button').forEach(b => b.setAttribute('aria-selected', b.dataset.v === v));
   $('#f-ab').hidden = v !== 'ab'; $('#f-nb').hidden = v !== 'nb'; $('#f-iv').hidden = v !== 'iv'; $('#ivinfo').hidden = v !== 'iv' && v !== 'mp' && v !== 'ge' && v !== 'al';
   $('main').classList.toggle('alt', v !== 'ab'); $('main').classList.toggle('mpa', v === 'mp' && st.mpdir === 'alt');
-  document.title = v === 'al' ? 'GOÄneu – Altersprüfung' : v === 'ge' ? 'GOÄneu – Geschlecht' : v === 'mp' ? 'GOÄneu – Ziffern-Mapping' : v === 'nb' ? 'GOÄneu – Nebeneinanderberechnung' : v === 'iv' ? 'GOÄneu – Intervalle' : 'GOÄneu – Steigerungsmatrix';
+  document.title = v === 'ch' ? 'GOÄneu – Assistent' : v === 'al' ? 'GOÄneu – Altersprüfung' : v === 'ge' ? 'GOÄneu – Geschlecht' : v === 'mp' ? 'GOÄneu – Ziffern-Mapping' : v === 'nb' ? 'GOÄneu – Nebeneinanderberechnung' : v === 'iv' ? 'GOÄneu – Intervalle' : 'GOÄneu – Steigerungsmatrix';
   renderHinweis(); apply(true);
+  if (v === 'ch') { setTimeout(() => $('#chin').focus(), 0); if (!keepHash) history.replaceState(null, '', '#assistent'); return; }
   if (st.sel !== null && st.sel !== -1) open(st.sel, true);
   else if (st.sel === -1) closeDrawer();
   else if (!keepHash) history.replaceState(null, '', v !== 'ab' ? '#' + VH[v] : location.pathname + location.search);
@@ -1016,7 +1056,7 @@ $('#chipsiv').addEventListener('click', e => { const b = e.target.closest('.chip
 $('#ivsel').addEventListener('change', e => { st.ivsel = e.target.value; if (st.ivsel !== '') { st.ivohne = false; st.collapsed.clear(); } else st.collapsed = allCollapsed(); apply(); list.scrollTop = 0; });
 $('#ivq').addEventListener('change', e => { st.ivq = e.target.value; renderIvSel(); apply(); list.scrollTop = 0; });
 $('#tabs').addEventListener('click', e => { const b = e.target.closest('button'); if (b) setView(b.dataset.v); });
-$('#tabs').addEventListener('keydown', e => { if (e.key==='ArrowRight' || e.key==='ArrowLeft') { const vs = ['ab','nb','iv','mp','ge','al'], v = vs[(vs.indexOf(st.view) + (e.key==='ArrowRight' ? 1 : 5)) % 6]; setView(v); $(`#tabs button[data-v=${v}]`).focus(); } });
+$('#tabs').addEventListener('keydown', e => { if (e.key==='ArrowRight' || e.key==='ArrowLeft') { const vs = ['ab','nb','iv','mp','ge','al','ch'], v = vs[(vs.indexOf(st.view) + (e.key==='ArrowRight' ? 1 : 6)) % 7]; setView(v); $(`#tabs button[data-v=${v}]`).focus(); } });
 $('#anz').addEventListener('change', e => { st.anz = e.target.value; apply(); list.scrollTop = 0; });
 $('#fmax').addEventListener('change', e => { st.fmax = e.target.value; apply(); list.scrollTop = 0; });
 $('#theo').addEventListener('change', e => { st.theo = e.target.checked; renderFmax(); apply(); });
@@ -1024,7 +1064,7 @@ $('#reset').addEventListener('click', () => { clearFilters(); st.collapsed = all
 $('#colhead').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; if (st.sort===b.dataset.s) st.dir = -st.dir; else { st.sort = b.dataset.s; st.dir = 'fmp'.includes(b.dataset.s) ? -1 : 1; } apply(); });
 document.addEventListener('keydown', e => {
   const inField = /INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName);
-  if (e.key==='/' && !inField) { $('#q').focus(); $('#q').select(); e.preventDefault(); }
+  if (e.key==='/' && !inField) { if (st.view === 'ch') $('#chin').focus(); else { $('#q').focus(); $('#q').select(); } e.preventDefault(); }
   else if (e.key==='Escape') { if (st.sel !== null) { closeDrawer(); if (inField) e.preventDefault(); } else setTimeout(syncQ, 0); }
 });
 $('#csv').addEventListener('click', () => {
@@ -1115,11 +1155,256 @@ document.addEventListener('focusin', e => { const el = e.target.closest('[data-t
 document.addEventListener('scroll', hideTip, true);
 document.addEventListener('keydown', e => { if (e.key==='Escape') hideTip(); }, true);
 
+/* ---------- Assistent: Antworten ausschließlich aus den Daten dieses Dashboards ---------- */
+const CH = {msgs:[]};
+const nf = n => n.toLocaleString('de-DE');
+const hashOf = (v, z) => ({ab:'#'+z, nb:'#neben/'+z, iv:'#intervalle/'+z, ge:'#geschlecht/'+z, al:'#alter/'+z, mpa:'#mapping/alt/'+z, mpn:'#mapping/neu/'+z})[v];
+const VNAME = {ab:'AB-Steigerungsgründe', nb:'Nebeneinanderberechnung', iv:'Intervalle', ge:'Geschlecht', al:'Alter', mpa:'Mapping alt ↔ neu', mpn:'Mapping alt ↔ neu'};
+const zref = (z, v = 'ab', label) => `<a class="zref" href="${hashOf(v, z)}">${label || z}</a>`;
+const srcl = (v, z) => `<a class="srcl" href="${hashOf(v, z)}">${VNAME[v]} · ${z}</a>`;
+const kapz = r => { const a = D.abschnitte[r.a], k = D.kapitel.find(x => x.k === a.kap); return `Kapitel ${a.kap}${k && k.titel ? ' – ' + k.titel : ''} · ${a.name}`; };
+const short = (t, n) => t.length > n ? t.slice(0, n).replace(/\s+\S*$/, '') + ' …' : t;
+const cap = (arr, n, f) => arr.slice(0, n).map(f).join(', ') + (arr.length > n ? ` … (+${arr.length - n} weitere)` : '');
+const AGENT_STOP = new Set('beschreibt beschreiben gilt gelten gibt darf ich eines einer einem dieser dieses diese gibt der die das den dem des ein eine einer einen für fuer von mit und oder bei im in zu zur zum welche welcher welches wie was gibt es ziffer ziffern goä nummer nr ist sind wird werden abrechnen abrechnung abgerechnet berechnen darf kann man mir mein bitte gebühr leistung leistungen neue neuen neuer alte alten heutige heutigen auf an aus nach über unter auch noch nur wenn dann dass als ob wo wann'.split(' '));
+const stem = t => t.length > 6 ? t.replace(/(ern|en|er|es|e|s|n)$/, '') : t;
+
+function ziffernIn(q){
+  let s = q.toLowerCase();
+  s = s.replace(/bmi\s*(von|ab|über|>=|≥)?\s*\d+([.,]\d+)?/g, ' ').replace(/\d+([.,]\d+)?\s*(ml|kg|%|prozent|stunden|std|minuten|min|tage|tagen|wochen|monat\w*|euro|€)/g, ' ');
+  s = s.replace(/\b\d+\s+ziffern\b/g, ' ').replace(/(\d{1,3})\s*[- ]?\s*(jährig\w*|jahre\w*|jahr\b|lj\b|lebensjahr\w*)/g, ' ').replace(/alter\s*(von|ab|bis|:)?\s*\d{1,3}/g, ' ');
+  const out = [];
+  for (const m of s.matchAll(/\b\d{1,5}\b/g)) { const n = +m[0]; if (n > 0 && (BYZ.has(n) || ALT.by.has(m[0])) && !out.includes(m[0])) out.push(m[0]); }
+  return out;
+}
+function ageIn(q){
+  const s = q.toLowerCase(); let m = /(\d{1,3})\s*[- ]?\s*(jährig\w*|jahre\w*|jahr\b|lj\b|lebensjahr\w*)/.exec(s) || /alter\s*(?:von|ab|bis|:)?\s*(\d{1,3})/.exec(s);
+  if (m) return +m[1]; if (/säugling|neugeboren/.test(s)) return 0; return null;
+}
+const reasonsIn = q => { const s = q.toLowerCase(), r = []; if (/gerinnung|marcumar|antikoagul|blutgerinn/.test(s)) r.push('G'); if (/adipos|bmi|übergewicht/.test(s)) r.push('B'); if (/schwanger/.test(s)) r.push('S'); if (/frühgebor/.test(s)) r.push('F'); if (/beatmung|beatmet/.test(s)) r.push('V'); return r; };
+const genderIn = q => { const s = q.toLowerCase(); return /\b(mann|männer|männlich\w*|herr|junge)\b/.test(s) ? 'M' : /\b(frau|frauen|weiblich\w*|patientin|mädchen)\b/.test(s) ? 'W' : null; };
+
+/* --- Bausteine je Thema --- */
+function secSteig(r, rs){
+  let h = `<h4>Steigerung (AB-Steigerungsgründe)</h4>`;
+  if (!r.m) return h + `<p>Die Ziffer steht nicht in der Steigerungsmatrix: Keiner der fünf AB-Steigerungsgründe greift. Maximaler Faktor ×1,0 = ${euro(r.g)}.</p><p class="srcp">Quelle: ${srcl('ab', r.z)}</p>`;
+  const m = r.m, ks = Object.keys(m.gruende);
+  h += `<p>Zutreffende Gründe: ${ks.map(k => `<b>${k}</b> ${esc(GR[k].name)} ×${m.gruende[k]}`).join('; ')}.</p>`;
+  if (rs.length) {
+    const ok = rs.filter(k => k in m.gruende), no = rs.filter(k => !(k in m.gruende));
+    if (no.length) h += `<p>Nicht anwendbar bei dieser Ziffer (greift laut Matrix nicht): ${no.map(k => esc(GR[k].name)).join(', ')}.</p>`;
+    if (ok.length) { const [i, theo] = m.sub[KEYS.filter(k => ok.includes(k)).join('')]; h += `<p>Mit ${ok.join(' + ')}: Faktor <b>×${m.moegl[i].f}</b> → <b>${euro(r.c[i])}</b>${theo ? ' – <b>nur theoretisch möglich</b> (S×F bzw. B×F praktisch ausgeschlossen)' : ''}.</p>`;
+      h += ok.map(k => `<p><b>${esc(GR[k].name)}:</b> Voraussetzung: ${esc(GR[k].voraussetzung)} · Nachweis: ${esc(GR[k].nachweis)} · Rechtsgrundlage: ${GR[k].ids.map(esc).join(', ')}.</p>`).join(''); }
+  }
+  const dif = m.maxT !== m.maxP;
+  h += `<p>Maximal praktisch: <b>×${m.moegl[m.maxP].f} = ${euro(r.c[m.maxP])}</b>${dif ? `; theoretisch bis ×${m.moegl[m.maxT].f} = ${euro(r.c[m.maxT])}` : ''}. Annahme der Matrix: Mehrere Gründe multiplizieren sich; der Entwurf regelt das nicht ausdrücklich.</p>`;
+  h += `<ul>${m.moegl.map((x, i) => `<li>×${x.f} = ${euro(r.c[i])} (${x.prakt.length ? x.prakt.join(' | ') : '–'}${x.theo.length ? '; nur theoretisch: ' + x.theo.join(' | ') : ''}) – ${x.status === 'p' ? 'praktisch' : 'nur theoretisch'}</li>`).join('')}</ul>`;
+  return h + `<p class="srcp">Quelle: ${srcl('ab', r.z)}</p>`;
+}
+function ownRules(r, types){ return r.rg.map(i => RL[i]).filter(x => types.includes(x.t) && x.sz.includes(r.z)); }
+function secNeben(r){
+  let h = `<h4>Nebeneinanderberechnung</h4>`;
+  const N = ownRules(r, ['N']), U2 = ownRules(r, ['U']), W = ownRules(r, ['E', 'B', 'A']);
+  const zs = x => [...new Set(x.flatMap(y => y.zz))].filter(v => v !== r.z).sort((a, b) => a - b);
+  if (N.length) h += `<p><b>Nicht neben</b> berechnungsfähig: ${zs(N).length ? cap(zs(N), 14, v => zref(v, 'nb')) : 'keine einzelne Ziffer genannt'}.</p>` + N.slice(0, 3).map(x => `<blockquote>${esc(x.satz)}<span>${x.e !== 'Ziffer' ? 'Allgemeine Bestimmung ' + esc(x.ab) : 'Ziffer ' + x.q}, Seite ${x.p}${x.bd ? ' · ⚑ Bedingung: ' + esc(x.bd) : ''}</span></blockquote>`).join('') + (N.length > 3 ? `<p>… und ${N.length - 3} weitere Regeln.</p>` : '');
+  if (U2.length) h += `<p><b>Nur neben</b> berechnungsfähig – mindestens eine von: ${cap(zs(U2), 14, v => zref(v, 'nb'))}.</p>` + U2.slice(0, 2).map(x => `<blockquote>${esc(x.satz)}<span>${x.e !== 'Ziffer' ? 'Allgemeine Bestimmung ' + esc(x.ab) : 'Ziffer ' + x.q}, Seite ${x.p}</span></blockquote>`).join('');
+  if (W.length) h += `<p>Weitere Regeln: ${W.map(x => esc(WT[x.t])).join('; ')}.</p>` + W.slice(0, 2).map(x => `<blockquote>${esc(x.satz)}</blockquote>`).join('');
+  if (!N.length && !U2.length) h += `<p>Für diese Ziffer ist im Dashboard weder eine „Nicht neben“- noch eine „Nur neben“-Regel hinterlegt.</p>`;
+  const gen = RL.filter(x => (x.t === 'N' || x.t === 'U') && x.zz.includes(r.z) && !x.sz.includes(r.z));
+  if (gen.length) h += `<p>Sie wird in Regeln anderer Ziffern genannt (${gen.length}; die Gegenrichtung ist eine Ableitung, kein Gesetzeswortlaut): ${cap([...new Set(gen.flatMap(x => x.sz))].sort((a, b) => a - b), 10, v => zref(v, 'nb'))}.</p>`;
+  return h + `<p class="srcp">Quelle: ${srcl('nb', r.z)}</p>`;
+}
+function secPair(a, b){
+  const ra = BYZ.get(a), rb = BYZ.get(b); if (!ra || !rb) return '';
+  const rule = (x, y) => RL.filter(q => ['N', 'U', 'E', 'B', 'A'].includes(q.t) && q.sz.includes(x) && q.zz.includes(y));
+  const quote = x => `<blockquote>${esc(x.satz)}<span>${x.e !== 'Ziffer' ? 'Allgemeine Bestimmung ' + esc(x.ab) : 'Regel der Ziffer ' + x.q}, Seite ${x.p}${x.bd ? ' · ⚑ Bedingung: ' + esc(x.bd) : ''}</span></blockquote>`;
+  let h = `<h4>Ziffer ${zref(a, 'nb')} neben ${zref(b, 'nb')}</h4>`, n = 0;
+  for (const [x, y] of [[a, b], [b, a]]) for (const q of rule(x, y)) {
+    n++; const t = q.t;
+    h += `<p>${t === 'N' ? `<b>Nicht neben:</b> ${x} ist neben ${y} nicht berechnungsfähig.` : t === 'U' ? `<b>Nur neben:</b> ${x} ist nur zusammen mit mindestens einer der genannten Ziffern berechnungsfähig; ${y} gehört dazu.` : t === 'E' ? `<b>Ausdrücklich erlaubt:</b> ${x} neben ${y}.` : t === 'B' ? `<b>Nur mit Begründung</b> neben ${y}.` : `<b>Nur mit Abschlag</b> neben ${y}.`}${x === b ? ' (Regel der Ziffer ' + b + ' – Gegenrichtung)' : ''}</p>` + quote(q);
+  }
+  for (const [x, y, rx] of [[a, b, ra], [b, a, rb]]) {
+    const u = ownRules(rx, ['U']); if (u.length && !u.some(q => q.zz.includes(y))) { n++; h += `<p><b>Nur neben:</b> ${x} ist nur neben ${cap([...new Set(u.flatMap(q => q.zz))].sort((p, q) => p - q), 8, v => zref(v, 'nb'))} berechnungsfähig; ${y} gehört <b>nicht</b> dazu.</p>`; }
+  }
+  if (!n) h += `<p>Zwischen ${a} und ${b} ist im Dashboard keine Regel zur Nebeneinanderberechnung hinterlegt. Das bedeutet nicht automatisch, dass beide immer nebeneinander berechnet werden dürfen: Regeln aus Allgemeinen Bestimmungen mit Kapitel- oder Abschnittsbezug und Bedingungen sind je Ziffer zu prüfen.</p>`;
+  const frei = [ra, rb].flatMap(rx => ownRules(rx, ['N', 'U']).filter(q => !q.zz.length)); if (frei.length) h += `<p>⚑ Beachte: Für ${[...new Set(frei.flatMap(q => q.sz))].join(', ')} gibt es Regeln ohne einzelne Ziffer (Bezug nur im Wortlaut): ${esc(frei[0].satz)}</p>`;
+  return h + `<p class="srcp">Quelle: ${srcl('nb', a)} · ${srcl('nb', b)}</p>`;
+}
+const ivNames = r => { const m = new Map(); r.iv.forEach(t => t[0].forEach(i => { if (!m.has(i)) m.set(i, []); m.get(i).push(t); })); return m; };
+function secIntervall(r){
+  let h = `<h4>Intervalle und Häufigkeit</h4>`; const m = ivNames(r);
+  if (!m.size) return h + `<p>Im Wortlaut dieser Ziffer wurde kein Intervall und keine Häufigkeitsgrenze erkannt.</p><p class="srcp">Quelle: ${srcl('iv', r.z)}</p>`;
+  h += `<ul>${[...m].sort((a, b) => a[0] - b[0]).map(([i, ts]) => `<li><b>${esc(IV[i].name)}</b> (${IVST[IV[i].status].name}, Cluster ${IV[i].cluster}: ${esc(IV[i].cluster_name)})${ts.slice(0, 2).map(t => `<blockquote>${esc(t[2])}<span>${QL[t[1]]}${t[3] ? ' · Häufigkeit laut Wortlaut: ' + esc(t[3]) : ''}</span></blockquote>`).join('')}</li>`).join('')}</ul>`;
+  return h + `<p class="srcp">Quelle: ${srcl('iv', r.z)}</p>`;
+}
+function secGeschlecht(r, g){
+  let h = `<h4>Geschlechtsbezug</h4>`, e = r.ge, nm = x => x === 'W' ? 'weiblich' : 'männlich';
+  if (!e) return h + `<p>Für diese Ziffer ist im Dashboard kein Geschlechtsbezug hinterlegt${g ? ' – gegen ' + (g === 'W' ? 'eine Frau' : 'einen Mann') + ' spricht daher nichts' : ''}.</p><p class="srcp">Quelle: ${srcl('ge', r.z)}</p>`;
+  if (e[0] === 'H') { h += `<p>Leistungsinhalt <b>${nm(e[1])}</b> (${esc(e[2])}, Konfidenz ${esc(e[4])}). Begründung: ${esc(e[6])}</p>`;
+    h += g ? (g === e[1] ? `<p>Das passt zur genannten Person (${nm(g)}).</p>` : `<p>Das widerspricht dem genannten Geschlecht (${nm(g)}). Nach Kap. A, AB Nr. 4 zählt der individuelle medizinische Bedarf, nicht der Personenstandseintrag: Es gibt nur eine weiche Prüfung (Aussteuerung an die Sachbearbeitung), keine automatische Ablehnung.</p>`) : `<p>Prüfung: weich (Aussteuerung an die Sachbearbeitung, keine automatische Ablehnung; Kap. A, AB Nr. 4).</p>`; }
+  else if (e[0] === 'G') h += `<p>Grenzfall: Geschlechtsbezug nicht obligatorisch (${esc(e[2])}${e[1] && e[1] !== '—' ? ', Vorschlag ' + nm(e[1]) : ''}). Empfehlung: ${esc(e[7])}</p>`;
+  else h += `<p>Geprüft und bewusst nicht aufgenommen: ${esc(e[2])} – ${esc(e[6])}</p>`;
+  return h + `<p class="srcp">Quelle: ${srcl('ge', r.z)}</p>`;
+}
+function secAlter(r, age){
+  let h = `<h4>Altersbezug</h4>`, a = r.al;
+  if (!a || (!a.h && !a.i && !a.r && !a.b)) return h + `<p>Für diese Ziffer ist im Dashboard kein Altersbezug hinterlegt.</p><p class="srcp">Quelle: ${srcl('al', r.z)}</p>`;
+  if (a.h) { const x = a.h, ok = age === null ? null : (x[2] === null || age >= x[2]) && (x[3] === null || age <= x[3]);
+    h += `<p>Prüfbedingung: <b>${esc(x[4])}</b> (Alter in vollendeten Lebensjahren am Behandlungstag; Wortlaut: „${esc(x[1])}“). Reaktion: <b>${esc(x[5])}</b>.</p>`;
+    if (age !== null) h += ok ? `<p>Alter ${age} liegt innerhalb der Grenze – die Altersprüfung ist unauffällig.</p>` : x[5] === 'Ablehnung' ? `<p>Alter ${age} liegt <b>außerhalb</b> der Grenze: Die Ziffer ist laut Dashboard nicht berechnungsfähig (harte Altersgrenze).</p>` : `<p>Alter ${age} liegt <b>außerhalb</b> der Grenze: nur mit der Ausnahme berechnungsfähig: ${esc(x[6] || 'siehe Reiter')}${x[7] ? ' (' + esc(x[7]) + ', Diagnoseliste noch offen)' : ''}.</p>`;
+    else if (x[6]) h += `<p>Ausnahme: ${esc(x[6])}</p>`;
+    if (x[11]) h += `<p>Narkose-/Sedierungsregel: ${esc(x[11])}</p>`; if (x[12]) h += `<p>Hinweis aus der Analyse: ${esc(x[12])}</p>`; }
+  if (a.i) h += `<p>Impliziter Altersbezug (nur Hinweis, keine Ablehnung): „${esc(a.i[0] || '–')}“ – Vorschlag: ${esc(a.i[2])}; Hinweis wenn: ${esc(a.i[3])}.</p>`;
+  if (a.r) h += `<p>Altersabhängige Regel (${esc(a.r[0])}): ${esc(a.r[1])} – ${esc(a.r[2])}</p>`;
+  if (a.b) h += a.b.map(i => `<p>Altersbänder der Leistungsfamilie ${esc(AL.baender[i].name)}: ${AL.baender[i].baender.map(([z, c]) => zref(z, 'al', z + ': ' + esc(c))).join(' · ')}.</p>`).join('');
+  return h + `<p class="srcp">Quelle: ${srcl('al', r.z)}</p>`;
+}
+function secMapping(zs, q){
+  const lower = q.toLowerCase(); let h = '';
+  const altRe = /(heutig\w*|aktuell\w*|bisherig\w*|derzeit\w*|früher\w*|alte[nrms]?|bestehend\w*)/g, neuRe = /neue[nrms]?/g;
+  for (const z of zs) {
+    const idx = lower.search(new RegExp('(?:^|\\D)' + z + '(?!\\d)')), before = lower.slice(Math.max(0, idx - 45), idx + 1);
+    const last = re => { let p = -1; for (const m of before.matchAll(re)) p = m.index; return p; };
+    const pa = last(altRe), pn = last(neuRe); const wantAlt = pa > pn, wantNeu = pn > pa;
+    const a = ALT.by.get(z), r = BYZ.get(+z);
+    if (a && !wantNeu) { h += `<h4>Alte GOÄ ${zref(z, 'mpa')} → GOÄneu</h4><p>${esc(a.t)}</p>`;
+      h += a.neu.length ? `<ul>${a.neu.map(([n, pp]) => `<li>neue Ziffer ${zref(n, 'mpa')} (${esc(short(BYZ.get(n).t, 110))}) – ${pp === null ? 'Nutzervorgabe, ohne automatische Wahrscheinlichkeit' : 'Wahrscheinlichkeit <b>' + pct(pp) + '</b>'}; Gebühr neu ${euro(BYZ.get(n).g)}</li>`).join('')}</ul>` : `<p>Für diese alte Ziffer ist keine neue Ziffer zugeordnet.</p>`;
+      h += `<p>Status: <b>${esc(MST[a.mst].name)}</b> (Gesamt-Wahrscheinlichkeit ${pct(a.p)}, Verhältnis ${esc(a.vh)}, Quelle: ${esc(a.ql)}). Begründung: ${esc(a.bg)}</p><p class="srcp">Quelle: ${srcl('mpa', z)}</p>`; }
+    if (r && !wantAlt) { h += `<h4>GOÄneu ${zref(z, 'mpn')} → Pendant in der alten GOÄ</h4><p>${esc(short(r.t, 160))}</p>`;
+      h += r.alt.length ? `<ul>${r.alt.map(([x, pp]) => `<li>alte Ziffer ${zref(x.z, 'mpa')} (${esc(x.t)}) – ${pp === null ? 'Nutzervorgabe' : 'Wahrscheinlichkeit <b>' + pct(pp) + '</b>'}, Status ${esc(MST[x.mst].name)}<br><span class="srcp">Begründung: ${esc(x.bg)}</span></li>`).join('')}</ul>` : `<p>Dieser neuen Ziffer ist keine Ziffer der heutigen GOÄ zugeordnet – sie ist neu oder neu zugeschnitten.</p>`;
+      h += `<p class="srcp">Quelle: ${srcl('mpn', z)}</p>`; }
+    if (a && r && !wantAlt && !wantNeu) h += `<p>⚑ Nummernkollision: ${z} bezeichnet in der alten und in der neuen GOÄ verschiedene Leistungen.</p>`;
+  }
+  return h + `<p class="srcp">Die Wahrscheinlichkeit ist eine Schätzung (Textähnlichkeit), kein Messwert.</p>`;
+}
+function steckbrief(r){
+  const m = r.m, nN = ownRules(r, ['N']), nU = ownRules(r, ['U']), iv = ivNames(r), g = r.ge, al = r.al;
+  const zsN = [...new Set(nN.flatMap(x => x.zz))].filter(v => v !== r.z), zsU = [...new Set(nU.flatMap(x => x.zz))];
+  let h = `<p><b>Ziffer ${r.z}</b> – ${esc(r.t)}<br>Gebühr (1,0-fach): <b>${euro(r.g)}</b> · ${esc(kapz(r))}</p><ul>`;
+  h += `<li><b>Steigerung:</b> ${m ? Object.keys(m.gruende).map(k => k + ' ×' + m.gruende[k]).join(', ') + '; max. praktisch ×' + m.moegl[m.maxP].f + ' = ' + euro(r.c[m.maxP]) : 'nicht durch AB steigerfähig (×1,0)'} – ${srcl('ab', r.z)}</li>`;
+  h += `<li><b>Nebeneinander:</b> ${nN.length || nU.length ? [nN.length ? 'nicht neben ' + (zsN.length ? cap(zsN, 6, v => zref(v, 'nb')) : 'siehe Wortlaut') : '', nU.length ? 'nur neben ' + cap(zsU, 6, v => zref(v, 'nb')) : ''].filter(Boolean).join('; ') : 'keine Nicht-neben-/Nur-neben-Regel hinterlegt'} – ${srcl('nb', r.z)}</li>`;
+  h += `<li><b>Intervalle:</b> ${iv.size ? [...iv.keys()].sort((a, b) => a - b).map(i => esc(IV[i].name)).join(', ') : 'kein Intervall erkannt'} – ${srcl('iv', r.z)}</li>`;
+  h += `<li><b>Geschlecht:</b> ${!g ? 'kein Geschlechtsbezug' : g[0] === 'H' ? (g[1] === 'W' ? 'weiblich' : 'männlich') + ' (' + esc(g[2]) + ')' : g[0] === 'G' ? 'Grenzfall (nur Hinweis)' : 'geprüft, nicht aufgenommen'} – ${srcl('ge', r.z)}</li>`;
+  h += `<li><b>Alter:</b> ${al && al.h ? esc(al.h[4]) + ' (' + esc(al.h[5]) + ')' : al && al.i ? 'impliziter Altersbezug (Hinweis)' : al && al.r ? 'altersabhängige Regel' : 'kein Altersbezug'} – ${srcl('al', r.z)}</li>`;
+  h += `<li><b>Alte GOÄ:</b> ${r.alt.length ? r.alt.map(([x, pp]) => 'alt ' + zref(x.z, 'mpa') + ' (' + pct(pp === null ? x.p : pp) + ')').join(', ') : 'kein Pendant zugeordnet'} – ${srcl('mpn', r.z)}</li></ul>`;
+  if (ALT.by.has(String(r.z))) h += `<p>⚑ Nummernkollision: In der alten GOÄ ist ${r.z} eine andere Leistung (${esc(ALT.by.get(String(r.z)).t)}).</p>`;
+  return h;
+}
+function searchTexts(q, alt){
+  const orig = q.toLowerCase().replace(/[^a-zäöüß0-9\- ]/g, ' ').split(/\s+/).filter(t => t.length > 2 && !AGENT_STOP.has(t) && !/^\d+$/.test(t)), toks = orig.map(stem);
+  if (!toks.length) return null;
+  const rows = alt ? ALT.rows : R;
+  const sc = rows.map(r => ({r, n: toks.filter(t => r.lt.includes(t)).length})).filter(x => x.n > 0);
+  const best = Math.max(0, ...sc.map(x => x.n)); if (!best || best < Math.ceil(toks.length / 2)) return {toks, orig, hits: [], best: 0};
+  const hits = sc.filter(x => x.n === best).map(x => x.r);
+  return {toks, orig, hits, best, all: toks.length};
+}
+/* Glossar und Themenfragen ohne Ziffer */
+function glossar(q){
+  const s = q.toLowerCase(), out = [];
+  const g = (re, f) => { if (re.test(s)) out.push(f()); };
+  [['G', /gerinnung/], ['B', /adipos|bmi|übergewicht/], ['S', /schwanger/], ['F', /frühgebor/], ['V', /beatmung|ct\/mrt|mrt/]].forEach(([k, re]) => g(re, () => `<h4>Steigerungsgrund ${k}: ${esc(GR[k].name)} (×${GR[k].faktor})</h4><p>${esc(GR[k].wortlaut || GR[k].voraussetzung)}</p><p>Geltungsbereich: ${esc(GR[k].geltung)} · Nachweis: ${esc(GR[k].nachweis)} · Ausnahme: ${esc(GR[k].ausnahme)} · Rechtsgrundlage: ${GR[k].ids.map(esc).join(', ')}.</p>`));
+  g(/ausnahmeprüfung/, () => `<p><b>Ausnahmeprüfung:</b> ${esc(AST.E.tip)}</p>`); g(/ablehnung|harte altersgrenze/, () => `<p><b>Ablehnung (Alter):</b> ${esc(AST.A.tip)}</p>`);
+  g(/implizit/, () => `<p><b>Impliziter Altersbezug:</b> ${esc(AST.I.tip)}</p>`); g(/weiche prüfung|aussteuerung/, () => `<p><b>Weiche Prüfung:</b> Nach Kap. A, AB Nr. 4 zählt bei geschlechtsspezifischem Leistungsinhalt der individuelle medizinische Bedarf, nicht der Personenstandseintrag. Ein Widerspruch führt nur zur Aussteuerung an die Sachbearbeitung, nie zur automatischen Ablehnung.</p>`);
+  g(/nicht neben/, () => `<p><b>Nicht neben:</b> ${esc(NBT.N.tip)}</p>`); g(/nur neben/, () => `<p><b>Nur neben:</b> ${esc(NBT.U.tip)}</p>`);
+  g(/multipl|kumulier|mehrere gründe/, () => `<p>Die Steigerungsmatrix nimmt an, dass sich mehrere Gründe multiplizieren. Der Entwurf regelt nicht ausdrücklich, ob mehrere Gründe kumulieren. Nicht enthalten sind § 2 (individuell vereinbarter höherer Faktor), Zuschläge und alle Minderungen (z. B. 0,9× ab der 2. Hauptleistung, § 6a).</p>`);
+  g(/konfidenz/, () => `<p><b>Konfidenz (Geschlecht):</b> „hoch“ = Geschlecht steht in der Legende oder das Organ bzw. Material gehört nur einem Geschlecht; „mittel“ = fachlich abgeleitet (z. B. Reproduktionsmedizin mit Paarbezug, Douglasraum, Rektozele).</p>`);
+  g(/wahrscheinlichkeit|sicher\b|plausibel|unsicher|keine entsprechung|sammelposition/, () => `<p><b>Wahrscheinlichkeit im Mapping:</b> Schätzung, wie wahrscheinlich die erste neue Ziffer inhaltlich dasselbe beschreibt (Textähnlichkeit, kalibriert an 104 Stichproben). Sicher ab 80 %, plausibel 50–79 % (gegenprüfen), unsicher 25–49 % (nur Vorschlag), keine Entsprechung unter 25 %; Sammelposition = keine 1:1-Zuordnung. Manuell geprüft sind nur die alten Abschnitte B und G.</p>`);
+  g(/prüfgröße|vollendet|lebensjahr/, () => `<p><b>Alter:</b> ${esc(AL.info['Prüfgröße'] || '')} ${esc((AL.info['Umrechnung GOÄ-Wortlaut'] || '').split('\n')[0])}</p>`);
+  IV.forEach(d => { const w = d.name.toLowerCase().replace(/\s*\(.*\)/, ''); if (w.length > 5 && s.includes(w)) out.push(`<p><b>${esc(d.name)}</b> (${IVST[d.status].name}, Cluster ${d.cluster}): ${esc(d.lang)}${d.hinweis ? ' – ' + esc(d.hinweis) : ''}</p>`); });
+  return out;
+}
+const AGG = [
+  [/gerinnung/, 'Ziffern mit Steigerungsgrund Gerinnungsstörung', () => R.filter(r => r.m && 'G' in r.m.gruende).length, 'ab:G'],
+  [/adipos|bmi|übergewicht/, 'Ziffern mit Steigerungsgrund Adipositas (BMI ≥ 40)', () => R.filter(r => r.m && 'B' in r.m.gruende).length, 'ab:B'],
+  [/schwanger/, 'Ziffern mit Steigerungsgrund Schwangerschaft ≥ 12. SSW', () => R.filter(r => r.m && 'S' in r.m.gruende).length, 'ab:S'],
+  [/frühgebor/, 'Ziffern mit Steigerungsgrund Frühgeborenes', () => R.filter(r => r.m && 'F' in r.m.gruende).length, 'ab:F'],
+  [/beatmung|ct\/mrt|mrt/, 'Ziffern mit Steigerungsgrund CT/MRT unter Beatmung', () => R.filter(r => r.m && 'V' in r.m.gruende).length, 'ab:V'],
+  [/nicht (durch ab )?steigerfähig|keine steigerung|nicht gesteigert/, 'Ziffern, die nicht durch AB steigerfähig sind', () => R.filter(r => !r.m).length, 'ab:ohne'],
+  [/steiger|ab-gründe|ab gründe/, 'Ziffern mit mindestens einem AB-Steigerungsgrund', () => R.filter(r => r.m).length, 'ab:'],
+  [/nicht neben/, 'Ziffern mit „Nicht neben“-Regel', () => R.filter(r => r.oN).length, 'nb:N'], [/nur neben/, 'Ziffern mit „Nur neben“-Regel', () => R.filter(r => r.oU).length, 'nb:U'],
+  [/weiblich|frauen/, 'Ziffern mit weiblichem Geschlechtsbezug', () => R.filter(r => r.gs === 'W').length, 'ge:W'], [/männlich|männer/, 'Ziffern mit männlichem Geschlechtsbezug', () => R.filter(r => r.gs === 'M').length, 'ge:M'],
+  [/grenzfäll/, 'Grenzfälle beim Geschlechtsbezug', () => R.filter(r => r.gs === 'G').length, 'ge:G'], [/geschlecht/, 'Ziffern mit Geschlechtsbezug (weiblich oder männlich)', () => R.filter(r => r.gs === 'W' || r.gs === 'M').length, 'ge:'],
+  [/ausnahmeprüfung/, 'Ziffern mit Ausnahmeprüfung beim Alter', () => R.filter(r => r.ak.includes('E')).length, 'al:E'], [/ablehnung/, 'Ziffern mit Alters-Ablehnung (harte Altersgrenze)', () => R.filter(r => r.ak.includes('A')).length, 'al:A'],
+  [/implizit/, 'Ziffern mit implizitem Altersbezug', () => R.filter(r => r.ak.includes('I')).length, 'al:I'], [/alter|altersgrenze|kinder|lebensjahr/, 'Ziffern mit Altersprüfung (Ablehnung oder Ausnahmeprüfung)', () => R.filter(r => r.ak.includes('A') || r.ak.includes('E')).length, 'al:'],
+  [/sicher\b/, 'alte Ziffern mit Mapping-Status „Sicher“', () => ALT.rows.filter(r => r.mst === 'SICHER').length, 'mp:SICHER'], [/plausibel/, 'alte Ziffern mit Mapping-Status „Plausibel“', () => ALT.rows.filter(r => r.mst === 'PLAUSIBEL').length, 'mp:PLAUSIBEL'],
+  [/unsicher/, 'alte Ziffern mit Mapping-Status „Unsicher“', () => ALT.rows.filter(r => r.mst === 'UNSICHER').length, 'mp:UNSICHER'], [/keine entsprechung/, 'alte Ziffern ohne erkennbare Entsprechung', () => ALT.rows.filter(r => r.mst === 'KEINE_ENTSPRECHUNG_ERKENNBAR').length, 'mp:KEINE_ENTSPRECHUNG_ERKENNBAR'],
+];
+function intervalAgg(s){
+  const m = [[/sitzung/, 'sitzung'], [/kalenderjahr/, 'kalenderjahr'], [/halbjahr/, 'kalenderhalbjahr'], [/quartal/, 'quartal'], [/kalenderwoche/, 'kalenderwoche'], [/kalendermonat/, 'kalendermonat'], [/krankheitsfall/, 'krankheitsfall'], [/behandlungsfall/, 'behandlungsfall_neu'], [/24 stunden/, 'rollierend_24h'], [/tag\b|kalendertag|täglich/, 'tag']].find(([re]) => re.test(s));
+  if (!m) return null; const i = IV.findIndex(d => d.id === m[1]); if (i < 0) return null;
+  return [`Ziffern mit dem Intervall „${IV[i].name}“`, R.filter(r => r.iv.some(t => t[0].includes(i))).length, 'iv:' + i];
+}
+function jump(code){
+  const [v, k] = code.split(':'); const view = {ab:'ab', nb:'nb', ge:'ge', al:'al', mp:'mp', iv:'iv'}[v];
+  setView(view); clearFilters(); st.collapsed.clear();
+  if (v === 'ab') { if (k === 'ohne') st.ohne = true; else if (k) st.gr = new Set([k]); } else if (v === 'nb' && k) st.nb = new Set([k]); else if (v === 'ge' && k) st.gst = new Set([k]);
+  else if (v === 'al' && k) st.ast = new Set([k]); else if (v === 'mp') { if (st.mpdir !== 'alt') setDir('alt'); st.mpst = new Set([k]); } else if (v === 'iv') { st.ivsel = k; renderIvSel(); }
+  renderNav(); apply(); list.scrollTop = 0;
+}
+const SUGG = ['Wie hoch ist der maximale Gebührensatz für Ziffer 1200?', 'Welche neue Ziffer entspricht der heutigen 863?', 'Darf Ziffer 1200 neben 1225 abgerechnet werden?', 'Wie oft ist Ziffer 4444 abrechenbar?', 'Darf Ziffer 36 bei einem 9-jährigen abgerechnet werden?', 'Hat Ziffer 111 einen Geschlechtsbezug?', 'Wie viele Ziffern können wegen Schwangerschaft gesteigert werden?', 'Was bedeutet Ausnahmeprüfung?'];
+const KEINE = 'Dazu enthält das Dashboard keine Information. Ich beantworte nur Fragen, die sich aus den Daten dieses Dashboards ergeben: AB-Steigerungsgründe und Gebührensatz, Nebeneinanderberechnung, Intervalle, Geschlechts- und Altersprüfung sowie das Mapping zwischen alter und neuer GOÄ.';
+function answer(q0){
+  const q = q0.trim(), s = q.toLowerCase(); if (!q) return '';
+  const zs = ziffernIn(q), age = ageIn(q), rs = reasonsIn(q), gd = genderIn(q), parts = [];
+  const f = {
+    neben: /neben|zusammen|gleichzeitig|kombin|nebeneinander/.test(s), iv: /wie oft|pro tag|je tag|täglich|sitzung|kalender|quartal|halbjahr|intervall|häufig|zeitraum|behandlungsfall|krankheitsfall|mal\b|innerhalb von|abstand|woche|monat/.test(s),
+    map: /heutig|aktuell|bisherig|derzeit|früher|pendant|entsprech|ersetz|nachfolger|mapping|umgestellt|alte[nrms]?\s+(goä|ziffer|nr|nummer)|neue[nrms]?\s+(goä|ziffer|nr|nummer)/.test(s),
+    ge: /geschlecht|männlich|weiblich|\bmann\b|männer|\bfrau|patientin/.test(s), al: age !== null || /alter\b|altersgrenze|kind\b|kinder|jugendlich|lebensjahr|säugling|neugeboren|erwachsen/.test(s),
+    fee: /gebühr|kostet|betrag|euro|€|wie viel|wieviel|preis|vergütung/.test(s) && !/maximal|höchst|steiger/.test(s), st: rs.length > 0 || /steiger|faktor|höchst|maximal|aufschlag|\d[,.]?\d?\s*fach|ab-gründe|zuschlag auf/.test(s)
+  };
+  const nummern = [...q.matchAll(/(?:ziffer|nummer|nr\.?|goä)\s*(\d{1,5})/gi)].map(m => m[1]).filter(n => !BYZ.has(+n) && !ALT.by.has(n));
+  if (/^(hallo|hi|guten (tag|morgen)|hilfe|help|was kannst du|wie funktionierst)/.test(s) || /was kannst du|was kann ich dich fragen/.test(s))
+    return `<p>Ich beantworte Fragen zum gebührenrechtlichen Teil – <b>ausschließlich aus den Daten dieses Dashboards</b>:</p><ul><li>Steigerung und maximaler Gebührensatz je Ziffer (auch mit Gründen wie BMI oder Gerinnungsstörung)</li><li>Nicht neben / Nur neben, auch für zwei Ziffern</li><li>Intervalle und Häufigkeit (z. B. je Sitzung, im Kalenderjahr)</li><li>Geschlechts- und Altersprüfung (auch mit konkretem Alter)</li><li>Mapping alte ↔ neue GOÄ mit Wahrscheinlichkeit</li><li>Suche nach Leistungen im Text und Zählfragen („Wie viele Ziffern …“)</li></ul><p>Fragen außerhalb dieser Daten beantworte ich nicht.</p>`;
+  if (!zs.length && nummern.length) return `<p>Die Ziffer ${esc(nummern[0])} gibt es weder in der neuen noch in der alten GOÄ dieses Dashboards.</p>`;
+  const anyFlag = Object.values(f).some(Boolean), hasWord = /ziffer|nummer|\bnr\b|goä|leistung/.test(s);
+  const fremd = s.replace(/[^a-zäöüß ]/g, ' ').split(/\s+/).filter(t => t.length > 2 && !AGENT_STOP.has(t)).length;
+  if (zs.length && !hasWord && !anyFlag && fremd > 0) return `<p>${KEINE}</p>`;
+  if (zs.length) {
+    const rows = zs.map(z => BYZ.get(+z)).filter(Boolean);
+    if (zs.length >= 2 && (f.neben || (!f.map && !f.iv && !f.ge && !f.al && !f.st && !f.fee && /abrechn|berechn|zusammen/.test(s)))) { const ns = zs.map(Number).filter(n => BYZ.has(n)); for (let i = 0; i < ns.length && parts.length < 4; i++) for (let j = i + 1; j < ns.length && parts.length < 4; j++) parts.push(secPair(ns[i], ns[j])); return parts.join(''); }
+    if (f.map) return secMapping(zs, q);
+    if (!rows.length) return secMapping(zs, q);
+    for (const r of rows.slice(0, 3)) {
+      let n = 0; const o = [];
+      if (f.st) { o.push(secSteig(r, rs)); n++; } if (f.neben) { o.push(secNeben(r)); n++; } if (f.iv) { o.push(secIntervall(r)); n++; } if (f.ge) { o.push(secGeschlecht(r, gd)); n++; } if (f.al) { o.push(secAlter(r, age)); n++; }
+      if (f.fee && !n) { o.push(`<p>Ziffer ${zref(r.z)} – ${esc(r.t)}<br>Gebühr (1,0-fach): <b>${euro(r.g)}</b>.</p><p class="srcp">Quelle: ${srcl('ab', r.z)}</p>`); n++; }
+      if (!n) o.push(steckbrief(r)); else if (n && !f.fee) o.unshift(`<p><b>Ziffer ${zref(r.z)}</b> – ${esc(short(r.t, 140))} · ${euro(r.g)}</p>`);
+      parts.push(o.join(''));
+    }
+    return parts.join('<hr>');
+  }
+  if (/wie viele|anzahl|wieviele|zähle/.test(s)) {
+    let hit = intervalAgg(s); if (!hit) { const a = AGG.find(([re]) => re.test(s)); if (a) hit = [a[1], a[2](), a[3]]; }
+    if (hit) { const [label, n, code] = hit; return `<p><b>${nf(n)}</b> ${esc(label)}.</p><p><button class="chact" data-jump="${esc(code)}">In Reiter „${VNAME[code.startsWith('ab') ? 'ab' : code.startsWith('nb') ? 'nb' : code.startsWith('ge') ? 'ge' : code.startsWith('al') ? 'al' : code.startsWith('iv') ? 'iv' : 'mpa']}“ anzeigen</button></p>`; }
+  }
+  const gl = glossar(q); if (gl.length) return gl.join('');
+  const srch = searchTexts(q, /heutig|alte[nrms]?\s*goä|aktuelle goä|bisherig/.test(s));
+  if (srch && srch.hits.length) { const alt = /heutig|alte[nrms]?\s*goä|aktuelle goä|bisherig/.test(s);
+    return `<p>${nf(srch.hits.length)} Treffer in der ${alt ? 'alten' : 'neuen'} GOÄ für „${esc(srch.orig.join(' '))}“${srch.best < srch.all ? ' (nicht alle Suchbegriffe kommen vor)' : ''}:</p><ul>${srch.hits.slice(0, 8).map(r => `<li>${zref(r.z, alt ? 'mpa' : 'ab')} – ${esc(short(r.t, 130))}${alt ? '' : ' · ' + euro(r.g)}</li>`).join('')}</ul>${srch.hits.length > 8 ? `<p>… und ${srch.hits.length - 8} weitere. <button class="chact" data-find="${esc(q)}">In der Suche anzeigen</button></p>` : ''}`; }
+  return `<p>${KEINE}</p>`;
+}
+function chAdd(who, html, plain){ CH.msgs.push({who, html}); const d = document.createElement('div'); d.className = 'cm ' + who; d.innerHTML = who === 'u' ? `<div class="cb">${esc(plain)}</div>` : `<div class="cb">${html}</div>`; $('#chlog').appendChild(d); $('#chlog').scrollTop = $('#chlog').scrollHeight; }
+function chAsk(q){ q = q.trim(); if (!q) return; chAdd('u', '', q); let a; try { a = answer(q); } catch (e) { a = `<p>${KEINE}</p>`; } chAdd('a', a + '<p class="fine">Antwort ausschließlich aus den Daten dieses Dashboards – keine Rechtsberatung.</p>'); $('#chin').value = ''; $('#chin').style.height = ''; }
+function chInit(){
+  chAdd('a', `<p>Guten Tag! Ich beantworte Fragen zum gebührenrechtlichen Teil – <b>ausschließlich aus den Daten dieses Dashboards</b> (alle Reiter) und nenne jeweils die Quelle. Was möchten Sie wissen?</p><div class="sugg">${SUGG.map(x => `<button data-q="${esc(x)}">${esc(x)}</button>`).join('')}</div>`);
+}
+$('#chform').addEventListener('submit', e => { e.preventDefault(); chAsk($('#chin').value); });
+$('#chin').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); chAsk($('#chin').value); } });
+$('#chin').addEventListener('input', e => { e.target.style.height = 'auto'; e.target.style.height = Math.min(e.target.scrollHeight, 140) + 'px'; });
+$('#chlog').addEventListener('click', e => {
+  const b = e.target.closest('button[data-q]'); if (b) { chAsk(b.dataset.q); return; }
+  const j = e.target.closest('button[data-jump]'); if (j) { jump(j.dataset.jump); return; }
+  const fd = e.target.closest('button[data-find]'); if (fd) { setView('ab'); clearFilters(); $('#q').value = fd.dataset.find.replace(/[^\wäöüÄÖÜß ]/g, ' ').split(/\s+/).filter(t => t.length > 2 && !AGENT_STOP.has(t.toLowerCase())).join(' '); st.q = $('#q').value; st.collapsed.clear(); renderNav(); apply(); return; }
+  const a = e.target.closest('a[href^="#"]'); if (a) { e.preventDefault(); const h = a.getAttribute('href'); if (location.hash !== h) history.pushState(null, '', h); fromHash(); }
+});
+$('#chclear').addEventListener('click', () => { CH.msgs = []; $('#chlog').innerHTML = ''; chInit(); $('#chin').focus(); });
+chInit();
+
 function fromHash(){
   const t = location.hash.slice(1).split('/');
   if (t[0] === 'mapping') { setView('mp', true); const d = t[1] === 'neu' ? 'neu' : 'alt'; if (d !== st.mpdir) setDir(d); if (t[2]) goto(d === 'neu' ? +t[2] : decodeURIComponent(t[2])); return; }
-  const m = /^#(neben|intervalle|geschlecht|alter)?\/?(\d+)?$/.exec(location.hash); if (!m) return;
-  setView(m[1] === 'neben' ? 'nb' : m[1] === 'intervalle' ? 'iv' : m[1] === 'geschlecht' ? 'ge' : m[1] === 'alter' ? 'al' : 'ab', true);
+  const m = /^#(neben|intervalle|geschlecht|alter|assistent)?\/?(\d+)?$/.exec(location.hash); if (!m) return;
+  setView(m[1] === 'assistent' ? 'ch' : m[1] === 'neben' ? 'nb' : m[1] === 'intervalle' ? 'iv' : m[1] === 'geschlecht' ? 'ge' : m[1] === 'alter' ? 'al' : 'ab', true);
   if (m[2]) goto(+m[2]);
 }
 window.addEventListener('hashchange', fromHash);
