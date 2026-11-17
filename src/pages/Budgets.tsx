@@ -101,8 +101,8 @@ export default function Budgets() {
                   <span className="inline-block h-3 w-3 rounded-sm" style={{ backgroundColor: c.color }} aria-hidden />
                   <span className="font-medium">{c.name}</span>
                   <span className="ml-auto flex gap-1">
-                    <button className="px-1 text-indigo-600 hover:underline" onClick={() => startEdit(c)}>Ändern</button>
-                    <button className="px-1 text-red-600 hover:underline" onClick={() => setRemoving(c)}>Entfernen</button>
+                    <button className="px-1 text-indigo-600 dark:text-indigo-400 hover:underline" onClick={() => startEdit(c)}>Ändern</button>
+                    <button className="px-1 text-red-600 dark:text-red-400 hover:underline" onClick={() => setRemoving(c)}>Entfernen</button>
                   </span>
                 </div>
                 <BudgetBar label={c.name} spentCents={p.spentCents} budgetCents={p.budgetCents} status={p.status} />
@@ -120,7 +120,7 @@ export default function Budgets() {
                   <div className="flex items-center gap-2 text-sm">
                     <span className="inline-block h-3 w-3 rounded-sm" style={{ backgroundColor: c.color }} aria-hidden />
                     <span>{c.name}</span>
-                    {editing !== c.id && <button className="ml-auto px-1 text-indigo-600 hover:underline" onClick={() => startEdit(c)}>Budget festlegen</button>}
+                    {editing !== c.id && <button className="ml-auto px-1 text-indigo-600 dark:text-indigo-400 hover:underline" onClick={() => startEdit(c)}>Budget festlegen</button>}
                   </div>
                   {editing === c.id && editor(c)}
                 </li>

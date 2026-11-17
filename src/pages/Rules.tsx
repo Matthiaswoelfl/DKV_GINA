@@ -122,7 +122,7 @@ export default function Rules() {
                       {c?.name} <span className="text-xs text-slate-500">({r.categoryType === 'income' ? 'Einnahme' : 'Ausgabe'})</span>
                     </td>
                     <td className="text-right tabular-nums">{r.priority}</td>
-                    <td className="text-right"><button className="px-2 text-red-600 hover:underline" onClick={() => setDeleting(r)}>Löschen</button></td>
+                    <td className="text-right"><button className="px-2 text-red-600 dark:text-red-400 hover:underline" onClick={() => setDeleting(r)}>Löschen</button></td>
                   </tr>
                 );
               })}

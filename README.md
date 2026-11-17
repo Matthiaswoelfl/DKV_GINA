@@ -19,6 +19,12 @@ npm start        # gebaut, ein Port: http://localhost:5174
 
 Optional Beispieldaten (nur bei leerer Datenbank): `npm run seed`
 
+## Tipps zur Bedienung
+
+- Neue Buchung: `N` drücken, Betrag eingeben, mit `Tab` zum Empfänger, `Enter` speichert. Datum, Typ und Kategorie bleiben für die nächste Buchung stehen.
+- Ist der Port belegt, startest du mit `PORT=5180 npm start` auf einem anderen. Im Entwicklungsmodus (`npm run dev`) nutzt das Frontend Port 5173 und der Server 5174.
+- Beenden mit `Strg+C`; der Server schließt die Datenbank dabei sauber.
+
 ## Qualität
 
 ```bash
@@ -44,6 +50,7 @@ Alle Daten liegen in `data/finanzen.db` (SQLite). Es gibt zwei Wege zur Sicherun
 - Phase 2: Kategorien verwalten (Farbe, „ist Sparen“, archivieren, löschen mit Umbuchung), Regeln („Empfänger enthält REWE → Lebensmittel“), Auto-Kategorisierung neuer Buchungen, Regelangebot nach manueller Kategorisierung, Übersicht „Unkategorisiert“.
 - Phase 3: Dashboard mit Zeitraum-Auswahl (Monat, Quartal, Jahr, benutzerdefiniert, Vor/Zurück), KPI-Kacheln mit Vergleich zum Vorzeitraum, Ausgaben nach Kategorie (Donut, Klick filtert die Buchungsliste), 12-Monats-Verlauf mit Saldo-Linie, Kategorie-Trend, Top-Empfänger. Jedes Diagramm hat Tooltips mit exakten Beträgen, die Verläufe zusätzlich eine Tabellenansicht.
 - Phase 4: Monatsbudgets pro Kategorie (grün, gelb ab 80 %, rot bei Überschreitung) auf eigener Seite und im Dashboard, automatische Erkennung wiederkehrender Zahlungen mit Monatssumme, CSV-Export, JSON-Backup und Wiederherstellung.
+- Phase 5: Hell/Dunkel/System-Umschalter (wird gemerkt), Dialoge mit Fokusfalle und Escape, Tastenkürzel (`N` springt zum Betragsfeld, `Enter` speichert), Skip-Link, Leerzustände, Fehlerseite, Tablet-Layout, saubere Fehlermeldungen von Server und API.
 
 ### Wiederkehrende Zahlungen
 

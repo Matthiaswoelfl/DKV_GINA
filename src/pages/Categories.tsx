@@ -2,6 +2,7 @@ import { useState, type FormEvent } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { api, ApiError } from '../api/client';
 import type { Category, TransactionType } from '../../shared/schemas';
+import Modal from '../components/Modal';
 
 const card = 'rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800/60';
 
@@ -62,8 +63,8 @@ function DeleteDialog({ category, all, onClose }: { category: Category; all: Cat
     onError: (e) => setError(e instanceof ApiError ? e.message : 'Löschen fehlgeschlagen'),
   });
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" role="alertdialog" aria-modal="true" aria-label="Kategorie löschen" onKeyDown={(e) => e.key === 'Escape' && onClose()}>
-      <div className="w-full max-w-md rounded-lg bg-white p-5 shadow-xl dark:bg-slate-800">
+    <Modal label="Kategorie löschen" alert onClose={onClose}>
+      <div>
         <h2 className="text-lg font-semibold">Kategorie „{category.name}“ löschen?</h2>
         <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Zugehörige Regeln und Budgets werden ebenfalls gelöscht.</p>
         {category.transactionCount > 0 && (
@@ -77,11 +78,11 @@ function DeleteDialog({ category, all, onClose }: { category: Category; all: Cat
         )}
         {error && <p role="alert" className="mt-2 text-sm text-red-600">{error}</p>}
         <div className="mt-5 flex justify-end gap-2">
-          <button className="btn-secondary" onClick={onClose}>Abbrechen</button>
+          <button data-autofocus className="btn-secondary" onClick={onClose}>Abbrechen</button>
           <button className="rounded-md bg-red-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-red-700" onClick={() => del.mutate()}>Löschen</button>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 }
 
@@ -118,9 +119,9 @@ export default function Categories() {
                     {c.isSavings && <span className="rounded bg-lime-100 px-1.5 text-xs text-lime-800">Sparen</span>}
                     {c.archived && <span className="rounded bg-slate-200 px-1.5 text-xs text-slate-700">archiviert</span>}
                     <span className="ml-auto text-xs text-slate-500">{c.transactionCount} Buchungen</span>
-                    <button className="px-1 text-indigo-600 hover:underline" onClick={() => setEditingId(c.id)}>Bearbeiten</button>
+                    <button className="px-1 text-indigo-600 dark:text-indigo-400 hover:underline" onClick={() => setEditingId(c.id)}>Bearbeiten</button>
                     <button className="px-1 text-slate-600 hover:underline dark:text-slate-300" onClick={() => archive.mutate(c)}>{c.archived ? 'Aktivieren' : 'Archivieren'}</button>
-                    <button className="px-1 text-red-600 hover:underline" onClick={() => setDeleting(c)}>Löschen</button>
+                    <button className="px-1 text-red-600 dark:text-red-400 hover:underline" onClick={() => setDeleting(c)}>Löschen</button>
                   </div>
                 )}
               </li>

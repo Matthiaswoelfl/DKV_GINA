@@ -106,6 +106,7 @@ export default function TransactionForm({ categories, editing, onDone, onManualC
         <input
           id={`${listId}-amount`}
           ref={amountRef}
+          data-amount-input={editing ? undefined : ''}
           className="input text-right"
           inputMode="decimal"
           placeholder="0,00"

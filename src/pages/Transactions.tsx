@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { api, ApiError, type TxQuery } from '../api/client';
 import { parseAmountToCents } from '../../shared/money';
@@ -8,6 +8,7 @@ import { categorize } from '../../shared/categorize';
 import RuleOffer, { type RuleOfferData } from '../components/RuleOffer';
 import TransactionForm from '../components/TransactionForm';
 import ConfirmDialog from '../components/ConfirmDialog';
+import Modal from '../components/Modal';
 import { formatDate, formatEuro } from '../lib/format';
 
 type SortKey = TransactionFilter['sort'];
@@ -29,6 +30,22 @@ export default function Transactions() {
   const [editing, setEditing] = useState<Transaction | null>(null);
   const [deleting, setDeleting] = useState<Transaction | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
+
+  // Tastenkürzel: „N“ springt zum Betragsfeld der neuen Buchung.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const el = e.target as HTMLElement | null;
+      const typing = el && (['INPUT', 'TEXTAREA', 'SELECT'].includes(el.tagName) || el.isContentEditable);
+      if (e.key.toLowerCase() !== 'n' || e.ctrlKey || e.metaKey || e.altKey || typing || editing || deleting) return;
+      const field = document.querySelector<HTMLInputElement>('[data-amount-input]');
+      if (field) {
+        e.preventDefault();
+        field.focus();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [editing, deleting]);
 
   const minCents = min ? parseAmountToCents(min) : null;
   const maxCents = max ? parseAmountToCents(max) : null;
@@ -102,7 +119,9 @@ export default function Transactions() {
   return (
     <div className="space-y-5">
       <section className={card} aria-label="Neue Buchung">
-        <h2 className="mb-3 text-sm font-semibold">Neue Buchung</h2>
+        <h2 className="mb-3 text-sm font-semibold">
+          Neue Buchung <span className="ml-2 text-xs font-normal text-slate-500">Tipp: Taste N springt zum Betrag, Enter speichert.</span>
+        </h2>
         {categories.isError ? (
           <p role="alert" className="text-sm text-red-600">Kategorien konnten nicht geladen werden.</p>
         ) : (
@@ -227,8 +246,8 @@ export default function Transactions() {
                     {t.type === 'income' ? '+' : '−'}{formatEuro(t.amountCents)}
                   </td>
                   <td className="whitespace-nowrap text-right">
-                    <button className="px-2 text-indigo-600 hover:underline" onClick={() => setEditing(t)}>Bearbeiten</button>
-                    <button className="px-2 text-red-600 hover:underline" onClick={() => setDeleting(t)}>Löschen</button>
+                    <button className="px-2 text-indigo-600 dark:text-indigo-400 hover:underline" onClick={() => setEditing(t)}>Bearbeiten</button>
+                    <button className="px-2 text-red-600 dark:text-red-400 hover:underline" onClick={() => setDeleting(t)}>Löschen</button>
                   </td>
                 </tr>
               ))}
@@ -245,12 +264,10 @@ export default function Transactions() {
       </section>
 
       {editing && (
-        <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/40 p-4" role="dialog" aria-modal="true" aria-label="Buchung bearbeiten" onKeyDown={(e) => e.key === 'Escape' && setEditing(null)}>
-          <div className="w-full max-w-3xl rounded-lg bg-white p-5 shadow-xl dark:bg-slate-800">
-            <h2 className="mb-3 text-lg font-semibold">Buchung bearbeiten</h2>
-            <TransactionForm categories={cats} editing={editing} onDone={() => setEditing(null)} />
-          </div>
-        </div>
+        <Modal label="Buchung bearbeiten" onClose={() => setEditing(null)} className="max-w-3xl">
+          <h2 className="mb-3 text-lg font-semibold">Buchung bearbeiten</h2>
+          <TransactionForm categories={cats} editing={editing} onDone={() => setEditing(null)} />
+        </Modal>
       )}
       {deleting && (
         <ConfirmDialog

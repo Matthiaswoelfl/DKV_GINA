@@ -37,6 +37,15 @@ export function createApp(db: Db, opts: { staticDir?: string; backupDir?: string
       res.status(400).json({ error: err.issues.map((i) => i.message).join('; ') });
       return;
     }
+    const code = (err as { type?: string } | null)?.type;
+    if (code === 'entity.parse.failed') {
+      res.status(400).json({ error: 'Ungültige Anfrage (kein gültiges JSON)' });
+      return;
+    }
+    if (code === 'entity.too.large') {
+      res.status(413).json({ error: 'Die Datei ist zu groß' });
+      return;
+    }
     if (res.headersSent) {
       next(err);
       return;

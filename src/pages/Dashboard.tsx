@@ -22,6 +22,7 @@ export default function Dashboard() {
   const [trendCategory, setTrendCategory] = useState<string>('');
   const prev = useMemo(() => previousPeriod(period), [period]);
 
+  const total = useQuery({ queryKey: ['transactions', 'count'], queryFn: api.transactionCount });
   const categories = useQuery({ queryKey: ['categories'], queryFn: api.categories });
   const summary = useQuery({ queryKey: ['stats', 'summary', period.from, period.to], queryFn: () => api.summary(period.from, period.to) });
   const prevSummary = useQuery({ queryKey: ['stats', 'summary', prev.from, prev.to], queryFn: () => api.summary(prev.from, prev.to) });
@@ -71,6 +72,21 @@ export default function Dashboard() {
     setSelected(null);
   }
 
+  if (total.data?.count === 0) {
+    return (
+      <div className="mx-auto mt-10 max-w-lg rounded-lg border border-slate-200 bg-white p-8 text-center shadow-sm dark:border-slate-700 dark:bg-slate-800/60">
+        <h2 className="text-lg font-semibold">Willkommen!</h2>
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+          Noch ist nichts erfasst. Sobald du die ersten Buchungen angelegt hast, zeigt dir das Dashboard, wohin dein Geld geht und wie sich das über die Zeit verändert.
+        </p>
+        <div className="mt-5 flex flex-wrap justify-center gap-2">
+          <Link className="btn-primary" to="/transaktionen">Erste Buchung erfassen</Link>
+          <Link className="btn-secondary" to="/daten">Backup wiederherstellen</Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-5">
       <PeriodPicker period={period} onChange={changePeriod} />
@@ -87,7 +103,7 @@ export default function Dashboard() {
       <ChartCard
         title="Budgets"
         subtitle={period.kind === 'month' ? 'Verbrauch im gewählten Monat' : 'Monatsbudgets hochgerechnet auf den Zeitraum'}
-        actions={<Link className="text-sm text-indigo-600 hover:underline" to="/budgets">Budgets verwalten</Link>}
+        actions={<Link className="text-sm text-indigo-600 dark:text-indigo-400 hover:underline" to="/budgets">Budgets verwalten</Link>}
         chart={
           budgets.isError ? (
             <EmptyChart>Budgets konnten nicht geladen werden.</EmptyChart>

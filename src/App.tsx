@@ -1,4 +1,5 @@
-import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { NavLink, Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { api } from './api/client';
 import Dashboard from './pages/Dashboard';
@@ -7,6 +8,16 @@ import Categories from './pages/Categories';
 import Rules from './pages/Rules';
 import Budgets from './pages/Budgets';
 import Data from './pages/Data';
+import ThemeToggle from './components/ThemeToggle';
+
+const TITLES: Record<string, string> = {
+  '/': 'Dashboard',
+  '/transaktionen': 'Transaktionen',
+  '/kategorien': 'Kategorien',
+  '/regeln': 'Regeln',
+  '/budgets': 'Budgets',
+  '/daten': 'Daten & Backup',
+};
 
 const link = ({ isActive }: { isActive: boolean }) =>
   `rounded-md px-3 py-1.5 text-sm font-medium ${
@@ -16,11 +27,19 @@ const link = ({ isActive }: { isActive: boolean }) =>
 export default function App() {
   const uncategorized = useQuery({ queryKey: ['uncategorized'], queryFn: api.uncategorizedCount });
   const open = uncategorized.data?.count ?? 0;
+  const { pathname } = useLocation();
+  useEffect(() => {
+    document.title = `${TITLES[pathname] ?? 'Finanz-Dashboard'} · Finanz-Dashboard`;
+  }, [pathname]);
   return (
     <div className="mx-auto max-w-6xl px-4 py-4">
-      <header className="mb-6 flex items-center justify-between">
+      <a href="#main" className="sr-only rounded bg-indigo-600 px-3 py-2 text-white focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50">
+        Zum Inhalt springen
+      </a>
+      <header className="mb-6 flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
         <h1 className="text-xl font-semibold">Finanz-Dashboard</h1>
-        <nav className="flex gap-1">
+        <div className="flex flex-wrap items-center gap-3">
+        <nav aria-label="Hauptnavigation" className="flex flex-wrap gap-1">
           <NavLink to="/" end className={link}>
             Dashboard
           </NavLink>
@@ -45,7 +64,10 @@ export default function App() {
             </NavLink>
           )}
         </nav>
+        <ThemeToggle />
+        </div>
       </header>
+      <main id="main" tabIndex={-1} className="outline-none">
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/transaktionen" element={<Transactions />} />
@@ -55,6 +77,7 @@ export default function App() {
         <Route path="/daten" element={<Data />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      </main>
     </div>
   );
 }

@@ -47,6 +47,7 @@ export const api = {
     call<Rule>(`/api/rules/${id}`, { method: 'PUT', body: JSON.stringify(r) }),
   deleteRule: (id: number) => call<undefined>(`/api/rules/${id}`, { method: 'DELETE' }),
   applyRules: () => call<{ updated: number }>('/api/rules/apply', { method: 'POST' }),
+  transactionCount: () => call<{ count: number }>('/api/transactions/count'),
   uncategorizedCount: () => call<{ count: number }>('/api/transactions/uncategorized/count'),
   transactions: (q: TxQuery) => {
     const p = new URLSearchParams();

@@ -66,3 +66,19 @@ describe('Transaktions-API', () => {
     expect(s.body).toEqual(['REWE Markt']);
   });
 });
+
+describe('Fehlerbehandlung', () => {
+  it('antwortet auf kaputtes JSON mit 400 statt 500', async () => {
+    const r = await request(app).post('/api/transactions').set('Content-Type', 'application/json').send('{kaputt').expect(400);
+    expect(r.body.error).toContain('JSON');
+  });
+  it('unbekannte API-Pfade liefern 404 als JSON', async () => {
+    const r = await request(app).get('/api/gibtsnicht').expect(404);
+    expect(r.body.error).toBeTruthy();
+  });
+  it('zählt Buchungen', async () => {
+    expect((await request(app).get('/api/transactions/count')).body).toEqual({ count: 0 });
+    await request(app).post('/api/transactions').send(base);
+    expect((await request(app).get('/api/transactions/count')).body).toEqual({ count: 1 });
+  });
+});

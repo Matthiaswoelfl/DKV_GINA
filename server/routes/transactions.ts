@@ -164,6 +164,11 @@ export function transactionsRouter(db: Db): Router {
     res.status(204).end();
   });
 
+  r.get('/count', (_req, res) => {
+    const row = db.prepare('SELECT COUNT(*) AS n FROM transactions').get() as { n: number };
+    res.json({ count: row.n });
+  });
+
   r.get('/uncategorized/count', (_req, res) => {
     const row = db.prepare('SELECT COUNT(*) AS n FROM transactions WHERE category_id IS NULL').get() as { n: number };
     res.json({ count: row.n });

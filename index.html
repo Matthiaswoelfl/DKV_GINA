@@ -4,6 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Finanz-Dashboard</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234f46e5'/%3E%3Cpath d='M8 22V14M16 22V8M24 22V17' stroke='white' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <script>
+      // Verhindert das Aufblitzen des falschen Farbschemas vor dem ersten Rendern.
+      try {
+        var p = localStorage.getItem('finanz-theme');
+        var dark = p === 'dark' || ((p === null || p === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (dark) { document.documentElement.classList.add('dark'); document.documentElement.style.colorScheme = 'dark'; }
+      } catch (e) { /* ignorieren */ }
+    </script>
   </head>
   <body>
     <div id="root"></div>

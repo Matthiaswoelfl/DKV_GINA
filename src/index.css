@@ -1,12 +1,17 @@
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 body {
   @apply bg-slate-50 text-slate-900 antialiased;
 }
-@media (prefers-color-scheme: dark) {
-  body {
-    @apply bg-slate-900 text-slate-100;
-  }
+.dark body {
+  @apply bg-slate-900 text-slate-100;
+}
+
+:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
 }
 
 @layer components {
@@ -34,13 +39,11 @@ body {
   --c-surface: #ffffff;
   --c-uncategorized: #b8b7b2;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --c-income: #3987e5;
-    --c-expense: #d95926;
-    --c-balance: #f0efec;
-    --c-axis: #94a3b8;
-    --c-surface: #1e293b;
-    --c-uncategorized: #6b6a66;
-  }
+:root.dark {
+  --c-income: #3987e5;
+  --c-expense: #d95926;
+  --c-balance: #f0efec;
+  --c-axis: #94a3b8;
+  --c-surface: #1e293b;
+  --c-uncategorized: #6b6a66;
 }
