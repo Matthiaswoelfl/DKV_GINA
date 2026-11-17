@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finanz-Dashboard – Planung</title>
+<style>
+:root{--bg:#f7f8fa;--fg:#1c2330;--muted:#5d6878;--card:#fff;--line:#e2e6ec;--acc:#2f6fed;--code:#eef1f6}
+@media (prefers-color-scheme:dark){:root{--bg:#12161d;--fg:#e6e9ef;--muted:#9aa5b5;--card:#1a202a;--line:#2b3340;--acc:#6b9bff;--code:#222a36}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:860px;margin:0 auto;padding:32px 16px 64px}
+h1{font-size:1.9rem;margin:0 0 4px}
+h2{font-size:1.3rem;margin:40px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--line)}
+h3{font-size:1.05rem;margin:20px 0 6px}
+p.sub{color:var(--muted);margin:0 0 24px}
+section,.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px 20px 16px;margin-bottom:16px}
+ol,ul{padding-left:22px}
+li{margin:6px 0}
+code{background:var(--code);padding:1px 5px;border-radius:4px;font-size:.9em}
+pre{background:var(--code);padding:14px;border-radius:8px;overflow:auto;font-size:.88rem;line-height:1.45}
+table{width:100%;border-collapse:collapse;font-size:.92rem;display:block;overflow-x:auto}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{white-space:nowrap}
+.tag{display:inline-block;background:var(--acc);color:#fff;border-radius:999px;padding:0 9px;font-size:.78rem;margin-right:6px}
+strong{font-weight:650}
+</style>
+</head>
+<body>
+<main>
+<h1>Persönliches Finanz-Dashboard</h1>
+<p class="sub">Planung: Rückfragen, Architektur, Datenmodell, Ordnerstruktur, Phasen. Stand 17.11.2026</p>
+
+<h2>Rückfragen</h2>
+<section>
+<ol>
+<li><strong>Bank:</strong> Im Auftrag steht noch der Platzhalter. Welche Bank ist es? Eine anonymisierte Beispiel-CSV mit 3–5 Zeilen, inklusive Kopfzeilen, wäre ideal. Daraus baue ich ein passendes Preset (Spaltenzuordnung, Encoding, Vorzeichenlogik). Ohne Angabe: generisches Mapping plus DKB-Preset.</li>
+<li><strong>Konten:</strong> Nur ein Girokonto oder mehrere (Giro, Kreditkarte, Tagesgeld)? Bei mehreren käme ein Feld <code>Konto</code> dazu, damit Umbuchungen die Zahlen nicht verfälschen.</li>
+<li><strong>Sparen und Umbuchungen:</strong> Als Ausgabe zählen oder als eigener Typ „Umbuchung"? Vorschlag: Eine Kategorie kann als „Umbuchung/Sparen" markiert werden und wird separat ausgewiesen.</li>
+<li><strong>Datenhaltung:</strong> Empfehlung IndexedDB mit Dexie: kein Backend, ein einziger Befehl, Daten bleiben im Browser. Nachteil: Die Daten hängen am Browserprofil, das JSON-Backup gleicht das aus. Alternative SQLite mit Express: eine Datei auf der Platte, aber mehr Wartung. Ist dir „Datei auf der Platte" wichtig?</li>
+<li><strong>Wiederkehrende Zahlungen:</strong> Nur monatliche oder auch quartalsweise und jährliche (z. B. Versicherungen)? Vorschlag: alle drei erkennen und auf den Monat umrechnen.</li>
+</ol>
+</section>
+
+<h2>Architektur</h2>
+<section>
+<ul>
+<li><strong>Stack:</strong> React 18, TypeScript (strict), Vite, Tailwind, Recharts, Dexie, Vitest, ESLint, Prettier.</li>
+<li><strong>Routing:</strong> <code>react-router</code> mit Dashboard, Transaktionen, Import, Kategorien und Regeln, Budgets, Einstellungen (Daten und Backup).</li>
+<li><strong>Schichten:</strong> <code>domain/</code> (reine Logik, keine DB, kein React, vollständig testbar), <code>db/</code> (Dexie-Schema, Repositories), <code>ui/</code> (Seiten, Komponenten, Charts).</li>
+<li><strong>Formatierung:</strong> Zentrale <code>format.ts</code> über <code>Intl</code>: <code>1.234,56 €</code> und <code>TT.MM.JJJJ</code>. Beträge intern als Cent-Integer.</li>
+<li><strong>Datenfluss:</strong> <code>useLiveQuery</code> für reaktive Listen, Aggregationen im Speicher (für private Datenmengen schnell genug).</li>
+<li><strong>Privatsphäre:</strong> Keine externen Requests, keine CDN-Fonts, keine Analytics.</li>
+<li><strong>Seed:</strong> <code>npm run seed</code> oder Button „Beispieldaten laden": ca. 6 Monate Fake-Buchungen mit festem Zufalls-Seed, als Seed markiert und wieder löschbar.</li>
+</ul>
+</section>
+
+<h2>Datenmodell</h2>
+<section>
+<p>Beträge als <code>amountCents</code> (Integer, Ausgaben negativ). Daten als ISO-String <code>YYYY-MM-DD</code>.</p>
+<table>
+<tr><th>Tabelle</th><th>Felder</th></tr>
+<tr><td><strong>transactions</strong></td><td><code>id</code>, <code>date</code>, <code>amountCents</code>, <code>type</code> (income/expense), <code>categoryId?</code>, <code>counterparty</code>, <code>description</code>, <code>note?</code>, <code>accountId</code>, <code>importHash?</code>, <code>source</code> (manual/csv/seed), <code>createdAt</code></td></tr>
+<tr><td><strong>categories</strong></td><td><code>id</code>, <code>name</code>, <code>kind</code> (income/expense/transfer), <code>color</code>, <code>sortOrder</code>, <code>archived</code></td></tr>
+<tr><td><strong>rules</strong></td><td><code>id</code>, <code>field</code> (counterparty/description/both), <code>match</code> (contains/startsWith/regex), <code>pattern</code>, <code>categoryId</code>, <code>priority</code>, <code>enabled</code></td></tr>
+<tr><td><strong>budgets</strong></td><td><code>id</code>, <code>categoryId</code>, <code>monthlyCents</code>, optional <code>validFrom</code></td></tr>
+<tr><td><strong>accounts</strong></td><td><code>id</code>, <code>name</code>, <code>bank?</code></td></tr>
+<tr><td><strong>importProfiles</strong></td><td><code>id</code>, <code>name</code>, <code>encoding</code>, <code>delimiter</code>, <code>headerRowIndex</code>, <code>columnMap</code>, <code>signConvention</code>, <code>dateFormat</code></td></tr>
+<tr><td><strong>settings</strong></td><td><code>key</code>, <code>value</code> (Theme, letzter Export, Standardzeitraum)</td></tr>
+</table>
+
+<h3>Duplikaterkennung</h3>
+<p><code>importHash = hash(accountId + date + amountCents + normalisierter Empfänger + Verwendungszweck + Vorkommensindex)</code>. Der Vorkommensindex wird innerhalb einer Datei hochgezählt, damit zwei identische Buchungen am selben Tag nicht als Duplikat gelten. Ein erneuter Import derselben Datei liefert dieselben Hashes und überspringt alles.</p>
+
+<h3>Regeln</h3>
+<p>Auswertung nach Priorität, erste Übereinstimmung gewinnt. Manuell gesetzte Kategorien werden nie überschrieben. Beim manuellen Kategorisieren erscheint der Vorschlag „Regel für ‚REWE' erstellen?".</p>
+</section>
+
+<h2>Ordnerstruktur</h2>
+<section>
+<p>Neuer Unterordner <code>finanz-dashboard/</code> im Repo, die vorhandene <code>pruefung_goa_bezug.html</code> bleibt unberührt.</p>
+<pre>finanz-dashboard/
+├─ package.json            # dev, build, test, lint, seed
+├─ vite.config.ts · tsconfig.json · tailwind.config.ts
+├─ README.md
+├─ src/
+│  ├─ domain/              # reine Logik + *.test.ts daneben
+│  │  ├─ money.ts  csv.ts  dedupe.ts  rules.ts
+│  │  ├─ aggregate.ts  recurring.ts  period.ts
+│  ├─ db/                  # schema.ts, repositories, backup.ts, seed.ts
+│  ├─ ui/
+│  │  ├─ layout/  components/  charts/  hooks/
+│  │  └─ pages/  Dashboard  Transactions  Import  Categories  Budgets  Settings
+│  ├─ lib/format.ts  theme.ts
+│  └─ main.tsx  App.tsx
+└─ test-fixtures/          # anonymisierte Beispiel-CSVs</pre>
+</section>
+
+<h2>Umsetzung in Phasen</h2>
+<section>
+<p>Nach jeder Phase laufen Tests, Linter und <code>tsc</code>. Danach folgt eine Zusammenfassung mit Testanleitung.</p>
+<ol>
+<li><span class="tag">Phase 1</span>Setup, Schema, Transaktions-CRUD, Liste mit Suche, Filtern, Sortierung.</li>
+<li><span class="tag">Phase 2</span>Kategorien, Regeln, CSV-Import (Mapping, Vorschau, Duplikate), Seed.</li>
+<li><span class="tag">Phase 3</span>Dashboard: Zeitraum, KPIs mit Vormonatsvergleich, Kategorie-Chart mit Klickfilter, 12-Monats-Verlauf, Kategorie-Trend, Top-Empfänger.</li>
+<li><span class="tag">Phase 4</span>Budgets, wiederkehrende Zahlungen, CSV- und JSON-Export, Restore.</li>
+<li><span class="tag">Phase 5</span>Dark Mode, Leerzustände, Fehlermeldungen, Tablet-Layout, README.</li>
+</ol>
+</section>
+
+<h2>Offene Annahmen</h2>
+<section>
+<ul>
+<li>Bank: DKB-Preset plus generisches Mapping</li>
+<li>Konten: ein Konto</li>
+<li>Sparen: Umbuchungskategorie, getrennt ausgewiesen</li>
+<li>Datenhaltung: Dexie (IndexedDB)</li>
+<li>Wiederkehrende Zahlungen: monatlich, quartalsweise, jährlich</li>
+<li>Ablage: <code>finanz-dashboard/</code> auf dem Branch <code>claude/lucid-cerf-xql1o9</code></li>
+</ul>
+<p>Bitte gib dein OK oder deine Änderungen zu den fünf Punkten, dann starte ich mit Phase 1.</p>
+</section>
+</main>
+</body>
+</html>
