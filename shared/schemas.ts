@@ -35,6 +35,7 @@ export interface Category {
   isSavings: boolean;
   sortOrder: number;
   archived: boolean;
+  transactionCount: number;
 }
 
 export const transactionFilter = z.object({
@@ -50,3 +51,41 @@ export const transactionFilter = z.object({
   dir: z.enum(['asc', 'desc']).default('desc'),
 });
 export type TransactionFilter = z.infer<typeof transactionFilter>;
+
+// ---- Kategorien -------------------------------------------------------------
+
+export const categoryInput = z
+  .object({
+    name: z.string().trim().min(1, 'Name fehlt').max(50, 'Name ist zu lang'),
+    type: transactionType,
+    color: z.string().regex(/^#[0-9a-fA-F]{6}$/, 'Farbe muss wie #1a2b3c angegeben werden'),
+    isSavings: z.boolean().default(false),
+    archived: z.boolean().default(false),
+  })
+  .refine((c) => !c.isSavings || c.type === 'expense', {
+    message: 'Nur Ausgabe-Kategorien können als „Sparen“ markiert werden',
+    path: ['isSavings'],
+  });
+export type CategoryInput = z.infer<typeof categoryInput>;
+
+// ---- Regeln -----------------------------------------------------------------
+
+export const matchField = z.enum(['payee', 'note']);
+export const matchType = z.enum(['contains', 'equals', 'starts_with']);
+export type MatchField = z.infer<typeof matchField>;
+export type MatchType = z.infer<typeof matchType>;
+
+export const ruleInput = z.object({
+  matchField: matchField.default('payee'),
+  matchType: matchType.default('contains'),
+  pattern: z.string().trim().min(1, 'Suchtext fehlt').max(200),
+  categoryId: z.number().int().positive(),
+  priority: z.number().int().min(-1000).max(1000).default(0),
+  enabled: z.boolean().default(true),
+});
+export type RuleInput = z.infer<typeof ruleInput>;
+
+export interface Rule extends RuleInput {
+  id: number;
+  categoryType: TransactionType;
+}

@@ -10,9 +10,11 @@ interface Props {
   /** Zum Bearbeiten übergeben; ohne = neue Buchung. */
   editing?: Transaction;
   onDone?: () => void;
+  /** Wird nach dem Speichern einer neuen Buchung mit manuell gewählter Kategorie aufgerufen. */
+  onManualCategory?: (tx: { payee: string; note: string; type: TransactionType }, categoryId: number) => void;
 }
 
-export default function TransactionForm({ categories, editing, onDone }: Props) {
+export default function TransactionForm({ categories, editing, onDone, onManualCategory }: Props) {
   const qc = useQueryClient();
   const listId = useId();
   const amountRef = useRef<HTMLInputElement>(null);
@@ -35,12 +37,14 @@ export default function TransactionForm({ categories, editing, onDone }: Props) 
   const mutation = useMutation({
     mutationFn: (input: Parameters<typeof api.createTransaction>[0]) =>
       editing ? api.updateTransaction(editing.id, input) : api.createTransaction(input),
-    onSuccess: async () => {
+    onSuccess: async (_saved, input) => {
       await qc.invalidateQueries({ queryKey: ['transactions'] });
+      await qc.invalidateQueries({ queryKey: ['uncategorized'] });
       await qc.invalidateQueries({ queryKey: ['payees'] });
       if (editing) {
         onDone?.();
       } else {
+        if (input.categoryId !== null) onManualCategory?.(input, input.categoryId);
         // Schnelle Serieneingabe: Datum, Typ und Kategorie bleiben, Rest wird geleert.
         setAmount('');
         setPayee('');

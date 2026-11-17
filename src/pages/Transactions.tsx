@@ -3,6 +3,9 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { api, ApiError, type TxQuery } from '../api/client';
 import { parseAmountToCents } from '../../shared/money';
 import type { Transaction, TransactionFilter } from '../../shared/schemas';
+import { useSearchParams } from 'react-router-dom';
+import { categorize } from '../../shared/categorize';
+import RuleOffer, { type RuleOfferData } from '../components/RuleOffer';
 import TransactionForm from '../components/TransactionForm';
 import ConfirmDialog from '../components/ConfirmDialog';
 import { formatDate, formatEuro } from '../lib/format';
@@ -14,7 +17,10 @@ export default function Transactions() {
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
   const [type, setType] = useState<'' | 'income' | 'expense'>('');
-  const [categoryFilter, setCategoryFilter] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const categoryFilter = searchParams.get('kategorie') ?? '';
+  const setCategoryFilter = (v: string) => setSearchParams(v ? { kategorie: v } : {}, { replace: true });
+  const [offer, setOffer] = useState<RuleOfferData | null>(null);
   const [q, setQ] = useState('');
   const [min, setMin] = useState('');
   const [max, setMax] = useState('');
@@ -41,19 +47,26 @@ export default function Transactions() {
   };
 
   const categories = useQuery({ queryKey: ['categories'], queryFn: api.categories });
+  const rulesQuery = useQuery({ queryKey: ['rules'], queryFn: api.rules });
   const txs = useQuery({ queryKey: ['transactions', query], queryFn: () => api.transactions(query) });
 
   const onError = (e: unknown) => setActionError(e instanceof ApiError ? e.message : 'Aktion fehlgeschlagen');
   const setCategory = useMutation({
     mutationFn: (v: { id: number; categoryId: number | null }) => api.setCategory(v.id, v.categoryId),
-    onSuccess: () => qc.invalidateQueries({ queryKey: ['transactions'] }),
+    onSuccess: async () => {
+      await qc.invalidateQueries({ queryKey: ['transactions'] });
+      await qc.invalidateQueries({ queryKey: ['uncategorized'] });
+    },
     onError,
   });
   const remove = useMutation({
     mutationFn: (id: number) => api.deleteTransaction(id),
     onSuccess: () => {
       setDeleting(null);
-      return qc.invalidateQueries({ queryKey: ['transactions'] });
+      return Promise.all([
+        qc.invalidateQueries({ queryKey: ['transactions'] }),
+        qc.invalidateQueries({ queryKey: ['uncategorized'] }),
+      ]);
     },
     onError: (e) => {
       setDeleting(null);
@@ -62,6 +75,13 @@ export default function Transactions() {
   });
 
   const cats = categories.data ?? [];
+
+  /** Bietet eine Regel an, wenn die vorhandenen Regeln die manuelle Wahl nicht schon liefern. */
+  function maybeOffer(tx: { payee: string; note: string; type: 'income' | 'expense' }, categoryId: number) {
+    if (categorize(tx, rulesQuery.data ?? []) === categoryId) return;
+    const name = cats.find((c) => c.id === categoryId)?.name;
+    if (name) setOffer({ payee: tx.payee, categoryId, categoryName: name });
+  }
   const catById = new Map(cats.map((c) => [c.id, c]));
   const rows = txs.data ?? [];
   const sumIncome = rows.filter((t) => t.type === 'income').reduce((s, t) => s + t.amountCents, 0);
@@ -86,9 +106,11 @@ export default function Transactions() {
         {categories.isError ? (
           <p role="alert" className="text-sm text-red-600">Kategorien konnten nicht geladen werden.</p>
         ) : (
-          <TransactionForm categories={cats} />
+          <TransactionForm categories={cats} onManualCategory={maybeOffer} />
         )}
       </section>
+
+      {offer && <RuleOffer key={`${offer.payee}-${offer.categoryId}`} offer={offer} onClose={() => setOffer(null)} />}
 
       <section className={card} aria-label="Filter">
         <div className="grid grid-cols-2 gap-3 md:grid-cols-7">
@@ -189,12 +211,14 @@ export default function Transactions() {
                       className="rounded border border-transparent bg-transparent px-1 py-0.5 hover:border-slate-300 dark:hover:border-slate-600"
                       style={{ color: t.categoryId ? catById.get(t.categoryId)?.color : undefined }}
                       value={t.categoryId ?? ''}
-                      onChange={(e) =>
-                        setCategory.mutate({ id: t.id, categoryId: e.target.value === '' ? null : Number(e.target.value) })
-                      }
+                      onChange={(e) => {
+                        const categoryId = e.target.value === '' ? null : Number(e.target.value);
+                        setCategory.mutate({ id: t.id, categoryId });
+                        if (categoryId !== null) maybeOffer(t, categoryId);
+                      }}
                     >
                       <option value="">— unkategorisiert —</option>
-                      {cats.filter((c) => c.type === t.type).map((c) => (
+                      {cats.filter((c) => c.type === t.type && (!c.archived || c.id === t.categoryId)).map((c) => (
                         <option key={c.id} value={c.id} className="text-slate-900">{c.name}</option>
                       ))}
                     </select>

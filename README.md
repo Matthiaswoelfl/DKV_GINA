@@ -32,4 +32,9 @@ Solange der Export (Phase 4) fehlt: Server stoppen und `data/finanzen.db` kopier
 
 ## Stand
 
-Phase 1: Transaktionen anlegen, bearbeiten, löschen; Liste mit Suche, Filtern, Sortierung und Inline-Kategorie.
+- Phase 1: Transaktionen anlegen, bearbeiten, löschen; Liste mit Suche, Filtern, Sortierung und Inline-Kategorie.
+- Phase 2: Kategorien verwalten (Farbe, „ist Sparen“, archivieren, löschen mit Umbuchung), Regeln („Empfänger enthält REWE → Lebensmittel“), Auto-Kategorisierung neuer Buchungen, Regelangebot nach manueller Kategorisierung, Übersicht „Unkategorisiert“.
+
+### Regel-Vorrang
+
+Bei mehreren Treffern gewinnt: höhere Priorität → genauerer Vergleich (gleich > beginnt mit > enthält) → längerer Suchtext → ältere Regel. Eine manuell gewählte Kategorie hat immer Vorrang vor Regeln.

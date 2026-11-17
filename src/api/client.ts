@@ -1,4 +1,12 @@
-import type { Category, Transaction, TransactionFilter, TransactionInput } from '../../shared/schemas';
+import type {
+  Category,
+  CategoryInput,
+  Rule,
+  RuleInput,
+  Transaction,
+  TransactionFilter,
+  TransactionInput,
+} from '../../shared/schemas';
 
 export class ApiError extends Error {}
 
@@ -24,6 +32,21 @@ export type TxQuery = Partial<Omit<TransactionFilter, 'sort' | 'dir'>> &
 
 export const api = {
   categories: () => call<Category[]>('/api/categories'),
+  createCategory: (c: CategoryInput) =>
+    call<Category>('/api/categories', { method: 'POST', body: JSON.stringify(c) }),
+  updateCategory: (id: number, c: CategoryInput) =>
+    call<Category>(`/api/categories/${id}`, { method: 'PUT', body: JSON.stringify(c) }),
+  deleteCategory: (id: number, reassignTo?: number | 'none') =>
+    call<undefined>(`/api/categories/${id}${reassignTo === undefined ? '' : `?reassignTo=${reassignTo}`}`, {
+      method: 'DELETE',
+    }),
+  rules: () => call<Rule[]>('/api/rules'),
+  createRule: (r: RuleInput) => call<Rule>('/api/rules', { method: 'POST', body: JSON.stringify(r) }),
+  updateRule: (id: number, r: RuleInput) =>
+    call<Rule>(`/api/rules/${id}`, { method: 'PUT', body: JSON.stringify(r) }),
+  deleteRule: (id: number) => call<undefined>(`/api/rules/${id}`, { method: 'DELETE' }),
+  applyRules: () => call<{ updated: number }>('/api/rules/apply', { method: 'POST' }),
+  uncategorizedCount: () => call<{ count: number }>('/api/transactions/uncategorized/count'),
   transactions: (q: TxQuery) => {
     const p = new URLSearchParams();
     Object.entries(q).forEach(([k, v]) => v !== undefined && v !== '' && p.set(k, String(v)));

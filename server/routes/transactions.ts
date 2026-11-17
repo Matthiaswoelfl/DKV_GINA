@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import { z } from 'zod';
 import type { Db } from '../db';
+import { categorize } from '../../shared/categorize';
+import { loadRules } from './rules';
 import {
   transactionFilter,
   transactionInput,
@@ -102,11 +104,13 @@ export function transactionsRouter(db: Db): Router {
       res.status(400).json({ error: 'Kategorie passt nicht zum Typ der Buchung' });
       return;
     }
+    // Ohne manuelle Kategorie greifen die Regeln.
+    const categoryId = i.categoryId ?? categorize(i, loadRules(db));
     const info = db
       .prepare(
         'INSERT INTO transactions (date, amount_cents, type, category_id, payee, note) VALUES (?,?,?,?,?,?)',
       )
-      .run(i.date, i.amountCents, i.type, i.categoryId, i.payee, i.note);
+      .run(i.date, i.amountCents, i.type, categoryId, i.payee, i.note);
     const row = db.prepare('SELECT * FROM transactions WHERE id = ?').get(info.lastInsertRowid) as Row;
     res.status(201).json(toTx(row));
   });
@@ -158,6 +162,11 @@ export function transactionsRouter(db: Db): Router {
       return;
     }
     res.status(204).end();
+  });
+
+  r.get('/uncategorized/count', (_req, res) => {
+    const row = db.prepare('SELECT COUNT(*) AS n FROM transactions WHERE category_id IS NULL').get() as { n: number };
+    res.json({ count: row.n });
   });
 
   r.get('/payees/suggest', (req, res) => {
