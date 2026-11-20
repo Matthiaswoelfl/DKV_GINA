@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Budget-Dashboard Projekt GOÄ-Novelle</title>
+<style>:root{--accent:#0b4f6c;--accent-l:#e4eef3;--ink:#1c2530;--mut:#5d6b78;--line:#dde3e8;--bg:#fff;--warn:#9a5b00}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 "Segoe UI",system-ui,-apple-system,Helvetica,Arial,sans-serif}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px 40px}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:18px 0;border-bottom:2px solid var(--accent)}
+header h1{font-size:20px;margin:0;color:var(--accent);font-weight:600}
+header .sub{color:var(--mut);font-size:13px}
+button,select,input{font:inherit;color:inherit}
+button{border:1px solid var(--accent);background:#fff;color:var(--accent);padding:6px 12px;border-radius:4px;cursor:pointer}
+button:hover{background:var(--accent-l)} button.primary{background:var(--accent);color:#fff} button.primary:hover{background:#093f57}
+button.link{border:0;padding:2px 6px;text-decoration:underline}
+input[type=text],input[type=number],input[type=date],select{border:1px solid #b9c4cd;border-radius:4px;padding:6px 8px;background:#fff}
+input:focus,select:focus,button:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+h2{font-size:16px;margin:0 0 10px;color:var(--accent)} h3{font-size:14px;margin:14px 0 6px}
+.card{border:1px solid var(--line);border-radius:6px;padding:16px;background:#fff}
+.grid2{display:grid;grid-template-columns:minmax(300px,1fr) minmax(320px,1.5fr);gap:16px;margin-top:16px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0}
+label.f{display:flex;flex-direction:column;font-size:12px;color:var(--mut);gap:3px}
+.seg{display:inline-flex;border:1px solid var(--accent);border-radius:4px;overflow:hidden}
+.seg label{padding:5px 12px;cursor:pointer;color:var(--accent);font-size:14px}
+.seg label{position:relative}.seg input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}.seg input:focus-visible+span{outline:2px solid var(--accent);outline-offset:-3px} .seg input:checked+span{background:var(--accent);color:#fff}
+.seg label span{display:block;margin:-5px -12px;padding:5px 12px}
+.hero{border-left:6px solid var(--accent);background:var(--accent-l)}
+.hero .big{font-size:23px;line-height:1.3;font-weight:600;color:var(--accent);margin:0 0 4px}
+.hero .big.warn{color:var(--warn)}
+.det{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:6px 20px;margin-top:12px;font-size:14px}
+.det div span{display:block;color:var(--mut);font-size:12px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:16px}
+.kpi{border:1px solid var(--line);border-radius:6px;padding:12px 14px}
+.kpi span{display:block;font-size:12px;color:var(--mut)} .kpi b{font-size:21px;font-weight:600} .kpi.acc{border-color:var(--accent);background:var(--accent-l)}
+table{border-collapse:collapse;font-size:13px;width:100%} th,td{padding:5px 8px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th:first-child,td:first-child{text-align:left} th{color:var(--mut);font-weight:600}
+.delta-pos{color:#9a2b2b}.delta-neg{color:#1d6b3a}
+.charts{display:grid;gap:16px;margin-top:16px}
+svg{width:100%;height:auto;display:block} svg text{font:11px "Segoe UI",system-ui,sans-serif;fill:#44525e}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:12px;color:var(--mut);margin-top:6px}
+.legend i{display:inline-block;width:11px;height:11px;margin-right:5px;vertical-align:-1px;border-radius:2px}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-top:22px;flex-wrap:wrap}
+.tabs button{border:0;border-bottom:3px solid transparent;border-radius:0;padding:8px 14px;color:var(--mut)}
+.tabs button.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+.pane{padding:14px 0}.pane[hidden]{display:none}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:6px}
+.mx input{width:52px;padding:3px 4px;text-align:right}
+.mx td:first-child,.mx th:first-child{position:sticky;left:0;background:#fff;z-index:1}
+.mx td,.mx th{padding:3px 4px}
+.note{color:var(--mut);font-size:13px}.err{color:#9a2b2b;font-size:13px}
+ul.ann{padding-left:18px;margin:6px 0}ul.ann li{margin:4px 0}
+#steckbrief{display:none}
+@media (max-width:820px){.grid2{grid-template-columns:1fr}.hero{order:-1}.hero .big{font-size:19px}}
+@media print{
+  @page{size:A4 portrait;margin:14mm}
+  body>*:not(#steckbrief){display:none!important}
+  #steckbrief{display:block!important;padding:0}
+  #steckbrief h1{font-size:20px;color:var(--accent);margin:0 0 2px}
+  #steckbrief .hero{border-left:6px solid var(--accent);background:var(--accent-l);padding:12px 14px;margin:12px 0}
+  #steckbrief .kpis{grid-template-columns:repeat(4,1fr)}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div><h1>Budget- und Reichweiten-Dashboard</h1><div class="sub">Projekt GOÄ-Novelle · Beratung → Kunde</div></div>
+  <div class="row"><button id="btn-xlsx">Excel-Export</button><button id="btn-print" class="primary">Budget-Steckbrief drucken</button></div>
+</header>
+
+<div class="grid2">
+  <section class="card" aria-labelledby="h-in">
+    <h2 id="h-in">Budget und Leistungsbeginn</h2>
+    <div class="row">
+      <label class="f">Budgetbetrag in €<input id="budget" type="text" inputmode="decimal" style="width:150px" autocomplete="off"></label>
+      <div class="seg" role="radiogroup" aria-label="Netto oder brutto">
+        <label><input type="radio" name="basis" value="net" checked><span>netto</span></label>
+        <label><input type="radio" name="basis" value="gross"><span>brutto</span></label>
+      </div>
+    </div>
+    <div class="row"><span class="note">Schnellwahl:</span>
+      <button data-quick="100000">100k</button><button data-quick="150000">150k</button><button data-quick="200000">200k</button><button data-quick="250000">250k</button></div>
+    <div class="err" id="budget-err"></div>
+    <div class="row"><label><input type="checkbox" id="inc-travel" checked> Reisekosten aus dem Budget bezahlen</label></div>
+    <div class="row"><label class="f">Leistungsbeginn<input id="start" type="date"></label></div>
+    <h3>Umkehrrechnung: Budget bis zum Zieldatum</h3>
+    <div class="row"><label class="f">Zieldatum<input id="target" type="date"></label></div>
+    <div id="inv-out" style="font-size:14px"></div>
+  </section>
+  <section class="card hero" aria-live="polite">
+    <h2>Reichweite</h2>
+    <p class="big" id="sentence"></p>
+    <div class="det" id="details"></div>
+    <div id="roletable" style="margin-top:12px"></div>
+  </section>
+</div>
+
+<div class="kpis" id="kpis"></div>
+
+<div class="charts">
+  <section class="card"><h2>Kumulierte Kosten und Budget</h2><div id="ch-cum"></div></section>
+  <section class="card"><h2>Wochenkosten je Rolle</h2><div id="ch-bars"></div><div id="ch-legend"></div></section>
+  <section class="card"><h2>Kapazität je Rolle und KW (FTE in %)</h2><div id="ch-heat"></div></section>
+</div>
+
+<nav class="tabs" role="tablist">
+  <button data-tab="kap">Kapazitätsplanung</button><button data-tab="par">Parameter</button>
+  <button data-tab="sz">Szenarien</button><button data-tab="ann">Annahmen</button>
+</nav>
+
+<div class="pane" id="pane-kap">
+  <div class="scroll" id="matrix"></div>
+  <div class="row" style="margin-top:12px">
+    <b>Bereich setzen:</b>
+    <select id="rg-role"></select> von <select id="rg-from"></select> bis <select id="rg-to"></select> auf
+    <select id="rg-val">
+      <option>0</option><option>5</option><option>10</option><option>15</option><option>20</option><option>25</option><option>30</option><option>35</option><option>40</option><option>45</option><option>50</option><option>55</option><option>60</option><option>65</option><option>70</option><option>75</option><option>80</option><option>85</option><option>90</option><option>95</option><option>100</option>
+    </select> %
+    <button id="rg-go" class="primary">Setzen</button>
+  </div>
+  <div class="row"><b>Rolle hinzufügen:</b><select id="add-type"></select><button id="add-go">Hinzufügen</button>
+    <b style="margin-left:18px">Plan verlängern um</b><input id="ext-n" type="number" min="1" max="52" value="4" style="width:70px"> Wochen<button id="ext-go">Verlängern</button>
+    <button id="reset" style="margin-left:auto">Ausgangsplan wiederherstellen</button></div>
+  <p class="note">Werte in Schritten von 5 %. Neue Wochen übernehmen die Auslastung der letzten Planwoche. Tagessatz einer neuen Rolle kommt aus der Tagessatztabelle (Reiter Parameter).</p>
+</div>
+
+<div class="pane" id="pane-par" hidden>
+  <div class="grid2" style="margin-top:0">
+    <div class="card"><h2>Parameter</h2>
+      <div class="row">
+        <label class="f">Tage je FTE-Woche<input id="p-days" type="number" step="0.5" min="0.5" max="7" style="width:110px"></label>
+        <label class="f">Onsite-Quote in %<input id="p-onsite" type="number" step="5" min="0" max="100" style="width:110px"></label>
+        <label class="f">Reisekosten je Onsite-Tag (€)<input id="p-travel" type="number" step="10" min="0" style="width:140px"></label>
+        <label class="f">MwSt. in %<input id="p-vat" type="number" step="1" min="0" max="100" style="width:90px"></label>
+      </div>
+      <div class="row"><label><input type="checkbox" id="p-hol"> Gesetzliche Feiertage (bundesweit) berücksichtigen</label></div>
+      <div class="row"><label><input type="checkbox" id="p-xmas"> Weihnachtspause 24.–31.12. berücksichtigen</label></div>
+      <p class="note">Standard: aus – dann entspricht der Basisplan exakt der Excel-Kalkulation.</p>
+    </div>
+    <div class="card"><h2>Tagessatztabelle</h2><table id="rates"></table></div>
+  </div>
+</div>
+
+<div class="pane" id="pane-sz" hidden>
+  <div class="row"><label class="f">Name des Szenarios<input id="sc-name" type="text" placeholder="z. B. Senior Consultant reduziert" style="width:280px"></label>
+    <button id="sc-save" class="primary" style="align-self:flex-end">Aktuellen Plan als Szenario speichern</button></div>
+  <div class="note" id="sc-msg"></div>
+  <ul id="sc-list" style="padding-left:18px"></ul>
+  <div class="scroll" id="sc-table"></div>
+  <p class="note">Vergleich mit dem oben eingestellten Budget, den Reisekosten-Einstellungen und dem aktuellen Leistungsbeginn. Δ-Werte relativ zum Basisplan (grün = günstiger bzw. längere Reichweite).</p>
+</div>
+
+<div class="pane" id="pane-ann" hidden>
+  <h2>Annahmen</h2>
+  <ul class="ann">
+    <li>Die Excel-Logik gilt: Beratertage = Auslastung × 5; Honorar = Tagessatz × Beratertage; Reisekosten = Beratertage × 40 % × 200 €; brutto = netto × 1,19 (MwSt. auch auf Reisekosten).</li>
+    <li>Plan-Woche 1 ist die Kalenderwoche des Leistungsbeginns. Ein anderer Start verschiebt den ganzen Plan; bei Start mitten in der Woche zählen nur die Resttage der ersten Woche.</li>
+    <li>Reisekosten fallen proportional zu den Beratertagen an (in Excel nur als Gesamtsumme).</li>
+    <li>Innerhalb der Woche, in der das Budget endet, werden Kosten gleichmäßig auf die Arbeitstage (Mo–Fr) verteilt. „Reicht bis“ ist der Arbeitstag, an dem das Budget aufgebraucht wird; der letzte voll gedeckte Arbeitstag steht daneben.</li>
+    <li>Brutto-Eingaben werden durch 1,19 geteilt; Reisekosten gelten wie in Excel als umsatzsteuerpflichtig.</li>
+    <li>Vorschuss: Der eingegebene Betrag wird auf den Gesamtplan angerechnet; angezeigt wird der noch ungedeckte Rest.</li>
+    <li>Feiertage (bundesweit: Neujahr, Karfreitag, Ostermontag, 1. Mai, Christi Himmelfahrt, Pfingstmontag, 3. Oktober, 25./26. Dezember) und Weihnachtspause (24.–31.12.) sind standardmäßig aus; Urlaub ist nicht modelliert (über die Auslastung abbildbar).</li>
+    <li>Plan-Verlängerung übernimmt die Auslastung der letzten Planwoche. Leere Zellen der Quelldatei zählen als 0 %.</li>
+    <li>Tagessätze kommen aus einer einzigen Tagessatztabelle (in der Quelle teils hart codiert, teils per Formel).</li>
+    <li>Szenarien werden optional im Browser gespeichert (localStorage). Der Basisplan ist fest im Code hinterlegt.</li>
+  </ul>
+</div>
+</div>
+
+<section id="steckbrief">
+  <h1>Budget-Steckbrief · Projekt GOÄ-Novelle</h1>
+  <div class="note" id="sb-date"></div>
+  <div class="hero"><p class="big" id="sb-sentence" style="font-size:19px;font-weight:600;color:#0b4f6c;margin:0"></p></div>
+  <div class="kpis" id="sb-kpis"></div>
+  <h3>Beratertage je Rolle</h3><div id="sb-roles"></div>
+  <h3>Kumulierte Kosten und Budget</h3><div id="sb-cum"></div>
+  <p class="note" id="sb-ann"></p>
+</section>
+
+<script>window.BASE_CONFIG = {"projekt":"Projekt GOÄ-Novelle","start":"2027-01-04","weeks":26,"parameters":{"daysPerFte":5,"onsiteQuote":0.4,"travelPerDay":200,"vat":0.19},"rates":{"Associate":850,"Consultant":1800,"Senior Consultant":2200,"Projektmanager":2500,"Senior Manager":2900,"Director":3200,"Partner":3490},"roles":[{"type":"Partner","fte":[0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1]},{"type":"Senior Consultant","fte":[1,1,1,0.5,0.5,0.5,0.5,0.5,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.25,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2]},{"type":"Consultant","fte":[0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0.6]}]};</script>
+<script>/* Rechenkern Budget- und Reichweitenrechner – Projekt GOÄ-Novelle.
+ * Reine Funktionen, kein DOM. Läuft im Browser (window.Core) und in Node (require).
+ *
+ * Plan-Objekt:
+ *   { projekt, start:'YYYY-MM-DD', weeks:n,
+ *     parameters:{ daysPerFte, onsiteQuote, travelPerDay, vat, holidays, christmasBreak },
+ *     rates:{ Rolle: Tagessatz }, roles:[{ id, type, fte:[n Werte 0..1] }] }
+ *
+ * Konventionen (siehe README "Annahmen"):
+ *  - Plan-Woche 1 ist die Kalenderwoche des Startdatums (Montag bis Freitag).
+ *  - Beratertage = FTE × Tage je FTE-Woche × (verfügbare Arbeitstage / 5).
+ *    Ohne Feiertage und bei Start am Montag ist der Faktor 1 → exakt "Kapazität × 5" wie in Excel.
+ *  - Reisekosten = Beratertage × Onsite-Quote × Reisekosten je Onsite-Tag (proportional je Woche).
+ *  - Innerhalb einer Woche verteilen sich die Kosten gleichmäßig auf die verfügbaren Arbeitstage.
+ */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory();
+  else root.Core = factory();
+})(typeof self !== 'undefined' ? self : this, function () {
+  'use strict';
+
+  var WORKWEEK = 5;               // Arbeitstage Mo–Fr je Kalenderwoche
+  var EPS = 1e-9;
+  var WEEKDAYS = ['Sonntag', 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag'];
+
+  // ---------- Datum ----------
+  function parseISO(s) {                       // 'YYYY-MM-DD' -> Date (UTC, ohne Zeitzonen-Effekte)
+    var p = String(s).split('-');
+    return new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]));
+  }
+  function toISO(d) { return d.toISOString().slice(0, 10); }
+  function addDays(d, n) { return new Date(d.getTime() + n * 86400000); }
+  function mondayOf(d) { var wd = (d.getUTCDay() + 6) % 7; return addDays(d, -wd); }
+  function isoWeek(d) {                        // ISO-8601-Kalenderwoche
+    var t = addDays(d, 3 - ((d.getUTCDay() + 6) % 7));   // Donnerstag der Woche
+    var y = t.getUTCFullYear();
+    var jan4 = new Date(Date.UTC(y, 0, 4));
+    var w = 1 + Math.round(((t - jan4) / 86400000 - 3 + ((jan4.getUTCDay() + 6) % 7)) / 7);
+    return { year: y, week: w };
+  }
+  function formatDate(d) {                     // TT.MM.JJJJ
+    var iso = toISO(d);
+    return iso.slice(8, 10) + '.' + iso.slice(5, 7) + '.' + iso.slice(0, 4);
+  }
+  function weekdayName(d) { return WEEKDAYS[d.getUTCDay()]; }
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+  function kwLabel(w) { return 'KW' + pad2(w); }
+
+  // ---------- Feiertage (bundesweit) ----------
+  function easterSunday(y) {                   // Gauß/Meeus-Algorithmus
+    var a = y % 19, b = Math.floor(y / 100), c = y % 100;
+    var d = Math.floor(b / 4), e = b % 4, f = Math.floor((b + 8) / 25);
+    var g = Math.floor((b - f + 1) / 3), h = (19 * a + b - d - g + 15) % 30;
+    var i = Math.floor(c / 4), k = c % 4, l = (32 + 2 * e + 2 * i - h - k) % 7;
+    var m = Math.floor((a + 11 * h + 22 * l) / 451);
+    var mo = Math.floor((h + l - 7 * m + 114) / 31), da = ((h + l - 7 * m + 114) % 31) + 1;
+    return new Date(Date.UTC(y, mo - 1, da));
+  }
+  var holidayCache = {};
+  function federalHolidays(y) {                // Set von ISO-Daten
+    if (holidayCache[y]) return holidayCache[y];
+    var e = easterSunday(y), s = {};
+    [new Date(Date.UTC(y, 0, 1)), addDays(e, -2), addDays(e, 1), new Date(Date.UTC(y, 4, 1)),
+      addDays(e, 39), addDays(e, 50), new Date(Date.UTC(y, 9, 3)),
+      new Date(Date.UTC(y, 11, 25)), new Date(Date.UTC(y, 11, 26))
+    ].forEach(function (d) { s[toISO(d)] = true; });
+    return (holidayCache[y] = s);
+  }
+  /** Weihnachtspause: 24.12. bis 31.12. (Annahme). */
+  function isChristmasBreak(d) { return d.getUTCMonth() === 11 && d.getUTCDate() >= 24; }
+
+  // ---------- Wochenraster ----------
+  /** Informationen zu Plan-Woche i: Montag, KW, verfügbare Arbeitstage (ISO-Daten). */
+  function weekInfo(plan, i) {
+    var start = parseISO(plan.start);
+    var monday = addDays(mondayOf(start), 7 * i);
+    var p = plan.parameters, days = [];
+    for (var k = 0; k < WORKWEEK; k++) {
+      var d = addDays(monday, k), iso = toISO(d);
+      if (i === 0 && d < start) continue;                                  // vor Leistungsbeginn
+      if (p.holidays && federalHolidays(d.getUTCFullYear())[iso]) continue;
+      if (p.christmasBreak && isChristmasBreak(d)) continue;
+      days.push(iso);
+    }
+    var iw = isoWeek(monday);
+    return { index: i, monday: toISO(monday), kw: iw.week, year: iw.year,
+      label: kwLabel(iw.week), days: days, avail: days.length };
+  }
+
+  // ---------- Rollen ----------
+  /** Anzeigenamen: eindeutig → "Consultant", mehrfach → "Consultant 1", "Consultant 2". */
+  function roleNames(plan) {
+    var cnt = {}, seen = {};
+    plan.roles.forEach(function (r) { cnt[r.type] = (cnt[r.type] || 0) + 1; });
+    return plan.roles.map(function (r) {
+      seen[r.type] = (seen[r.type] || 0) + 1;
+      return cnt[r.type] > 1 ? r.type + ' ' + seen[r.type] : r.type;
+    });
+  }
+  function round2(x) { return Math.round((x + (x >= 0 ? EPS : -EPS)) * 100) / 100; }
+
+  // ---------- Hauptrechnung ----------
+  /** Berechnet Wochen-, Rollen- und Gesamtwerte eines Plans. */
+  function computePlan(plan) {
+    var p = plan.parameters, names = roleNames(plan);
+    var rate = plan.roles.map(function (r) { return +plan.rates[r.type] || 0; });
+    var weeks = [], roleTot = plan.roles.map(function () { return { days: 0, fee: 0 }; });
+    var totals = { days: 0, fee: 0, travel: 0 };
+    for (var i = 0; i < plan.weeks; i++) {
+      var wi = weekInfo(plan, i), f = wi.avail / WORKWEEK;
+      var roleDays = [], roleFee = [], days = 0, fee = 0;
+      plan.roles.forEach(function (r, j) {
+        var d = (+r.fte[i] || 0) * p.daysPerFte * f;
+        roleDays.push(d); roleFee.push(d * rate[j]);
+        days += d; fee += d * rate[j];
+        roleTot[j].days += d; roleTot[j].fee += d * rate[j];
+      });
+      var travel = days * p.onsiteQuote * p.travelPerDay;
+      weeks.push({ info: wi, roleDays: roleDays, roleFee: roleFee, days: days, fee: fee,
+        travel: travel, total: fee + travel });
+      totals.days += days; totals.fee += fee; totals.travel += travel;
+    }
+    totals.net = totals.fee + totals.travel;
+    totals.gross = totals.net * (1 + p.vat);
+    return {
+      weeks: weeks,
+      roles: plan.roles.map(function (r, j) {
+        return { id: r.id, type: r.type, name: names[j], rate: rate[j],
+          days: round2(roleTot[j].days), fee: round2(roleTot[j].fee) };
+      }),
+      totals: { days: round2(totals.days), fee: round2(totals.fee), travel: round2(totals.travel),
+        net: round2(totals.net), gross: round2(totals.gross) }
+    };
+  }
+
+  function weekCost(w, includeTravel) { return w.fee + (includeTravel ? w.travel : 0); }
+
+  /**
+   * Reichweite eines Netto-Budgets.
+   * opts.includeTravel: Reisekosten werden aus dem Budget bezahlt (Standard true).
+   * Rückgabe-status: 'zero' (Budget ≤ 0) | 'within' (reicht bis endDate) | 'beyond' (reicht über das Planende hinaus).
+   */
+  function reach(plan, budgetNet, opts) {
+    var inc = !opts || opts.includeTravel !== false;
+    var calc = computePlan(plan), W = calc.weeks, n = plan.roles.length;
+    var budget = Math.max(0, +budgetNet || 0);
+    var res = { status: 'zero', budget: budget, includeTravel: inc, endDate: null, kw: null, year: null,
+      lastFullDay: null, coveredDays: 0, coveredByRole: calc.roles.map(function () { return 0; }),
+      used: 0, remaining: budget, weekIndex: null, weekFunded: 0, weekCostTotal: 0, weekShare: 0,
+      planEnd: null, totalCost: 0, shortfall: 0 };
+    var lastWeekDays = W[W.length - 1].info.days;
+    res.planEnd = lastWeekDays.length ? lastWeekDays[lastWeekDays.length - 1] : W[W.length - 1].info.monday;
+    var total = 0; W.forEach(function (w) { total += weekCost(w, inc); });
+    res.totalCost = round2(total);
+    if (budget <= 0) return res;
+
+    var cum = 0, covered = 0, byRole = res.coveredByRole;
+    for (var i = 0; i < W.length; i++) {
+      var w = W[i], c = weekCost(w, inc);
+      if (c > 0 && cum + c >= budget - EPS) {                 // Budget erschöpft sich in dieser Woche
+        var rem = Math.min(c, budget - cum), share = rem / c;
+        var dayPos = share * w.info.avail;                    // lineare Interpolation auf Arbeitstage
+        var idx = Math.min(w.info.avail, Math.max(1, Math.ceil(dayPos - EPS)));
+        var full = Math.floor(dayPos + EPS);
+        res.status = 'within'; res.weekIndex = i;
+        res.endDate = w.info.days[idx - 1]; res.kw = w.info.kw; res.year = w.info.year;
+        res.lastFullDay = full >= 1 ? w.info.days[full - 1] : (i > 0 ? lastDayBefore(W, i) : null);
+        res.coveredDays = round2(covered + w.days * share);
+        res.coveredByRole = byRole.map(function (x, j) { return round2(x + w.roleDays[j] * share); });
+        res.used = round2(budget); res.remaining = 0;
+        res.weekFunded = round2(rem); res.weekCostTotal = round2(c); res.weekShare = share;
+        return res;
+      }
+      cum += c; covered += w.days;
+      for (var j = 0; j < n; j++) byRole[j] += w.roleDays[j];
+    }
+    res.status = 'beyond';
+    res.endDate = res.planEnd; res.kw = W[W.length - 1].info.kw; res.year = W[W.length - 1].info.year;
+    res.coveredDays = round2(covered);
+    res.coveredByRole = byRole.map(round2);
+    res.used = round2(cum); res.remaining = round2(budget - cum);
+    return res;
+  }
+  function lastDayBefore(W, i) {
+    for (var k = i - 1; k >= 0; k--) if (W[k].info.days.length) return W[k].info.days[W[k].info.days.length - 1];
+    return null;
+  }
+
+  /** Umkehrrechnung: Netto-Kosten vom Leistungsbeginn bis einschließlich Zieldatum. */
+  function budgetForDate(plan, dateISO, includeTravel) {
+    var inc = includeTravel !== false, calc = computePlan(plan), cost = 0, days = 0;
+    calc.weeks.forEach(function (w) {
+      var c = weekCost(w, inc);
+      if (!w.info.avail) return;
+      var upTo = w.info.days.filter(function (d) { return d <= dateISO; }).length;
+      var share = upTo / w.info.avail;
+      cost += c * share; days += w.days * share;
+    });
+    var vat = plan.parameters.vat;
+    return { net: round2(cost), gross: round2(cost * (1 + vat)), days: round2(days) };
+  }
+
+  /** Kennzahlen eines Szenarios für Vergleich und KPI-Leiste. */
+  function summarize(plan, budgetNet, opts) {
+    var calc = computePlan(plan);
+    return { calc: calc, totals: calc.totals, reach: reach(plan, budgetNet, opts) };
+  }
+
+  // ---------- Plan-Bearbeitung (liefern immer neue Pläne) ----------
+  function clonePlan(plan) { return JSON.parse(JSON.stringify(plan)); }
+  var idCounter = 0;
+  function newId() { idCounter += 1; return 'r' + Date.now().toString(36) + idCounter; }
+
+  /** Baut aus der JSON-Konfiguration einen Plan. */
+  function planFromConfig(cfg) {
+    var p = cfg.parameters;
+    return {
+      projekt: cfg.projekt, start: cfg.start, weeks: cfg.weeks,
+      parameters: { daysPerFte: p.daysPerFte, onsiteQuote: p.onsiteQuote, travelPerDay: p.travelPerDay,
+        vat: p.vat, holidays: false, christmasBreak: false },
+      rates: JSON.parse(JSON.stringify(cfg.rates)),
+      roles: cfg.roles.map(function (r, i) { return { id: 'base' + i, type: r.type, fte: r.fte.slice() }; })
+    };
+  }
+  /** Setzt FTE einer Rolle für Wochen from..to (0-basiert, inklusive). */
+  function setRange(plan, roleId, from, to, fte) {
+    var np = clonePlan(plan), v = Math.min(1, Math.max(0, fte));
+    np.roles.forEach(function (r) {
+      if (r.id !== roleId) return;
+      for (var i = Math.max(0, from); i <= Math.min(np.weeks - 1, to); i++) r.fte[i] = v;
+    });
+    return np;
+  }
+  function addRole(plan, type) {
+    var np = clonePlan(plan);
+    var fte = []; for (var i = 0; i < np.weeks; i++) fte.push(0);
+    np.roles.push({ id: newId(), type: type, fte: fte });
+    return np;
+  }
+  function removeRole(plan, roleId) {
+    var np = clonePlan(plan);
+    np.roles = np.roles.filter(function (r) { return r.id !== roleId; });
+    return np;
+  }
+  /** Verlängert den Plan um n Wochen; neue Wochen übernehmen die Auslastung der letzten Planwoche. */
+  function extendWeeks(plan, n) {
+    var np = clonePlan(plan), add = Math.max(0, Math.floor(n) || 0);
+    np.roles.forEach(function (r) {
+      var last = r.fte.length ? r.fte[r.fte.length - 1] : 0;
+      for (var i = 0; i < add; i++) r.fte.push(last);
+    });
+    np.weeks += add;
+    return np;
+  }
+
+  return {
+    WORKWEEK: WORKWEEK, parseISO: parseISO, toISO: toISO, addDays: addDays, mondayOf: mondayOf,
+    isoWeek: isoWeek, formatDate: formatDate, weekdayName: weekdayName, kwLabel: kwLabel,
+    easterSunday: easterSunday, federalHolidays: federalHolidays, weekInfo: weekInfo,
+    roleNames: roleNames, round2: round2, computePlan: computePlan, reach: reach,
+    budgetForDate: budgetForDate, summarize: summarize, clonePlan: clonePlan,
+    planFromConfig: planFromConfig, setRange: setRange, addRole: addRole,
+    removeRole: removeRole, extendWeeks: extendWeeks
+  };
+});
+</script>
+<script>/* Excel-Export (.xlsx) mit echten Formeln – eigener minimaler Writer ohne Bibliothek.
+ * Aufbau analog zur Ausgangsdatei: Kapazität → Beratertage → Honorar → Reisekosten → Gesamtaufwand.
+ * Alle Tagessätze und Parameter stehen in Zellen; es gibt keine #REF!-Verweise und keine fest
+ * verdrahteten Faktoren. Läuft im Browser (window.Xlsx) und in Node (require).
+ */
+(function (root, factory) {
+  if (typeof module === 'object' && module.exports) module.exports = factory(require('./core.js'));
+  else root.Xlsx = factory(root.Core);
+})(typeof self !== 'undefined' ? self : this, function (Core) {
+  'use strict';
+
+  // Stile (Index in cellXfs): 0 normal, 1 fett, 2 Prozent, 3 Euro, 4 Zahl 0,00, 5 Kopf (fett+Fläche), 6 Euro fett
+  var S = { normal: 0, bold: 1, pct: 2, eur: 3, num: 4, head: 5, eurBold: 6 };
+
+  function colName(n) { var s = ''; while (n > 0) { var m = (n - 1) % 26; s = String.fromCharCode(65 + m) + s; n = Math.floor((n - 1) / 26); } return s; }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+  /** Baut die Zellen: Liste von { r, c, v | f, s }. Gibt auch die Adressen der Kernzellen zurück. */
+  function buildCells(plan, title) {
+    var calc = Core.computePlan(plan), W = plan.weeks, N = plan.roles.length;
+    var cells = [], c0 = 3, cTot = c0 + W;                       // Spalte C = erste KW
+    var firstCol = colName(c0), lastCol = colName(c0 + W - 1), totCol = colName(cTot);
+    function put(r, c, o) { o.r = r; o.c = c; cells.push(o); }
+    function rng(r) { return firstCol + r + ':' + lastCol + r; }
+    var names = calc.roles.map(function (x) { return x.name; });
+
+    var row = 1;
+    put(row, 1, { v: title, s: S.bold });
+    row = 2; var rHead = row;
+    put(row, 1, { v: 'Rolle', s: S.head }); put(row, 2, { v: 'Tagessatz', s: S.head });
+    for (var i = 0; i < W; i++) put(row, c0 + i, { v: calc.weeks[i].info.label, s: S.head });
+    put(row, cTot, { v: 'TOTAL', s: S.head });
+    row = 3; put(row, 1, { v: 'Montag der Woche' });
+    for (i = 0; i < W; i++) put(row, c0 + i, { v: Core.formatDate(Core.parseISO(calc.weeks[i].info.monday)) });
+    row = 4; var rAvail = row; put(row, 1, { v: 'Verfügbare Arbeitstage (Mo–Fr)' });
+    for (i = 0; i < W; i++) put(row, c0 + i, { v: calc.weeks[i].info.avail });
+    put(row, cTot, { f: 'SUM(' + rng(row) + ')' });
+
+    // Parameterblock zuerst positionieren (Adressen werden in Formeln gebraucht)
+    var types = Object.keys(plan.rates);
+    var rCapSec = 6, rCap0 = 7, rCapSum = rCap0 + N;
+    var rDaySec = rCapSum + 2, rDay0 = rDaySec + 1, rDaySum = rDay0 + N;
+    var rFeeSec = rDaySum + 2, rFee0 = rFeeSec + 1, rFeeSum = rFee0 + N;
+    var rTravel = rFeeSum + 2, rNet = rTravel + 1, rGross = rNet + 1, rCum = rGross + 1;
+    var rPar = rCum + 3;
+    var P = { days: '$B$' + (rPar + 1), work: '$B$' + (rPar + 2), onsite: '$B$' + (rPar + 3), travel: '$B$' + (rPar + 4), vat: '$B$' + (rPar + 5) };
+    var rRate0 = rPar + 8;
+
+    put(rCapSec, 1, { v: 'Kapazität je KW (FTE-Anteil, 1 = volle Woche)', s: S.bold });
+    calc.roles.forEach(function (ro, j) {
+      var r = rCap0 + j, ti = types.indexOf(ro.type);
+      put(r, 1, { v: names[j] });
+      put(r, 2, { f: '$B$' + (rRate0 + ti), s: S.eur });
+      for (var k = 0; k < W; k++) put(r, c0 + k, { v: plan.roles[j].fte[k] || 0, s: S.pct });
+      put(r, cTot, { f: 'AVERAGE(' + rng(r) + ')', s: S.pct });
+    });
+    put(rCapSum, 1, { v: 'Gesamtkapazität', s: S.bold });
+    for (i = 0; i < W; i++) { var cl = colName(c0 + i); put(rCapSum, c0 + i, { f: 'SUM(' + cl + rCap0 + ':' + cl + (rCapSum - 1) + ')', s: S.pct }); }
+
+    put(rDaySec, 1, { v: 'Beratertage je KW  (= FTE × Tage je FTE-Woche × verfügbare Arbeitstage / Arbeitstage Mo–Fr)', s: S.bold });
+    names.forEach(function (n, j) {
+      var r = rDay0 + j; put(r, 1, { v: n });
+      for (var k = 0; k < W; k++) { var cl2 = colName(c0 + k);
+        put(r, c0 + k, { f: cl2 + (rCap0 + j) + '*' + P.days + '*' + cl2 + '$' + rAvail + '/' + P.work, s: S.num }); }
+      put(r, cTot, { f: 'SUM(' + rng(r) + ')', s: S.num });
+    });
+    put(rDaySum, 1, { v: 'Gesamtkapazität Beratertage', s: S.bold });
+    for (i = 0; i <= W; i++) { var cc = colName(c0 + i);
+      put(rDaySum, c0 + i, { f: 'SUM(' + cc + rDay0 + ':' + cc + (rDaySum - 1) + ')', s: S.num }); }
+
+    put(rFeeSec, 1, { v: 'Honorar je KW (Tagessatz × Beratertage, netto)', s: S.bold });
+    names.forEach(function (n, j) {
+      var r = rFee0 + j; put(r, 1, { v: n });
+      for (var k = 0; k < W; k++) { var cl3 = colName(c0 + k);
+        put(r, c0 + k, { f: '$B$' + (rCap0 + j) + '*' + cl3 + (rDay0 + j), s: S.eur }); }
+      put(r, cTot, { f: 'SUM(' + rng(r) + ')', s: S.eur });
+    });
+    put(rFeeSum, 1, { v: 'Gesamtberatungsbudget netto ohne Nebenkosten', s: S.bold });
+    for (i = 0; i <= W; i++) { var c4 = colName(c0 + i);
+      put(rFeeSum, c0 + i, { f: 'SUM(' + c4 + rFee0 + ':' + c4 + (rFeeSum - 1) + ')', s: S.eurBold }); }
+
+    put(rTravel, 1, { v: 'Reisekosten (Beratertage × Onsite-Quote × Kosten je Onsite-Tag)' });
+    put(rNet, 1, { v: 'Gesamtaufwand (Budget netto)', s: S.bold });
+    put(rGross, 1, { v: 'Gesamtaufwand (Budget brutto) inkl. MwSt.', s: S.bold });
+    put(rCum, 1, { v: 'Kumuliert netto' });
+    for (i = 0; i < W; i++) { var c5 = colName(c0 + i), prev = colName(c0 + i - 1);
+      put(rTravel, c0 + i, { f: c5 + rDaySum + '*' + P.onsite + '*' + P.travel, s: S.eur });
+      put(rNet, c0 + i, { f: c5 + rFeeSum + '+' + c5 + rTravel, s: S.eur });
+      put(rGross, c0 + i, { f: c5 + rNet + '*(1+' + P.vat + ')', s: S.eur });
+      put(rCum, c0 + i, { f: i === 0 ? c5 + rNet : prev + rCum + '+' + c5 + rNet, s: S.eur });
+    }
+    put(rTravel, cTot, { f: 'SUM(' + rng(rTravel) + ')', s: S.eur });
+    put(rNet, cTot, { f: 'SUM(' + rng(rNet) + ')', s: S.eurBold });
+    put(rGross, cTot, { f: 'SUM(' + rng(rGross) + ')', s: S.eurBold });
+
+    var p = plan.parameters;
+    put(rPar, 1, { v: 'Parameter', s: S.bold });
+    put(rPar + 1, 1, { v: 'Tage je FTE-Woche' }); put(rPar + 1, 2, { v: p.daysPerFte });
+    put(rPar + 2, 1, { v: 'Arbeitstage je Kalenderwoche (Mo–Fr)' }); put(rPar + 2, 2, { v: Core.WORKWEEK });
+    put(rPar + 3, 1, { v: 'Onsite-Quote' }); put(rPar + 3, 2, { v: p.onsiteQuote, s: S.pct });
+    put(rPar + 4, 1, { v: 'Reisekosten je Onsite-Tag' }); put(rPar + 4, 2, { v: p.travelPerDay, s: S.eur });
+    put(rPar + 5, 1, { v: 'MwSt.' }); put(rPar + 5, 2, { v: p.vat, s: S.pct });
+    put(rRate0 - 1, 1, { v: 'Tagessatztabelle', s: S.bold });
+    types.forEach(function (t, k) { put(rRate0 + k, 1, { v: t }); put(rRate0 + k, 2, { v: plan.rates[t], s: S.eur }); });
+    put(rRate0 + types.length + 1, 1, { v: 'Start: ' + Core.formatDate(Core.parseISO(plan.start)) + (p.holidays ? ' · Feiertage berücksichtigt' : '') + (p.christmasBreak ? ' · Weihnachtspause berücksichtigt' : '') });
+    return { cells: cells, addr: { net: totCol + rNet, gross: totCol + rGross, days: totCol + rDaySum, fee: totCol + rFeeSum, travel: totCol + rTravel }, rows: rRate0 + types.length + 1, cols: cTot };
+  }
+
+  function sheetXml(model) {
+    var byRow = {};
+    model.cells.forEach(function (c) { (byRow[c.r] = byRow[c.r] || []).push(c); });
+    var out = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetViews><sheetView workbookViewId="0"><pane xSplit="2" ySplit="2" topLeftCell="C3" activePane="bottomRight" state="frozen"/></sheetView></sheetViews><cols><col min="1" max="1" width="46" customWidth="1"/><col min="2" max="2" width="14" customWidth="1"/><col min="3" max="' + model.cols + '" width="11" customWidth="1"/></cols><sheetData>';
+    Object.keys(byRow).map(Number).sort(function (a, b) { return a - b; }).forEach(function (r) {
+      out += '<row r="' + r + '">';
+      byRow[r].sort(function (a, b) { return a.c - b.c; }).forEach(function (c) {
+        var ref = colName(c.c) + c.r, st = c.s ? ' s="' + c.s + '"' : '';
+        if (c.f !== undefined) out += '<c r="' + ref + '"' + st + '><f>' + esc(c.f) + '</f></c>';
+        else if (typeof c.v === 'number') out += '<c r="' + ref + '"' + st + '><v>' + c.v + '</v></c>';
+        else out += '<c r="' + ref + '"' + st + ' t="inlineStr"><is><t xml:space="preserve">' + esc(c.v) + '</t></is></c>';
+      });
+      out += '</row>';
+    });
+    return out + '</sheetData></worksheet>';
+  }
+
+  var STYLES = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">' +
+    '<numFmts count="2"><numFmt numFmtId="164" formatCode="#,##0.00\\ &quot;€&quot;"/><numFmt numFmtId="165" formatCode="0.00"/></numFmts>' +
+    '<fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts>' +
+    '<fills count="3"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill><fill><patternFill patternType="solid"><fgColor rgb="FFDCE9F0"/></patternFill></fill></fills>' +
+    '<borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders>' +
+    '<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>' +
+    '<cellXfs count="7"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>' +
+    '<xf numFmtId="0" fontId="1" fillId="0" borderId="0" xfId="0" applyFont="1"/>' +
+    '<xf numFmtId="9" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/>' +
+    '<xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/>' +
+    '<xf numFmtId="165" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/>' +
+    '<xf numFmtId="0" fontId="1" fillId="2" borderId="0" xfId="0" applyFont="1" applyFill="1"/>' +
+    '<xf numFmtId="164" fontId="1" fillId="0" borderId="0" xfId="0" applyNumberFormat="1" applyFont="1"/></cellXfs></styleSheet>';
+
+  // ---------- minimaler ZIP-Writer (ohne Kompression) ----------
+  var crcTable = (function () { var t = [], c, n, k; for (n = 0; n < 256; n++) { c = n; for (k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+  function crc32(b) { var c = 0xFFFFFFFF; for (var i = 0; i < b.length; i++) c = crcTable[(c ^ b[i]) & 255] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
+  function utf8(s) { return new TextEncoder().encode(s); }
+  function zip(files) {
+    var parts = [], central = [], offset = 0;
+    function u16(v) { return [v & 255, (v >>> 8) & 255]; }
+    function u32(v) { return [v & 255, (v >>> 8) & 255, (v >>> 16) & 255, (v >>> 24) & 255]; }
+    files.forEach(function (f) {
+      var name = utf8(f.name), data = utf8(f.data), crc = crc32(data);
+      var head = [0x50, 0x4b, 3, 4].concat(u16(20), u16(0x0800), u16(0), u16(0), u16(0x21), u32(crc), u32(data.length), u32(data.length), u16(name.length), u16(0));
+      parts.push(Uint8Array.from(head), name, data);
+      central.push(Uint8Array.from([0x50, 0x4b, 1, 2].concat(u16(20), u16(20), u16(0x0800), u16(0), u16(0), u16(0x21), u32(crc), u32(data.length), u32(data.length), u16(name.length), u16(0), u16(0), u16(0), u16(0), u32(0), u32(offset))), name);
+      offset += head.length + name.length + data.length;
+    });
+    var cdSize = 0; central.forEach(function (p) { cdSize += p.length; });
+    var end = Uint8Array.from([0x50, 0x4b, 5, 6].concat(u16(0), u16(0), u16(files.length), u16(files.length), u32(cdSize), u32(offset), u16(0)));
+    var all = parts.concat(central, [end]), total = 0; all.forEach(function (p) { total += p.length; });
+    var out = new Uint8Array(total), pos = 0; all.forEach(function (p) { out.set(p, pos); pos += p.length; });
+    return out;
+  }
+
+  /** Erzeugt die .xlsx-Datei als Uint8Array. */
+  function build(plan, title) {
+    var model = buildCells(plan, title || ('Projekt GOÄ-Novelle | ' + Core.formatDate(Core.parseISO(plan.start))));
+    var X = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>';
+    var files = [
+      { name: '[Content_Types].xml', data: X + '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/><Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>' },
+      { name: '_rels/.rels', data: X + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>' },
+      { name: 'xl/workbook.xml', data: X + '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Budget" sheetId="1" r:id="rId1"/></sheets><calcPr calcId="191029" fullCalcOnLoad="1"/></workbook>' },
+      { name: 'xl/_rels/workbook.xml.rels', data: X + '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>' },
+      { name: 'xl/styles.xml', data: STYLES },
+      { name: 'xl/worksheets/sheet1.xml', data: sheetXml(model) }
+    ];
+    return { bytes: zip(files), addr: model.addr };
+  }
+
+  return { build: build, buildCells: buildCells, colName: colName };
+});
+</script>
+<script>/* Oberfläche. Alle Berechnungen liegen in Core (src/core.js); hier nur Darstellung und Ereignisse.
+ * BASE_CONFIG wird beim Build aus config/basisplan.json eingebettet. */
+(function () {
+  'use strict';
+  var C = window.Core, X = window.Xlsx;
+  var BASE = C.planFromConfig(window.BASE_CONFIG);        // Basisplan: immer im Code hinterlegt
+  var STORE = 'goae-budget-szenarien-v1';
+  var COLORS = ['#0b4f6c', '#5a9bb8', '#b08968', '#7a8b99', '#c0a062', '#6b8f71', '#a05a5a', '#8d7aa8'];
+  var TRAVEL_COLOR = '#c9ced3';
+
+  var state = {
+    plan: C.clonePlan(BASE),
+    budget: { text: '200.000', amount: 200000, gross: false, includeTravel: true },
+    target: '2027-03-31', scenarios: [], tab: 'kap'
+  };
+
+  // ---------- Formatierung ----------
+  var nfEur = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  var nfEur0 = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR', minimumFractionDigits: 0, maximumFractionDigits: 2 });
+  var nfNum = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+  var nfPct = new Intl.NumberFormat('de-DE', { minimumFractionDigits: 0, maximumFractionDigits: 1 });
+  function eur(x) { return nfEur.format(x); }
+  function eurS(x) { return Number.isInteger(Math.round(x * 100) / 100) ? nfEur0.format(Math.round(x)) : nfEur.format(x); }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function dFmt(iso) { return C.formatDate(C.parseISO(iso)); }
+  function dLong(iso) { return C.weekdayName(C.parseISO(iso)) + ', ' + dFmt(iso); }
+  function $(id) { return document.getElementById(id); }
+  function signed(x, f) { return (x > 0 ? '+' : x < 0 ? '−' : '') + f(Math.abs(x)); }
+
+  /** Freitext → Zahl. Akzeptiert "200.000", "200000", "200k", "1,5k", "200.000 €". */
+  function parseAmount(t) {
+    var s = String(t).toLowerCase().replace(/[€\s]/g, ''), mult = 1;
+    if (/k$/.test(s)) { mult = 1000; s = s.slice(0, -1); }
+    s = s.replace(/\./g, '').replace(',', '.');
+    var v = parseFloat(s);
+    return isFinite(v) && v >= 0 ? v * mult : NaN;
+  }
+
+  // ---------- Ableitungen ----------
+  function netBudget() { return state.budget.gross ? state.budget.amount / (1 + state.plan.parameters.vat) : state.budget.amount; }
+  function compute() {
+    var net = netBudget();
+    return { net: net, S: C.summarize(state.plan, net, { includeTravel: state.budget.includeTravel }) };
+  }
+  function reachSentence(R, b, vat) {
+    var basis = b.gross ? ' brutto' : ' netto';
+    var trv = b.includeTravel ? 'inkl. Reisekosten' : 'Reisekosten nicht im Budget';
+    var amt = eurS(b.amount) + basis;
+    if (R.status === 'zero') return { cls: 'warn', text: 'Mit ' + eurS(b.amount) + ' ist keine Leistung finanziert – das Budget deckt keinen Beratertag.' };
+    if (R.status === 'beyond') {
+      var rest = b.gross ? R.remaining * (1 + vat) : R.remaining;
+      return { cls: '', text: 'Mit ' + amt + ' (' + trv + ') reicht das Budget bei aktueller Teamaufstellung über das Planende hinaus (Planende: ' +
+        dLong(R.planEnd) + ', KW ' + R.kw + '/' + R.year + '). Es bleiben ' + eurS(rest) + basis + ' übrig.' };
+    }
+    return { cls: '', text: 'Mit ' + amt + ' (' + trv + ') reicht das Budget bei aktueller Teamaufstellung bis ca. ' +
+      dLong(R.endDate) + ' (KW ' + R.kw + '/' + R.year + ').' };
+  }
+  function reachShort(R) {
+    if (R.status === 'zero') return 'kein Budget';
+    if (R.status === 'beyond') return 'über Planende';
+    return dFmt(R.endDate) + ' (KW ' + R.kw + ')';
+  }
+
+  // ---------- Diagramme (SVG) ----------
+  function niceMax(v) {
+    if (v <= 0) return { max: 1, step: 0.25 };
+    var p = Math.pow(10, Math.floor(Math.log10(v))), n = v / p, s = n <= 1 ? 0.2 : n <= 2 ? 0.5 : n <= 5 ? 1 : 2;
+    var step = s * p, max = Math.ceil(v / step) * step; return { max: max, step: step };
+  }
+  function tK(v) { return nfNum.format(v / 1000) + ' T€'; }
+  function axisX(W, x, h, mb) {
+    var o = '', every = W.length > 30 ? 4 : 2;
+    W.forEach(function (w, i) { if (i % every === 0) o += '<text x="' + x(i + 0.5) + '" y="' + (h - mb + 14) + '" text-anchor="middle">' + w.info.label + '</text>'; });
+    return o;
+  }
+  function chartCum(S, net, inc) {
+    var W = S.calc.weeks, R = S.reach, n = W.length, w = 900, h = 320, ml = 62, mr = 16, mt = 16, mb = 34;
+    var cum = [0], t = 0; W.forEach(function (k) { t += k.fee + (inc ? k.travel : 0); cum.push(t); });
+    var ymax = niceMax(Math.max(t, net) * 1.05), pw = w - ml - mr, ph = h - mt - mb;
+    function x(i) { return ml + pw * i / n; } function y(v) { return mt + ph - ph * v / ymax.max; }
+    var o = '<svg viewBox="0 0 ' + w + ' ' + h + '" role="img" aria-label="Kumulierte Kosten mit Budgetlinie">';
+    for (var g = 0; g <= ymax.max + 1e-6; g += ymax.step) o += '<line x1="' + ml + '" x2="' + (w - mr) + '" y1="' + y(g) + '" y2="' + y(g) + '" stroke="#e7ecf0"/><text x="' + (ml - 6) + '" y="' + (y(g) + 4) + '" text-anchor="end">' + tK(g) + '</text>';
+    o += axisX(W, x, h, mb);
+    o += '<polyline fill="none" stroke="' + COLORS[0] + '" stroke-width="2.5" points="' + cum.map(function (v, i) { return x(i) + ',' + y(v); }).join(' ') + '"/>';
+    if (net > 0) o += '<line x1="' + ml + '" x2="' + (w - mr) + '" y1="' + y(net) + '" y2="' + y(net) + '" stroke="#9a5b00" stroke-width="1.5" stroke-dasharray="6 4"/><text x="' + (w - mr) + '" y="' + (y(net) - 5) + '" text-anchor="end" style="fill:#9a5b00">Budget ' + eurS(net) + ' netto</text>';
+    if (R.status === 'within') {
+      var px = x(R.weekIndex + R.weekShare), py = y(net);
+      var left = px > w * 0.65, tx = left ? px - 10 : px + 10;
+      o += '<line x1="' + px + '" x2="' + px + '" y1="' + py + '" y2="' + (mt + ph) + '" stroke="#9a5b00" stroke-dasharray="2 3"/><circle cx="' + px + '" cy="' + py + '" r="6" fill="#fff" stroke="#9a5b00" stroke-width="3"/>' +
+        '<text x="' + tx + '" y="' + (py + 22) + '" text-anchor="' + (left ? 'end' : 'start') + '" style="font-weight:600;font-size:12px;fill:#9a5b00">Budget reicht bis ' + dFmt(R.endDate) + '</text>';
+    }
+    return o + '</svg>';
+  }
+  function chartBars(S, inc) {
+    var W = S.calc.weeks, roles = S.calc.roles, n = W.length, w = 900, h = 280, ml = 62, mr = 16, mt = 12, mb = 34;
+    var mx = 0; W.forEach(function (k) { mx = Math.max(mx, k.fee + (inc ? k.travel : 0)); });
+    var ym = niceMax(mx * 1.05), pw = w - ml - mr, ph = h - mt - mb, bw = pw / n * 0.7;
+    function x(i) { return ml + pw * i / n; } function y(v) { return mt + ph - ph * v / ym.max; }
+    var o = '<svg viewBox="0 0 ' + w + ' ' + h + '" role="img" aria-label="Wochenkosten je Rolle">';
+    for (var g = 0; g <= ym.max + 1e-6; g += ym.step) o += '<line x1="' + ml + '" x2="' + (w - mr) + '" y1="' + y(g) + '" y2="' + y(g) + '" stroke="#e7ecf0"/><text x="' + (ml - 6) + '" y="' + (y(g) + 4) + '" text-anchor="end">' + tK(g) + '</text>';
+    W.forEach(function (k, i) {
+      var base = 0, bx = x(i) + (pw / n - bw) / 2, tip = k.info.label + ' (ab ' + dFmt(k.info.monday) + ')';
+      roles.forEach(function (r, j) {
+        var v = k.roleFee[j]; if (v <= 0) return;
+        o += '<rect x="' + bx + '" y="' + y(base + v) + '" width="' + bw + '" height="' + (y(base) - y(base + v)) + '" fill="' + COLORS[j % COLORS.length] + '"><title>' + tip + ' · ' + esc(r.name) + ': ' + eur(v) + '</title></rect>'; base += v;
+      });
+      if (inc && k.travel > 0) { o += '<rect x="' + bx + '" y="' + y(base + k.travel) + '" width="' + bw + '" height="' + (y(base) - y(base + k.travel)) + '" fill="' + TRAVEL_COLOR + '"><title>' + tip + ' · Reisekosten: ' + eur(k.travel) + '</title></rect>'; }
+    });
+    return o + axisX(W, x, h, mb) + '</svg>';
+  }
+  function legend(S, inc) {
+    var l = S.calc.roles.map(function (r, j) { return '<span><i style="background:' + COLORS[j % COLORS.length] + '"></i>' + esc(r.name) + '</span>'; });
+    if (inc) l.push('<span><i style="background:' + TRAVEL_COLOR + '"></i>Reisekosten</span>');
+    return '<div class="legend">' + l.join('') + '</div>';
+  }
+  function chartHeat(S) {
+    var W = S.calc.weeks, roles = S.calc.roles, plan = state.plan, n = W.length, w = 900, lw = 120, cw = (w - lw - 8) / n, ch = 26, h = 22 + roles.length * ch + 6;
+    var o = '<svg viewBox="0 0 ' + w + ' ' + h + '" role="img" aria-label="Kapazität je Rolle und KW">';
+    W.forEach(function (k, i) { if (i % (n > 30 ? 4 : 2) === 0) o += '<text x="' + (lw + i * cw + cw / 2) + '" y="14" text-anchor="middle">' + k.info.label + '</text>'; });
+    roles.forEach(function (r, j) {
+      var y0 = 22 + j * ch;
+      o += '<text x="' + (lw - 8) + '" y="' + (y0 + ch / 2 + 4) + '" text-anchor="end">' + esc(r.name) + '</text>';
+      W.forEach(function (k, i) {
+        var v = plan.roles[j].fte[i] || 0;
+        o += '<rect x="' + (lw + i * cw + 0.5) + '" y="' + (y0 + 1) + '" width="' + (cw - 1) + '" height="' + (ch - 2) + '" rx="2" fill="' + (v > 0 ? '#0b4f6c' : '#f1f4f6') + '" fill-opacity="' + (v > 0 ? 0.15 + 0.85 * v : 1) + '"><title>' + esc(r.name) + ', ' + k.info.label + ': ' + Math.round(v * 100) + ' %</title></rect>';
+        if (cw > 24 && v > 0) o += '<text x="' + (lw + i * cw + cw / 2) + '" y="' + (y0 + ch / 2 + 4) + '" text-anchor="middle" style="font-size:9px;fill:' + (v > 0.5 ? '#fff' : '#1c2530') + '">' + Math.round(v * 100) + '</text>';
+      });
+    });
+    return o + '</svg>';
+  }
+
+  // ---------- Ergebnisbereiche ----------
+  function renderResult(cp) {
+    var R = cp.S.reach, T = cp.S.totals, b = state.budget, vat = state.plan.parameters.vat, st = reachSentence(R, b, vat);
+    $('sentence').className = 'big ' + st.cls; $('sentence').textContent = st.text;
+    var roleRows = cp.S.calc.roles.map(function (r, j) { return '<tr><td>' + esc(r.name) + '</td><td>' + nfNum.format(R.coveredByRole[j]) + '</td><td>' + nfNum.format(r.days) + '</td></tr>'; }).join('');
+    var d = '<div><span>Abgedeckte Beratertage gesamt</span><b>' + nfNum.format(R.coveredDays) + ' von ' + nfNum.format(T.days) + '</b></div>';
+    d += '<div><span>Verbrauchtes Budget</span><b>' + eur(R.used) + ' netto / ' + eur(R.used * (1 + vat)) + ' brutto</b></div>';
+    if (R.status === 'within') {
+      d += '<div><span>Finanziert in der letzten Woche (KW ' + R.kw + ')</span><b>' + eur(R.weekFunded) + ' von ' + eur(R.weekCostTotal) + ' (' + nfPct.format(R.weekShare * 100) + ' %)</b></div>';
+      d += '<div><span>Letzter voll gedeckter Arbeitstag</span><b>' + (R.lastFullDay ? dLong(R.lastFullDay) : 'keiner') + '</b></div>';
+    }
+    if (R.status === 'beyond') d += '<div><span>Übriges Budget</span><b>' + eur(R.remaining) + ' netto / ' + eur(R.remaining * (1 + vat)) + ' brutto</b></div>';
+    var gap = R.totalCost - R.budget;
+    d += '<div><span>Gesamtplan nach Abzug des Vorschusses (' + (b.includeTravel ? 'inkl.' : 'ohne') + ' Reisekosten, netto)</span><b>' + (gap > 0 ? 'noch ungedeckt: ' + eur(gap) : 'Budget übersteigt Plan um ' + eur(-gap)) + '</b></div>';
+    $('details').innerHTML = d;
+    $('roletable').innerHTML = '<table><tr><th>Rolle</th><th>Beratertage abgedeckt</th><th>Beratertage Gesamtplan</th></tr>' + roleRows + '</table>';
+  }
+  function renderKpis(cp) {
+    var T = cp.S.totals;
+    var k = [['Gesamtaufwand netto (inkl. Reise)', eur(T.net)], ['Gesamtaufwand brutto', eur(T.gross)], ['Beratertage gesamt', nfNum.format(T.days)], ['Reichweite des Budgets', reachShort(cp.S.reach)]];
+    var html = k.map(function (x, i) { return '<div class="kpi' + (i === 3 ? ' acc' : '') + '"><span>' + x[0] + '</span><b>' + x[1] + '</b></div>'; }).join('');
+    $('kpis').innerHTML = html; $('sb-kpis').innerHTML = html;
+  }
+  function renderCharts(cp) {
+    var inc = state.budget.includeTravel, cum = chartCum(cp.S, cp.net, inc);
+    $('ch-cum').innerHTML = cum; $('sb-cum').innerHTML = cum;
+    $('ch-bars').innerHTML = chartBars(cp.S, inc); $('ch-legend').innerHTML = legend(cp.S, inc);
+    $('ch-heat').innerHTML = chartHeat(cp.S);
+  }
+  function renderInverse() {
+    var t = state.target, el = $('inv-out');
+    if (!t) { el.textContent = 'Bitte ein Zieldatum wählen.'; return; }
+    var r = C.budgetForDate(state.plan, t, state.budget.includeTravel);
+    el.innerHTML = 'Bis einschließlich ' + dLong(t) + ' werden <b>' + nfNum.format(r.days) + ' Beratertage</b> benötigt.<br>Benötigtes Budget: <b>' + eur(r.net) + ' netto</b> / <b>' + eur(r.gross) + ' brutto</b> (' + (state.budget.includeTravel ? 'inkl.' : 'ohne') + ' Reisekosten).';
+  }
+  function renderSteckbrief(cp) {
+    var R = cp.S.reach, st = reachSentence(R, state.budget, state.plan.parameters.vat), p = state.plan.parameters;
+    $('sb-sentence').textContent = st.text;
+    $('sb-date').textContent = 'Stand ' + dFmt(C.toISO(new Date())) + ' · Leistungsbeginn ' + dFmt(state.plan.start) + ' · ' + state.plan.weeks + ' Wochen';
+    $('sb-roles').innerHTML = $('roletable').innerHTML;
+    $('sb-ann').textContent = 'Annahmen: ' + p.daysPerFte + ' Tage je FTE-Woche · ' + nfPct.format(p.onsiteQuote * 100) + ' % Onsite · ' + eurS(p.travelPerDay) + ' je Onsite-Tag · MwSt. ' + nfPct.format(p.vat * 100) + ' % · Feiertage ' + (p.holidays ? 'berücksichtigt' : 'nicht berücksichtigt') + '.';
+  }
+  function update() {
+    var cp = compute();
+    renderResult(cp); renderKpis(cp); renderCharts(cp); renderInverse(); renderSteckbrief(cp);
+    renderCompare(cp);
+  }
+
+  // ---------- Szenarien ----------
+  function loadStore() { try { var s = JSON.parse(localStorage.getItem(STORE) || '[]'); if (Array.isArray(s)) state.scenarios = s.filter(function (x) { return x && x.name && x.plan; }); } catch (e) { /* ohne Speicher weiterarbeiten */ } }
+  function saveStore() { try { localStorage.setItem(STORE, JSON.stringify(state.scenarios)); } catch (e) { $('sc-msg').textContent = 'Hinweis: Browser-Speicher nicht verfügbar – Szenarien gelten nur bis zum Schließen.'; } }
+  function renderScenarioList() {
+    $('sc-list').innerHTML = state.scenarios.length ? state.scenarios.map(function (s, i) {
+      return '<li>' + esc(s.name) + ' <button class="link" data-sc-load="' + i + '">Laden</button><button class="link" data-sc-del="' + i + '">Löschen</button></li>';
+    }).join('') : '<li class="note">Noch keine Szenarien gespeichert (Basisplan ist immer vorhanden).</li>';
+  }
+  function renderCompare(cp) {
+    var net = cp.net, opts = { includeTravel: state.budget.includeTravel }, start = state.plan.start;
+    var cols = [{ name: 'Basisplan', plan: BASE }].concat(state.scenarios, [{ name: 'Aktuell (Editor)', plan: state.plan }]);
+    var res = cols.map(function (c) { var p = C.clonePlan(c.plan); p.start = start; return { name: c.name, S: C.summarize(p, net, opts) }; });
+    var types = []; res.forEach(function (r) { r.S.calc.roles.forEach(function (ro) { if (types.indexOf(ro.name) < 0) types.push(ro.name); }); });
+    var b = res[0];
+    function dayOf(r, nm) { var f = r.S.calc.roles.filter(function (x) { return x.name === nm; })[0]; return f ? f.days : 0; }
+    function reachDays(r) { var R = r.S.reach; return R.status === 'within' ? R.endDate : (R.status === 'beyond' ? '9999-12-31' : null); }
+    function dcell(v, f, invert) { if (Math.abs(v) < 0.005) return '<td>–</td>'; var good = invert ? v > 0 : v < 0; return '<td class="' + (good ? 'delta-neg' : 'delta-pos') + '">' + signed(v, f) + '</td>'; }
+    var h = '<tr><th></th>' + res.map(function (r) { return '<th>' + esc(r.name) + '</th>'; }).join('') + '</tr>';
+    function line(label, fn) { return '<tr><td>' + label + '</td>' + res.map(fn).join('') + '</tr>'; }
+    h += line('Gesamtkosten netto', function (r) { return '<td>' + eur(r.S.totals.net) + '</td>'; });
+    h += line('Gesamtkosten brutto', function (r) { return '<td>' + eur(r.S.totals.gross) + '</td>'; });
+    h += line('Beratertage gesamt', function (r) { return '<td>' + nfNum.format(r.S.totals.days) + '</td>'; });
+    types.forEach(function (t) { h += line('&nbsp;&nbsp;' + esc(t), function (r) { return '<td>' + nfNum.format(dayOf(r, t)) + '</td>'; }); });
+    h += line('Reichweite von ' + eurS(state.budget.gross ? net * (1 + state.plan.parameters.vat) : net) + (state.budget.gross ? ' brutto' : ' netto'), function (r) { return '<td>' + reachShort(r.S.reach) + '</td>'; });
+    h += line('Δ Kosten netto zum Basisplan', function (r, i) { return i === 0 ? '<td>–</td>' : dcell(r.S.totals.net - b.S.totals.net, eur, false); });
+    h += line('Δ Beratertage zum Basisplan', function (r, i) { return i === 0 ? '<td>–</td>' : dcell(r.S.totals.days - b.S.totals.days, nfNum.format.bind(nfNum), false); });
+    h += line('Δ Reichweite (Kalendertage)', function (r, i) {
+      if (i === 0) return '<td>–</td>'; var a = reachDays(r), z = reachDays(b); if (!a || !z) return '<td>–</td>';
+      if (a === z) return '<td>–</td>'; if (a === '9999-12-31' || z === '9999-12-31') return '<td>' + (a === '9999-12-31' ? 'über Planende' : 'kürzer') + '</td>';
+      var dd = Math.round((C.parseISO(a) - C.parseISO(z)) / 86400000); return dcell(dd, function (v) { return v + ' Tage'; }, true);
+    });
+    $('sc-table').innerHTML = '<table>' + h + '</table>';
+  }
+
+  // ---------- Kapazitätsmatrix ----------
+  function weekOptions(sel) {
+    var cp = C.computePlan(state.plan);
+    return cp.weeks.map(function (w, i) { return '<option value="' + i + '"' + (i === sel ? ' selected' : '') + '>' + w.info.label + '/' + w.info.year + '</option>'; }).join('');
+  }
+  function renderMatrix() {
+    var plan = state.plan, cp = C.computePlan(plan), W = cp.weeks;
+    var h = '<table class="mx"><tr><th>Rolle</th>' + W.map(function (w) { return '<th title="ab ' + dFmt(w.info.monday) + '">' + w.info.label + '</th>'; }).join('') + '<th></th></tr>';
+    plan.roles.forEach(function (r, j) {
+      h += '<tr><td>' + esc(cp.roles[j].name) + '</td>' + W.map(function (w, i) {
+        return '<td><input type="number" min="0" max="100" step="5" data-r="' + j + '" data-w="' + i + '" value="' + Math.round((r.fte[i] || 0) * 100) + '" aria-label="' + esc(cp.roles[j].name) + ' ' + w.info.label + ' in Prozent"></td>';
+      }).join('') + '<td><button class="link" data-rm="' + j + '" title="Rolle entfernen">entfernen</button></td></tr>';
+    });
+    $('matrix').innerHTML = h + '</table>';
+    var sel = plan.roles.map(function (r, j) { return '<option value="' + j + '">' + esc(cp.roles[j].name) + '</option>'; }).join('');
+    $('rg-role').innerHTML = sel; $('rg-from').innerHTML = weekOptions(0); $('rg-to').innerHTML = weekOptions(plan.weeks - 1);
+    $('add-type').innerHTML = Object.keys(plan.rates).map(function (t) { return '<option>' + esc(t) + '</option>'; }).join('');
+    renderParams();
+  }
+  function renderParams() {
+    var p = state.plan.parameters;
+    $('p-days').value = p.daysPerFte; $('p-onsite').value = nfPct.format(p.onsiteQuote * 100).replace(',', '.');
+    $('p-travel').value = p.travelPerDay; $('p-vat').value = nfPct.format(p.vat * 100).replace(',', '.');
+    $('p-hol').checked = !!p.holidays; $('p-xmas').checked = !!p.christmasBreak;
+    $('rates').innerHTML = Object.keys(state.plan.rates).map(function (t) {
+      return '<tr><td>' + esc(t) + '</td><td><input type="number" min="0" step="10" data-rate="' + esc(t) + '" value="' + state.plan.rates[t] + '"> €</td></tr>';
+    }).join('');
+    $('start').value = state.plan.start;
+  }
+
+  // ---------- Ereignisse ----------
+  function setTab(t) {
+    state.tab = t;
+    document.querySelectorAll('.tabs button').forEach(function (b) { b.classList.toggle('on', b.dataset.tab === t); });
+    document.querySelectorAll('.pane').forEach(function (p) { p.hidden = p.id !== 'pane-' + t; });
+  }
+  function readNum(el, min, max, dflt) { var v = parseFloat(String(el.value).replace(',', '.')); if (!isFinite(v)) return dflt; return Math.min(max, Math.max(min, v)); }
+  function bind() {
+    $('budget').addEventListener('input', function (e) {
+      var v = parseAmount(e.target.value); $('budget-err').textContent = isFinite(v) ? '' : 'Bitte einen Betrag eingeben (z. B. 200.000 oder 200k).';
+      if (isFinite(v)) { state.budget.amount = v; update(); }
+    });
+    document.querySelectorAll('[data-quick]').forEach(function (b) { b.addEventListener('click', function () { var v = +b.dataset.quick; state.budget.amount = v; $('budget').value = nfNum.format(v); $('budget-err').textContent = ''; update(); }); });
+    document.querySelectorAll('input[name=basis]').forEach(function (r) { r.addEventListener('change', function () { if (r.checked) { state.budget.gross = r.value === 'gross'; update(); } }); });
+    $('inc-travel').addEventListener('change', function (e) { state.budget.includeTravel = e.target.checked; update(); });
+    $('start').addEventListener('change', function (e) { if (e.target.value) { state.plan.start = e.target.value; renderMatrix(); update(); } });
+    $('target').addEventListener('change', function (e) { state.target = e.target.value; renderInverse(); });
+    $('matrix').addEventListener('input', function (e) {
+      var t = e.target; if (t.dataset.r === undefined) return;
+      var v = Math.min(100, Math.max(0, parseFloat(t.value) || 0)); state.plan.roles[+t.dataset.r].fte[+t.dataset.w] = v / 100; update();
+    });
+    $('matrix').addEventListener('change', function (e) { var t = e.target; if (t.dataset.r === undefined) return; var v = Math.round(Math.min(100, Math.max(0, parseFloat(t.value) || 0)) / 5) * 5; t.value = v; state.plan.roles[+t.dataset.r].fte[+t.dataset.w] = v / 100; update(); });
+    $('matrix').addEventListener('click', function (e) { if (e.target.dataset.rm !== undefined) { state.plan = C.removeRole(state.plan, state.plan.roles[+e.target.dataset.rm].id); renderMatrix(); update(); } });
+    $('rg-go').addEventListener('click', function () {
+      var j = +$('rg-role').value, a = +$('rg-from').value, b = +$('rg-to').value, v = +$('rg-val').value / 100;
+      if (b < a) { var t = a; a = b; b = t; }
+      state.plan = C.setRange(state.plan, state.plan.roles[j].id, a, b, v); renderMatrix(); update();
+    });
+    $('add-go').addEventListener('click', function () { state.plan = C.addRole(state.plan, $('add-type').value); renderMatrix(); update(); });
+    $('ext-go').addEventListener('click', function () { state.plan = C.extendWeeks(state.plan, readNum($('ext-n'), 1, 52, 4)); renderMatrix(); update(); });
+    $('reset').addEventListener('click', function () { if (confirm('Ausgangsplan wiederherstellen? Alle Änderungen im Editor gehen verloren (gespeicherte Szenarien bleiben).')) { state.plan = C.clonePlan(BASE); renderMatrix(); update(); } });
+    $('p-days').addEventListener('input', function (e) { state.plan.parameters.daysPerFte = readNum(e.target, 0.5, 7, 5); update(); });
+    $('p-onsite').addEventListener('input', function (e) { state.plan.parameters.onsiteQuote = readNum(e.target, 0, 100, 40) / 100; update(); });
+    $('p-travel').addEventListener('input', function (e) { state.plan.parameters.travelPerDay = readNum(e.target, 0, 10000, 200); update(); });
+    $('p-vat').addEventListener('input', function (e) { state.plan.parameters.vat = readNum(e.target, 0, 100, 19) / 100; update(); });
+    $('p-hol').addEventListener('change', function (e) { state.plan.parameters.holidays = e.target.checked; renderMatrix(); update(); });
+    $('p-xmas').addEventListener('change', function (e) { state.plan.parameters.christmasBreak = e.target.checked; renderMatrix(); update(); });
+    $('rates').addEventListener('input', function (e) { var t = e.target; if (t.dataset.rate) { state.plan.rates[t.dataset.rate] = readNum(t, 0, 100000, 0); update(); } });
+    $('sc-save').addEventListener('click', function () {
+      var n = $('sc-name').value.trim(); if (!n) { $('sc-msg').textContent = 'Bitte einen Namen vergeben.'; return; }
+      if (n === 'Basisplan') { $('sc-msg').textContent = 'Der Name „Basisplan“ ist reserviert.'; return; }
+      var snap = { name: n, plan: C.clonePlan(state.plan) }, i = state.scenarios.map(function (s) { return s.name; }).indexOf(n);
+      if (i >= 0) state.scenarios[i] = snap; else state.scenarios.push(snap);
+      $('sc-msg').textContent = 'Szenario „' + n + '“ gespeichert.'; saveStore(); renderScenarioList(); update();
+    });
+    $('sc-list').addEventListener('click', function (e) {
+      var d = e.target.dataset; if (d.scLoad !== undefined) { state.plan = C.clonePlan(state.scenarios[+d.scLoad].plan); $('sc-name').value = state.scenarios[+d.scLoad].name; renderMatrix(); update(); }
+      if (d.scDel !== undefined) { state.scenarios.splice(+d.scDel, 1); saveStore(); renderScenarioList(); update(); }
+    });
+    document.querySelectorAll('.tabs button').forEach(function (b) { b.addEventListener('click', function () { setTab(b.dataset.tab); }); });
+    $('btn-xlsx').addEventListener('click', function () {
+      var out = X.build(state.plan), blob = new Blob([out.bytes], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'Budget-Szenario_' + C.toISO(new Date()) + '.xlsx';
+      document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+    });
+    $('btn-print').addEventListener('click', function () { window.print(); });
+  }
+
+  loadStore(); bind(); $('budget').value = nfNum.format(state.budget.amount); $('target').value = state.target;
+  renderMatrix(); renderScenarioList(); setTab('kap'); update();
+  window.__dashboard = { state: state };   // nur für Tests/Debugging
+})();
+</script>
+</body>
+</html>

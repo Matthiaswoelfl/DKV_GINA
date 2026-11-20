@@ -1,0 +1,5 @@
+{
+  "name": "budget-dashboard-projekt-goae-novelle",
+  "private": true,
+  "scripts": { "build": "node build.js", "test": "node --test tests/*.test.js" }
+}

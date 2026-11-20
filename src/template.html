@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Budget-Dashboard Projekt GOÄ-Novelle</title>
+<style>/*CSS*/</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div><h1>Budget- und Reichweiten-Dashboard</h1><div class="sub">Projekt GOÄ-Novelle · Beratung → Kunde</div></div>
+  <div class="row"><button id="btn-xlsx">Excel-Export</button><button id="btn-print" class="primary">Budget-Steckbrief drucken</button></div>
+</header>
+
+<div class="grid2">
+  <section class="card" aria-labelledby="h-in">
+    <h2 id="h-in">Budget und Leistungsbeginn</h2>
+    <div class="row">
+      <label class="f">Budgetbetrag in €<input id="budget" type="text" inputmode="decimal" style="width:150px" autocomplete="off"></label>
+      <div class="seg" role="radiogroup" aria-label="Netto oder brutto">
+        <label><input type="radio" name="basis" value="net" checked><span>netto</span></label>
+        <label><input type="radio" name="basis" value="gross"><span>brutto</span></label>
+      </div>
+    </div>
+    <div class="row"><span class="note">Schnellwahl:</span>
+      <button data-quick="100000">100k</button><button data-quick="150000">150k</button><button data-quick="200000">200k</button><button data-quick="250000">250k</button></div>
+    <div class="err" id="budget-err"></div>
+    <div class="row"><label><input type="checkbox" id="inc-travel" checked> Reisekosten aus dem Budget bezahlen</label></div>
+    <div class="row"><label class="f">Leistungsbeginn<input id="start" type="date"></label></div>
+    <h3>Umkehrrechnung: Budget bis zum Zieldatum</h3>
+    <div class="row"><label class="f">Zieldatum<input id="target" type="date"></label></div>
+    <div id="inv-out" style="font-size:14px"></div>
+  </section>
+  <section class="card hero" aria-live="polite">
+    <h2>Reichweite</h2>
+    <p class="big" id="sentence"></p>
+    <div class="det" id="details"></div>
+    <div id="roletable" style="margin-top:12px"></div>
+  </section>
+</div>
+
+<div class="kpis" id="kpis"></div>
+
+<div class="charts">
+  <section class="card"><h2>Kumulierte Kosten und Budget</h2><div id="ch-cum"></div></section>
+  <section class="card"><h2>Wochenkosten je Rolle</h2><div id="ch-bars"></div><div id="ch-legend"></div></section>
+  <section class="card"><h2>Kapazität je Rolle und KW (FTE in %)</h2><div id="ch-heat"></div></section>
+</div>
+
+<nav class="tabs" role="tablist">
+  <button data-tab="kap">Kapazitätsplanung</button><button data-tab="par">Parameter</button>
+  <button data-tab="sz">Szenarien</button><button data-tab="ann">Annahmen</button>
+</nav>
+
+<div class="pane" id="pane-kap">
+  <div class="scroll" id="matrix"></div>
+  <div class="row" style="margin-top:12px">
+    <b>Bereich setzen:</b>
+    <select id="rg-role"></select> von <select id="rg-from"></select> bis <select id="rg-to"></select> auf
+    <select id="rg-val">
+      <option>0</option><option>5</option><option>10</option><option>15</option><option>20</option><option>25</option><option>30</option><option>35</option><option>40</option><option>45</option><option>50</option><option>55</option><option>60</option><option>65</option><option>70</option><option>75</option><option>80</option><option>85</option><option>90</option><option>95</option><option>100</option>
+    </select> %
+    <button id="rg-go" class="primary">Setzen</button>
+  </div>
+  <div class="row"><b>Rolle hinzufügen:</b><select id="add-type"></select><button id="add-go">Hinzufügen</button>
+    <b style="margin-left:18px">Plan verlängern um</b><input id="ext-n" type="number" min="1" max="52" value="4" style="width:70px"> Wochen<button id="ext-go">Verlängern</button>
+    <button id="reset" style="margin-left:auto">Ausgangsplan wiederherstellen</button></div>
+  <p class="note">Werte in Schritten von 5 %. Neue Wochen übernehmen die Auslastung der letzten Planwoche. Tagessatz einer neuen Rolle kommt aus der Tagessatztabelle (Reiter Parameter).</p>
+</div>
+
+<div class="pane" id="pane-par" hidden>
+  <div class="grid2" style="margin-top:0">
+    <div class="card"><h2>Parameter</h2>
+      <div class="row">
+        <label class="f">Tage je FTE-Woche<input id="p-days" type="number" step="0.5" min="0.5" max="7" style="width:110px"></label>
+        <label class="f">Onsite-Quote in %<input id="p-onsite" type="number" step="5" min="0" max="100" style="width:110px"></label>
+        <label class="f">Reisekosten je Onsite-Tag (€)<input id="p-travel" type="number" step="10" min="0" style="width:140px"></label>
+        <label class="f">MwSt. in %<input id="p-vat" type="number" step="1" min="0" max="100" style="width:90px"></label>
+      </div>
+      <div class="row"><label><input type="checkbox" id="p-hol"> Gesetzliche Feiertage (bundesweit) berücksichtigen</label></div>
+      <div class="row"><label><input type="checkbox" id="p-xmas"> Weihnachtspause 24.–31.12. berücksichtigen</label></div>
+      <p class="note">Standard: aus – dann entspricht der Basisplan exakt der Excel-Kalkulation.</p>
+    </div>
+    <div class="card"><h2>Tagessatztabelle</h2><table id="rates"></table></div>
+  </div>
+</div>
+
+<div class="pane" id="pane-sz" hidden>
+  <div class="row"><label class="f">Name des Szenarios<input id="sc-name" type="text" placeholder="z. B. Senior Consultant reduziert" style="width:280px"></label>
+    <button id="sc-save" class="primary" style="align-self:flex-end">Aktuellen Plan als Szenario speichern</button></div>
+  <div class="note" id="sc-msg"></div>
+  <ul id="sc-list" style="padding-left:18px"></ul>
+  <div class="scroll" id="sc-table"></div>
+  <p class="note">Vergleich mit dem oben eingestellten Budget, den Reisekosten-Einstellungen und dem aktuellen Leistungsbeginn. Δ-Werte relativ zum Basisplan (grün = günstiger bzw. längere Reichweite).</p>
+</div>
+
+<div class="pane" id="pane-ann" hidden>
+  <h2>Annahmen</h2>
+  <ul class="ann">
+    <li>Die Excel-Logik gilt: Beratertage = Auslastung × 5; Honorar = Tagessatz × Beratertage; Reisekosten = Beratertage × 40 % × 200 €; brutto = netto × 1,19 (MwSt. auch auf Reisekosten).</li>
+    <li>Plan-Woche 1 ist die Kalenderwoche des Leistungsbeginns. Ein anderer Start verschiebt den ganzen Plan; bei Start mitten in der Woche zählen nur die Resttage der ersten Woche.</li>
+    <li>Reisekosten fallen proportional zu den Beratertagen an (in Excel nur als Gesamtsumme).</li>
+    <li>Innerhalb der Woche, in der das Budget endet, werden Kosten gleichmäßig auf die Arbeitstage (Mo–Fr) verteilt. „Reicht bis“ ist der Arbeitstag, an dem das Budget aufgebraucht wird; der letzte voll gedeckte Arbeitstag steht daneben.</li>
+    <li>Brutto-Eingaben werden durch 1,19 geteilt; Reisekosten gelten wie in Excel als umsatzsteuerpflichtig.</li>
+    <li>Vorschuss: Der eingegebene Betrag wird auf den Gesamtplan angerechnet; angezeigt wird der noch ungedeckte Rest.</li>
+    <li>Feiertage (bundesweit: Neujahr, Karfreitag, Ostermontag, 1. Mai, Christi Himmelfahrt, Pfingstmontag, 3. Oktober, 25./26. Dezember) und Weihnachtspause (24.–31.12.) sind standardmäßig aus; Urlaub ist nicht modelliert (über die Auslastung abbildbar).</li>
+    <li>Plan-Verlängerung übernimmt die Auslastung der letzten Planwoche. Leere Zellen der Quelldatei zählen als 0 %.</li>
+    <li>Tagessätze kommen aus einer einzigen Tagessatztabelle (in der Quelle teils hart codiert, teils per Formel).</li>
+    <li>Szenarien werden optional im Browser gespeichert (localStorage). Der Basisplan ist fest im Code hinterlegt.</li>
+  </ul>
+</div>
+</div>
+
+<section id="steckbrief">
+  <h1>Budget-Steckbrief · Projekt GOÄ-Novelle</h1>
+  <div class="note" id="sb-date"></div>
+  <div class="hero"><p class="big" id="sb-sentence" style="font-size:19px;font-weight:600;color:#0b4f6c;margin:0"></p></div>
+  <div class="kpis" id="sb-kpis"></div>
+  <h3>Beratertage je Rolle</h3><div id="sb-roles"></div>
+  <h3>Kumulierte Kosten und Budget</h3><div id="sb-cum"></div>
+  <p class="note" id="sb-ann"></p>
+</section>
+
+<script>window.BASE_CONFIG = /*CONFIG*/;</script>
+<script>/*CORE*/</script>
+<script>/*XLSX*/</script>
+<script>/*UI*/</script>
+</body>
+</html>
